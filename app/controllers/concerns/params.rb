@@ -3,7 +3,7 @@ module Params
   private
 
   def user_params
-    params.require(:user).permit(:email, :password)
+    params.require(:user).permit(:email, :password, :username)
   end
 
   # def server_params

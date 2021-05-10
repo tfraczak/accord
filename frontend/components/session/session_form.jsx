@@ -35,7 +35,7 @@ class SessionForm extends React.Component {
             formFooterTOS,
             formFooterPrivacy,
         } = this.props;
-
+        debugger
         ////////////// form specific inserts //////////////
 
         const insertUsername = () => {
@@ -44,9 +44,9 @@ class SessionForm extends React.Component {
                     <>
                         <label 
                             htmlFor="username"
-                            className="session-form username-label" >
+                            className="username-label" >
                             username
-                            { insertError("username") }
+                            { insertError("Username") }
                         </label>
                         <input
                             id="username"
@@ -60,6 +60,16 @@ class SessionForm extends React.Component {
             return null;
         };
 
+        const insertDemoLogin = () => {
+            if (formTitle === "Welcome back!") {
+                return (
+                    <>
+
+                    </>
+                )
+            }
+        }
+
         const insertSubTitle = () => {
             if (formTitle === "Welcome back!") {
                 return <>{formSubTitle()}</>;
@@ -70,7 +80,7 @@ class SessionForm extends React.Component {
         const insertAgreement = () => {
             if (formTitle === "Create an account") {
                 return (
-                    <p className="session-form footer-tos">
+                    <p className="footer-tos">
                         By registering, you agree to Accord's {formFooterTOS()} and {formFooterPrivacy()}.
                     </p>
                 )
@@ -89,31 +99,40 @@ class SessionForm extends React.Component {
                     }
                 });
 
-                const errorClassName = `session-form ${field}-error`;
+                switch(errorMessage) {
+                    case "Password is too short (minimum is 6 characters)":
+                        errorMessage = "Must be 6 or more in length";
+                        break;
+                    case "Email has already been taken":
+                        errorMessage = "Email is already registered";
+                        break;
+                    default:
+                        break;
+                }
 
-                return (
-                    <p className={errorClassName}>- <em>{errorMessage}</em></p>
-                )
+                const errorClassName = `${field}-error`;
+                if (errorMessage) return <p className={errorClassName}>- <em>{errorMessage}</em></p>;
             }
 
             return null;
 
         };
+        debugger
 
         ////////////// render //////////////
 
         return (
-            <div className="session-form wrapper">
-                <div>
-                    <h2 className="session-form title">{ formTitle }</h2>
+            <div className="session-wrapper">
+                <div className="form-wrapper">
+                    <h2 className="title">{ formTitle }</h2>
                     { insertSubTitle() }
                     <form
-                        className="session-form form"
+                        className="form"
                         onSubmit={ this.handleSubmit }>
                         
-                        <label htmlFor="email" className="session-form email-label" >
+                        <label htmlFor="email" className="email-label" >
                             email
-                            { insertError("email") }
+                            { insertError("Email") }
                         </label>
                         <input
                             id="email"
@@ -122,9 +141,9 @@ class SessionForm extends React.Component {
                             onChange={ this.handleChange('email') }
                             className="sesion-form email-input" />
                         { insertUsername() }
-                        <label htmlFor="password" className="session-form password-label" >
+                        <label htmlFor="password" className="password-label" >
                             password
-                            { insertError("password") }
+                            { insertError("Password") }
                         </label>
                         <input
                             id="password"
@@ -132,13 +151,14 @@ class SessionForm extends React.Component {
                             value={ this.state.password }
                             onChange={ this.handleChange('password') }
                             className="sesion-form password-input" />
-                        <div className="session-form footer">
-                            <button className="session-form button">{ formButtonText }</button>
+                        <div className="footer">
+                            <button className="button">{ formButtonText }</button>
                             { formFooterLink() }
                         </div>
                         { insertAgreement() }
                     </form>
                 </div>
+                
             </div>
         )
             

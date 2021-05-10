@@ -1,6 +1,6 @@
-import entities from "../reducers/entities_reducer";
-import session from "../reducers/session_reducer";
-import errors from "../reducers/errors_reducer";
+import entities from "./entities_reducer";
+import session from "./session_reducer";
+import errors from "./errors_reducer";
 import { combineReducers } from 'redux';
 
 export default combineReducers({

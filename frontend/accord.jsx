@@ -11,20 +11,22 @@ document.addEventListener("DOMContentLoaded", () => {
     let store;
     // creates the store depending if there is a user currently signed in the data backend
     if (window.currentUser) {
-        const { id, username, usernameId, avatarUrl } = window.currentUser;
         const preloadedState = {
             entities: {
-                id: { id, username, usernameId, avatarUrl },
+                users: { [window.currentUser.id]: window.currentUser },
             },
             session: {
-                currentUser: { ...window.currentUser },
+                id: window.currentUser.id,
             },
-            errors: [],
         }
         store = configureStore(preloadedState);
+        delete window.currentUser;
     } else {
         store = configureStore();
     }
+
+    window.getState = store.getState();
+    window.dispatch = store.dispatch;
 
     // renders the entire DOM passing the store as a prop
     ReactDOM.render(<Root store={store} />, root);
