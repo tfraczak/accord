@@ -17,7 +17,7 @@
 /storage/*
 !/storage/.keep
 
-
+/node_modules
 /yarn-error.log
 
 /public/assets
@@ -29,3 +29,5 @@
 node_modules/
 bundle.js
 bundle.js.map
+tmp/
+.DS_Store

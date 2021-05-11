@@ -8,6 +8,10 @@ class SessionForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    componentWillUnmount() {
+        this.props.removeSessionErrors();
+    }
+
     handleSubmit(e) {
         e.preventDefault();
         const user = Object.assign({}, this.state);
@@ -56,9 +60,10 @@ class SessionForm extends React.Component {
             formTitle,
             formSubTitle,
             formButtonText,
-            formFooterLink,
             formFooterTOS,
             formFooterPrivacy,
+            formType,
+            removeSessionErrors,
         } = this.props;
 
         const formBox = `form-box-${this.props.formType}`;
@@ -69,12 +74,7 @@ class SessionForm extends React.Component {
             if (formTitle === "Create an account") {
                 return (
                     <div className="username-wrapper">
-                        <h3 
-                            htmlFor="username"
-                            className="username-label" >
-                            username
-                            { insertError("Username") }
-                        </h3>
+                        { insertError("username") }
                         <input
                             id="username"
                             type="text"
@@ -88,7 +88,7 @@ class SessionForm extends React.Component {
         };
 
         const insertDemoLogin = () => {
-            if (formTitle === "Welcome back!") {
+            if (formType === "login") {
                 return (
                     <div className="demo-login">
                         <h2>Guest Demo Login</h2>
@@ -100,14 +100,14 @@ class SessionForm extends React.Component {
         }
 
         const insertSubTitle = () => {
-            if (formTitle === "Welcome back!") {
+            if (formType === "login") {
                 return <>{formSubTitle()}</>;
             }
             return null;
         };
 
         const insertAgreement = () => {
-            if (formTitle === "Create an account") {
+            if (formType === "register") {
                 return (
                     <p className="footer-agreement">
                         By registering, you agree to Accord's {formFooterTOS()} and {formFooterPrivacy()}.
@@ -127,26 +127,47 @@ class SessionForm extends React.Component {
                         return;
                     }
                 });
-
+                field = field.toLowerCase()
                 switch(errorMessage) {
                     case "Password is too short (minimum is 6 characters)":
-                        errorMessage = "Must be 6 or more in length";
+                        errorMessage = " - Must be 6 or more in length";
                         break;
                     case "Email has already been taken":
-                        errorMessage = "Email is already registered";
+                        errorMessage = " - Email is already registered";
                         break;
                     default:
                         break;
                 }
 
-                const errorClassName = `${field}-error`;
-                if (errorMessage) return <p className={errorClassName}>- <em>{errorMessage}</em></p>;
+                const errorClassName = `${field} input-label error`;
+                if (errorMessage) return <h3 className={errorClassName}>{field}<em>{errorMessage}</em></h3>;
             }
 
-            return null;
+            return <h3 className={`${field} input-label`} >{field}</h3>;
 
         };
 
+        const insertInquiryLink = () => {
+            switch (formType) {
+                case "login":
+                    return (
+                        <div className="createAccount-inquiryLink">
+                            <p className="createAccount-inquiry">Need an account?</p>
+                            <Link
+                                className="to-register"
+                                to="/register">
+                                Register</Link>
+                        </div>
+                    )
+                case "register":
+                    return <Link
+                                className="to-login"
+                                to="/login">
+                                Already have an account?</Link>
+                default:
+                    return null;
+            }
+        }
         ////////////// render //////////////
 
         return (
@@ -161,10 +182,7 @@ class SessionForm extends React.Component {
                             className="form"
                             onSubmit={ this.handleSubmit }>
                             <div className="email-wrapper">
-                                <h3 htmlFor="email" className="email-label" >
-                                    email
-                                    { insertError("Email") }
-                                </h3>
+                                { insertError("Email") }
                                 <input
                                     id="email"
                                     type="text"
@@ -174,10 +192,7 @@ class SessionForm extends React.Component {
                             </div>
                             { insertUsername() }
                             <div className="password-wrapper">
-                                <h3 htmlFor="password" className="password-label" >
-                                    password
-                                    { insertError("Password") }
-                                </h3>
+                                { insertError("Password") }
                                 <input
                                     id="password"
                                     type="password"
@@ -188,7 +203,7 @@ class SessionForm extends React.Component {
                             { insertAgreement() }
                             <div className="footer">
                                 <button className="button">{ formButtonText }</button>
-                                { formFooterLink() }
+                                { insertInquiryLink() }
                             </div>
                             
                         </form>

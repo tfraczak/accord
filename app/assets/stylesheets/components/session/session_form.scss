@@ -1,5 +1,7 @@
 .session-form-wrapper {
 
+    ////////// SHARED SESSION FORM STYLING //////////
+
     position: absolute;
     top: 0;
     left: 0;
@@ -12,7 +14,88 @@
     font-family: $roboto;
     color: $font-sub;
 
+    .title {
+        font-size: 24px;
+        margin-bottom: 8px;
+        font-weight: 550;
+        line-height: 30px;
+        color: $font-main;
+    }
+
+    .password-wrapper, .email-wrapper, .username-wrapper {
+        margin-bottom: 20px;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+
+        h3 {
+            box-sizing: border-box;
+            width: 100%;
+            text-transform: uppercase;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        input {
+            box-sizing: border-box;
+            font-size: 16px;
+            outline: none;
+            width: 412px;
+            height: 40px;
+            border-radius: 3px;
+            padding: 10px;
+            background-color: $input-bg-color;
+            border: 1px solid $input-outline-color;
+            transition: border-color .2s ease-in-out;
+            
+            &:hover {
+                border-color: $border-hover;
+            }
+
+            &:focus {
+                border: 1px solid #41aaff;
+            }
+
+        }
+
+        .error {
+            color: red;
+
+            em {
+                font-style: italic;
+                text-transform: none;
+            }
+            
+        }
+
+        .footer {
+
+            button {
+                background-color: $form-button;
+                width: 100%;
+                height: 44px;
+                min-width: 130px;
+                font-size: 16px;
+                color: $form-button-color;
+                border-radius: 3px;
+                margin-bottom: 12px;
+                font-weight: 500;
     
+                &:hover {
+                    cursor: pointer;
+                }
+    
+            }
+
+        }
+
+    }
+
+    ////////// LOGIN FORM //////////
 
     .form-box-login {
         background-color: $form-color;
@@ -24,14 +107,6 @@
         border-radius: 5px;
         box-sizing: border-box;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-
-        .title {
-            font-size: 24px;
-            margin-bottom: 8px;
-            font-weight: 550;
-            line-height: 30px;
-            color: $font-main;
-        }
 
         .subtitle {
             font-size: 16px;
@@ -46,63 +121,8 @@
             flex-direction: column;
             
             .form {
-                display: flex;
-                flex-direction: column;
-                margin-top: 20px;
-
-                .password-wrapper, .email-wrapper, .username-wrapper {
-                    margin-bottom: 20px;
-                }
     
-                h3 {
-                    box-sizing: border-box;
-                    width: 100%;
-                    text-transform: uppercase;
-                    font-size: 11px;
-                    font-weight: 700;
-                    margin-bottom: 8px;
-                }
-
-                input {
-                    box-sizing: border-box;
-                    font-size: 16px;
-                    outline: none;
-                    width: 412px;
-                    height: 40px;
-                    border-radius: 3px;
-                    padding: 10px;
-                    background-color: $input-bg-color;
-                    border: 1px solid $input-outline-color;
-                    transition: border-color .2s ease-in-out;
-                    
-                    &:hover {
-                        border-color: $border-hover;
-                    }
-
-                    &:focus {
-                        border: 1px solid #41aaff;
-                    }
-
-                }
-
-                button {
-                    background-color: $form-button;
-                    width: 100%;
-                    height: 44px;
-                    min-width: 130px;
-                    font-size: 16px;
-                    color: $form-button-color;
-                    border-radius: 3px;
-                    margin-bottom: 8px;
-                    font-weight: 500;
-
-                    &:hover {
-                        cursor: pointer;
-                    }
-
-                }
-    
-                .account-inquiryLink {
+                .createAccount-inquiryLink {
                     display: flex;
                     font-size: 14px;
                     margin-top: 4px;
@@ -122,7 +142,6 @@
                 }
     
             }
-
             
         }
 
@@ -157,7 +176,11 @@
             }
 
         }
+
     }
+
+    ////////// REGISTER FORM //////////
+
     .form-box-register {
         background-color: $form-color;
         width: 480px;
@@ -168,20 +191,8 @@
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 
         .title {
-            font-size: 24px;
-            margin-bottom: 8px;
-            font-weight: 550;
-            line-height: 30px;
-            color: $font-main;
             text-align: center;
             width: 100%;
-        }
-
-        .subtitle {
-            font-size: 16px;
-            font-weight: 300;
-            line-height: 20px;
-            font-weight: 300;
         }
     
         .form-wrapper {
@@ -190,62 +201,9 @@
             flex-direction: column;
             
             .form {
-                display: flex;
-                flex-direction: column;
-                margin-top: 20px;
 
-                .password-wrapper, .email-wrapper, .username-wrapper {
-                    margin-bottom: 20px;
-                }
-    
-                h3 {
-                    box-sizing: border-box;
-                    width: 100%;
-                    text-transform: uppercase;
-                    font-size: 11px;
-                    font-weight: 700;
-                    margin-bottom: 8px;
-                }
-
-                input {
-                    box-sizing: border-box;
-                    font-size: 16px;
-                    outline: none;
-                    width: 412px;
-                    height: 40px;
-                    border-radius: 3px;
-                    padding: 10px;
-                    background-color: $input-bg-color;
-                    border: 1px solid $input-outline-color;
-                    transition: border-color .2s ease-in-out;
-                    
-                    &:hover {
-                        border-color: $border-hover;
-                    }
-
-                    &:focus {
-                        border: 1px solid #41aaff;
-                    }
-
-                }
                 .footer {
                     margin-bottom: 12px;
-
-                    button {
-                        background-color: $form-button;
-                        width: 100%;
-                        height: 44px;
-                        min-width: 130px;
-                        font-size: 16px;
-                        color: $form-button-color;
-                        border-radius: 3px;
-                        margin-bottom: 12px;
-    
-                        &:hover {
-                            cursor: pointer;
-                        }
-    
-                    }
 
                     .to-login {
                         font-size: 14px;
@@ -275,10 +233,6 @@
                     }
                 }
 
-
-                
-
-    
             }
 
             .demo-login {
@@ -288,6 +242,7 @@
             }
 
         }
+
     }
 }
 
@@ -297,11 +252,15 @@
 
         .form-box-login {
             width: 480px;
+            height: 580px;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
         }
     
         .demo-login {
-            display: none;
-            opacity: 0;
+            width: 480px;
+            margin-top: 40px;
         }
 
     }
