@@ -11,9 +11,13 @@ export default (props) => {
         }
     }
 
+    const inlineBgImg = {backgroundImage: `url(${window.backgroundImg})`};
+
+    // <img className="bg-image" src={window.backgroundImg} alt="bg-img" />
+
     return (
         <div className="splash-wrapper">
-            <img className="bg-image" src={window.backgroundImg} alt="bg-img" />
+            <div className="bg-container" style={inlineBgImg}></div>
             <header className="header-wrapper">
                 <div className="header-elements">
                     <a name="top">

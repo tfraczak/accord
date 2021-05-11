@@ -68,6 +68,8 @@ class SessionForm extends React.Component {
 
         const formBox = `form-box-${this.props.formType}`;
 
+        const inlineBgImg = {backgroundImage: `url(${window.backgroundImg})`};
+
         ////////////// form specific inserts //////////////
 
         const insertUsername = () => {
@@ -174,11 +176,12 @@ class SessionForm extends React.Component {
                     return null;
             }
         }
+
         ////////////// render //////////////
 
         return (
             <>
-                <img className="bg-image" src={window.backgroundImg} alt="bg-img" />
+                <div className="bg-container" style={inlineBgImg}></div>
                 <header className="session-header-wrapper">
                     <img id="splash-logo" className="horizontal-logo" src={window.logoUrl} />
                 </header>
