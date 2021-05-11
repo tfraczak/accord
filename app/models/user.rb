@@ -13,7 +13,7 @@ class User < ApplicationRecord
     validates :password, length: { minimum: 6, allow_nil: true }
     
     after_initialize :ensure_session_token
-    before_validation :assign_username_id
+    before_validation :assign_username_id, :assign_default_avatar
 
     def self.find_by_credentials(email, pw)
         user = User.find_by(email: email)
@@ -58,6 +58,10 @@ class User < ApplicationRecord
 
     def assign_username_id
         self.username_id ||= User.generate_username_id(self.username)
+    end
+
+    def assign_default_avatar
+        self.avatar_url ||= "assets/default_avatar.png"
     end
 
     private

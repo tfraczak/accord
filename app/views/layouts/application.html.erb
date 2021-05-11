@@ -10,6 +10,10 @@
     <% if logged_in? %>
       <%= current_user_assignment %>
     <% end %>
+    <script>
+      window.logoUrl = "<%= image_url('splash_logo_white.png') %>"
+      window.defaultAvatarUrl = "<%= image_url('default_avatar.png') %>"
+    </script>
   </head>
 
   <body>

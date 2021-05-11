@@ -125,6 +125,9 @@ class SessionForm extends React.Component {
                     if (error.includes(field)) {
                         errorMessage = error;
                         return;
+                    } else if (error === "Login or password is invalid.") {
+                        errorMessage = error;
+                        return;
                     }
                 });
                 field = field.toLowerCase()
@@ -134,6 +137,9 @@ class SessionForm extends React.Component {
                         break;
                     case "Email has already been taken":
                         errorMessage = " - Email is already registered";
+                        break;
+                    case "Login or password is invalid.":
+                        errorMessage = " - Login or password is invalid."
                         break;
                     default:
                         break;
