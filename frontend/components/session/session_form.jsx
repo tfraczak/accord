@@ -177,46 +177,52 @@ class SessionForm extends React.Component {
         ////////////// render //////////////
 
         return (
-            <div className="session-form-wrapper">
-                <div className={formBox}>
-                    <div className="form-wrapper">
-                        
-                        <h2 className="title">{ formTitle }</h2>
-                        { insertSubTitle() }
-                        
-                        <form
-                            className="form"
-                            onSubmit={ this.handleSubmit }>
-                            <div className="email-wrapper">
-                                { insertError("Email") }
-                                <input
-                                    id="email"
-                                    type="text"
-                                    value={ this.state.email }
-                                    onChange={ this.handleChange('email') }
-                                    className="sesion-form email-input" />
-                            </div>
-                            { insertUsername() }
-                            <div className="password-wrapper">
-                                { insertError("Password") }
-                                <input
-                                    id="password"
-                                    type="password"
-                                    value={ this.state.password }
-                                    onChange={ this.handleChange('password') }
-                                    className="sesion-form password-input" />
-                            </div>
-                            { insertAgreement() }
-                            <div className="footer">
-                                <button className="button">{ formButtonText }</button>
-                                { insertInquiryLink() }
-                            </div>
+            <>
+                <img className="bg-image" src={window.backgroundImg} alt="bg-img" />
+                <header className="session-header-wrapper">
+                    <img id="splash-logo" className="horizontal-logo" src={window.logoUrl} />
+                </header>
+                <div className="session-form-wrapper">
+                    <div className={formBox}>
+                        <div className="form-wrapper">
                             
-                        </form>
+                            <h2 className="title">{ formTitle }</h2>
+                            { insertSubTitle() }
+                            
+                            <form
+                                className="form"
+                                onSubmit={ this.handleSubmit }>
+                                <div className="email-wrapper">
+                                    { insertError("Email") }
+                                    <input
+                                        id="email"
+                                        type="text"
+                                        value={ this.state.email }
+                                        onChange={ this.handleChange('email') }
+                                        className="sesion-form email-input" />
+                                </div>
+                                { insertUsername() }
+                                <div className="password-wrapper">
+                                    { insertError("Password") }
+                                    <input
+                                        id="password"
+                                        type="password"
+                                        value={ this.state.password }
+                                        onChange={ this.handleChange('password') }
+                                        className="sesion-form password-input" />
+                                </div>
+                                { insertAgreement() }
+                                <div className="footer">
+                                    <button className="button">{ formButtonText }</button>
+                                    { insertInquiryLink() }
+                                </div>
+                                
+                            </form>
+                        </div>
+                        { insertDemoLogin() }
                     </div>
-                    { insertDemoLogin() }
                 </div>
-            </div>
+            </>
         )
             
     }

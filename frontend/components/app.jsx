@@ -7,7 +7,9 @@ import { AuthRoute } from '../utils/route_utils';
 
 const App = () => (
     <div className="app-wrapper">
-        <SplashContainer />
+        <Route
+            exact path="/" 
+            component={SplashContainer} />
         <AuthRoute 
             path="/login"
             component={LoginFormContainer}/>

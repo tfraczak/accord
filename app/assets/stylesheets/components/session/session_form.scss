@@ -1,5 +1,17 @@
 @import "../../base/reset.scss";
 
+.session-header-wrapper {
+    display: flex;
+    margin: 24px;
+    width: 80%;
+
+    .horizontal-logo {
+        position: relative;
+        height: 35px;
+    }
+
+}
+
 .session-form-wrapper {
 
     ////////// SHARED SESSION FORM STYLING //////////
