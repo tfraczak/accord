@@ -1,3 +1,5 @@
+@import "../../base/reset.css";
+
 .session-form-wrapper {
 
     ////////// SHARED SESSION FORM STYLING //////////
@@ -13,6 +15,19 @@
     height: 100%;
     font-family: $roboto;
     color: $font-sub;
+
+    button {
+        border: none;
+        background-color: $form-button;
+        color: $form-button-color;
+        font-size: 16px;
+        border-radius: 3px;
+        font-weight: 500;
+        
+        &:hover {
+            cursor: pointer;
+        }
+    }
 
     .title {
         font-size: 24px;
@@ -75,19 +90,11 @@
         .footer {
 
             button {
-                background-color: $form-button;
+                
                 width: 100%;
                 height: 44px;
                 min-width: 130px;
-                font-size: 16px;
-                color: $form-button-color;
-                border-radius: 3px;
                 margin-bottom: 12px;
-                font-weight: 500;
-    
-                &:hover {
-                    cursor: pointer;
-                }
     
             }
 
@@ -113,6 +120,7 @@
             font-weight: 300;
             line-height: 20px;
             font-weight: 300;
+            margin: 0;
         }
     
         .form-wrapper {
@@ -164,15 +172,6 @@
                 width: 80%;
                 height: 40px;
                 margin-top: 20px;
-                background-color: $form-button;
-                color: $form-button-color;
-                border-radius: 3px;
-                font-weight: 500;
-                border: none;
-
-                &:hover {
-                    cursor: pointer;
-                }
 
             }
 
