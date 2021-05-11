@@ -7,8 +7,7 @@ export default (props) => {
 
     return (
         <header className="header-wrapper">
-            <h1>Accord</h1>
-            <img src="/assets/splash_logo.png" width="50" height="50" />
+            <img className="horizontal-logo" src="/assets/splash_logo.png" />
             {props.currentUser ? insertLogoutButton() : null}
         </header>
     )

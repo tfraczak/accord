@@ -22,6 +22,31 @@ class SessionForm extends React.Component {
         };
     }
 
+    guestDemoLogin(num) {
+        return e => {
+            e.preventDefault();
+            let user;
+            switch(num) {
+                case 1:
+                    user = {
+                        email: "teddy@gmail.com",
+                        password: "password",
+                    };
+                case 2:
+                    user = {
+                        email: "tim@gmail.com",
+                        password: "password",
+                    };
+                default:
+                    user = {
+                        email: "teddy@gmail.com",
+                        password: "password",
+                    };
+            }
+            this.props.processForm(user);
+        }
+    }
+
     render() {
 
         ////////////// form specific variables //////////////
@@ -35,7 +60,7 @@ class SessionForm extends React.Component {
             formFooterTOS,
             formFooterPrivacy,
         } = this.props;
-        debugger
+
         ////////////// form specific inserts //////////////
 
         const insertUsername = () => {
@@ -63,9 +88,11 @@ class SessionForm extends React.Component {
         const insertDemoLogin = () => {
             if (formTitle === "Welcome back!") {
                 return (
-                    <>
-
-                    </>
+                    <div className="demo-login">
+                        <h2>Guest Demo Login</h2>
+                        <button onClick={this.guestDemoLogin(1)}>Guest 1</button>
+                        <button onClick={this.guestDemoLogin(2)}>Guest 2</button>
+                    </div>
                 )
             }
         }
@@ -117,48 +144,51 @@ class SessionForm extends React.Component {
             return null;
 
         };
-        debugger
 
         ////////////// render //////////////
 
         return (
-            <div className="session-wrapper">
-                <div className="form-wrapper">
-                    <h2 className="title">{ formTitle }</h2>
-                    { insertSubTitle() }
-                    <form
-                        className="form"
-                        onSubmit={ this.handleSubmit }>
+            <div className="session-form-wrapper">
+                <div className="form-box">
+                    <div className="form-wrapper">
                         
-                        <label htmlFor="email" className="email-label" >
-                            email
-                            { insertError("Email") }
-                        </label>
-                        <input
-                            id="email"
-                            type="text"
-                            value={ this.state.email }
-                            onChange={ this.handleChange('email') }
-                            className="sesion-form email-input" />
-                        { insertUsername() }
-                        <label htmlFor="password" className="password-label" >
-                            password
-                            { insertError("Password") }
-                        </label>
-                        <input
-                            id="password"
-                            type="password"
-                            value={ this.state.password }
-                            onChange={ this.handleChange('password') }
-                            className="sesion-form password-input" />
-                        <div className="footer">
-                            <button className="button">{ formButtonText }</button>
-                            { formFooterLink() }
-                        </div>
-                        { insertAgreement() }
-                    </form>
+                        <h2 className="title">{ formTitle }</h2>
+                        { insertSubTitle() }
+                        
+                        <form
+                            className="form"
+                            onSubmit={ this.handleSubmit }>
+
+                            <label htmlFor="email" className="email-label" >
+                                email
+                                { insertError("Email") }
+                            </label>
+                            <input
+                                id="email"
+                                type="text"
+                                value={ this.state.email }
+                                onChange={ this.handleChange('email') }
+                                className="sesion-form email-input" />
+                            { insertUsername() }
+                            <label htmlFor="password" className="password-label" >
+                                password
+                                { insertError("Password") }
+                            </label>
+                            <input
+                                id="password"
+                                type="password"
+                                value={ this.state.password }
+                                onChange={ this.handleChange('password') }
+                                className="sesion-form password-input" />
+                            <div className="footer">
+                                <button className="button">{ formButtonText }</button>
+                                { formFooterLink() }
+                            </div>
+                            { insertAgreement() }
+                        </form>
+                    </div>
+                    { insertDemoLogin() }
                 </div>
-                
             </div>
         )
             
