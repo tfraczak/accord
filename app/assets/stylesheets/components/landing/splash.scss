@@ -1,10 +1,26 @@
 .header-wrapper {
+    display: flex;
     
-    > img {
-        position: fixed;
-        top: 24px;
-        left: 24px;
+    margin: 24px;
+    img {
+        position: relative;
         height: 35px;
         
+    }
+
+    button {
+        margin-left: 20px;
+        position: relative;
+        padding: 5px 10px;
+        background-color: $form-button;
+        color: $form-button-color;
+        font-weight: 700;
+        border-radius: 5px;
+        font-family: $roboto;
+
+        &:hover {
+            cursor: pointer;
+        }
+
     }
 }

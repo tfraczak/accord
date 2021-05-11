@@ -15,7 +15,8 @@ const mSTP = (state, ownProps) => ({
     formButtonText: "Continue",
     formFooterLink: () => <Link className="to-login" to="/login">Already have an account?</Link>,
     formFooterTOS: () => <Link to="/terms">Terms of Service</Link>,
-    formFooterPrivacy: () => <Link to="/privacy">Privacy Policy</Link>
+    formFooterPrivacy: () => <Link to="/privacy">Privacy Policy</Link>,
+    formType: "register",
 });
 
 const mDTP = (dispatch, ownProps) => ({

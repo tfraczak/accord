@@ -19,6 +19,7 @@ const mSTP = (state, ownProps) => ({
             <Link className="to-register" to="/register">Register</Link>
         </div>
     ),
+    formType: "login",
 });
 
 const mDTP = (dispatch, ownProps) => ({

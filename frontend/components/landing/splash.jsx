@@ -7,7 +7,7 @@ export default (props) => {
 
     return (
         <header className="header-wrapper">
-            <img className="horizontal-logo" src="/assets/splash_logo.png" />
+            <img id="splash-logo" className="horizontal-logo" src="/assets/splash_logo_white.png" />
             {props.currentUser ? insertLogoutButton() : null}
         </header>
     )

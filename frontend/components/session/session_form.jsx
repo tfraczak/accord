@@ -61,25 +61,27 @@ class SessionForm extends React.Component {
             formFooterPrivacy,
         } = this.props;
 
+        const formBox = `form-box-${this.props.formType}`;
+
         ////////////// form specific inserts //////////////
 
         const insertUsername = () => {
             if (formTitle === "Create an account") {
                 return (
-                    <>
-                        <label 
+                    <div className="username-wrapper">
+                        <h3 
                             htmlFor="username"
                             className="username-label" >
                             username
                             { insertError("Username") }
-                        </label>
+                        </h3>
                         <input
                             id="username"
                             type="text"
                             onChange={this.handleChange('username')}
                             value={this.state.username}
                             className="sesion-form username-input" />
-                    </>
+                    </div>
                 )
             }
             return null;
@@ -107,7 +109,7 @@ class SessionForm extends React.Component {
         const insertAgreement = () => {
             if (formTitle === "Create an account") {
                 return (
-                    <p className="footer-tos">
+                    <p className="footer-agreement">
                         By registering, you agree to Accord's {formFooterTOS()} and {formFooterPrivacy()}.
                     </p>
                 )
@@ -149,7 +151,7 @@ class SessionForm extends React.Component {
 
         return (
             <div className="session-form-wrapper">
-                <div className="form-box">
+                <div className={formBox}>
                     <div className="form-wrapper">
                         
                         <h2 className="title">{ formTitle }</h2>
@@ -158,33 +160,37 @@ class SessionForm extends React.Component {
                         <form
                             className="form"
                             onSubmit={ this.handleSubmit }>
-
-                            <label htmlFor="email" className="email-label" >
-                                email
-                                { insertError("Email") }
-                            </label>
-                            <input
-                                id="email"
-                                type="text"
-                                value={ this.state.email }
-                                onChange={ this.handleChange('email') }
-                                className="sesion-form email-input" />
+                            <div className="email-wrapper">
+                                <h3 htmlFor="email" className="email-label" >
+                                    email
+                                    { insertError("Email") }
+                                </h3>
+                                <input
+                                    id="email"
+                                    type="text"
+                                    value={ this.state.email }
+                                    onChange={ this.handleChange('email') }
+                                    className="sesion-form email-input" />
+                            </div>
                             { insertUsername() }
-                            <label htmlFor="password" className="password-label" >
-                                password
-                                { insertError("Password") }
-                            </label>
-                            <input
-                                id="password"
-                                type="password"
-                                value={ this.state.password }
-                                onChange={ this.handleChange('password') }
-                                className="sesion-form password-input" />
+                            <div className="password-wrapper">
+                                <h3 htmlFor="password" className="password-label" >
+                                    password
+                                    { insertError("Password") }
+                                </h3>
+                                <input
+                                    id="password"
+                                    type="password"
+                                    value={ this.state.password }
+                                    onChange={ this.handleChange('password') }
+                                    className="sesion-form password-input" />
+                            </div>
+                            { insertAgreement() }
                             <div className="footer">
                                 <button className="button">{ formButtonText }</button>
                                 { formFooterLink() }
                             </div>
-                            { insertAgreement() }
+                            
                         </form>
                     </div>
                     { insertDemoLogin() }
