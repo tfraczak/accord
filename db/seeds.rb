@@ -6,6 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+drop_table :users
+
 User.create!(
     email: "teddy@gmail.com",
     username: "teddy",
