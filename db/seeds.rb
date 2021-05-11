@@ -13,6 +13,12 @@ User.new(
 ).create!
 
 User.new(
+    email: "tim@gmail.com",
+    username: "oilslick",
+    password: "password",
+).create!
+
+User.new(
     email: "alex@gmail.com",
     username: "fraczles",
     password: "password",
