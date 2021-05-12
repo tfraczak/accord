@@ -15,6 +15,19 @@ class User < ApplicationRecord
     after_initialize :ensure_session_token
     before_validation :assign_username_id, :assign_default_avatar
 
+    has_many :owned_servers,
+        foreign_key: :owner_id,
+        class_name: :Server
+
+    has_many :memberships,
+        inverse_of: :user,
+        dependent: :destroy
+    
+    has_many :joined_servers,
+        through: :memberships,
+        source: :joinable,
+        source_type: :Server
+
     def self.find_by_credentials(email, pw)
         user = User.find_by(email: email)
         return user if user && user.is_password?(pw)

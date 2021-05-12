@@ -6,9 +6,9 @@ module Params
     params.require(:user).permit(:email, :password, :username)
   end
 
-  # def server_params
-  #   params.require(:server).permit(:name, :image_url, :owner_id)
-  # end
+  def server_params
+    params.require(:server).permit(:name, :image_url, :owner_id)
+  end
 
   # def channel_params
   #   params.require(:channel).permit(:name, :type, :server_id)
@@ -18,9 +18,9 @@ module Params
   #   params.require(:conversation).permit(:initiator_id)
   # end
 
-  # def membership_params
-  #   params.require(:membership).permit(:user_id, :local_username, :joinable_id, :joinable_type)
-  # end
+  def membership_params
+    params.require(:membership).permit(:user_id, :local_username, :joinable_id, :joinable_type)
+  end
 
   # def messages_params
   #   params.require(:messages).permit(:body, :author_id, :messageable_id, :messageable_type)

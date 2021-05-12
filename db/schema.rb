@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_07_153633) do
+ActiveRecord::Schema.define(version: 2021_05_12_152852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "memberships", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "local_username"
+    t.string "joinable_type", null: false
+    t.bigint "joinable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["joinable_type", "joinable_id"], name: "index_memberships_on_joinable_type_and_joinable_id"
+    t.index ["user_id", "joinable_id", "joinable_type"], name: "unique_membership_index", unique: true
+    t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
+  create_table "servers", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "image_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "owner_id"
+    t.index ["owner_id"], name: "index_servers_on_owner_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
@@ -29,4 +50,6 @@ ActiveRecord::Schema.define(version: 2021_05_07_153633) do
     t.index ["username", "username_id"], name: "unique_username_by_uid", unique: true
   end
 
+  add_foreign_key "memberships", "users"
+  add_foreign_key "servers", "users", column: "owner_id"
 end
