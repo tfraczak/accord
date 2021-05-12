@@ -3,6 +3,7 @@
 @import "./landing/splash_divs.scss";
 @import "./landing/splash_footer.scss";
 @import "./landing/splash.scss";
+@import "./error_404/error_404.scss";
 
 html {
     background-color: #fdf9f6;
@@ -15,5 +16,6 @@ html {
         display: flex;
         justify-content: center;
         align-items: center;
+        z-index: -1;
     }
 }

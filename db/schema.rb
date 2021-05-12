@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_12_152852) do
+ActiveRecord::Schema.define(version: 2021_05_12_180418) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "memberships", force: :cascade do |t|
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.string "local_username"
     t.string "joinable_type", null: false
     t.bigint "joinable_id", null: false
