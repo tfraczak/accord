@@ -65,6 +65,7 @@ export default props => {
                         <li>Video Games</li>
                         <li>Gardening</li>
                         <li>Baseball/Softball</li>
+                        <li>Fishing</li>
                     </ul>
                 </div>
             )
