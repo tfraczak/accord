@@ -143,6 +143,9 @@ class SessionForm extends React.Component {
                     case "Login or password is invalid.":
                         errorMessage = " - Login or password is invalid."
                         break;
+                    case "Email can't be blank":
+                        errorMessage = " - Email can't be blank"
+                        break;
                     default:
                         break;
                 }
