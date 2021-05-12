@@ -1,12 +1,12 @@
 class Api::ServersController < ApplicationController
 
     def index
-        if params[:userId]
+        if params[:user_id]
             user = User.find_by(id: params[:user_id])
             @servers = user.joined_servers
-            render 'api/users/show'
+        else
+            @servers = Server.find_by(server_params)
         end
-        @servers = Server.find_by(server_params)
         render :index
     end
 
