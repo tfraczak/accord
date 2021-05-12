@@ -1,0 +1,111 @@
+.splash-footer-wrapper {
+    padding: 50px 0;
+    position: absolute;
+    top: 3900px;
+    display: flex;
+    bottom: 0;
+    align-items: flex-start;
+    justify-content: center;
+    height: 25rem;
+    width: 100%;
+    background-color: $font-main;
+    font-family: $roboto;
+
+    .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(12,1fr);
+        grid-gap: 20px;
+        max-width: 1080px;
+
+        a {
+            text-decoration: none;
+            color: $link-color;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        .social-wrapper {
+            
+            .footer-logo {
+                height: 40px;
+                margin-bottom: 20px;
+            }
+            .linkedin-logo, .github-logo {
+                height: 20px;
+                margin-right: 20px;
+                margin-bottom: 10px;
+            }
+
+            p {
+                color: $font-sub-negative;
+                font-weight: 500;
+                font-size: 14px;
+                margin-top: 10px;
+            }
+
+            hr {
+                margin: 20px 0;
+                border:1px solid #666;
+            }
+
+        }
+
+        div:not(.social-links) {
+            padding: 0 10px;
+
+            h1 {
+                font-size: 22px;
+                color: $font-main-negative;
+                font-weight: 500;
+                margin-bottom: 30px;
+                white-space: nowrap;
+            }
+
+            li {
+                color: $font-sub-negative;
+                font-weight: 500;
+                font-size: 16px;
+                margin-top: 20px;
+                white-space: nowrap;
+            }
+        }
+
+        div:not(.social-wrapper, .social-links) {
+    
+        }
+
+        .social-wrapper {
+            grid-column-start: 1;
+            grid-column-end: 5;
+        }
+
+        .skills-wrapper {
+            grid-column-start: 5;
+            grid-column-end: 7;
+
+        }
+
+        .hobbies-wrapper {
+            grid-column-start: 7;
+            grid-column-end: 9;
+
+        }
+
+        .projects-wrapper {
+            grid-column-start: 9;
+            grid-column-end: 11;
+
+        }
+
+        .contact-wrapper {
+            grid-column-start: 11;
+            grid-column-end: 13;
+        }
+
+    }
+
+    
+
+}

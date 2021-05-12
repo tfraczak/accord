@@ -1,15 +1,17 @@
 @import "./session/session_form.scss";
 @import "./landing/splash_header.scss";
 @import "./landing/splash_divs.scss";
+@import "./landing/splash_footer.scss";
+@import "./landing/splash.scss";
 
 html {
-    background-color: white;
+    background-color: #fdf9f6;
     .bg-container {
         position: absolute;
         top: 0;
         background-size: cover;
-        width: 100vw;
-        height: 100vh;
+        width: 1920px;
+        height: 1080px;
         display: flex;
         justify-content: center;
         align-items: center;

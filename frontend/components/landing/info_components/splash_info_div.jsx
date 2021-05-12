@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default props => {
     const { divNum } = props;
+
     
     switch (divNum) {
         case 1:
@@ -11,7 +12,7 @@ export default props => {
                     <h1 className="title">Your place to chat</h1>
                     <p className="desc">Whether you’re part of a fishing club, programming bootcamp, worldwide hot sauce community, or just a handful of aquaintances that want to lurk around each other, Accord makes it easy to chat every day and connect more often.</p>
                     <div className="session-links">
-                        <Link className="login-link" to="/login">Login</Link>
+                        <Link className="login-link" to="/login"><i className="fas fa-sign-in-alt"></i>Login</Link>
                         <Link className="register-link" to="/register">Create an account</Link>
                     </div>
                 </div>

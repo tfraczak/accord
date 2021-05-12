@@ -104,10 +104,46 @@
         }
     }
 
+    .login-link, .register-link {
+        text-decoration: none;
+        margin-left: 70px;
+        position: relative;
+        padding: 18px 30px;
+        background-color: white;
+        color: $font-main;
+        font-weight: 500;
+        font-size: 18px;
+        border-radius: 50px;
+        font-family: $roboto;
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+
+        transition: 0.2s ease-in-out;
+
+    }
+
+    .login-link:hover {
+        cursor: pointer;
+        color: $link-hover-color;
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+    }
+    
+    .register-link {
+        background-color: $link-button-color;
+        color: $font-main;
+        
+        &:hover {
+            cursor: pointer;
+            background-color: $link-button-color-hover;
+            box-shadow: 0 0 30px rgba(255, 196, 0, 0.2);
+        }
+    }
+
     .div-1 {
         color: white;
         width: 40%;
-        margin-bottom: 700px;
+        margin-bottom: 500px;
 
         h1 {
             font-size: 54px;
@@ -118,12 +154,16 @@
         p {
             font-size: 20px;
             line-height: 36px;
-            text-shadow:
-                -1px -1px 0 #000,  
-                1px -1px 0 #000,
-                -1px 1px 0 #000,
-                1px 1px 0 #000;
+            // text-shadow:
+            //     -1px -1px 0 #000,  
+            //     1px -1px 0 #000,
+            //     -1px 1px 0 #000,
+            //     1px 1px 0 #000;
             margin-bottom: 30px;
+        }
+
+        i {
+            padding-right: 10px;
         }
 
     }
@@ -150,71 +190,16 @@
         }
 
         a {
-            text-decoration: none;
-            position: relative;
-            padding: 18px 30px;
-            background-color: white;
-            color: $font-main;
-            font-weight: 500;
-            font-size: 18px;
-            border-radius: 50px;
-            font-family: $roboto;
-            display: flex;
-            align-items: center;
-            background-color: $link-button-color;
-            color: $font-main;
-
-            transition: 0.2s ease-in-out;
-            
-            &:hover {
-                cursor: pointer;
-                background-color: $link-button-color-hover;
-                box-shadow: 0 0 30px rgba(255, 196, 0, 0.2);
-            }
+            margin-left: 0;
         }
 
     }
+
 
     .session-links {
         display: flex;
         justify-content: center;
         align-items: center;
-
-        a {
-            text-decoration: none;
-            margin-left: 70px;
-            position: relative;
-            padding: 18px 30px;
-            background-color: white;
-            color: $font-main;
-            font-weight: 500;
-            font-size: 18px;
-            border-radius: 50px;
-            font-family: $roboto;
-            display: flex;
-            align-items: center;
-
-            transition: 0.2s ease-in-out;
-    
-        }
-
-        .login-link:hover {
-            cursor: pointer;
-            color: $link-hover-color;
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
-        }
-        
-        .register-link {
-            background-color: $link-button-color;
-            color: $font-main;
-            
-            &:hover {
-                cursor: pointer;
-                background-color: $link-button-color-hover;
-                box-shadow: 0 0 30px rgba(255, 196, 0, 0.2);
-            }
-        }
-
     }
 
 }

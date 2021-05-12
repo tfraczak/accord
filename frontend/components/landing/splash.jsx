@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import SplashInfoDiv from "./info_components/splash_info_div";
+import SplashFooterDiv from "./info_components/splash_footer_div";
 
 export default (props) => {
     const insertSessionButton = () => {
@@ -12,18 +13,17 @@ export default (props) => {
     }
 
     const inlineBgImg = {backgroundImage: `url(${window.backgroundImg})`};
-
+    
     // <img className="bg-image" src={window.backgroundImg} alt="bg-img" />
 
     return (
         <div className="splash-wrapper">
+            <a name="#top"></a>
             <div className="bg-container" style={inlineBgImg}></div>
             <header className="header-wrapper">
                 <div className="header-elements">
-                    <a name="top">
-                        <img id="splash-logo" className="horizontal-logo" src={window.logoUrl} />
-                    </a>
-                    <nav>
+                    <img id="splash-logo" className="horizontal-logo" src={window.logoUrl} />
+                    <nav className="splash-nav">
                         <p>Download</p>
                         <p>Why Accord?</p>
                         <p>Nitro</p>
@@ -44,7 +44,11 @@ export default (props) => {
             </div>
             <div className="splash-footer-wrapper">
                 <div className="footer-grid">
-                    
+                    <SplashFooterDiv divType="social" />
+                    <SplashFooterDiv divType="skills" />
+                    <SplashFooterDiv divType="hobbies" />
+                    <SplashFooterDiv divType="projects" />
+                    <SplashFooterDiv divType="contact" />
                 </div>
             </div>
         </div>

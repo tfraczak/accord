@@ -1,10 +1,3 @@
-.gb-image {
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    left: 50%;
-    right: 50%;
-}
 
 .header-wrapper {
     position: absolute;
@@ -20,14 +13,15 @@
     color: $font-sub;
 
     .header-elements {
-        display: flex;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: repeat(12,1fr);
         width: 63%;
         margin-top: 20px;
 
         .horizontal-logo {
             position: relative;
             height: 35px;
+            grid-column-start: 1;
         }
 
         .logout-button {
@@ -39,6 +33,7 @@
             font-weight: 700;
             border-radius: 50px;
             font-family: $roboto;
+            grid-column-end: 13;
     
             &:hover {
                 cursor: pointer;
@@ -47,7 +42,6 @@
 
         .to-login {
             text-decoration: none;
-            margin-left: 70px;
             position: relative;
             padding: 10px 15px;
             background-color: white;
@@ -58,6 +52,7 @@
             font-family: $roboto;
             display: flex;
             align-items: center;
+            grid-column-end: 13;
     
             &:hover {
                 cursor: pointer;
@@ -68,6 +63,7 @@
             width: 100%;
             display: flex;
             justify-content: center;
+            grid-column-start: 6;
 
             p {
                 margin: 0 10px;
@@ -78,15 +74,11 @@
                 white-space: nowrap;
                 align-items: center;
                 text-align: center;
-                color: $form-button-color;
+                color: $font-main-negative;
                 font-weight: 500;
                 font-size: 15px;
             }
-
         }
     }
-
-
-
-
 }
+
