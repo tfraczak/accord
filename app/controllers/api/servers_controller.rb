@@ -34,7 +34,7 @@ class Api::ServersController < ApplicationController
         @server = Server.find_by(id: params[:id])
         if @server
             @server.destroy
-            render json: {}
+            render json: @server
         else
             render json: ["Server doesn't exist."], status: 404
         end

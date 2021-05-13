@@ -17,11 +17,13 @@ export default props => {
     const inlineBgImg = {backgroundImage: `url(${window.backgroundImg})`};
 
     return (
-        <div className="error-404-wrapper">
+        <>
             <div className="bg-container" style={inlineBgImg}></div>
-            <h1>404</h1>
-            <p>{errMsg()}</p>
-            <Link to="/" >Let's get you back home...</Link>
-        </div>
+            <div className="error-404-wrapper">
+                <h1>404</h1>
+                <p>{errMsg()}</p>
+                <Link to="/" >Let's get you back home...</Link>
+            </div>
+        </>
     )
 };

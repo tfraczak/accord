@@ -12,12 +12,12 @@ const App = () => (
             <Route exact path="/">
                 <SplashContainer />
             </Route>
-            <AuthRoute exact path="/login">
-                <LoginFormContainer />
-            </AuthRoute>
-            <AuthRoute exact path="/register">
-                <RegisterFormContainer />
-            </AuthRoute>
+            <Route exact path="/login">
+                <AuthRoute exact path="/login" component={LoginFormContainer} />
+            </Route>
+            <Route exact path="/register">
+                <AuthRoute exact path="/register" component={RegisterFormContainer} />
+            </Route>
             {/* <ProtectedRoute exact path="/app">
                 <LoadingContainer />
             </ProtectedRoute>

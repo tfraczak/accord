@@ -3,7 +3,7 @@ class Server < ApplicationRecord
     validates :name, :owner_id, presence: true
 
     before_validation :assign_empty_image
-    after_save :assign_owner_as_member
+    after_create :assign_owner_as_member
 
     belongs_to :owner,
         foreign_key: :owner_id,
