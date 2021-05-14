@@ -4,6 +4,7 @@
 @import "./landing/splash_footer.scss";
 @import "./landing/splash.scss";
 @import "./error_404/error_404.scss";
+@import "./accord_app/accord_app.scss";
 
 html {
     background-color: #fdf9f6;
@@ -18,4 +19,6 @@ html {
         align-items: center;
         z-index: -1;
     }
+    overflow-x: hidden;
+    
 }

@@ -1,5 +1,6 @@
 import * as ServerAPIUtil from "../utils/server_utils";
 import { removeUser } from "./user_actions";
+import { camelToSnakeCase, convertToSnakeCase } from "../utils/camel_to_snake";
 
 export const RECEIVE_SERVERS = "RECEIVE_SERVERS";
 export const RECEIVE_SERVER = "RECEIVE_SERVER";
@@ -8,7 +9,7 @@ export const REMOVE_SERVER_ERRORS = "REMOVE_SERVER_ERRORS";
 export const REMOVE_SERVER = "REMOVE_SERVER";
 
 
-const receiveServers = servers => ({
+export const receiveServers = servers => ({
     type: RECEIVE_SERVERS,
     servers,
 });
@@ -41,6 +42,7 @@ export const retrieveUserServers = userId => dispatch => {
 };
 
 export const createServer = server => dispatch => {
+    server = convertToSnakeCase(server);
     ServerAPIUtil.createServer(server).then(server => {
         dispatch(receiveServer(server))
     }, err => {
@@ -49,6 +51,7 @@ export const createServer = server => dispatch => {
 };
 
 export const updateServer = server => dispatch => {
+    server = convertToSnakeCase(server);
     ServerAPIUtil.updateServer(server).then(server => {
         dispatch(receiveServer(server))
     }, err => {
@@ -64,12 +67,8 @@ export const deleteServer = serverId => dispatch => {
     });
 };
 
-export const joinServer = (serverId, currentUserId) => dispatch => {
-    const membership = {
-        user_id: currentUserId,
-        joinable_id: serverId,
-        joinable_type: "Server",
-    };
+export const joinServer = (membership) => dispatch => {
+    membership = convertToSnakeCase(membership);
     ServerAPIUtil.joinServer(membership).then(server => {
         dispatch(receiveServer(server))
     }, () => (

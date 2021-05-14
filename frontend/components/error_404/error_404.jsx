@@ -14,7 +14,7 @@ export default props => {
         return errMsgs[i];
     };
 
-    const inlineBgImg = {backgroundImage: `url(${window.backgroundImg})`};
+    const inlineBgImg = {backgroundImage: `url(${window.brokenBg})`};
 
     return (
         <>

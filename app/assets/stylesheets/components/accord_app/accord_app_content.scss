@@ -1,0 +1,43 @@
+.base {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    background-color: $accord-app-2;
+
+    .content {
+        position: relative;
+        display: flex;
+        flex: 1 1 auto;
+        align-items: stretch;
+        justify-content: flex-start;
+        width: 100%;
+        height: 100%;
+
+        .sidebar-wrapper {
+            position: relative;
+            display: flex;
+            flex: 0 0 auto;
+            overflow: hidden;
+            flex-direction: column;
+            width: 240px;
+            height: 100%;
+            background-color: $accord-app-3;
+        }
+
+        .focus {
+            position: relative;
+            display: flex;
+            flex: 1 1 auto;
+            flex-direction: column;
+            background-color: $accord-app-2;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+        }
+
+    }
+}

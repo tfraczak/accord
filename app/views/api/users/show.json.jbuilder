@@ -1,0 +1,1 @@
+json.extract! @user, :id, :username, :username_id, :avatar_url

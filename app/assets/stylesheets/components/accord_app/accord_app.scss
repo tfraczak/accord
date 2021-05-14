@@ -1,0 +1,16 @@
+.webapp-wrapper {
+
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+
+}
+
+@import './accord_app_server_nav.scss';
+@import './accord_app_content.scss';
+@import './accord_app_sidebar.scss';
+@import './accord_app_focus.scss';
+@import './accord_app_focus_content.scss';
+@import './accord_app_main_focus.scss';

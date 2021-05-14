@@ -1,0 +1,42 @@
+.main-focus {
+    .messages-wrapper {
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding: 0 12px;
+        width: auto;
+        height: 100%;
+    }
+
+    .message-form {
+        position: relative;
+        display: flex;
+        flex: 1 1 auto;
+        align-items: flex-start;
+        justify-content: center;
+        box-sizing: border-box;
+        padding: 0 20px;
+        width: 100%;
+        min-height: 70px;
+        margin-top: 30px;
+
+        .message-input {
+            border: none;
+            border-radius: 8px;
+            height: 45px;
+            width: 100%;
+            background-color: $splash-bg-color;
+            padding: 0 20px;
+            font-size: 16px;
+            font-family: $roboto;
+            color: $font-main;
+
+            &:focus {
+                outline: none;
+            }
+
+        }
+
+    }
+}

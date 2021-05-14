@@ -6,6 +6,7 @@ class SessionForm extends React.Component {
         super(props);
         this.state = props.user;
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.guestDemoLogin = this.guestDemoLogin.bind(this);
     }
 
     componentWillUnmount() {

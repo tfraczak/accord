@@ -1,18 +1,4 @@
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-    background: $splash-bg-color; 
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: $font-sub; 
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: $font-main; 
+body {
+    width: 100%;
+    height: 100%;
 }
