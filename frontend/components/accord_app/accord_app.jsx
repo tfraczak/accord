@@ -19,12 +19,12 @@ class AccordApp extends React.Component {
             <div className="webapp-wrapper">
                 <nav className="servers-profile-nav">
                     <ul className="nav-list">
-                        <li className="profile">
+                        <li className="profile" key="profile-li">
                             <NavLink className="profile-li" to="/channels/@me">
                                 <img src={window.defaultAvatarUrl} alt="profile-link" className="profile-link" />
                             </NavLink>
                         </li>
-                        <li className="profile-servers-separator">
+                        <li className="profile-servers-separator" key="servers-list-separator-1">
                             <div></div>
                         </li>
                         { servers.map(server => <ServerListItem server={ server } />) }
