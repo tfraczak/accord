@@ -1,3 +1,5 @@
+import { convertToSnakeCase } from "./camel_to_snake";
+
 export const getUserServers = userId => (
     $.ajax({
         method: "GET",
@@ -40,5 +42,34 @@ export const leaveServer = (membershipId) => (
     $.ajax({
         method: "DELETE",
         url: `/api/memberships/${membershipId}`,
+    })
+);
+
+export const createInvite = (serverId, expiration=null) => (
+    $.ajax({
+        method: "POST",
+        url: `/api/servers/${serverId}/invitations`,
+        data: { invitation: {expiration} },
+    })
+);
+
+export const getInvitations = (serverId) => (
+    $.ajax({
+        method: "GET",
+        url: `/api/servers/${serverId}/invitations`,
+    })
+);
+
+export const destroyInvite = (inviteId) => (
+    $.ajax({
+        method: "DELETE",
+        url: `/api/invitations/${inviteId}`,
+    })
+);
+
+export const getServerByInvite = urlToken => (
+    $.ajax({
+        method: "GET",
+        url: `/api/invitations/${urlToken}`,
     })
 );
