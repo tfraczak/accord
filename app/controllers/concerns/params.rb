@@ -38,4 +38,8 @@ module Params
   #   params.require(:mention).permit(:mentioner_id, :mentionee_id, :message_id)
   # end
 
+  def invitation_params
+    params.require(:invitation).permit(:server_id, :expiration)
+  end
+
 end

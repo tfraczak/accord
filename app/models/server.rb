@@ -18,6 +18,9 @@ class Server < ApplicationRecord
         through: :memberships,
         source: :user
 
+    has_many :invitations,
+        dependent: :destroy
+
     def assign_empty_image
         self.image_url ||= ""
     end

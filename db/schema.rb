@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_12_180418) do
+ActiveRecord::Schema.define(version: 2021_05_14_012433) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "invitations", force: :cascade do |t|
+    t.string "url_path"
+    t.bigint "server_id", null: false
+    t.integer "expiration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["server_id"], name: "index_invitations_on_server_id"
+    t.index ["url_path"], name: "index_invitations_on_url_path", unique: true
+  end
 
   create_table "memberships", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -50,6 +60,7 @@ ActiveRecord::Schema.define(version: 2021_05_12_180418) do
     t.index ["username", "username_id"], name: "unique_username_by_uid", unique: true
   end
 
+  add_foreign_key "invitations", "servers"
   add_foreign_key "memberships", "users"
   add_foreign_key "servers", "users", column: "owner_id"
 end
