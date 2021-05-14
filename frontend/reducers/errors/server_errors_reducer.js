@@ -4,7 +4,7 @@ import {
     REMOVE_SERVER,
     RECEIVE_SERVER_ERRORS,
     REMOVE_SERVER_ERRORS,
-} from "../actions/server_actions";
+} from "../../actions/server_actions";
 
 export default (state = [], action) => {
     Object.freeze(state)

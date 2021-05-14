@@ -37,18 +37,26 @@ class SessionForm extends React.Component {
                         email: "teddy@gmail.com",
                         password: "password",
                     };
+                    return this.props.processForm(user);
                 case 2:
                     user = {
                         email: "tim@gmail.com",
                         password: "password",
                     };
+                    return this.props.processForm(user);
+                case 3:
+                    user = {
+                        email: "alex@gmail.com",
+                        password: "password",
+                    };
+                    return this.props.processForm(user);
                 default:
                     user = {
                         email: "teddy@gmail.com",
                         password: "password",
                     };
+                    return this.props.processForm(user);
             }
-            this.props.processForm(user);
         }
     }
 
@@ -97,6 +105,7 @@ class SessionForm extends React.Component {
                         <h2>Guest Demo Login</h2>
                         <button onClick={this.guestDemoLogin(1)}>Guest 1</button>
                         <button onClick={this.guestDemoLogin(2)}>Guest 2</button>
+                        <button onClick={this.guestDemoLogin(3)}>Guest 3</button>
                     </div>
                 )
             }

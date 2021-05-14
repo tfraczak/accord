@@ -1,4 +1,3 @@
-import { bindActionCreators } from "redux";
 import {
     RECEIVE_SERVERS,
     RECEIVE_SERVER,
@@ -6,7 +5,7 @@ import {
     RECEIVE_INVITATIONS,
     RECEIVE_INVITATION,
     REMOVE_INVITATION,
-} from "../actions/server_actions";
+} from "../../actions/server_actions";
 
 
 export default (state = {}, action) => {

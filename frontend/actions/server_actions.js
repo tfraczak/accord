@@ -10,6 +10,8 @@ export const REMOVE_SERVER = "REMOVE_SERVER";
 export const RECEIVE_INVITATIONS = "RECEIVE_INVITATIONS";
 export const RECEIVE_INVITATION = "RECEIVE_INVITATION";
 export const REMOVE_INVITATION = "REMOVE_INVITATION";
+export const RECEIVE_INVITED_SERVER = "RECEIVE_INVITED_SERVER";
+
 
 
 
@@ -52,6 +54,11 @@ const removeInvitation = inviteId => ({
     inviteId,
 });
 
+const receiveInvitedServer = server => ({
+    type: RECEIVE_INVITED_SERVER,
+    server,
+});
+
 export const retrieveUserServers = userId => dispatch => {
     ServerAPIUtil.getUserServers(userId).then(servers => {
         dispatch(receiveServers(servers))
@@ -62,11 +69,11 @@ export const retrieveUserServers = userId => dispatch => {
 
 export const createServer = server => dispatch => {
     server = convertToSnakeCase(server);
-    ServerAPIUtil.createServer(server).then(server => {
+    return ServerAPIUtil.createServer(server).then(server => {
         dispatch(receiveServer(server))
     }, err => {
         dispatch(receiveServerErrors(err.responseJSON))
-    })
+    });
 };
 
 export const updateServer = server => dispatch => {
@@ -135,10 +142,10 @@ export const destroyInvite = inviteId => dispatch => {
     });
 };
 
-export const getServerByInvite = urlToken => dispatch => {
-    ServerAPIUtil.getServerByInvite(urlToken).then(server => {
-        dispatch(receiveServer(server));
-    }, err => {
-        dispatch(receiveServerErrors(err.responseJSON));
-    });
-};
+export const getServerByJoinForm = urlToken => dispatch => (
+    ServerAPIUtil.getServerByInvite(urlToken).then(server => (
+        dispatch(receiveServer(server))
+    ), err => (
+        dispatch(receiveServerErrors(err.responseJSON))
+    ))
+);

@@ -1,6 +1,6 @@
 import React from 'react';
-import ServerListItem from './server_list_item';
 import { NavLink } from 'react-router-dom';
+import ServersNavBarContainer from './servers/servers_nav_bar/servers_nav_bar_container';
 
 class AccordApp extends React.Component {
     constructor(props) {
@@ -14,35 +14,17 @@ class AccordApp extends React.Component {
     }
 
     render() {
-        const servers = this.props.servers
+        const { servers, getServerByInvite } = this.props;
         return (
             <div className="webapp-wrapper">
-                <nav className="servers-profile-nav">
-                    <ul className="nav-list">
-                        <li className="profile" key="profile-li">
-                            <NavLink className="profile-li" to="/channels/@me">
-                                <img src={window.defaultAvatarUrl} alt="profile-link" className="profile-link" />
-                            </NavLink>
-                        </li>
-                        <li className="profile-servers-separator" key="servers-list-separator-1">
-                            <div></div>
-                        </li>
-                        { servers.map(server => <ServerListItem server={ server } />) }
-                        <li className="add-server">
-
-                        </li>
-                        <li className="explore-servers">
-
-                        </li>
-                    </ul>
-                </nav>
+                <ServersNavBarContainer />
                 <div className="base wrapper">
                     <div className="content wrapper">
 
                         <div className="sidebar-wrapper">
                             <nav className="sidebar-nav">
                                 <div className="sb-header wrapper">
-                                    <header className="sb-header"></header>
+                                    <header className="sb-header server-toolbar"></header>
                                 </div>
                                 <div className="focus-channels-dms">
                                 

@@ -8,7 +8,7 @@ class Invitation < ApplicationRecord
     belongs_to :server
 
     def self.generate_url_token
-        SecureRandom.urlsafe_base64(10)
+        SecureRandom.urlsafe_base64(7)
     end
 
     def self.valid_url_token

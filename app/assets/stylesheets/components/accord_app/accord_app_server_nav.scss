@@ -65,7 +65,7 @@
         height: 48px;
         margin-bottom: 8px;
 
-        a {
+        a, .add-server-button {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -82,7 +82,15 @@
                 border-radius: 35%;
                 background-color: $link-button-color;
                 color: $font-main;
+                cursor: pointer;
             }
+        }
+
+        .add-server-button{
+            font-size: 20px;
+            font-weight: 300;
+            color: $link-button-color;
+
         }
         
         img {

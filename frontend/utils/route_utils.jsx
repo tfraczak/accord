@@ -22,6 +22,16 @@ const Protected = ({component: Component, path, loggedIn, exact}) => (
     )}/>
 );
 
+// const Invite = ({component: Component, error: Error404 , path, loggedIn, exact}) => (
+//     <Route path={path} exact={exact} render={props => (
+//         loggedIn ? (
+//             <Component {...props} />
+//         ) : (
+//             <Error404 />
+//         )
+//     )}/>
+// );
+
 const mSTP = state => ({
     loggedIn: Boolean(state.session.id)
 });
