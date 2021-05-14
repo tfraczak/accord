@@ -7,7 +7,7 @@ class Api::InvitationsController < ApplicationController
     end
 
     def show
-        invitation = Invitation.find_by(url_path: params[:url_token])
+        invitation = Invitation.find_by(url_token: params[:url_token])
         
         if invitation
             @server = Server.find_by(id: invitation.server_id)

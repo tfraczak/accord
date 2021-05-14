@@ -10,19 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_14_012433) do
+ActiveRecord::Schema.define(version: 2021_05_14_231616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "invitations", force: :cascade do |t|
-    t.string "url_path"
+    t.string "url_token"
     t.bigint "server_id", null: false
     t.integer "expiration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["server_id"], name: "index_invitations_on_server_id"
-    t.index ["url_path"], name: "index_invitations_on_url_path", unique: true
+    t.index ["url_token"], name: "index_invitations_on_url_token", unique: true
   end
 
   create_table "memberships", force: :cascade do |t|

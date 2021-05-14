@@ -1,9 +1,9 @@
 class Invitation < ApplicationRecord
 
     validates :server_id, presence: true
-    validates :url_path, uniqueness: true
+    validates :url_token, uniqueness: true
 
-    before_validation :assign_url_path
+    before_validation :assign_url_token
 
     belongs_to :server
 
@@ -13,12 +13,12 @@ class Invitation < ApplicationRecord
 
     def self.valid_url_token
         token = generate_url_token
-        token = generate_url_token while self.find_by(url_path: token)
+        token = generate_url_token while self.find_by(url_token: token)
         token
     end
 
-    def assign_url_path
-        self.url_path = Invitation.valid_url_token
+    def assign_url_token
+        self.url_token = Invitation.valid_url_token
     end
 
 end
