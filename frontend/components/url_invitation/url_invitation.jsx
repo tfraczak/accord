@@ -27,9 +27,13 @@ class UrlInvitation extends React.Component {
             invitedServer,
             validUrlToken,
         } = this.props;
+        
         if (validUrlToken(this.props.urlToken)) {
-            getServerByUrl(urlToken);
-            retrieveUserServers(currentUserId);
+            getServerByUrl(urlToken).then(res => (
+                retrieveUserServers(currentUserId)
+            ), err => (
+                history.push("/404")
+            ));
         } else {
             history.push("/404");
         }
