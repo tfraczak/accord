@@ -13,7 +13,6 @@ export default props => {
         const i = Math.floor(Math.random() * errMsgs.length);
         return errMsgs[i];
     };
-
     const inlineBgImg = {backgroundImage: `url(${window.brokenBg})`};
 
     return (

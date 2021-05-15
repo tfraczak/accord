@@ -1,6 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createServer } from '../../../../../actions/server_actions';
+import {
+    createServer,
+    removeServerErrors,
+    receiveServerErrors,
+} from '../../../../../actions/server_actions';
 import { closeModal, openModal } from '../../../../../actions/ui_actions';
 import AddServerForm from './add_server_form';
 
@@ -10,7 +14,6 @@ const mSTP = (state, ownProps) => ({
       input: `${state.entities.users[state.session.id].username}'s server`
     },
     formType: "create",
-    inputLabel: (<h3 className="server-form-input-label">SERVER NAME</h3>),
     formTitle: "Create a server",
     formSubtitle: (
         <>
@@ -20,7 +23,7 @@ const mSTP = (state, ownProps) => ({
     ),
     inputPlaceholder: null,
     formFooter: (<h3 className="asf-create-footer">Have an invite already?</h3>),
-    errors: state.errors,
+    serverErrors: state.errors.servers,
 
 });
 
@@ -32,6 +35,8 @@ const mDTP = dispatch => ({
             Join a Server
         </button>
     ),
+    receiveServerErrors: errors => dispatch(receiveServerErrors(errors)),
+    removeServerErrors: () => dispatch(removeServerErrors()),
 });
 
 export default connect(mSTP, mDTP)(AddServerForm);

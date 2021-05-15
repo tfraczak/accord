@@ -40,9 +40,9 @@ class ServerFormModal extends React.Component {
 		}
 		
 		return (
-			<div className="modal-background">
+			<div className="asf-modal-background">
 				<div 
-				className="modal-child"
+				className="asf-modal-child"
 				onClick={e => e.stopPropagation()}>
 
 				{ component }

@@ -1,6 +1,6 @@
 import * as ServerAPIUtil from "../utils/server_utils";
 import { removeUser } from "./user_actions";
-import { camelToSnakeCase, convertToSnakeCase } from "../utils/camel_to_snake";
+import { convertToSnakeCase } from "../utils/func_utils";
 
 export const RECEIVE_SERVERS = "RECEIVE_SERVERS";
 export const RECEIVE_SERVER = "RECEIVE_SERVER";
@@ -25,7 +25,7 @@ const receiveServer = server => ({
     server,
 });
 
-const receiveServerErrors = errors => ({
+export const receiveServerErrors = errors => ({
     type: RECEIVE_SERVER_ERRORS,
     errors,
 });
@@ -59,13 +59,15 @@ const receiveInvitedServer = server => ({
     server,
 });
 
-export const retrieveUserServers = userId => dispatch => {
-    ServerAPIUtil.getUserServers(userId).then(servers => {
+export const retrieveUserServers = userId => dispatch => (
+    ServerAPIUtil.getUserServers(userId).then(servers => (
         dispatch(receiveServers(servers))
-    }, err => {
+    ), err => (
         dispatch(receiveServerErrors(err.responseJSON))
-    })
-};
+    ))
+);
+
+window.retrieveUserServers = retrieveUserServers;
 
 export const createServer = server => dispatch => {
     server = convertToSnakeCase(server);
@@ -95,9 +97,9 @@ export const deleteServer = serverId => dispatch => {
 
 export const joinServer = (membership) => dispatch => {
     membership = convertToSnakeCase(membership);
-    ServerAPIUtil.joinServer(membership).then(server => {
+    return ServerAPIUtil.joinServer(membership).then(server => (
         dispatch(receiveServer(server))
-    }, () => (
+    ), () => (
         dispatch({
             type: RECEIVE_SERVER_ERRORS,
             errors: ["Something went wrong. Couldn't join server."],
@@ -149,3 +151,11 @@ export const getServerByJoinForm = urlToken => dispatch => (
         dispatch(receiveServerErrors(err.responseJSON))
     ))
 );
+
+export const getServerByUrl = urlToken => dispatch => (
+    ServerAPIUtil.getServerByInvite(urlToken).then(server => (
+        dispatch(receiveInvitedServer(server))
+    ))  
+);
+
+window.getServerByUrl = getServerByUrl;

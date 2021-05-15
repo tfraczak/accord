@@ -1,0 +1,276 @@
+.asf-modal-background {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	background: $modal-bg-color;
+	z-index: 10;
+}
+
+.asf-modal-child {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	box-sizing: border-box;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: $form-color;
+	width: 450px;
+	height: 450px;
+	padding: 20px;
+	font-family: $roboto;
+	border-radius: 7px;
+
+	
+
+	.asf-wrapper{ 
+		position: relative;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+		box-sizing: border-box;
+
+		.fas.fa-times {
+			position: absolute;
+			top: 0;
+			right: 0;
+			cursor: pointer;
+			transition: 0.1s ease-in-out;
+			color: $font-main;
+			&:hover {
+				color: $form-button;
+			}
+		}
+
+		button {
+			border-radius: 5px;
+			box-sizing: border-box;
+			font-weight: 700;
+			cursor: pointer;
+		}
+	
+		.add-server-title {
+			font-size: 32px;
+			font-weight: 700;
+			color: $font-main;
+			margin-bottom: 8px;
+		}
+	
+		> p {
+			color: $font-sub;
+			font-size: 14px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			
+		}
+		
+		p:last-of-type {
+			margin-bottom: 12px;
+		}
+	
+		////////////////// create has an img
+	
+		img {
+			width: 150px;
+			height: 150px;
+			margin-bottom: 12px;
+		}
+	
+		////////////////// join has a div separator
+		.asf-form-separator {
+			width: 100%;
+			height: 150px;
+		}
+	
+	
+		.add-server-form {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: center;
+			box-sizing: border-box;
+			
+			width: 100%;
+			height: 100%;
+		
+			.asf-input-wrapper {
+				position: relative;
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-start;
+				align-items: flex-start;
+				box-sizing: border-box;
+				width: 100%;
+	
+				h3 {
+					font-size: 11px;
+					color: $gray;
+					font-weight: 700;
+					margin-bottom: 5px;
+					&.error {
+						color: red;
+						font-style: italic;
+					}
+				}
+	
+				input {
+					box-sizing: border-box;
+					width: 100%;
+					height: 40px;
+					border: 1px solid $input-outline-color;
+					border-radius: 3px;
+					padding: 10px 15px;
+					font-size: 16px;
+					margin-bottom: 15px;
+					color: $font-sub
+	
+					
+	
+				}
+	
+				::placeholder {
+					color: #aaaaaa;
+					font-size: 16px;
+					font-style: italic;
+				}
+	
+			}
+	
+			.submit {
+				background-color: $form-button;
+				color: $form-button-color;
+				font-size: 18px;
+				
+			}
+	
+			.asf-create.submit {
+				box-sizing: border-box;
+				margin-bottom: 15px;
+				width: 100%;
+				padding: 10px 0;
+			}
+	
+			.asf-button-wrapper {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				box-sizing: border-box;
+				width: 100%;
+				height: 100%;
+			}
+			
+			///////////// create form
+			.asf-button-wrapper.create {
+				justify-content: space-between;
+				
+				.asf-to-join-wrapper {
+					display: flex;
+					flex-direction: column;
+					justify-content: flex-end;
+					align-items: center;
+					box-sizing: border-box;
+					width: 100%;
+					height: 100%;
+					
+					.asf-create-footer {
+						font-weight: 500;
+						font-size: 16px;
+						color: $gray;
+						margin-bottom: 5px;
+						font-style: italic;
+					}
+	
+					button {
+						background-color: $form-button-sub;
+						color: $form-button-color;
+						font-size: 16px;
+						box-sizing: border-box;
+						padding: 8px 0;
+						width: 100%
+					}
+				}
+			}
+	
+			.asf-button-wrapper.join {
+				.asf-footer-wrapper {
+					display: flex;
+					flex-direction: column;
+					align-items: flex-start;
+					box-sizing: border-box;
+					width: 100%;
+					height: 100%;
+	
+					h6 {
+						text-transform: uppercase;
+						font-size: 12px;
+						font-weight: 700;
+						color: $gray;
+						margin-top:15px;
+					}
+	
+					ul {
+						display: flex;
+						flex-direction: column;
+						align-items: flex-start;
+						box-sizing: border-box;
+						width: 100%;
+						height: 100%;
+						li {
+							margin-top: 10px;
+							font-size: 14px;
+							font-weight: 300;
+							font-style: italic;
+							color: #5c5c5c;
+						}
+					}
+	
+				}
+	
+				.join-footer-buttons-wrapper {
+					display: flex;
+					justify-content: space-between;
+					align-items: flex-end;
+					box-sizing: border-box;
+					width: 100%;
+					height: 100%;
+	
+					.asf-to-create {
+						font-weight: 300;
+						&:hover {
+							text-decoration: underline;
+						}
+					}
+	
+					.submit {
+						padding: 10px 20px;
+						font-size: 16px;
+					}
+	
+				}
+			}
+	
+			
+	
+	
+	
+		}
+
+		
+
+	}
+
+	
+
+	
+
+}

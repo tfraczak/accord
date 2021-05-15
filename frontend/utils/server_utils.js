@@ -1,4 +1,4 @@
-import { convertToSnakeCase } from "./camel_to_snake";
+import { convertToSnakeCase } from "./func_utils";
 
 export const getUserServers = userId => (
     $.ajax({
@@ -30,13 +30,13 @@ export const destroyServer = serverId => (
     })
 );
 
-export const joinServer = (membership) => (
-    $.ajax({
+export const joinServer = (membership) => {
+    return $.ajax({
         method: "POST",
         url: `/api/memberships`,
         data: { membership }
     })
-);
+};
 
 export const leaveServer = (membershipId) => (
     $.ajax({
@@ -67,9 +67,9 @@ export const destroyInvite = (inviteId) => (
     })
 );
 
-export const getServerByInvite = urlToken => (
-    $.ajax({
+export const getServerByInvite = urlToken => {
+    return $.ajax({
         method: "GET",
         url: `/api/invitations/${urlToken}`,
     })
-);
+};

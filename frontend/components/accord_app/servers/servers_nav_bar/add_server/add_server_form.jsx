@@ -1,4 +1,5 @@
 import React from 'react';
+import { validUrlToken } from '../../../../../utils/func_utils';
 
 class AddServerForm extends React.Component {
     constructor(props) {
@@ -7,6 +8,11 @@ class AddServerForm extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.insertButtons = this.insertButtons.bind(this);
+        this.labelWithErrors = this.labelWithErrors.bind(this);
+    }
+
+    componentWillUnmount() {
+        this.props.removeServerErrors();
     }
 
     handleChange(e) {
@@ -31,19 +37,42 @@ class AddServerForm extends React.Component {
                 });
                 break;
             case 'join':
-                const urlToken = this.state.input.slice(-10);
-                this.props.processForm(urlToken).then(newServer => {
-                    this.props.closeModal();
-                    this.props.history.push(`./channels/${newServer.id}`);
-                });
-                break;
+                const urlToken = validUrlToken(this.state.input);
+                if (urlToken) {
+                    this.props.processForm(urlToken).then(newServer => {
+                        this.props.closeModal();
+                        this.props.history.push(`./channels/${newServer.id}`);
+                    });
+                    break;
+                } else {
+                    this.props.receiveServerErrors(["Link or token is invalid"]);
+                    break;
+                }
             default:
                 return;
         }
     }
 
-    insertErrors() {
-        const { errors } = this.props;
+    labelWithErrors() {
+        const errors = this.props.serverErrors;
+        let errorMsg;
+        switch(errors[0]) {
+            case "Name can't be blank":
+                errorMsg = " - Server name can't be empty";
+                break;
+            case "Link or token is invalid":
+                errorMsg = " - Link or token is invalid";
+                break;
+            default:
+                errorMsg = null;
+        }
+
+        const className = "server-form-input-label" + (errorMsg ? " error" : "");
+        return (
+            <h3 id={errorMsg ? "error" : null} className={className}>
+                { this.props.formType === 'create' ? "SERVER NAME" : "INVITE LINK" }{ errorMsg }
+            </h3>
+        )
     }
 
     insertButtons() {
@@ -83,13 +112,14 @@ class AddServerForm extends React.Component {
             formType,
         } = this.props;
         return (
-            <>
+            <div className="asf-wrapper">
+                <i className="fas fa-times" onClick={() => this.props.closeModal()}></i>
                 <h1 className="add-server-title">{formTitle}</h1>
                 { formSubtitle }
                 { formType === 'create' ? ( <img className="asf-create-img" alt='upload-img-placeholder' src={window.defaultServerImg} /> ) : <div className="asf-form-separator"></div> }
                 <form onSubmit={this.handleSubmit} className="add-server-form">
                     <div className="asf-input-wrapper">
-                        { inputLabel }
+                        { this.labelWithErrors() }
                         <input
                             type="text"
                             className="add-server-input"
@@ -100,7 +130,7 @@ class AddServerForm extends React.Component {
 
                     { this.insertButtons() }
                 </form>
-            </>
+            </div>
         )
     }
 }

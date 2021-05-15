@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { serverInitials } from '../../../../../utils/func_utils';
 
 export default props => {
 
@@ -7,19 +8,6 @@ export default props => {
     const name = props.server.name;
     const id = props.server.id;
 
-    const serverInitials = name => {
-        let newName;
-        if (name.includes(" ")) {
-            newName = name.split(" ").map(word => word[0]).join("");
-        } else if (name.includes("-")) {
-            newName = name.split("-").map(word => {
-                for (let i=0; i < word.length; i++) {
-                    if (word[i] !== " ") return word[i];
-                }
-            }).join("-");
-        }
-        return newName;
-    };
     const insertServerImg = () => {
         if (imgUrl) {
             return <img src={imgUrl} key={`i-${id}`} alt={`img-${name}-${id}`} />

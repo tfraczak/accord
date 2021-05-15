@@ -1,6 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getServerByJoinForm } from '../../../../../actions/server_actions';
+import {
+    getServerByJoinForm,
+    removeServerErrors,
+    receiveServerErrors,
+} from '../../../../../actions/server_actions';
 import { closeModal, openModal } from '../../../../../actions/ui_actions';
 import AddServerForm from './add_server_form';
 
@@ -10,7 +14,6 @@ const mSTP = (state, ownProps) => ({
       input: "",
     },
     formType: "join",
-    inputLabel: (<h3 className="server-form-input-label">INVITE LINK <span className="required">*</span></h3>),
     formTitle: "Join a Server",
     formSubtitle: (
         <>
@@ -27,7 +30,7 @@ const mSTP = (state, ownProps) => ({
             </ul>
         </div>
     ),
-    errors: state.errors,
+    serverErrors: state.errors.servers,
 
 });
 
@@ -39,6 +42,8 @@ const mDTP = dispatch => ({
             Back
         </button>
     ),
+    receiveServerErrors: errors => dispatch(receiveServerErrors(errors)),
+    removeServerErrors: () => dispatch(removeServerErrors()),
 });
 
 export default connect(mSTP, mDTP)(AddServerForm);

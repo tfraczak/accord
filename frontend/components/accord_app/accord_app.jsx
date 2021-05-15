@@ -14,7 +14,6 @@ class AccordApp extends React.Component {
     }
 
     render() {
-        const { servers, getServerByInvite } = this.props;
         return (
             <div className="webapp-wrapper">
                 <ServersNavBarContainer />
