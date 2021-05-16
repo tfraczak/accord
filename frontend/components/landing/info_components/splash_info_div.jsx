@@ -12,8 +12,15 @@ export default props => {
                     <h1 className="title">Your place to chat</h1>
                     <p className="desc">Whether you’re part of a fishing club, programming bootcamp, worldwide hot sauce community, or just a handful of aquaintances that want to lurk around each other, Accord makes it easy to chat every day and connect more often.</p>
                     <div className="session-links">
-                        <Link className="login-link" to="/login"><i className="fas fa-sign-in-alt"></i>Login</Link>
-                        <Link className="register-link" to="/register">Create an account</Link>
+                        { props.loggedIn ? (
+                                <Link className="open-accord" to="/app">Open Accord</Link>
+                        ) : (
+                            <>
+                                <Link className="login-link" to="/login"><i className="fas fa-sign-in-alt"></i>Login</Link>
+                                <Link className="register-link" to="/register">Create an account</Link>
+                            </>
+                        ) }
+                        
                     </div>
                 </div>
             )
@@ -54,7 +61,11 @@ export default props => {
                     <p className="desc">Low-latency voice and video feels like you’re in the same room. Wave hello over video, watch friends stream their games, or gather up and have a drawing session with screen share.</p>
                     <img src={window.placeholderImg} alt="ph-img" />
                     <h2 className="journey-question">Ready to start your journey?</h2>
-                    <Link className="register-link" to="/register">Create an account</Link>
+                    { props.loggedIn ? (
+                                <Link className="open-accord bottom" to="/app">Open Accord</Link>
+                        ) : (
+                                <Link className="register-link" to="/register">Create an account</Link>
+                        ) }
                 </div>
             )
     }

@@ -13,8 +13,9 @@
     color: $font-sub;
 
     .header-elements {
-        display: grid;
-        grid-template-columns: repeat(12,1fr);
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 63%;
         margin-top: 20px;
 
@@ -27,16 +28,20 @@
         .logout-button {
             margin-left: 70px;
             position: relative;
-            padding: 5px 10px;
+            padding: 10px 15px;
             background-color: $form-button;
             color: $form-button-color;
             font-weight: 700;
             border-radius: 50px;
             font-family: $roboto;
             grid-column-end: 13;
+
+            transition: 0.2s ease-in-out;
     
             &:hover {
                 cursor: pointer;
+                background-color: $link-button-color-hover;
+                box-shadow: 0 0 30px rgba(255, 196, 0, 0.2);
             }
         }
 
@@ -56,18 +61,20 @@
     
             &:hover {
                 cursor: pointer;
+                color: $link-hover-color;
+                box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
             }
         }
 
         nav {
-            width: 100%;
             display: flex;
             justify-content: center;
             grid-column-start: 6;
+            min-width: 100%;
 
-            p {
-                margin: 0 10px;
-                padding: 0 10px;
+            a {
+                text-decoration: none;
+                margin: 0 30px;
                 box-sizing: border-box;
                 display: flex;
                 justify-content: space-evenly;
@@ -76,7 +83,7 @@
                 text-align: center;
                 color: $font-main-negative;
                 font-weight: 500;
-                font-size: 15px;
+                font-size: 18px;
             }
         }
     }

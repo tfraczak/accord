@@ -104,7 +104,7 @@
         }
     }
 
-    .login-link, .register-link {
+    .login-link, .register-link, .open-accord {
         text-decoration: none;
         margin-left: 70px;
         position: relative;
@@ -121,15 +121,15 @@
 
         transition: 0.2s ease-in-out;
 
-    }
+        &:hover {
+            cursor: pointer;
+            color: $link-hover-color;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+        }
 
-    .login-link:hover {
-        cursor: pointer;
-        color: $link-hover-color;
-        box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
     }
     
-    .register-link {
+    .register-link, .open-accord.bottom {
         background-color: $link-button-color;
         color: $font-main;
         
@@ -195,11 +195,14 @@
 
     }
 
-
     .session-links {
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+
+    .open-accord {
+        margin: 0;
     }
 
 }

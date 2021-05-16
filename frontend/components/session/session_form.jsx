@@ -196,7 +196,9 @@ class SessionForm extends React.Component {
             <>
                 <div className="bg-container" style={inlineBgImg}></div>
                 <header className="session-header-wrapper">
-                    <img id="splash-logo" className="horizontal-logo" src={window.logoUrl} />
+                    <Link className="session-to-home" to="/">
+                        <img id="splash-logo" className="horizontal-logo" src={window.logoUrl} />
+                    </Link>
                 </header>
                 <div className="session-form-wrapper">
                     <div className={formBox}>

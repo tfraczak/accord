@@ -5,10 +5,24 @@
     margin: 24px;
     width: 80%;
 
-    .horizontal-logo {
+    .session-to-home {
         position: relative;
         height: 35px;
+        z-index: 1;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        .horizontal-logo {
+            position: relative;
+            height: 35px;
+
+        }
+        
     }
+
+    
 
 }
 

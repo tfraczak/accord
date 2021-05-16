@@ -44,7 +44,7 @@ class UrlInvitation extends React.Component {
 
     handleYes(e) {
         e.preventDefault();
-        const redirectTime = 10000;
+        const redirectTime = 3000;
         const serverIds = this.props.serverIds;
         const invitedServer = this.props.invitedServer;
         if (serverIds.includes(invitedServer.id.toString())) {
