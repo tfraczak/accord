@@ -10,15 +10,15 @@ export default props => {
         <nav className="servers-profile-nav">
             <ul className="nav-list">
                 <li className="profile" key="profile-li">
-                    <NavLink className="profile-li" to="/channels/@me">
-                        <img src={window.defaultAvatarUrl} alt="profile-link" className="profile-link" />
+                    <NavLink className="profile-link" to="/channels/@me">
+                        <img src={window.defaultAvatarUrl} alt="profile-img" className="profile-link" />
                     </NavLink>
                 </li>
                 <li className="profile-servers-separator" key="servers-list-separator-1">
                     <div></div>
                 </li>
                 { servers.map(server => <ServerListItem server={ server } />) }
-                <AddServerButton openModal={openModal} getServerByInvite={getServerByInvite} />
+                <AddServerButton id="asf-button" openModal={openModal} getServerByInvite={getServerByInvite} />
                 {/* <li className="explore-servers"></li> */}
             </ul>
         </nav>

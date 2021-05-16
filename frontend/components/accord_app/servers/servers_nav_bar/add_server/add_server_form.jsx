@@ -9,6 +9,7 @@ class AddServerForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.insertButtons = this.insertButtons.bind(this);
         this.labelWithErrors = this.labelWithErrors.bind(this);
+        this.clickClose = this.clickClose.bind(this);
     }
 
     componentWillUnmount() {
@@ -32,6 +33,7 @@ class AddServerForm extends React.Component {
                     ownerId: this.props.currentUser.id,
                 };
                 this.props.processForm(server).then(newServer => {
+                    document.getElementById("asf-button").classList.remove("active");
                     this.props.closeModal();
                     this.props.history.push(`./channels/${newServer.id}`);
                 });
@@ -103,6 +105,11 @@ class AddServerForm extends React.Component {
         }
     }
 
+    clickClose() {
+        document.getElementById("asf-button").classList.remove("active");
+        this.props.closeModal();
+    }
+
     render() {
         const { 
             formTitle,
@@ -113,7 +120,7 @@ class AddServerForm extends React.Component {
         } = this.props;
         return (
             <div className="asf-wrapper">
-                <i className="fas fa-times" onClick={() => this.props.closeModal()}></i>
+                <i className="fas fa-times" onClick={this.clickClose}></i>
                 <h1 className="add-server-title">{formTitle}</h1>
                 { formSubtitle }
                 { formType === 'create' ? ( <img className="asf-create-img" alt='upload-img-placeholder' src={window.defaultServerImg} /> ) : <div className="asf-form-separator"></div> }

@@ -10,11 +10,11 @@ export default props => {
 
     const insertServerImg = () => {
         if (imgUrl) {
-            return <img src={imgUrl} key={`i-${id}`} alt={`img-${name}-${id}`} />
+            return <img className="server-icon img" src={imgUrl} key={`i-${id}`} alt={`img-${name}-${id}`} />
         } else {
             return (
-                <h1 className="default-server-icon">
-                    {serverInitials(name).slice(0,5)}
+                <h1 className="server-icon default">
+                    { serverInitials(name) }
                 </h1>
             );
         }
@@ -23,7 +23,7 @@ export default props => {
 
     return (
         <li className={`server`} key={`s-${id}`} >
-            <NavLink to={`/channels/${id}`}>
+            <NavLink to={`/channels/${id}`} className="server-item">
                 {insertServerImg()}
             </NavLink>
         </li>

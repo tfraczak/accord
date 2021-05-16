@@ -65,7 +65,7 @@
         height: 48px;
         margin-bottom: 8px;
 
-        a, .add-server-button {
+        a {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -85,11 +85,29 @@
                 cursor: pointer;
             }
         }
-
-        .add-server-button{
+        
+        .add-server-button {
             font-size: 20px;
             font-weight: 300;
             color: $link-button-color;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            width: 48px;
+            height: 48px;
+            background-color: $accord-app-4;
+            border-radius: 50%;
+    
+            transition: 0.1s ease-in-out;
+            border: transparent;
+    
+            &:first-child:hover, &.active {
+                border-radius: 35%;
+                background-color: $link-color;
+                color: $font-main;
+                cursor: pointer;
+            }
 
         }
         
@@ -98,5 +116,9 @@
             height: 48px;
             border-radius: inherit;
         }
+    }
+
+    .profile-link {
+
     }
 }

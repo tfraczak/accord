@@ -14,7 +14,7 @@ export const serverInitials = name => {
             for (let i=0; i < word.length; i++) {
                 if (word[i] !== " ") return word[i];
             }
-        }).join("-");
+        }).join("-").slice(0,5);
     }
     return newName;
 };

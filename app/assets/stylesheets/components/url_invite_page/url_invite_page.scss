@@ -1,0 +1,160 @@
+.url-invite-wrapper {
+    position: absolute;
+    top: -100px;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-family: $roboto;
+    color: $font-sub;
+
+    .url-invite-content-box {
+        position: relative;
+        background-color: $form-color;
+        min-width: 500px;
+        min-height: 400px;
+        display: flex;
+        flex: 0 0 auto;
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: flex-end;
+        box-sizing: border-box;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+
+        .ui-question {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            width: 100%;
+            height: 30px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .ui-server-info-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            box-sizing: border-box;
+            width: 100%;
+            min-height: 186px;
+            margin-top: 27px;
+            margin-bottom: 26px;
+
+            h1 {
+                height: 150px;
+                width: 150px;
+                border: 2px solid $font-main;
+                border-radius: 100px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-sizing: border-box;
+                font-size: 50px;
+                font-weight: 700;
+                margin-bottom: 12px;
+            }
+
+            h2 {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-sizing: border-box;
+                font-size: 24px;
+                font-weight: 500;
+                font-style: italic;
+            }
+
+        }
+
+        .yes-no-wrapper {
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            justify-content: space-between;
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+
+            .cancel-button {
+                background-color: transparent;
+                font-size: 14px;
+                margin-bottom: 10px;
+                transition: 0.2s text-decoration ease-in-out;
+
+                &:hover {
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+            }
+
+            .join-button {
+                box-sizing: border-box;
+                background-color: $form-button;
+                color: $form-button-color;
+                padding: 12px 20px;
+                font-weight: 700;
+                border-radius: 10px;
+                margin-bottom: 30px;
+                width: 100%;
+
+                transition: 0.1s ease-in-out;
+
+                &:hover {
+                    cursor: pointer;
+                    background-color: $link-button-color-hover;
+                }
+
+            }
+        }
+
+        .separator {
+            box-sizing: border-box;
+            width: 100%;
+            height: 30px;
+        }
+
+        .join-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            width: 100%;
+            height: 94px;
+
+            img {
+                width: 90px;
+                height: 90px;
+            }
+
+            h1 {
+                font-size: 24px;
+                font-weight: 500;
+                color: $font-main;
+                margin-bottom: 20px;
+            }
+
+            h1.joined {
+                font-weight: 700; 
+                color: $link-hover-color;
+            }
+
+            p {
+                font-size: 14px;
+                font-weight: 300;
+                font-style: italic;
+            }
+
+        }
+
+    }
+
+}
