@@ -1,8 +1,8 @@
 import * as SessionAPIUtil from "../utils/session_utils";
 import { getUserServers } from "../utils/server_utils";
-import { RECEIVE_SERVERS, receiveServers } from "./server_actions";
+import { RECEIVE_SERVERS, receiveServers, receiveServerErrors } from "./server_actions";
 import { convertToSnakeCase } from "../utils/func_utils";
-import { retrieveServerMembers, receiveUsers } from './user_actions'
+import { retrieveServerMembers, receiveUsers } from './user_actions';
 
 
 export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER"; 

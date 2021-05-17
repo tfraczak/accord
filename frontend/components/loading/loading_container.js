@@ -1,7 +1,6 @@
 import Loading from "./loading";
 import { connect } from "react-redux";
 import { _retrieveUserLoadData } from '../../actions/session_actions';
-import { createServer } from '../../actions/server_actions';
 
 const mSTP = (state, ownProps) => ({
     currentUserId: state.session.id,
