@@ -23,3 +23,47 @@ User.create!(
     username: "fraczles",
     password: "password",
 )
+
+
+Server.create!(
+    name: "Teddy's Hangout",
+    owner_id: 1,
+)
+Server.create!(
+    name: "The Apiary",
+    owner_id: 2,
+)
+Server.create!(
+    name: "My Awesome Hangout",
+    owner_id: 3,
+)
+
+Membership.create!(
+    user_id: 2,
+    joinable_type: :Server,
+    joinable_id: 1,
+)
+Membership.create!(
+    user_id: 3,
+    joinable_type: :Server,
+    joinable_id: 2,
+)
+Membership.create!(
+    user_id: 2,
+    joinable_type: :Server,
+    joinable_id: 3,
+)
+
+Invitation.create!(
+    server_id: 1
+)
+Invitation.create!(
+    server_id: 1,
+    expiration: 12,
+)
+Invitation.create!(
+    server_id: 2
+)
+Invitation.create!(
+    server_id: 3
+)

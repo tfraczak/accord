@@ -8,7 +8,7 @@ const mSTP = (state, ownProps) => ({
 });
 
 const mDTP = (dispatch) => ({
-    retrieveUserLoadData: (userId, history) => dispatch(_retrieveUserLoadData(userId, history)),
+    retrieveUserLoadData: (userId, history) => dispatch(_retrieveUserLoadData(userId,history)),
 });
 
 export default connect(mSTP, mDTP)(Loading);
