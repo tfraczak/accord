@@ -1,13 +1,24 @@
 import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom';
 import * as InviteActions from '../../../../actions/invitation_actions';
 import * as ServerActions from '../../../../actions/server_actions';
-import * as UserActions from '../../../../actions/user_actions';
-import ServerToolbar from "./servers_nav_bar";
+import ServerToolbar from "./server_toolbar";
+import { currentUsersMembershipId } from '../../../../utils/selectors';
 
 const mSTP = (state, ownProps) => {
-    const server = state.entities.servers[ownProps.math.params.serverId];
+
+    const server = state.entities.servers[ownProps.match.params.serverId];
     const currentUserId = state.session.id;
-    const membershipId = server.memberships[currentUserId].id;
+    const memberships = state.entities.memberships;
+    const users = state.entities.users;
+
+    const membershipId = currentUsersMembershipId(
+        currentUserId,
+        users,
+        server,
+        memberships
+    )
+    debugger
     return {
         server,
         currentUserId,
@@ -16,10 +27,10 @@ const mSTP = (state, ownProps) => {
 };
 
 const mDTP = (dispatch, ownProps) => ({
-    leaveServer: (membershipId, currentUserId, userId=null) => dispatch(ServerActions.leaveServer((membershipId, currentUserId, userId=null))),
+    leaveServer: (membershipId) => dispatch(ServerActions.leaveServer((membershipId))),
     createInvite: (serverId, expiration) => dispatch(InviteActions.createInvite((serverId, expiration))),
     deleteServer: serverId => dispatch(ServerActions.deleteServer(serverId)),
     updateServer: server => dispatch(ServerActions.updateServer(server)),
 });
 
-export default connect(mSTP, mDTP)(ServerToolbar);
+export default withRouter(connect(mSTP, mDTP)(ServerToolbar));

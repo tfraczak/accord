@@ -1,10 +1,13 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 import {
     createServer,
     removeServerErrors,
     receiveServerErrors,
 } from '../../../../../actions/server_actions';
+
 import { closeModal, openModal } from '../../../../../actions/ui_actions';
 import AddServerForm from './add_server_form';
 
@@ -39,4 +42,4 @@ const mDTP = dispatch => ({
     removeServerErrors: () => dispatch(removeServerErrors()),
 });
 
-export default connect(mSTP, mDTP)(AddServerForm);
+export default withRouter(connect(mSTP, mDTP)(AddServerForm));

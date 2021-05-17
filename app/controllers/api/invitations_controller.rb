@@ -25,7 +25,6 @@ class Api::InvitationsController < ApplicationController
         rescue => exception
             @invitation.expiration = nil
         end
-        debugger
         if @invitation.save
             render :show
         else

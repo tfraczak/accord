@@ -30,4 +30,6 @@ class CreateServerInvite extends React.Component {
 
 }
 
+export default CreateServerInvite;
+
     

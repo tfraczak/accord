@@ -9,12 +9,12 @@ export const receiveMemberships = memberships => ({
     memberships,
 });
 
-const receiveMembership = membership => ({
+export const receiveMembership = membership => ({
     type: RECEIVE_MEMBERSHIP,
     membership,
 });
 
-const removeMembership = membershipId => ({
+export const removeMembership = membershipId => ({
     type: REMOVE_MEMBERSHIP,
     membershipId,
 });

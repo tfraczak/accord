@@ -2,7 +2,9 @@ import * as SessionAPIUtil from "../utils/session_utils";
 import { getUserServers } from "../utils/server_utils";
 import { RECEIVE_SERVERS, receiveServers, receiveServerErrors } from "./server_actions";
 import { convertToSnakeCase } from "../utils/func_utils";
-import { retrieveServerMembers, receiveUsers } from './user_actions';
+import { receiveUsers } from './user_actions';
+import { receiveMemberships } from './membership_actions';
+import { receiveInvitations } from './invitation_actions';
 
 
 export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER"; 
@@ -62,6 +64,8 @@ export const _retrieveUserLoadData = (userId, history) => dispatch => {
         .then(payload => {
             dispatch(receiveServers(payload.servers));
             dispatch(receiveUsers(payload.users));
+            dispatch(receiveMemberships(payload.memberships));
+            dispatch(receiveInvitations(payload.invitations));
         }, err => {
             dispatch(receiveServerErrors(err.responseJSON))
         })

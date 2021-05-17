@@ -1,5 +1,12 @@
 class Api::MembershipsController < ApplicationController
 
+    def index
+        if params[:server_id]
+            @memberships = Membership.where(joinable_id: params[:server_id], joinable_type: :Server)
+        end
+        render :index
+    end
+
     def create
         if params[:server_id]
             @membership = Membership.new(membership_params)

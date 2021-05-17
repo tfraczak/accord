@@ -24,30 +24,40 @@ class AddServerForm extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        const { formType } = this.props;  
+        const {
+            formType,
+            closeModal,
+            history,
+            processForm,
+            currentUser,
+            receiveServerErrors,
+        } = this.props;
+
         Object.freeze(this.state);
         switch(formType) {
             case 'create':
                 const server = {
                     name: this.state.input,
-                    ownerId: this.props.currentUser.id,
+                    ownerId: currentUser.id,
                 };
-                this.props.processForm(server).then(newServer => {
+                processForm(server).then(newServer => {
+                    closeModal();
                     document.getElementById("asf-button").classList.remove("active");
-                    this.props.closeModal();
-                    this.props.history.push(`./channels/${newServer.id}`);
+                    // history.push(`./channels/${newServer.id}`);
                 });
                 break;
             case 'join':
                 const urlToken = validUrlToken(this.state.input);
                 if (urlToken) {
-                    this.props.processForm(urlToken).then(newServer => {
-                        this.props.closeModal();
-                        this.props.history.push(`./channels/${newServer.id}`);
+                    processForm(urlToken, currentUser.id).then(() => {
+                        
+                        closeModal();
+                        document.getElementById("asf-button").classList.remove("active");
+                        // history.push(`/channels/${newServer.id}`);
                     });
                     break;
                 } else {
-                    this.props.receiveServerErrors(["Link or token is invalid"]);
+                    receiveServerErrors(["Link or token is invalid"]);
                     break;
                 }
             default:

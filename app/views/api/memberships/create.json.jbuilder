@@ -1,6 +1,7 @@
 json.set! :membership do
-    json.partial! 'api/memberships/membership', membership: @membership
+    json.partial! "api/memberships/membership", membership: @membership
 end
+
 
 if @server
     json.set! @membership.joinable_type.downcase do

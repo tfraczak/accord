@@ -18,7 +18,9 @@ export default (state = {}, action) => {
             return Object.assign({}, state, { [action.server.id]: action.server });
         case REMOVE_SERVER:
             nextState = Object.assign({}, state);
+            
             delete nextState[action.serverId];
+            
             return nextState;
         // case RECEIVE_INVITATIONS:
         //     return Object.assign({}, ...state, { invitations: action.invitations });
@@ -32,9 +34,9 @@ export default (state = {}, action) => {
         //     return nextState
         // case RECEIVE_LOCAL_USERNAME:
         //     nextState = Object.assign({}, state);
-        //     debugger
+        //     
         //     const oldMemberships = nextState[action.membership.joinableId];
-        //     debugger
+        //     
         //     nextState[action.membership.joinableId].memberships = Object.assign({}, );
         //     return nextState;
         default:

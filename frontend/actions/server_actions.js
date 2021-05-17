@@ -86,6 +86,7 @@ export const deleteServer = serverId => dispatch => {
 
 export const joinServer = (membership) => dispatch => {
     membership = convertToSnakeCase(membership);
+    
     return ServerAPIUtil.joinServer(membership).then(payload => {
         dispatch(receiveServer(payload.server));
         dispatch(MembershipActions.receiveMembership(payload.membership));
@@ -97,19 +98,15 @@ export const joinServer = (membership) => dispatch => {
     ));
 };
 
-window.joinServer = joinServer;
-
-export const leaveServer = (membershipId, currentUserId, userId=null) => dispatch => {
-    userId = userId || currentUserId;
+export const leaveServer = (membershipId) => dispatch => {
+    debugger
     return ServerAPIUtil.leaveServer(membershipId).then( membership => {
-        if (currentUserId === userId) {
-            dispatch(removeServer(membership.joinableId));
-        } else {
-            dispatch(removeUser(membership.userId));
-        }       
+        
+        dispatch(removeServer(membership.joinableId));
+        dispatch(MembershipActions.removeMembership(membership.id));
     }, err => {
         dispatch(receiveServerErrors(err.responseJSON));
-    });
+    })
 };
 
 export const retrieveServerInvitations = serverId => dispatch => {
@@ -120,13 +117,21 @@ export const retrieveServerInvitations = serverId => dispatch => {
     });
 };
 
-export const getServerByJoinForm = urlToken => dispatch => (
-    ServerAPIUtil.getServerByInvite(urlToken).then(server => (
-        dispatch(receiveServer(server))
-    ), err => (
-        dispatch(receiveServerErrors(err.responseJSON))
-    ))
-);
+export const getServerByJoinForm = (urlToken,currentUserId)  => dispatch => {
+    return ServerAPIUtil.getServerByInvite(urlToken)
+        .then(server => {
+            
+            let membership = {
+                userId: currentUserId,
+                joinableId: server.id,
+                joinableType: "Server",
+            };
+            joinServer(membership)(dispatch);
+        }, err => {
+            dispatch(receiveServerErrors(err.responseJSON))
+        });
+};
+
 
 export const getServerByUrl = urlToken => dispatch => (
     ServerAPIUtil.getServerByInvite(urlToken).then(server => (

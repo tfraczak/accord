@@ -38,12 +38,12 @@ export const joinServer = (membership) => {
     })
 };
 
-export const leaveServer = (membershipId) => (
-    $.ajax({
+export const leaveServer = (membershipId) => {
+    return $.ajax({
         method: "DELETE",
         url: `/api/memberships/${membershipId}`,
     })
-);
+};
 
 export const updateLocalUsername = (membership) => {
     membership = convertToSnakeCase(membership);

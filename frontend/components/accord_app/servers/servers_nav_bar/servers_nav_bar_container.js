@@ -15,7 +15,7 @@ const mDTP = (dispatch, ownProps) => ({
     updateServer: server => dispatch(ServerActions.updateServer(server)),
     deleteServer: serverId => dispatch(ServerActions.deleteServer(serverId)),
     joinServer: membership => dispatch(ServerActions.joinServer(membership)),
-    leaveServer: (membershipId, currentUserId, userId=null) => dispatch(ServerActions.leaveServer(membershipId, currentUserId, userId)),
+    leaveServer: (membershipId) => dispatch(ServerActions.leaveServer(membershipId)),
     openModal: modal => dispatch(openModal(modal)),
     closeModal: () => dispatch(closeModal()),
 });

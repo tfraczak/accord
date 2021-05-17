@@ -1,1 +1,1 @@
-json.extract! @membership, :id, :user_id, :local_username, :joinable_id
+json.partial! 'api/memberships/membership', membership: @membership

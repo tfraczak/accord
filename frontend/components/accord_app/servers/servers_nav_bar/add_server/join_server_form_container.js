@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {
     getServerByJoinForm,
@@ -8,34 +9,37 @@ import {
 import { closeModal, openModal } from '../../../../../actions/ui_actions';
 import AddServerForm from './add_server_form';
 
-const mSTP = (state, ownProps) => ({
-    currentUser: state.entities.users[state.session.id],
-    submitObj: {
-      input: "",
-    },
-    formType: "join",
-    formTitle: "Join a Server",
-    formSubtitle: (
-        <>
-            <p>Enter an invite below to join an existing server</p>
-        </>
-    ),
-    inputPlaceholder: "https://accord.com/Ia78S8gyoQ",
-    formFooter: (
-        <div className="asf-footer-wrapper">
-            <h6 className="invites-examples-title" >invites should look like</h6>
-            <ul className="invites-examples-list">
-                <li key="join-ex-1">Ia78S8gyoQ</li>
-                <li key="join-ex-2">https://accord.com/Ia78S8gyoQ</li>
-            </ul>
-        </div>
-    ),
-    serverErrors: state.errors.servers,
+const mSTP = (state, ownProps) => {
+    
+    return {
+        currentUser: state.entities.users[state.session.id],
+        submitObj: {
+        input: "",
+        },
+        formType: "join",
+        formTitle: "Join a Server",
+        formSubtitle: (
+            <>
+                <p>Enter an invite below to join an existing server</p>
+            </>
+        ),
+        inputPlaceholder: "https://accord.com/Ia78S8gyoQ",
+        formFooter: (
+            <div className="asf-footer-wrapper">
+                <h6 className="invites-examples-title" >invites should look like</h6>
+                <ul className="invites-examples-list">
+                    <li key="join-ex-1">Ia78S8gyoQ</li>
+                    <li key="join-ex-2">https://accord.com/Ia78S8gyoQ</li>
+                </ul>
+            </div>
+        ),
+        serverErrors: state.errors.servers,
+    }
 
-});
+};
 
 const mDTP = dispatch => ({
-    processForm: urlToken => dispatch(getServerByJoinForm(urlToken)),
+    processForm: (urlToken, currentUserId) => dispatch(getServerByJoinForm(urlToken, currentUserId)),
     closeModal: () => dispatch(closeModal()),
     otherForm: (
         <button type="button" className="asf-to-create" onClick={() => dispatch(openModal('create server'))}>
@@ -46,4 +50,4 @@ const mDTP = dispatch => ({
     removeServerErrors: () => dispatch(removeServerErrors()),
 });
 
-export default connect(mSTP, mDTP)(AddServerForm);
+export default withRouter(connect(mSTP, mDTP)(AddServerForm));

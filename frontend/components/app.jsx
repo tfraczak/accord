@@ -12,7 +12,6 @@ import { AuthRoute, ProtectedRoute } from '../utils/route_utils';
 
 const App = () => (
     <div className="app-wrapper">
-        <AddServerModal />
         <Switch>
             <ProtectedRoute path="/channels" component={AccordAppContainer} />
             <ProtectedRoute exact path="/app" component={LoadingContainer} />
