@@ -61,7 +61,7 @@ export const _retrieveUserLoadData = (userId, history) => dispatch => {
     getUserServers(userId)
         .then(payload => {
             dispatch(receiveServers(payload.servers));
-            return dispatch(receiveUsers(payload.users));
+            dispatch(receiveUsers(payload.users));
         }, err => {
             dispatch(receiveServerErrors(err.responseJSON))
         })
