@@ -1,16 +1,15 @@
 import * as ServerAPIUtil from "../utils/server_utils";
 import { removeUser } from "./user_actions";
 import { convertToSnakeCase } from "../utils/func_utils";
+import { receiveInvitations } from './invitation_actions';
 
 export const RECEIVE_SERVERS = "RECEIVE_SERVERS";
 export const RECEIVE_SERVER = "RECEIVE_SERVER";
 export const RECEIVE_SERVER_ERRORS = "RECEIVE_SERVER_ERRORS";
 export const REMOVE_SERVER_ERRORS = "REMOVE_SERVER_ERRORS";
 export const REMOVE_SERVER = "REMOVE_SERVER";
-export const RECEIVE_INVITATIONS = "RECEIVE_INVITATIONS";
-export const RECEIVE_INVITATION = "RECEIVE_INVITATION";
-export const REMOVE_INVITATION = "REMOVE_INVITATION";
 export const RECEIVE_INVITED_SERVER = "RECEIVE_INVITED_SERVER";
+export const RECEIVE_LOCAL_USERNAME = "RECEIVE_LOCAL_USERNAME";
 
 
 
@@ -39,24 +38,14 @@ export const removeServerErrors = () => ({
     type: REMOVE_SERVER_ERRORS,
 });
 
-const receiveInvitations = invitations => ({
-    type: RECEIVE_INVITATIONS,
-    invitations,
-});
-
-const receiveInvitation = invitation => ({
-    type: RECEIVE_INVITATION,
-    invitation,
-});
-
-const removeInvitation = inviteId => ({
-    type: REMOVE_INVITATION,
-    inviteId,
-});
-
 const receiveInvitedServer = server => ({
     type: RECEIVE_INVITED_SERVER,
     server,
+});
+
+const receiveLocalUsername = membership => ({
+    type: RECEIVE_LOCAL_USERNAME,
+    membership,
 });
 
 export const retrieveUserServers = userId => dispatch => (
@@ -66,8 +55,6 @@ export const retrieveUserServers = userId => dispatch => (
         dispatch(receiveServerErrors(err.responseJSON))
     ))
 );
-
-window.retrieveUserServers = retrieveUserServers;
 
 export const createServer = server => dispatch => {
     server = convertToSnakeCase(server);
@@ -88,7 +75,7 @@ export const updateServer = server => dispatch => {
 };
 
 export const deleteServer = serverId => dispatch => {
-    ServerAPIUtil.destroyServer(serverId).then(server => {
+    return ServerAPIUtil.destroyServer(serverId).then(server => {
         dispatch(removeServer(server.id))
     }, err => {
         dispatch(receiveServerErrors(err.responseJSON))
@@ -109,7 +96,7 @@ export const joinServer = (membership) => dispatch => {
 
 export const leaveServer = (membershipId, currentUserId, userId=null) => dispatch => {
     userId = userId || currentUserId;
-    ServerAPIUtil.leaveServer(membershipId).then( membership => {
+    return ServerAPIUtil.leaveServer(membershipId).then( membership => {
         if (currentUserId === userId) {
             dispatch(removeServer(membership.joinableId));
         } else {
@@ -123,22 +110,6 @@ export const leaveServer = (membershipId, currentUserId, userId=null) => dispatc
 export const retrieveServerInvitations = serverId => dispatch => {
     ServerAPIUtil.getInvitations(serverId).then(invitations => {
         dispatch(receiveInvitations(invitations));
-    }, err => {
-        dispatch(receiveServerErrors(err.responseJSON));
-    });
-};
-
-export const createInvite = (serverId, expiration) => dispatch => {
-    ServerAPIUtil.createInvite(serverId,expiration).then(invitation => {
-        dispatch(receiveInvitation(invitation));
-    }, err => {
-        dispatch(receiveServerErrors(err.responseJSON));
-    });
-};
-
-export const destroyInvite = inviteId => dispatch => {
-    ServerAPIUtil.destroyInvite(inviteId).then(invitation => {
-        dispatch(removeInvitation(invitation.id));
     }, err => {
         dispatch(receiveServerErrors(err.responseJSON));
     });
@@ -158,4 +129,15 @@ export const getServerByUrl = urlToken => dispatch => (
     ))  
 );
 
-window.getServerByUrl = getServerByUrl;
+// export const changeNickname = (membershipId, localUsername) => dispatch => {
+//     const membership = {
+//         id: membershipId,
+//         localUsername: localUsername,
+//     };
+//     return ServerAPIUtil.updateLocalUsername(membership)
+//         .then(membership => {
+//             dispatch(receiveLocalUsername(membership));
+//         });
+// };
+
+// window.changeNickname = changeNickname;

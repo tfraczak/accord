@@ -8,10 +8,11 @@
 
 }
 
-@import './accord_app_server_nav.scss';
+@import './servers_nav/server_nav.scss';
 @import './accord_app_content.scss';
 @import './accord_app_sidebar.scss';
 @import './accord_app_focus.scss';
 @import './accord_app_focus_content.scss';
 @import './accord_app_main_focus.scss';
-@import './accord_app_asf_modal.scss';
+@import './servers_nav/asf_modal.scss';
+@import './server_members_list/server_members_list.scss';

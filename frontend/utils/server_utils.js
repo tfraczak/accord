@@ -45,6 +45,15 @@ export const leaveServer = (membershipId) => (
     })
 );
 
+export const updateLocalUsername = (membership) => {
+    membership = convertToSnakeCase(membership);
+    return $.ajax({
+        method: "PATCH",
+        url: `/api/memberships/${membership.id}`,
+        data: { membership }
+    })
+};
+
 export const createInvite = (serverId, expiration=null) => (
     $.ajax({
         method: "POST",

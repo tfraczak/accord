@@ -1,6 +1,8 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Route, Switch } from 'react-router-dom';
 import ServersNavBarContainer from './servers/servers_nav_bar/servers_nav_bar_container';
+import ServerMembersListContainer from './servers/server_members_list/server_members_list_container';
+import ConversationMembersList from './conversations/conversation_members_list/conversation_members_list_container';
 
 class AccordApp extends React.Component {
     constructor(props) {
@@ -9,7 +11,7 @@ class AccordApp extends React.Component {
 
     componentDidMount() {
         if (!this.props.servers.length) {
-            this.props.retrieveUserServers(this.props.currentUserId);
+            this.props.history.push("/app");
         }
     }
 
@@ -44,7 +46,12 @@ class AccordApp extends React.Component {
                                         <input className="message-input" type="text" placeholder="Message" />
                                     </form>
                                 </div>
-                                <div className="focus-right-wrapper"></div>
+                                <div className="focus-right-wrapper">
+                                    <Switch>
+                                        <Route exact path="/channels/@me" component={ConversationMembersList} />
+                                        <Route path="/channels/:serverId" component={ServerMembersListContainer}/>
+                                    </Switch>
+                                </div>
                             </div>
                         </div>
 

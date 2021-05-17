@@ -1,6 +1,8 @@
 import * as UserAPIUtil from "../utils/user_utils";
+import { retrieveUserServers } from "./server_actions";
 
 export const RECEIVE_USERS = "RECEIVE_USERS";
+export const RECEIVE_MEMBERS = "RECEIVE_MEMBERS";
 export const RECEIVE_SERVER_USERS = "RECEIVE_SERVER_USERS";
 export const RECEIVE_USER = "RECEIVE_USER";
 export const REMOVE_USER = "REMOVE_USER";
@@ -8,7 +10,7 @@ export const RECEIVE_USER_ERRORS = "RECEIVE_USER_ERRORS";
 export const REMOVE_USER_ERRORS = "REMOVE_USER_ERRORS";
 
 
-const receiveUsers = users => ({
+export const receiveUsers = users => ({
     type: RECEIVE_USERS,
     users,
 });
@@ -35,3 +37,5 @@ export const retrieveServerMembers = serverId => dispatch => {
         dispatch(receiveUserErrors(err.responseJSON))
     });
 };
+
+window.retrieveServerMembers = retrieveServerMembers;

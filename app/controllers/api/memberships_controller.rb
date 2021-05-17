@@ -12,10 +12,9 @@ class Api::MembershipsController < ApplicationController
 
     def update # used only for updating local_username
         @membership = Membership.find_by(id: params[:id])
-
-        if local_username_valid? && @membership.update(local_username_params)
-            @user = User.find_by(id: @membership.user_id)
-            render :create
+        @server= Server.find_by(id: @membership.joinable_id) if @membership.joinable_type == "Server"
+        if local_username_valid? && @membership.update(local_username: local_username_param)
+            render :update
         elsif @membership && local_username_empty?
             render json: ["Local username cannot be empty."], status: 422
         elsif illegal_update?
@@ -49,6 +48,10 @@ class Api::MembershipsController < ApplicationController
         !membership_params[:user_id] &&
         !membership_params[:joinable_id] &&
         !membership_params[:joinable_type]
+    end
+
+    def local_username_param
+        membership_params[:local_username]
     end
 
 end

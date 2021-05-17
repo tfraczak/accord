@@ -1,6 +1,7 @@
 import { connect } from "react-redux";
 import * as ServerActions from '../../actions/server_actions';
 import * as UserActions from '../../actions/user_actions';
+import { _retrieveUserLoadData } from '../../actions/session_actions';
 import AccordApp from "./accord_app";
 import { openModal, closeModal } from "../../actions/ui_actions";
 
@@ -8,6 +9,7 @@ const mSTP = (state, ownProps) => ({
     servers: Object.values(state.entities.servers),
     currentUserId: state.session.id,
     invitedServer: state.session.invitedServer,
+
 });
 
 const mDTP = (dispatch, ownProps) => ({

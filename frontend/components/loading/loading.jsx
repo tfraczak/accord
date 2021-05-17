@@ -1,8 +1,9 @@
 import React from 'react';
 
 export default props => {
+
+    props.retrieveUserLoadData(props.currentUserId, props.history);
     
-    props.retrieveUserLoadData(props.currentUserId,props.history)
     const loadingMsgs = [
         "Hacking into the mainframe...",
         "Aright boss, gettin' your stuff...",

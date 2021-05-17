@@ -19,8 +19,13 @@ class Api::InvitationsController < ApplicationController
 
     def create
         @invitation = Invitation.new(server_id: params[:server_id])
-        @invitation.expiration = invitation_params[:expiration]
         
+        begin
+            @invitation.expiration = invitation_params[:expiration]
+        rescue => exception
+            @invitation.expiration = nil
+        end
+        debugger
         if @invitation.save
             render :show
         else

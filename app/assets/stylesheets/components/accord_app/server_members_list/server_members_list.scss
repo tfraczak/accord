@@ -1,0 +1,85 @@
+.focus-right-wrapper {
+
+    .members-list-wrapper {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex: 0 0 auto;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        padding: 0 8px;
+        color: $font-main;
+        overflow: hidden scroll;
+
+        &::-webkit-scrollbar {
+            display: block;
+            width: 5px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            display: block;
+            background-color: $accord-app-5;
+            border-radius: 20px;
+        }
+        &::-webkit-scrollbar-track {
+            display: block;
+            background-color: transparent;
+        }
+
+        h3 {
+            display: flex;
+            box-sizing: border-box;
+            width: 100%;
+            height: auto;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 24px 8px 0;
+        }
+
+        .ml-ul {
+            position: relative;
+            display: flex;
+            flex: 1 1 auto;
+            flex-direction: column;
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+    
+            li {
+                position: relative;
+                display: flex;
+                align-items: center;
+                box-sizing: border-box;
+                padding: 0 8px;
+                height: 44px;
+                width: 100%;
+                border-radius: 5px;
+
+                &:hover {
+                    background-color: $accord-app-4;
+                    cursor: pointer;
+                }
+    
+                img {
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 10px;
+                    border-radius: 50px;
+                }
+    
+                .ml-username {
+                    box-sizing: border-box;
+                    width: 100%;
+                    height: auto;
+                    margin-left: 8px;
+                    font-size: 14px;
+                }
+            }
+    
+        }
+    }
+
+}

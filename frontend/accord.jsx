@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from "react-dom";
 import configureStore from './store/store';
 import Root from './components/root';
+import throttle from 'lodash.throttle';
+import { saveState } from './utils/state_utils';
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -24,6 +26,15 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
         store = configureStore();
     }
+
+    store.subscribe(throttle(() => {
+        saveState({
+            entities: store.getState().entities,
+            ui: store.getState().ui,
+            session: store.getState().session,
+            errors: store.getState().errors,
+        });
+    }, 1000));
 
     window.getState = store.getState();
     window.dispatch = store.dispatch;

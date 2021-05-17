@@ -2,6 +2,7 @@ import * as SessionAPIUtil from "../utils/session_utils";
 import { getUserServers } from "../utils/server_utils";
 import { RECEIVE_SERVERS, receiveServers } from "./server_actions";
 import { convertToSnakeCase } from "../utils/func_utils";
+import { retrieveServerMembers, receiveUsers } from './user_actions'
 
 
 export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER"; 
@@ -32,7 +33,7 @@ export const removeSessionErrors = () => ({
 
 export const register = user => dispatch => {
     user = convertToSnakeCase(user);
-    SessionAPIUtil.createUser(user).then(currentUser => (
+    return SessionAPIUtil.createUser(user).then(currentUser => (
         dispatch(receiveCurrentUser(currentUser))
     ), err => (
         dispatch(receiveSessionErrors(err.responseJSON))
@@ -58,8 +59,9 @@ export const logout = () => dispatch => {
 
 export const _retrieveUserLoadData = (userId, history) => dispatch => {
     getUserServers(userId)
-        .then(servers => {
-            dispatch(receiveServers(servers))
+        .then(payload => {
+            dispatch(receiveServers(payload.servers));
+            return dispatch(receiveUsers(payload.users));
         }, err => {
             dispatch(receiveServerErrors(err.responseJSON))
         })
