@@ -2,6 +2,8 @@ import * as ServerAPIUtil from "../utils/server_utils";
 import { removeUser } from "./user_actions";
 import { convertToSnakeCase } from "../utils/func_utils";
 import { receiveInvitations } from './invitation_actions';
+import * as MembershipActions from './membership_actions';
+import { join } from "lodash";
 
 export const RECEIVE_SERVERS = "RECEIVE_SERVERS";
 export const RECEIVE_SERVER = "RECEIVE_SERVER";
@@ -84,15 +86,18 @@ export const deleteServer = serverId => dispatch => {
 
 export const joinServer = (membership) => dispatch => {
     membership = convertToSnakeCase(membership);
-    return ServerAPIUtil.joinServer(membership).then(server => (
-        dispatch(receiveServer(server))
-    ), () => (
+    return ServerAPIUtil.joinServer(membership).then(payload => {
+        dispatch(receiveServer(payload.server));
+        dispatch(MembershipActions.receiveMembership(payload.membership));
+    }, () => (
         dispatch({
             type: RECEIVE_SERVER_ERRORS,
             errors: ["Something went wrong. Couldn't join server."],
         })
     ));
 };
+
+window.joinServer = joinServer;
 
 export const leaveServer = (membershipId, currentUserId, userId=null) => dispatch => {
     userId = userId || currentUserId;

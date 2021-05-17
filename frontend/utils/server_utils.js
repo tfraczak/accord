@@ -33,7 +33,7 @@ export const destroyServer = serverId => (
 export const joinServer = (membership) => {
     return $.ajax({
         method: "POST",
-        url: `/api/memberships`,
+        url: `/api/servers/${membership.joinable_id}/memberships`,
         data: { membership }
     })
 };

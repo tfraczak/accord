@@ -1,4 +1,5 @@
 import { connect } from "react-redux";
+import * as InviteActions from '../../../../actions/invitation_actions';
 import * as ServerActions from '../../../../actions/server_actions';
 import * as UserActions from '../../../../actions/user_actions';
 import ServerToolbar from "./servers_nav_bar";
@@ -16,7 +17,7 @@ const mSTP = (state, ownProps) => {
 
 const mDTP = (dispatch, ownProps) => ({
     leaveServer: (membershipId, currentUserId, userId=null) => dispatch(ServerActions.leaveServer((membershipId, currentUserId, userId=null))),
-    createInvite: (serverId, expiration) => dispatch(ServerActions.createInvite((serverId, expiration))),
+    createInvite: (serverId, expiration) => dispatch(InviteActions.createInvite((serverId, expiration))),
     deleteServer: serverId => dispatch(ServerActions.deleteServer(serverId)),
     updateServer: server => dispatch(ServerActions.updateServer(server)),
 });

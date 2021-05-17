@@ -1,12 +1,17 @@
 class Api::MembershipsController < ApplicationController
 
     def create
-        membership = Membership.new(membership_params)
-        if membership.save
-            @server = Server.find_by(id: membership.joinable_id)
-            render :create
-        else
-            render json: membership.errors.full_messages, status: 422
+        if params[:server_id]
+            @membership = Membership.new(membership_params)
+            @membership.joinable_id = params[:server_id]
+            @membership.joinable_type = :Server
+            
+            if @membership.save
+                @server = Server.find_by(id: @membership.joinable_id)
+                render :create
+            else
+                render json: membership.errors.full_messages, status: 422
+            end
         end
     end
 

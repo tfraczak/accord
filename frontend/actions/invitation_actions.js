@@ -20,7 +20,7 @@ const removeInvitation = inviteId => ({
 });
 
 export const createInvite = (serverId, expiration) => dispatch => {
-    ServerAPIUtil.createInvite(serverId,expiration).then(invitation => {
+    return ServerAPIUtil.createInvite(serverId,expiration).then(invitation => {
         dispatch(receiveInvitation(invitation));
     }, err => {
         dispatch(receiveServerErrors(err.responseJSON));

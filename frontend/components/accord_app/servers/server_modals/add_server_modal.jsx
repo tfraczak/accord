@@ -1,8 +1,8 @@
 import React from 'react';
-import { closeModal } from '../../../../../actions/ui_actions';
+import { closeModal } from '../../../../actions/ui_actions';
 import { connect } from 'react-redux';
-import CreateServerFormContainer from '../add_server/create_server_form_container';
-import JoinServerFormContainer from '../add_server/join_server_form_container';
+import CreateServerFormContainer from '../servers_nav_bar/add_server/create_server_form_container';
+import JoinServerFormContainer from '../servers_nav_bar/add_server/join_server_form_container';
 
 class ServerFormModal extends React.Component {
     constructor(props) {
