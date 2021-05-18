@@ -27,14 +27,14 @@ document.addEventListener("DOMContentLoaded", () => {
         store = configureStore();
     }
 
-    // store.subscribe(throttle(() => {
-    //     saveState({
-    //         entities: store.getState().entities,
-    //         ui: store.getState().ui,
-    //         session: store.getState().session,
-    //         errors: store.getState().errors,
-    //     });
-    // }, 1000));
+    store.subscribe(throttle(() => {
+        saveState({
+            entities: store.getState().entities,
+            ui: store.getState().ui,
+            session: store.getState().session,
+            errors: store.getState().errors,
+        });
+    }, 1000));
 
     window.getState = store.getState();
     window.dispatch = store.dispatch;

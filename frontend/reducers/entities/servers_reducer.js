@@ -22,23 +22,12 @@ export default (state = {}, action) => {
             delete nextState[action.serverId];
             
             return nextState;
-        // case RECEIVE_INVITATIONS:
-        //     return Object.assign({}, ...state, { invitations: action.invitations });
-        // case RECEIVE_INVITATION:
-        //     nextState = Object.assign({}, state);
-        //     nextState["invitations"] = {...nextState["invitations"], ...{ [action.invitation.id]: action.invitation }}
-        //     return nextState
-        // case REMOVE_INVITATION:
-        //     nextState = Object.assign({}, state);
-        //     delete nextState["invitations"][action.inviteId];
-        //     return nextState
-        // case RECEIVE_LOCAL_USERNAME:
-        //     nextState = Object.assign({}, state);
-        //     
-        //     const oldMemberships = nextState[action.membership.joinableId];
-        //     
-        //     nextState[action.membership.joinableId].memberships = Object.assign({}, );
-        //     return nextState;
+        case "LEAVE_SERVER":
+            nextState = Object.assign({}, state);
+            delete nextState[action.payload.serverId];
+            return nextState;
+        
+        
         default:
             return state;
     }

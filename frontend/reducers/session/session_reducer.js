@@ -3,6 +3,11 @@ import {
     LOGOUT_CURRENT_USER,
 } from "../../actions/session_actions";
 
+import {
+    RECEIVE_INVITATION,
+    REMOVE_INVITATION,
+} from '../../actions/invitation_actions';
+
 import { RECEIVE_INVITED_SERVER } from "../../actions/server_actions";
 
 
@@ -19,6 +24,10 @@ export default (state = _nullSession, action) => {
             return _nullSession;
         case RECEIVE_INVITED_SERVER:
             return Object.assign({}, state, { invitedServer: action.server })
+        case RECEIVE_INVITATION:
+            return Object.assign({}, state, { invitation: action.invitation })
+        case REMOVE_INVITATION:
+            return Object.assign({}, state, { invitation: "" });
         default:
             return state;
     }

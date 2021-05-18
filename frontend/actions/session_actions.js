@@ -5,6 +5,7 @@ import { convertToSnakeCase } from "../utils/func_utils";
 import { receiveUsers } from './user_actions';
 import { receiveMemberships } from './membership_actions';
 import { receiveInvitations } from './invitation_actions';
+import { receiveChannels } from './channel_actions';
 
 
 export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER"; 
@@ -66,6 +67,7 @@ export const _retrieveUserLoadData = (userId, history) => dispatch => {
             dispatch(receiveUsers(payload.users));
             dispatch(receiveMemberships(payload.memberships));
             dispatch(receiveInvitations(payload.invitations));
+            dispatch(receiveChannels(payload.channels));
         }, err => {
             dispatch(receiveServerErrors(err.responseJSON))
         })

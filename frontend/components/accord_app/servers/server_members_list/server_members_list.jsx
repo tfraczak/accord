@@ -8,15 +8,18 @@ class ServerMembersList extends Component {
 
     render() {
         const { serverMembers } = this.props;
-
-        return ( 
-            <div className="members-list-wrapper">
-                <h3 className="ml-title">MEMBERS - {serverMembers.length}</h3>
-                <ul className="ml-ul">
-                    { serverMembers.map(member => <MemberListItem member={member} />) }
-                </ul>
-            </div>
-        )
+        if (serverMembers) {
+            return ( 
+                <div className="members-list-wrapper">
+                    <h3 className="ml-title">MEMBERS - {serverMembers.length}</h3>
+                    <ul className="ml-ul">
+                        { serverMembers.map(member => <MemberListItem member={member} />) }
+                    </ul>
+                </div>
+            )
+        } else {
+            return <div></div>
+        }
     }
 }
 

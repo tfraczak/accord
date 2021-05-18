@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_14_231616) do
+ActiveRecord::Schema.define(version: 2021_05_17_213319) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "channels", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "media_type", null: false
+    t.bigint "server_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["server_id"], name: "index_channels_on_server_id"
+  end
 
   create_table "invitations", force: :cascade do |t|
     t.string "url_token"
@@ -60,6 +69,7 @@ ActiveRecord::Schema.define(version: 2021_05_14_231616) do
     t.index ["username", "username_id"], name: "unique_username_by_uid", unique: true
   end
 
+  add_foreign_key "channels", "servers"
   add_foreign_key "invitations", "servers"
   add_foreign_key "memberships", "users"
   add_foreign_key "servers", "users", column: "owner_id"

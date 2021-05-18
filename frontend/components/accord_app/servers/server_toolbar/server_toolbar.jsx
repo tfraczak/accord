@@ -26,6 +26,59 @@ class ServerToolbar extends Component {
         }
     }
 
+    renderServer() {
+        const {
+            history,
+            server,
+            currentUserId,
+            membershipId,
+            deleteServer,
+            updateServer,
+            leaveServer,
+            createInvite,
+            urlToken,
+            removeInvitation,
+        } = this.props;
+
+        const params = this.props.match.params;
+        if(server) {
+            return (
+                <div className="st-wrapper">
+                    <button
+                        className={ this.state.isOpen ? `st-dropdown-btn dropped` : `st-dropdown-btn` }
+                        type="button"
+                        onClick={this.toggleToolbar}>
+                            { server.name }
+                        <i 
+                            id="st-chevron"
+                            className={ this.state.isOpen ? `fas fa-chevron-down` : `fas fa-chevron-left`}></i>
+                    </button>
+                    { this.state.isOpen ? (
+                    <ul id="server-tools" className="st-closed">
+                        <CreateServerInvite 
+                            createInvite={createInvite}
+                            invite={urlToken} 
+                            serverId={server.id}
+                            removeInvitation={removeInvitation}
+                            params={params} />
+                        { server.ownerId === currentUserId ? (
+                        <>
+                            <ServerUpdateForm server={server} updateServer={updateServer}/>
+                            <ServerDeleteButton deleteServer={() => deleteServer(server.id)}/>
+                        </>
+                        ) : (
+                            <ServerLeaveButton history={history} leaveServer={leaveServer} membershipId={membershipId} />
+                        ) }
+                    </ul>
+                    ) : null }  
+                </div>
+            )
+        } else {
+            history.push('/app')
+        }
+    }
+
+
     render() {
         const {
             history,
@@ -37,33 +90,11 @@ class ServerToolbar extends Component {
             leaveServer,
             createInvite,
         } = this.props;
-        debugger
+        
         return (
-            <div className="st-wrapper">
-                <button 
-                    type="button"
-                    onClick={this.toggleToolbar}>
-                    <i 
-                        id="st-chevron"
-                        className={ this.state.isOpen ? `fas fa-chevron-down` : `fas fa-chevron-right`}></i>
-                    {server.name}
-                </button>
-                { this.state.isOpen ? (
-                <ul id="server-tools" className="st-closed">
-                    <li>
-                        <CreateServerInvite createInvite={createInvite} />
-                    </li>
-                    { server.ownerId === currentUserId ? (
-                    <>
-                        <ServerUpdateForm server={server} updateServer={updateServer}/>
-                        <ServerDeleteButton deleteServer={() => deleteServer(server.id)}/>
-                    </>
-                    ) : (
-                        <ServerLeaveButton leaveServer={leaveServer} membershipId={membershipId} />
-                    ) }
-                </ul>
-                ) : null }
-            </div>
+            <>
+                { server ? this.renderServer() : history.push('/app') }
+            </>
         )
     }
 

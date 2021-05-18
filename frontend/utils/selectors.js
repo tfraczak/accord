@@ -1,5 +1,6 @@
 export const serverMembers = (usersState, server, membershipsState) => {
     if (server) {
+        
         const users = Object.values(usersState);
         const memberships = Object.values(membershipsState)
         const serverMemberships = memberships.filter(membership => {
@@ -26,15 +27,15 @@ const attachLocalUsername = (usersArr, membershipsArr) => {
 };
 
 export const currentUsersMembershipId = (currentUserId, usersState, server, membershipsState) => {
-    const members = serverMembers(usersState, server, membershipsState);
-    let mId;
-    for (let member of members) {
-        if (member.id === currentUserId) {
-            mId = member.membershipId;
-            break;
+    if (server) {
+        const members = serverMembers(usersState, server, membershipsState);
+        let mId;
+        for (let member of members) {
+            if (member.id === currentUserId) {
+                mId = member.membershipId;
+                break;
+            }
         }
+        return mId;
     }
-    return mId;
 }
-
-window.currentUsersMembershipId = currentUsersMembershipId;

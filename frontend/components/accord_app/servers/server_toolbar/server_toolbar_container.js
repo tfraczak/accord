@@ -11,6 +11,7 @@ const mSTP = (state, ownProps) => {
     const currentUserId = state.session.id;
     const memberships = state.entities.memberships;
     const users = state.entities.users;
+    const urlToken = state.session.invitation;
 
     const membershipId = currentUsersMembershipId(
         currentUserId,
@@ -18,19 +19,21 @@ const mSTP = (state, ownProps) => {
         server,
         memberships
     )
-    debugger
+    
     return {
         server,
         currentUserId,
         membershipId,
+        urlToken,
     };
 };
 
 const mDTP = (dispatch, ownProps) => ({
     leaveServer: (membershipId) => dispatch(ServerActions.leaveServer((membershipId))),
-    createInvite: (serverId, expiration) => dispatch(InviteActions.createInvite((serverId, expiration))),
+    createInvite: (serverId) => dispatch(InviteActions.createInvite((serverId))),
     deleteServer: serverId => dispatch(ServerActions.deleteServer(serverId)),
     updateServer: server => dispatch(ServerActions.updateServer(server)),
+    removeInvitation: () => dispatch(InviteActions.removeInvitation()),
 });
 
 export default withRouter(connect(mSTP, mDTP)(ServerToolbar));

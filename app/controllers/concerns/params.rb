@@ -10,9 +10,9 @@ module Params
     params.require(:server).permit(:name, :image_url, :owner_id)
   end
 
-  # def channel_params
-  #   params.require(:channel).permit(:name, :type, :server_id)
-  # end
+  def channel_params
+    params.require(:channel).permit(:name, :media_type, :server_id)
+  end
 
   # def conversation_params
   #   params.require(:conversation).permit(:initiator_id)

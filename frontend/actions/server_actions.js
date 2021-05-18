@@ -99,11 +99,18 @@ export const joinServer = (membership) => dispatch => {
 };
 
 export const leaveServer = (membershipId) => dispatch => {
-    debugger
+    
     return ServerAPIUtil.leaveServer(membershipId).then( membership => {
-        
-        dispatch(removeServer(membership.joinableId));
-        dispatch(MembershipActions.removeMembership(membership.id));
+
+        const payload = {
+            serverId: membership.joinableId,
+            membershipId: membership.id,
+        };
+
+        dispatch({
+            type: "LEAVE_SERVER",
+            payload,
+        });
     }, err => {
         dispatch(receiveServerErrors(err.responseJSON));
     })

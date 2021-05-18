@@ -4,7 +4,7 @@ export default props => {
 
     return (
         <li>
-            <button onClick={props.deleteServer}>Delete Server</button>
+            <button className="st-delete-btn" onClick={props.deleteServer}>Delete Server</button>
         </li>
     )
 }

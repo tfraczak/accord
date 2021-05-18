@@ -15,11 +15,9 @@ export default (state = {}, action) => {
             return Object.assign({}, state, action.memberships );
         case RECEIVE_MEMBERSHIP:
             return Object.assign({}, state, { [action.membership.id]: action.membership });
-        case REMOVE_MEMBERSHIP:
+        case "LEAVE_SERVER":
             nextState = Object.assign({}, state);
-            debugger
-            delete nextState[action.membershipId];
-            
+            delete nextState[action.payload.membershipId];
             return  nextState;
         default:
             return state;

@@ -1,4 +1,5 @@
 import { receiveServerErrors } from './server_actions';
+import * as ServerAPIUtil from '../utils/server_utils';
 
 export const RECEIVE_INVITATIONS = "RECEIVE_INVITATIONS";
 export const RECEIVE_INVITATION = "RECEIVE_INVITATION";
@@ -14,12 +15,11 @@ const receiveInvitation = invitation => ({
     invitation,
 });
 
-const removeInvitation = inviteId => ({
+export const removeInvitation = () => ({
     type: REMOVE_INVITATION,
-    inviteId,
 });
 
-export const createInvite = (serverId, expiration) => dispatch => {
+export const createInvite = (serverId, expiration=null) => dispatch => {
     return ServerAPIUtil.createInvite(serverId,expiration).then(invitation => {
         dispatch(receiveInvitation(invitation));
     }, err => {

@@ -21,6 +21,9 @@ class Server < ApplicationRecord
     has_many :invitations,
         dependent: :destroy
 
+    has_many :channels,
+        dependent: :destroy
+
     def assign_empty_image
         self.image_url ||= ""
     end
