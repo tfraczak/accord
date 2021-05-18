@@ -10,20 +10,23 @@ class ServerToolbar extends Component {
         super(props);
         this.state = {
             isOpen: null,
-            
         }
 
         this.toggleToolbar = this.toggleToolbar.bind(this);
+        this.closeToolbar = this.closeToolbar.bind(this);
 
+    }
+
+    closeToolbar() {
+        this.setState({
+            isOpen: null,
+        });
     }
 
     toggleToolbar(e) {
         e.preventDefault();
-        if (this.state.isOpen) {
-            this.setState({ isOpen: null });
-        } else {
-            this.setState({ isOpen: " open" });
-        }
+        const currentSetting = this.state.isOpen;
+        this.setState({ isOpen: !currentSetting });
     }
 
     renderServer() {
@@ -43,7 +46,8 @@ class ServerToolbar extends Component {
         const params = this.props.match.params;
         if(server) {
             return (
-                <div className="st-wrapper">
+                <div
+                    className="st-wrapper">
                     <button
                         className={ this.state.isOpen ? `st-dropdown-btn dropped` : `st-dropdown-btn` }
                         type="button"
@@ -54,22 +58,27 @@ class ServerToolbar extends Component {
                             className={ this.state.isOpen ? `fas fa-chevron-down` : `fas fa-chevron-left`}></i>
                     </button>
                     { this.state.isOpen ? (
-                    <ul id="server-tools" className="st-closed">
-                        <CreateServerInvite 
-                            createInvite={createInvite}
-                            invite={urlToken} 
-                            serverId={server.id}
-                            removeInvitation={removeInvitation}
-                            params={params} />
-                        { server.ownerId === currentUserId ? (
-                        <>
-                            <ServerUpdateForm server={server} updateServer={updateServer}/>
-                            <ServerDeleteButton deleteServer={() => deleteServer(server.id).then(() => history.push("/channels/@me"))}/>
-                        </>
-                        ) : (
-                            <ServerLeaveButton history={history} leaveServer={leaveServer} membershipId={membershipId} />
-                        ) }
-                    </ul>
+                        <div
+                            className="server-tools-wrapper"
+                            tabIndex="0"
+                            onBlur={this.closeToolbar}>
+                            <ul id="server-tools" className="st-closed">
+                                <CreateServerInvite 
+                                    createInvite={createInvite}
+                                    invite={urlToken} 
+                                    serverId={server.id}
+                                    removeInvitation={removeInvitation}
+                                    params={params} />
+                                { server.ownerId === currentUserId ? (
+                                <>
+                                    <ServerUpdateForm server={server} updateServer={updateServer}/>
+                                    <ServerDeleteButton deleteServer={() => deleteServer(server.id).then(() => history.push("/channels/@me"))}/>
+                                </>
+                                ) : (
+                                    <ServerLeaveButton history={history} leaveServer={leaveServer} membershipId={membershipId} />
+                                ) }
+                            </ul>
+                        </div>
                     ) : null }  
                 </div>
             )

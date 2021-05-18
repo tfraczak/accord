@@ -19,7 +19,7 @@ module Params
   # end
 
   def membership_params
-    params.require(:membership).permit(:user_id, :local_username)
+    params.require(:membership).permit(:user_id, :joinable_id, :joinable_type, :local_username)
   end
 
   # def messages_params

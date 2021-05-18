@@ -10,7 +10,7 @@ class SessionForm extends React.Component {
     }
 
     componentWillUnmount() {
-        this.props.removeSessionErrors();
+        this.props.removeErrors();
     }
 
     handleSubmit(e) {
@@ -72,7 +72,7 @@ class SessionForm extends React.Component {
             formFooterTOS,
             formFooterPrivacy,
             formType,
-            removeSessionErrors,
+            removeErrors,
         } = this.props;
 
         const formBox = `form-box-${this.props.formType}`;

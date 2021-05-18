@@ -3,6 +3,16 @@ import { Link } from 'react-router-dom';
 import SplashInfoDiv from "./info_components/splash_info_div";
 import SplashFooterDiv from "./info_components/splash_footer_div";
 
+
+// class Splash extends React.Component {
+//     constructor(props){
+//         super(props);
+//     }
+
+
+
+// }
+
 export default (props) => {
     const insertSessionButton = () => {
         if (props.currentUser) {

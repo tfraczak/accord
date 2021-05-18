@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import SessionForm from "./session_form";
 import { connect } from "react-redux";
-import { register, removeSessionErrors } from "../../actions/session_actions";
+import { register, removeErrors } from "../../actions/session_actions";
 
 const mSTP = (state, ownProps) => ({
     user: {
@@ -20,7 +20,7 @@ const mSTP = (state, ownProps) => ({
 
 const mDTP = (dispatch, ownProps) => ({
     processForm: user => dispatch(register(user)),
-    removeSessionErrors: () => dispatch(removeSessionErrors()),
+    removeErrors: () => dispatch(removeErrors()),
 });
 
 export default connect(mSTP, mDTP)(SessionForm);

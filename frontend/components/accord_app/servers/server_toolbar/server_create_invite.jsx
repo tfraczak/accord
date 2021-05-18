@@ -17,7 +17,6 @@ class CreateServerInvite extends React.Component {
 
     handleInvite() {
         if (!this.state.invite) {
-
             this.props.createInvite(this.props.serverId).then(() => {
                 this.setState({ receivedInvite: true });
             });
@@ -29,10 +28,18 @@ class CreateServerInvite extends React.Component {
     }
 
     insertUrlToken() {
-        if (this.state.invite && (this.state.serverId === parseInt(this.props.params.serverId))) {
-            return this.state.invite.urlToken;
+        if (this.props.invite && (this.state.serverId === parseInt(this.props.params.serverId))) {
+            return this.props.invite.urlToken;
         } else {
             return "";
+        }
+    }
+
+    insertButtonText() {
+        if (this.props.invite && (this.state.serverId === parseInt(this.props.params.serverId))) {
+            return "REMOVE INVITE";
+        } else {
+            return "CREATE INVITE";
         }
     }
 
@@ -44,7 +51,7 @@ class CreateServerInvite extends React.Component {
                     type="text"
                     disabled 
                     value={`accord.com/${this.insertUrlToken()}`}/>
-                <button onClick={this.handleInvite}>{ this.state.invite ? "REMOVE INVITE" : "CREATE INVITE" }</button>
+                <button onClick={this.handleInvite}>{ this.insertButtonText() }</button>
             </li>
         )
     } 

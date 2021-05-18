@@ -13,7 +13,17 @@ if @channels
     json.set! :channels do
         @channels.each do |channel|
             json.set! channel.id do
-                json.partial! 'api/channels/channel', channel: @channel
+                json.partial! 'api/channels/channel', channel: channel
+            end
+        end
+    end
+end
+
+if @members
+    json.set! :users do
+        @members.each do |member|
+            json.set! member.id do
+                json.partial! 'api/users/user', user: member
             end
         end
     end

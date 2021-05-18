@@ -4,6 +4,8 @@ import {
     REMOVE_USER_ERRORS,
 } from "../../actions/user_actions";
 
+import { REMOVE_ERRORS } from './errors_reducer';
+
 export default (state = {}, action) => {
     Object.freeze(state)
     switch (action.type) {
@@ -11,7 +13,7 @@ export default (state = {}, action) => {
             return action.errors;
         case RECEIVE_USERS:
             return [];
-        case REMOVE_USER_ERRORS:
+        case REMOVE_ERRORS:
             return [];
         default:
             return state;

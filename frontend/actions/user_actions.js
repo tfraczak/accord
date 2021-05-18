@@ -8,6 +8,7 @@ export const RECEIVE_USER = "RECEIVE_USER";
 export const REMOVE_USER = "REMOVE_USER";
 export const RECEIVE_USER_ERRORS = "RECEIVE_USER_ERRORS";
 export const REMOVE_USER_ERRORS = "REMOVE_USER_ERRORS";
+export const REMOVE_ERRORS = "REMOVE_ERRORS";
 
 
 export const receiveUsers = users => ({
