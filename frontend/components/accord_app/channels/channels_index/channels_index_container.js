@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import ChannelsIndex from './channels_index';
-import { serverChannels } from '../../../utils/selectors';
+import { serverChannels } from '../../../../utils/selectors';
 
 const mSTP = (state, ownProps) => {
     const server = state.entities.servers[ownProps.match.params.serverId];

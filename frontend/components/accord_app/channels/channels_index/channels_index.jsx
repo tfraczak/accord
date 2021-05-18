@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import channels_reducer from '../../../reducers/entities/channels_reducer';
 import ChannelListItem from './channel_list_item';
 
 class ChannelsIndex extends Component {
