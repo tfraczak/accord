@@ -42,6 +42,11 @@ json.set! :channels do
             json.set! channel.id do
                 json.partial! "api/channels/channel", channel: channel
             end
+            channel.messages.each do |message|
+                json.set! message.id do
+                    json.partial! "api/messages/message", message: message
+                end
+            end
         end
     end
 end

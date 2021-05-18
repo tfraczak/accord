@@ -22,9 +22,9 @@ module Params
     params.require(:membership).permit(:user_id, :joinable_id, :joinable_type, :local_username)
   end
 
-  # def messages_params
-  #   params.require(:messages).permit(:body, :author_id, :messageable_id, :messageable_type)
-  # end
+  def message_params
+    params.require(:messages).permit(:body, :author_id, :messageable_id, :messageable_type)
+  end
 
   # def role_params
   #   params.require(:role).permit(:user_id, :ord, :roleable_id, :roleable_type)

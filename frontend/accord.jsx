@@ -30,9 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     store.subscribe(throttle(() => {
         saveState({
             entities: store.getState().entities,
-            ui: store.getState().ui,
             session: store.getState().session,
-            errors: store.getState().errors,
         });
     }, 1000));
 

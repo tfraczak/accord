@@ -3,6 +3,7 @@ import servers from "./servers_reducer";
 import invitations from "./invitations_reducer";
 import memberships from "./memberships_reducer";
 import channels from "./channels_reducer";
+import messages from "./messages_reducer";
 import { combineReducers } from 'redux';
 
 export default combineReducers({
@@ -11,4 +12,5 @@ export default combineReducers({
     invitations,
     memberships,
     channels,
+    messages,
 });
