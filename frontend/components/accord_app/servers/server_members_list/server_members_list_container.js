@@ -9,6 +9,7 @@ const mSTP = (state, ownProps) => {
     const memberships = state.entities.memberships;
     return {
         serverMembers: serverMembers(users, server, memberships),
+        server,
     }
 };
 

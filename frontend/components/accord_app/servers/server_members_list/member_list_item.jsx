@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 export default (props) => {
-    const { member } = props;
+    const { member, serverId } = props;
     let username;
     if (member.localUsername) {
         username = member.localUsername;
@@ -10,7 +10,7 @@ export default (props) => {
     }
 
     return (
-        <li key={ `members-list-${member.id}` } className="ml-item">
+        <li key={ `ml-${member.id}-${serverId}` } className="ml-item">
             <img
                 src={window.defaultAvatarUrl}
                 alt={`${username}-avatar-${member.id}`}

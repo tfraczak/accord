@@ -5,6 +5,7 @@ import ServerMembersListContainer from './servers/server_members_list/server_mem
 import ConversationMembersList from './conversations/conversation_members_list/conversation_members_list_container';
 import ServerToolbarContainer from './servers/server_toolbar/server_toolbar_container';
 import AddServerModal from './servers/server_modals/add_server_modal';
+import ChannelsIndexContainer from './channels/channels_index_container';
 
 class AccordApp extends React.Component {
     constructor(props) {
@@ -37,7 +38,10 @@ class AccordApp extends React.Component {
                                         </header>
                                     </div>
                                     <div className="focus-channels-dms">
-                                    
+                                        <Switch>
+                                            <Route exact path="/channels/@me" component={ConversationMembersList} />
+                                            <Route path="/channels/:serverId/" component={ChannelsIndexContainer} />
+                                        </Switch>
                                     </div>
                                 </nav>
                                 <div className="sidebar-current-user"></div>

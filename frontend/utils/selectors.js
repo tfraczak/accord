@@ -39,3 +39,10 @@ export const currentUsersMembershipId = (currentUserId, usersState, server, memb
         return mId;
     }
 }
+
+export const serverChannels = (server, channelsState) => {
+    if (server) {
+        const channels = Object.values(channelsState);
+        return channels.filter(channel => channel.serverId === server.id);
+    }
+}

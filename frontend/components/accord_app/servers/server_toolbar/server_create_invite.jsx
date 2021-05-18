@@ -37,7 +37,7 @@ class CreateServerInvite extends React.Component {
     }
 
     render() {
-        debugger
+        
         return (
             <li>
                 <input
