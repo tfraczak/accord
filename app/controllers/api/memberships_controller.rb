@@ -15,6 +15,7 @@ class Api::MembershipsController < ApplicationController
             
             if @membership.save
                 @server = Server.find_by(id: @membership.joinable_id)
+                @channels = @server.channels
                 render :create
             else
                 render json: membership.errors.full_messages, status: 422

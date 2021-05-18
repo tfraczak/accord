@@ -12,8 +12,11 @@ class Api::ServersController < ApplicationController
 
     def create
         @server = Server.new(server_params)
+        debugger
         if @server.save
             @channel = Channel.find_by(server_id: @server.id)
+            @membership = Membership.find_by(joinable_id: @server.id, joinable_type: :Server, user_id: current_user.id)
+
             render :show
         else
             render json: @server.errors.full_messages, status: 422

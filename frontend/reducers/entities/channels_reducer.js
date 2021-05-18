@@ -4,11 +4,18 @@ import {
     REMOVE_CHANNEL,
 } from "../../actions/channel_actions";
 
+import {
+    RECEIVE_NEW_SERVER,
+    RECEIVE_JOINED_SERVER,
+} from "../../actions/server_actions";
+
 
 
 export default (state = {}, action) => {
     Object.freeze(state);
     let nextState;
+    let channel;
+    let channels;
     switch (action.type) {
         case RECEIVE_CHANNELS:
             return Object.assign({}, state, action.channels );
@@ -18,6 +25,12 @@ export default (state = {}, action) => {
             nextState = Object.assign({}, state);
             delete nextState[action.payload.channelId];
             return  nextState;
+        case RECEIVE_NEW_SERVER:
+            channel = action.payload.channel;
+            return Object.assign({}, state, { [channel.id]: channel });
+        case RECEIVE_JOINED_SERVER:
+            channels = action.payload.channels;
+            return Object.assign({}, state, channels );
         default:
             return state;
     }

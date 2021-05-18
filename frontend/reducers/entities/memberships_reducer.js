@@ -4,12 +4,17 @@ import {
     REMOVE_MEMBERSHIP,
 } from "../../actions/membership_actions";
 
-import { REMOVE_SERVER } from '../../actions/server_actions';
+import {
+    REMOVE_SERVER,
+    RECEIVE_JOINED_SERVER,
+    RECEIVE_NEW_SERVER,
+} from '../../actions/server_actions';
 
 
 export default (state = {}, action) => {
     Object.freeze(state);
     let nextState;
+    let membership;
     switch (action.type) {
         case RECEIVE_MEMBERSHIPS:
             return Object.assign({}, state, action.memberships );
@@ -19,6 +24,12 @@ export default (state = {}, action) => {
             nextState = Object.assign({}, state);
             delete nextState[action.payload.membershipId];
             return  nextState;
+        case RECEIVE_JOINED_SERVER:
+            membership = action.payload.membership;
+            return Object.assign({}, state, { [membership.id]: membership });
+        case RECEIVE_NEW_SERVER:
+            membership = action.payload.membership;
+            return Object.assign({}, state, { [membership.id]: membership });
         default:
             return state;
     }

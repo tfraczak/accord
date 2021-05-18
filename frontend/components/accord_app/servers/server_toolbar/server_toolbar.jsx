@@ -64,7 +64,7 @@ class ServerToolbar extends Component {
                         { server.ownerId === currentUserId ? (
                         <>
                             <ServerUpdateForm server={server} updateServer={updateServer}/>
-                            <ServerDeleteButton deleteServer={() => deleteServer(server.id)}/>
+                            <ServerDeleteButton deleteServer={() => deleteServer(server.id).then(() => history.push("/channels/@me"))}/>
                         </>
                         ) : (
                             <ServerLeaveButton history={history} leaveServer={leaveServer} membershipId={membershipId} />

@@ -9,6 +9,16 @@ if @server
     end
 end
 
+if @channels
+    json.set! :channels do
+        @channels.each do |channel|
+            json.set! channel.id do
+                json.partial! 'api/channels/channel', channel: @channel
+            end
+        end
+    end
+end
+
 # if @conversation
 #     json.set! @membership.joinable_type.downcase do
 #         json.partial! 'api/conversations/conversation', server: @conversation

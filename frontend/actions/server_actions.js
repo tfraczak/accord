@@ -12,9 +12,8 @@ export const REMOVE_SERVER_ERRORS = "REMOVE_SERVER_ERRORS";
 export const REMOVE_SERVER = "REMOVE_SERVER";
 export const RECEIVE_INVITED_SERVER = "RECEIVE_INVITED_SERVER";
 export const RECEIVE_LOCAL_USERNAME = "RECEIVE_LOCAL_USERNAME";
-
-
-
+export const RECEIVE_NEW_SERVER = "RECEIVE_NEW_SERVER";
+export const RECEIVE_JOINED_SERVER = "RECEIVE_JOINED_SERVER";
 
 export const receiveServers = servers => ({
     type: RECEIVE_SERVERS,
@@ -45,9 +44,14 @@ const receiveInvitedServer = server => ({
     server,
 });
 
-const receiveLocalUsername = membership => ({
-    type: RECEIVE_LOCAL_USERNAME,
-    membership,
+const receiveNewServer = payload => ({
+    type: RECEIVE_NEW_SERVER,
+    payload,
+});
+
+const receiveJoinedServer = payload => ({
+    type: RECEIVE_JOINED_SERVER,
+    payload,
 });
 
 export const retrieveUserServers = userId => dispatch => (
@@ -60,8 +64,9 @@ export const retrieveUserServers = userId => dispatch => (
 
 export const createServer = server => dispatch => {
     server = convertToSnakeCase(server);
-    return ServerAPIUtil.createServer(server).then(server => {
-        dispatch(receiveServer(server))
+    return ServerAPIUtil.createServer(server).then(payload => {
+        debugger
+        dispatch(receiveNewServer(payload))
     }, err => {
         dispatch(receiveServerErrors(err.responseJSON))
     });
@@ -88,8 +93,8 @@ export const joinServer = (membership) => dispatch => {
     membership = convertToSnakeCase(membership);
     
     return ServerAPIUtil.joinServer(membership).then(payload => {
-        dispatch(receiveServer(payload.server));
-        dispatch(MembershipActions.receiveMembership(payload.membership));
+        debugger
+        dispatch(receiveJoinedServer(payload));
     }, () => (
         dispatch({
             type: RECEIVE_SERVER_ERRORS,
