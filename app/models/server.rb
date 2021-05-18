@@ -3,7 +3,7 @@ class Server < ApplicationRecord
     validates :name, :owner_id, presence: true
 
     before_validation :assign_empty_image
-    after_create :assign_owner_as_member
+    after_create :assign_owner_as_member, :create_general_channel
 
     belongs_to :owner,
         foreign_key: :owner_id,
@@ -33,6 +33,14 @@ class Server < ApplicationRecord
             user_id: self.owner_id,
             joinable_type: self.class.to_s,
             joinable_id: self.id
+        ).save
+    end
+
+    def create_general_channel
+        Channel.new(
+            name: "general",
+            server_id: self.id,
+            media_type: "text"
         ).save
     end
 

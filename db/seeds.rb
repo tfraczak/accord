@@ -67,3 +67,50 @@ Invitation.create!(
 Invitation.create!(
     server_id: 3
 )
+
+Channel.create!(
+    server_id: 1,
+    name: "baby things",
+    media_type: "text"
+)
+Channel.create!(
+    server_id: 1,
+    name: "gourmet milks",
+    media_type: "text"
+)
+Channel.create!(
+    server_id: 1,
+    name: "best naps",
+    media_type: "text"
+)
+Channel.create!(
+    server_id: 1,
+    name: "just okay naps",
+    media_type: "text"
+)
+Channel.create!(
+    server_id: 2,
+    name: "Development",
+    media_type: "text"
+)
+Channel.create!(
+    server_id: 2,
+    name: "Video games",
+    media_type: "text"
+)
+Channel.create!(
+    server_id: 2,
+    name: "Bread",
+    media_type: "text"
+)
+Channel.create!(
+    server_id: 2,
+    name: "Watermelons",
+    media_type: "text"
+)
+Channel.create!(
+    server_id: 3,
+    name: "This is so awesome!",
+    media_type: "text"
+)
+

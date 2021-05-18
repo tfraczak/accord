@@ -13,6 +13,7 @@ class Api::ServersController < ApplicationController
     def create
         @server = Server.new(server_params)
         if @server.save
+            @channel = Channel.find_by(server_id: @server.id)
             render :show
         else
             render json: @server.errors.full_messages, status: 422
