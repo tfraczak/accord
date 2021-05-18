@@ -8,14 +8,14 @@
 
 }
 
-@import './servers_nav/server_nav.scss';
 @import './accord_app_content.scss';
 @import './accord_app_sidebar.scss';
 @import './accord_app_focus.scss';
 @import './accord_app_focus_content.scss';
 @import './accord_app_main_focus.scss';
-@import './servers_nav/asf_modal.scss';
-@import './server_members_list/server_members_list.scss';
-@import './server_toolbar/toolbar.scss';
+@import './servers/asf_modal.scss';
+@import './servers/server_nav.scss';
+@import './servers/server_members_list.scss';
+@import './servers/toolbar.scss';
 @import './channels/channels_index.scss';
 @import './channels/channel_chat_title.scss';

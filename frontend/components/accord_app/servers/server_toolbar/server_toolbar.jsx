@@ -11,22 +11,45 @@ class ServerToolbar extends Component {
         this.state = {
             isOpen: null,
         }
-
+        this.stWrapperRef = React.createRef();
         this.toggleToolbar = this.toggleToolbar.bind(this);
         this.closeToolbar = this.closeToolbar.bind(this);
+        this.handleClickOutside = this.handleClickOutside.bind(this);
 
     }
 
+    componentDidMount() {
+        document.addEventListener('mousedown', this.handleClickOutside);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleClickOutside);
+    }
+
+    handleClickOutside(e) {
+        if (this.wrapperRef && !this.wrapperRef.current.contains(e.target)) {
+            this.closeToolbar();
+        }
+    }
+
     closeToolbar() {
-        this.setState({
-            isOpen: null,
-        });
+        const fadeIn = document.getElementsByClassName("fade-in")
+        if (fadeIn) {
+            document.getElementById("server-tools-wrapper").classList.remove("fade-in");
+            document.getElementById("server-tools-wrapper").classList.add("fade-out");
+        }
     }
 
     toggleToolbar(e) {
         e.preventDefault();
-        const currentSetting = this.state.isOpen;
-        this.setState({ isOpen: !currentSetting });
+        const fadeIn = document.getElementsByClassName("fade-in")
+        if (fadeIn) {
+            document.getElementById("server-tools-wrapper").classList.toggle("fade-out")
+        } else {
+            document.getElementById("server-tools-wrapper").classList.toggle("fade-in")
+        }
+        // const currentSetting = this.state.isOpen;
+        // this.setState({ isOpen: !currentSetting });
     }
 
     renderServer() {
@@ -51,17 +74,43 @@ class ServerToolbar extends Component {
                     <button
                         className={ this.state.isOpen ? `st-dropdown-btn dropped` : `st-dropdown-btn` }
                         type="button"
-                        onClick={this.toggleToolbar}>
+                        onClick={ this.toggleToolbar }>
                             { server.name }
                         <i 
                             id="st-chevron"
                             className={ this.state.isOpen ? `fas fa-chevron-down` : `fas fa-chevron-left`}></i>
                     </button>
-                    { this.state.isOpen ? (
+                        <div
+                            id="server-tools-wrapper"
+                            className="server-tools-wrapper fade-out"
+                            tabIndex="0"
+                            onBlur={this.closeToolbar}
+                            ref={this.stWrapperRef}>
+                                
+                            <ul id="server-tools" className="st-closed">
+                                <CreateServerInvite 
+                                    createInvite={createInvite}
+                                    invite={urlToken} 
+                                    serverId={server.id}
+                                    removeInvitation={removeInvitation}
+                                    params={params} />
+                                { server.ownerId === currentUserId ? (
+                                <>
+                                    <ServerUpdateForm server={server} updateServer={updateServer}/>
+                                    <ServerDeleteButton deleteServer={() => deleteServer(server.id).then(() => history.push("/channels/@me"))}/>
+                                </>
+                                ) : (
+                                    <ServerLeaveButton history={history} leaveServer={leaveServer} membershipId={membershipId} />
+                                ) }
+                            </ul>
+                        </div> 
+                    {/* { this.state.isOpen ? (
                         <div
                             className="server-tools-wrapper"
                             tabIndex="0"
-                            onBlur={this.closeToolbar}>
+                            onBlur={this.closeToolbar}
+                            ref={this.stWrapperRef}>
+
                             <ul id="server-tools" className="st-closed">
                                 <CreateServerInvite 
                                     createInvite={createInvite}
@@ -79,7 +128,7 @@ class ServerToolbar extends Component {
                                 ) }
                             </ul>
                         </div>
-                    ) : null }  
+                    ) : null }   */}
                 </div>
             )
         } else {

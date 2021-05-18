@@ -24,7 +24,7 @@ export default (state = {}, action) => {
         case REMOVE_CHANNEL:
             nextState = Object.assign({}, state);
             delete nextState[action.payload.channelId];
-            return  nextState;
+            return nextState;
         case RECEIVE_NEW_SERVER:
             channel = action.payload.channel;
             return Object.assign({}, state, { [channel.id]: channel });

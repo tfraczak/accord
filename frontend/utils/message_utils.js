@@ -8,9 +8,10 @@ export const getChannelMessages = channelId => {
 };
 
 export const createMessage = message => {
+    message = convertToSnakeCase(message);
     return $.ajax({
         method: "POST",
         url: `/api/messages`,
-        data: { convertToSnakeCase(message) }
+        data: { message }
     });
 };
