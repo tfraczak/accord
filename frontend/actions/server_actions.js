@@ -65,7 +65,7 @@ export const retrieveUserServers = userId => dispatch => (
 export const createServer = server => dispatch => {
     server = convertToSnakeCase(server);
     return ServerAPIUtil.createServer(server).then(payload => {
-        debugger
+        
         dispatch(receiveNewServer(payload))
     }, err => {
         dispatch(receiveServerErrors(err.responseJSON))
@@ -93,7 +93,7 @@ export const joinServer = (membership) => dispatch => {
     membership = convertToSnakeCase(membership);
     
     return ServerAPIUtil.joinServer(membership).then(payload => {
-        debugger
+        
         dispatch(receiveJoinedServer(payload));
     }, () => (
         dispatch({
