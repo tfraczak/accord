@@ -9,6 +9,8 @@ import {
     RECEIVE_NEW_SERVER,
 } from "../../actions/server_actions";
 
+import { RECEIVE_USER_LOAD_DATA } from '../../actions/session_actions';
+
 
 export default (state = {}, action) => {
     Object.freeze(state);
@@ -17,6 +19,8 @@ export default (state = {}, action) => {
     switch(action.type) {
         case RECEIVE_SERVERS:
             return Object.assign({}, action.servers);
+        case RECEIVE_USER_LOAD_DATA:
+            return Object.assign({}, action.payload.servers);
         case RECEIVE_SERVER:
             return Object.assign({}, state, { [action.server.id]: action.server });
         case REMOVE_SERVER:

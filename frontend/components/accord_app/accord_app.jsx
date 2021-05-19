@@ -7,11 +7,12 @@ import ServerToolbarContainer from './servers/server_toolbar/server_toolbar_cont
 import AddServerModal from './servers/server_modals/add_server_modal';
 import ChannelsIndexContainer from './channels/channels_index/channels_index_container';
 import ChannelChatTitleContainer from './channels/channel_chat_title/channel_chat_title_container';
-import ChatChannelContainer from './chat/chat_channel/chat_channel_container';
+import ChatContainer from './chat/chat_container';
 
 class AccordApp extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {};
     }
 
     componentDidMount() {
@@ -63,8 +64,8 @@ class AccordApp extends React.Component {
                                     <div className="main-focus">
                                         <Switch>
                                             <Route exact path="/channels/@me" component={ConversationMembersList} />
-                                            <Route exact path="/channels/:serverId/:channelId" component={ChatChannelContainer} />
-                                        </Switch>
+                                            <Route exact path="/channels/:serverId/:channelId" component={ChatContainer} />
+                                        </Switch>    
                                     </div>
                                     <div className="focus-right-wrapper">
                                         <Switch>

@@ -6,14 +6,7 @@ class ChatChannel < ApplicationCable::Channel
   end
 
   def speak(data) # create action equivalent?
-
-    @message = Message.new(
-      body: data['message'],
-      author_id: 2,
-      messageable_type: @chat.class.to_s,
-      messageable_id: @chat.id
-    )
-    debugger
+    @message = Message.new(data['message'])
     if @message.save
       socket = { 
         message: {

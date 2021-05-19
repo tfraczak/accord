@@ -1,4 +1,5 @@
 import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom';
 import * as ServerActions from '../../actions/server_actions';
 import * as UserActions from '../../actions/user_actions';
 import { _retrieveUserLoadData } from '../../actions/session_actions';
@@ -9,6 +10,7 @@ const mSTP = (state, ownProps) => ({
     servers: Object.values(state.entities.servers),
     currentUserId: state.session.id,
     invitedServer: state.session.invitedServer,
+    channelId: ownProps.match.params.channelId,
 
 });
 
@@ -24,4 +26,4 @@ const mDTP = (dispatch, ownProps) => ({
     closeModal: () => dispatch(closeModal()),
 });
 
-export default connect(mSTP, mDTP)(AccordApp);
+export default withRouter(connect(mSTP, mDTP)(AccordApp));

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import MessageForm from "../message_form/message_form_container";
+import MessageFormContainer from "./message_form/message_form_container";
 
-class ChatChannel extends Component {
+class Chat extends Component {
     constructor(props) {
         super(props);
         this.state = { messages: [] };
@@ -9,8 +9,8 @@ class ChatChannel extends Component {
         this.subscription = App.cable.subscriptions.create(
             {
                 channel: `ChatChannel`,
-                type: `Channel`,
-                chatId: 1,
+                type: `${this.props.type}`,
+                chatId: this.props.chat.id,
 
             },
             {
@@ -24,24 +24,11 @@ class ChatChannel extends Component {
                 }
             }
         );
-        debugger
 
     }
 
     componentDidMount() {
-        // App.cable.subscriptions.create(
-        //     { channel: `ChatChannel` }, // this needs to be the same backend?
-        //     {
-        //         received: data => {
-        //             this.setState({
-        //                 messages: this.state.messages.concat(data.message)
-        //             });
-        //         },
-        //         speak: data => {
-        //             return this.perform("speak", data);
-        //         }
-        //     }
-        // );
+        
     }
 
     componentDidUpdate() {
@@ -49,21 +36,36 @@ class ChatChannel extends Component {
     }
 
     render() {
+        const {
+            currentUserId,
+            chat,
+            type,
+        } = this.props;
+
+        const newMessage = {
+            authorId: currentUserId,
+            messageableType: type,
+            messageableId: chat.id,
+            body: "",
+        }
+
         const messageList = this.state.messages.map(message => {
             return (
-                <li key={message.id} className="message">
+                <li key={`message-${message.id}`} className="message">
                     { message.body }
-                    <div ref={this.bottom} />
                 </li>
             );
         });
         return (
             <>
                 <div className="messages-wrapper">{ messageList }</div>
-                <MessageForm subscription={this.subscription}/>
+                <div ref={this.bottom} />
+                <MessageFormContainer
+                    subscription={this.subscription}
+                    message={ newMessage }/>
             </>
         )
     }
 }
 
-export default ChatChannel;
+export default Chat;

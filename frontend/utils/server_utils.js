@@ -1,11 +1,12 @@
 import { convertToSnakeCase } from "./func_utils";
 
-export const getUserServers = userId => (
-    $.ajax({
+export const getUserServers = userId => {
+    
+    return $.ajax({
         method: "GET",
         url: `/api/users/${userId}/servers`,
     })
-);
+};
 
 export const createServer = server => (
     $.ajax({

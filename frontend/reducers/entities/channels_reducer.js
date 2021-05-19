@@ -9,6 +9,8 @@ import {
     RECEIVE_JOINED_SERVER,
 } from "../../actions/server_actions";
 
+import { RECEIVE_USER_LOAD_DATA } from '../../actions/session_actions';
+
 
 
 export default (state = {}, action) => {
@@ -19,6 +21,9 @@ export default (state = {}, action) => {
     switch (action.type) {
         case RECEIVE_CHANNELS:
             return Object.assign({}, state, action.channels );
+        case RECEIVE_USER_LOAD_DATA:
+            
+            return Object.assign({}, state, action.payload.channels );
         case RECEIVE_CHANNEL:
             return Object.assign({}, state, { [action.channel.id]: action.channel });
         case REMOVE_CHANNEL:

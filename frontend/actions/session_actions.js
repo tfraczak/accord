@@ -13,6 +13,7 @@ export const LOGOUT_CURRENT_USER = "LOGOUT_CURRENT_USER";
 export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
 export const REMOVE_SESSION_ERRORS = "REMOVE_SESSION_ERRORS";
 export const REMOVE_ERRORS = "REMOVE_ERRORS";
+export const RECEIVE_USER_LOAD_DATA = "RECEIVE_USER_LOAD_DATA";
 
 
 const receiveCurrentUser = currentUser => {
@@ -31,9 +32,20 @@ const receiveSessionErrors = errors => ({
     errors,
 });
 
+const receiveUserLoadData = payload => {
+    
+    return {
+        type: RECEIVE_USER_LOAD_DATA,
+        payload,
+    }
+    
+};
+
 export const removeErrors = () => ({
     type: REMOVE_ERRORS,
 });
+
+
 
 export const register = user => dispatch => {
     user = convertToSnakeCase(user);
@@ -64,13 +76,7 @@ export const logout = () => dispatch => {
 export const _retrieveUserLoadData = (userId, history) => dispatch => {
     getUserServers(userId)
         .then(payload => {
-            dispatch(receiveServers(payload.servers));
-            dispatch(receiveUsers(payload.users));
-            dispatch(receiveMemberships(payload.memberships));
-            dispatch(receiveInvitations(payload.invitations));
-            dispatch(receiveChannels(payload.channels));
-        }, err => {
-            dispatch(receiveServerErrors(err.responseJSON))
+            dispatch(receiveUserLoadData(payload));
         })
         .then(
             () => history.push("/channels/@me"), () => history.push("/")

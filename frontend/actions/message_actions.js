@@ -24,4 +24,4 @@ export const retrieveChannelMessages = channelId => dispatch => {
         .then(messages => {
             dispatch(receiveMessages(messages));
         });
-}
+};

@@ -4,7 +4,6 @@ import ChannelListItem from './channel_list_item';
 class ChannelsIndex extends Component {
     constructor(props) {
         super(props);
-
     }
 
     render() {
@@ -21,7 +20,7 @@ class ChannelsIndex extends Component {
                         <i className="fas fa-plus add-channel"></i>
                     </div>
                     <ul id="channels-index">
-                        {channels.map(channel => <ChannelListItem channel={channel} serverId={server.id} />)}
+                        {channels.map(channel => <ChannelListItem channel={channel} serverId={server.id}/>)}
                     </ul>
                 </div>
             )

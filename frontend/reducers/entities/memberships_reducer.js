@@ -10,6 +10,8 @@ import {
     RECEIVE_NEW_SERVER,
 } from '../../actions/server_actions';
 
+import { RECEIVE_USER_LOAD_DATA } from '../../actions/session_actions';
+
 
 export default (state = {}, action) => {
     Object.freeze(state);
@@ -18,6 +20,8 @@ export default (state = {}, action) => {
     switch (action.type) {
         case RECEIVE_MEMBERSHIPS:
             return Object.assign({}, state, action.memberships );
+        case RECEIVE_USER_LOAD_DATA:
+            return Object.assign({}, state, action.payload.memberships );
         case RECEIVE_MEMBERSHIP:
             return Object.assign({}, state, { [action.membership.id]: action.membership });
         case "LEAVE_SERVER":
