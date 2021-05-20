@@ -7,6 +7,6 @@ test:
 production:
   adapter: redis
   # url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
-  # url: redis://redistogo:0364980e7f9e9c06c10cb1c0ec8f836b@spinyfin.redistogo.com:11250/
-  url: <%= ENV['REDIS_URL'] %>
+  url: redis://redistogo:0364980e7f9e9c06c10cb1c0ec8f836b@spinyfin.redistogo.com:11250/
+  # url: <%= ENV['REDIS_URL'] %>
   channel_prefix: accord_production
