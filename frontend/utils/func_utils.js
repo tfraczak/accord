@@ -32,17 +32,17 @@ export const convertToSnakeCase = obj => {
 export const extractDateTime = dateTime => {
     let dateObject = new Date(dateTime);
     
-    // find the time and adjust it
+    // find the local time
     const timeOptions = { hour: 'numeric', minute: 'numeric' };
     let time = dateObject.toLocaleTimeString('en-US', timeOptions);
     
-    //find the date
+    // find the local date
     const dateOptions = { month: 'numeric', day: 'numeric', year: 'numeric' };
     let date = dateObject.toLocaleDateString('en-US', dateOptions);
     
     const now = new Date();
     const dateObj = new Date(date);
-    debugger
+
     // today?
     if ((now.getDate() === dateObj.getDate()) && (now.getMonth() === dateObj.getMonth()) && (now.getYear() === dateObj.getYear())) {
         return `today at ${time}`;
