@@ -2,7 +2,7 @@ import {
     RECEIVE_INVITATION,
     RECEIVE_INVITATIONS,
     REMOVE_INVITATION,
-} from "../../actions/server_actions";
+} from "../../actions/invitation_actions";
 
 import { RECEIVE_USER_LOAD_DATA } from '../../actions/session_actions';
 

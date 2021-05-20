@@ -45,6 +45,9 @@
     width: 100%;
     min-height: 55px;
     display: flex;
+    align-items: center;
     background-color: $accord-app-4;
     box-sizing: border-box;
+    font-family: $roboto;
+    padding: 0 8px;
 }

@@ -16,7 +16,7 @@ class ServerLeaveButton extends React.Component {
     render() {
 
         return (
-            <li>
+            <li onClick={e => e.stopPropagation()}>
                 <button className="st-leave-server-btn" onClick={this.handleClick}>Leave Server</button>
             </li>
         )

@@ -35,23 +35,16 @@ class CreateServerInvite extends React.Component {
         }
     }
 
-    insertButtonText() {
-        if (this.props.invite && (this.state.serverId === parseInt(this.props.params.serverId))) {
-            return "REMOVE INVITE";
-        } else {
-            return "CREATE INVITE";
-        }
-    }
-
     render() {
         
         return (
-            <li>
+            <li onClick={e => e.stopPropagation()}>
                 <input
                     type="text"
-                    disabled 
-                    value={`accord.com/${this.insertUrlToken()}`}/>
-                <button onClick={this.handleInvite}>{ this.insertButtonText() }</button>
+                    disabled
+                    value={`accord.com/${this.insertUrlToken()}`}
+                    onClick={e => e.stopPropagation()}/>
+                <button onClick={this.handleInvite}>CREATE INVITE</button>
             </li>
         )
     } 

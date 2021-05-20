@@ -6,6 +6,7 @@ import throttle from 'lodash.throttle';
 import { saveState } from './utils/state_utils';
 
 
+
 document.addEventListener("DOMContentLoaded", () => {
 
     // grabs the root element
@@ -13,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let store;
     // creates the store depending if there is a user currently signed in the data backend
     if (window.currentUser) {
+        const currentUser = window.currentUser;
         const preloadedState = {
             entities: {
                 users: { [window.currentUser.id]: window.currentUser },
@@ -21,8 +23,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 id: window.currentUser.id,
             },
         }
-        store = configureStore(preloadedState);
+
         delete window.currentUser;
+        
+        store = configureStore(preloadedState);
+
+        
+        
     } else {
         store = configureStore();
     }

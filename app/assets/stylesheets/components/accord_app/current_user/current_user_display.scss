@@ -1,0 +1,69 @@
+.sidebar-current-user {
+
+    .currentuser-avatar {
+        position: relative;
+        box-sizing: border-box;
+        display: flex;
+        width: 36px;
+        height: 36px;
+        border-radius: 50px;
+    }
+
+    .username-wrapper {
+        position: relative;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 32px;
+        margin-left: 7px;
+        margin-right: 10px;
+        
+        &:hover {
+            cursor: pointer;
+        }
+
+        .username {
+            font-weight: 700;
+            transform: scale(1.02, 0.99);
+            color: #1a1a1a;
+        }
+
+        .username-id {
+            font-weight: 500;
+            font-size: 12px;
+            color: #474747
+        }
+
+    }
+
+    .temp-links {
+        position: relative;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        
+        .to-home, .logout {
+            background-color: transparent;
+            color: #292929;
+            font-size: 18px;
+            width: 18px;
+            height: 18px;
+            transition: 0.2s ease-in-out;
+
+            &:hover {
+                cursor: pointer;
+                color: $link-button-color;
+            }
+            
+        }
+
+
+    }
+
+    
+
+}

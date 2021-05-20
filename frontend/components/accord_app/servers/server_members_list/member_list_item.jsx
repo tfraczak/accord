@@ -10,7 +10,7 @@ export default (props) => {
     }
 
     return (
-        <li key={ `ml-${member.id}-${serverId}` } className="ml-item">
+        <li className="ml-item">
             <img
                 src={window.defaultAvatarUrl}
                 alt={`${username}-avatar-${member.id}`}

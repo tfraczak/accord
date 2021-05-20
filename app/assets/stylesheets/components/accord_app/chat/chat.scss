@@ -1,0 +1,75 @@
+.messages-wrapper {
+    
+    .message-wrapper {
+        position: relative;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 50px;
+        width: 100%;
+        padding: 5px 75px 7px 75px;
+        margin-top: 15px;
+
+        &:hover {
+            background-color: $chat-hover;
+        }
+
+        .chat-avatar {
+            position: absolute;
+            top: 1px;
+            left: -69px;
+            box-sizing: border-box;
+            display: flex;
+            width: 42px;
+            height: 42px;
+            border-radius: 50px;
+            margin: 0 12px;
+        }
+
+        .message-info-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+            display: flex;
+            flex-wrap: wrap;
+            min-height: 22px;
+            margin-bottom: 5px;
+
+            .author {
+                color: $font-main;
+                font-weight: 700;
+                margin-right: 12px;
+                
+                transform: scale(1.05, 1);
+
+                &:hover {
+                    text-decoration: underline;
+                    color: black;
+                    cursor: pointer;
+                }
+
+            }
+
+            .date-time {
+                color: #7e7e7e;
+                font-size: 11px;
+                font-weight: 700;
+                transform: scale(1.05, 1);
+
+            }
+
+            
+        }
+        
+        .message {
+            min-height: 22px;
+            font-weight: 300;
+            font-size: 16px;
+        }
+
+    }
+
+
+}

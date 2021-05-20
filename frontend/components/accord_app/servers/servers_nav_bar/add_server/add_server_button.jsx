@@ -1,11 +1,14 @@
 import React from 'react';
 
 
-export default ({ openModal }) => {
-	
+export default (props) => {
 	const onClick = () => {
+		const servers = document.getElementsByClassName("server-item");
+        const profile = document.getElementById("profile");
+        profile.classList.remove("active");
+        for (let server of servers) { server.classList.remove("active") }
 		document.getElementById("asf-button").classList.add("active");
-		openModal('create server');
+		props.openModal('create server');
 	}
 
 	return (

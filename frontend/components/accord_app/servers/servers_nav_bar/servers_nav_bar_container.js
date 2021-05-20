@@ -1,14 +1,17 @@
 import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom';
 import * as ServerActions from '../../../../actions/server_actions';
-import * as UserActions from '../../../../actions/user_actions';
 import ServersNavBar from "./servers_nav_bar";
 import { openModal, closeModal } from "../../../../actions/ui_actions";
 
-const mSTP = (state, ownProps) => ({
-    servers: Object.values(state.entities.servers),
-    currentUserId: state.session.id,
-    invitedServer: state.session.invitedServer,
-});
+
+const mSTP = (state, ownProps) => {
+    return {
+        servers: Object.values(state.entities.servers),
+        currentUserId: state.session.id,
+        invitedServer: state.session.invitedServer,
+    }
+};
 
 const mDTP = (dispatch, ownProps) => ({
     createServer: server => dispatch(ServerActions.createServer(server)),
@@ -20,4 +23,4 @@ const mDTP = (dispatch, ownProps) => ({
     closeModal: () => dispatch(closeModal()),
 });
 
-export default connect(mSTP, mDTP)(ServersNavBar);
+export default withRouter(connect(mSTP, mDTP)(ServersNavBar));

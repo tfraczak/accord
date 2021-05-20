@@ -28,3 +28,31 @@ export const convertToSnakeCase = obj => {
     for(let i = 0; i < keys.length; i++) { newObj[convertedKeys[i]] = values[i] }
     return newObj;
 };
+
+export const extractDateTime = dateTime => {
+    let dateObject = new Date(dateTime);
+    
+    // find the time and adjust it
+    const timeOptions = { hour: 'numeric', minute: 'numeric' };
+    let time = dateObject.toLocaleTimeString('en-US', timeOptions);
+    
+    //find the date
+    const dateOptions = { month: 'numeric', day: 'numeric', year: 'numeric' };
+    let date = dateObject.toLocaleDateString('en-US', dateOptions);
+    
+    const now = new Date();
+    const dateObj = new Date(date);
+    debugger
+    // today?
+    if ((now.getDate() === dateObj.getDate()) && (now.getMonth() === dateObj.getMonth()) && (now.getYear() === dateObj.getYear())) {
+        return `today at ${time}`;
+    }
+
+    // yesterday?
+    if ((now.getDate() - dateObj.getDate() === 1) || (now.getMonth() - dateObj.getMonth() === 1) || (now.getYear() - dateObj.getYear() === 1)) {
+        return `yesterday at ${time}`;
+    }
+
+    // more than a day ago
+    return date;
+};

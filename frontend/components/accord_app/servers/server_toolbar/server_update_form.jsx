@@ -25,13 +25,14 @@ class ServerToolbar extends Component {
     render() {
         const name = this.props.server.name
         return (
-            <li>
-                <form className="st-update-form" onSubmit={this.handleSubmit}>
+            <li onClick={e => e.stopPropagation()}>
+                <form onClick={e => e.stopPropagation()} className="st-update-form" onSubmit={this.handleSubmit}>
                     <input
                         className="st-update-input"
                         type="text"
                         placeholder={name}
-                        onChange={this.handleChange} />
+                        onChange={this.handleChange}
+                        onClick={e => e.stopPropagation()} />
                     <button className="st-update-btn" type="submit">UPDATE</button>
                 </form>
             </li>

@@ -82,12 +82,12 @@ export const updateServer = server => dispatch => {
     })
 };
 
-export const deleteServer = serverId => dispatch => {
-    return ServerAPIUtil.destroyServer(serverId).then(server => {
-        dispatch(removeServer(server.id))
-    }, err => {
+export const deleteServer = (serverId, history) => dispatch => {
+    return ServerAPIUtil.destroyServer(serverId)
+    .then(() => dispatch(removeServer(serverId)),
+    err => {
         dispatch(receiveServerErrors(err.responseJSON))
-    });
+    })
 };
 
 export const joinServer = (membership) => dispatch => {

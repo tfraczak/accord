@@ -45,3 +45,19 @@ json.set! :channels do
         end
     end
 end
+
+json.set! :messages do
+    @servers.each do |server|
+        server.channels.each do |channel|
+            messages = Message
+                .where(messageable_type: :Channel, messageable_id: channel.id)
+                .order(:created_at)
+                .limit(50)
+            messages.each do |message|
+                json.set! message.id do
+                    json.partial! "api/messages/message", message: message
+                end
+            end
+        end
+    end
+end

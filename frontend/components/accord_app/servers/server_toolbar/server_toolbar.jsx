@@ -27,7 +27,7 @@ class ServerToolbar extends Component {
     }
 
     handleClickOutside(e) {
-        if (this.wrapperRef && !this.wrapperRef.current.contains(e.target)) {
+        if (this.stWrapperRef && !this.stWrapperRef.current.contains(e.target)) {
             this.closeToolbar();
         }
     }
@@ -48,8 +48,6 @@ class ServerToolbar extends Component {
         } else {
             document.getElementById("server-tools-wrapper").classList.toggle("fade-in")
         }
-        // const currentSetting = this.state.isOpen;
-        // this.setState({ isOpen: !currentSetting });
     }
 
     renderServer() {
@@ -80,14 +78,15 @@ class ServerToolbar extends Component {
                             id="st-chevron"
                             className={ this.state.isOpen ? `fas fa-chevron-down` : `fas fa-chevron-left`}></i>
                     </button>
-                        <div
+                        <section
                             id="server-tools-wrapper"
                             className="server-tools-wrapper fade-out"
                             tabIndex="0"
                             onBlur={this.closeToolbar}
+                            onClick={e => e.stopPropagation()}
                             ref={this.stWrapperRef}>
                                 
-                            <ul id="server-tools" className="st-closed">
+                            <ul id="server-tools" className="st-closed" onClick={e => e.stopPropagation()}>
                                 <CreateServerInvite 
                                     createInvite={createInvite}
                                     invite={urlToken} 
@@ -103,36 +102,11 @@ class ServerToolbar extends Component {
                                     <ServerLeaveButton history={history} leaveServer={leaveServer} membershipId={membershipId} />
                                 ) }
                             </ul>
-                        </div> 
-                    {/* { this.state.isOpen ? (
-                        <div
-                            className="server-tools-wrapper"
-                            tabIndex="0"
-                            onBlur={this.closeToolbar}
-                            ref={this.stWrapperRef}>
-
-                            <ul id="server-tools" className="st-closed">
-                                <CreateServerInvite 
-                                    createInvite={createInvite}
-                                    invite={urlToken} 
-                                    serverId={server.id}
-                                    removeInvitation={removeInvitation}
-                                    params={params} />
-                                { server.ownerId === currentUserId ? (
-                                <>
-                                    <ServerUpdateForm server={server} updateServer={updateServer}/>
-                                    <ServerDeleteButton deleteServer={() => deleteServer(server.id).then(() => history.push("/channels/@me"))}/>
-                                </>
-                                ) : (
-                                    <ServerLeaveButton history={history} leaveServer={leaveServer} membershipId={membershipId} />
-                                ) }
-                            </ul>
-                        </div>
-                    ) : null }   */}
+                        </section> 
                 </div>
             )
         } else {
-            history.push('/app')
+            history.push('/channels/@me')
         }
     }
 

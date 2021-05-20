@@ -7,7 +7,9 @@ import ServerToolbarContainer from './servers/server_toolbar/server_toolbar_cont
 import AddServerModal from './servers/server_modals/add_server_modal';
 import ChannelsIndexContainer from './channels/channels_index/channels_index_container';
 import ChannelChatTitleContainer from './channels/channel_chat_title/channel_chat_title_container';
-import ChatContainer from './chat/chat_container';
+import MainFocusContainer from './main-focus/main_focus_container';
+import CurrentUserDisplayContainer from './current_user/current_user_display_container';
+import SbHeaderContainer from './sb-header/sb_header_container';
 
 class AccordApp extends React.Component {
     constructor(props) {
@@ -33,12 +35,7 @@ class AccordApp extends React.Component {
                             <div className="sidebar-wrapper">
                                 <nav className="sidebar-nav">
                                     <div className="sb-header wrapper">
-                                        <header className="sb-header server-toolbar">
-                                            <Switch>
-                                                <Route exact path="/channels/@me" component={ConversationMembersList} />
-                                                <Route path="/channels/:serverId" component={ ServerToolbarContainer } />
-                                            </Switch>
-                                        </header>
+                                        <Route path="/channels/:serverId/" component={SbHeaderContainer} />
                                     </div>
                                     <div className="focus-channels-dms">
                                         <Switch>
@@ -47,7 +44,9 @@ class AccordApp extends React.Component {
                                         </Switch>
                                     </div>
                                 </nav>
-                                <div className="sidebar-current-user"></div>
+                                <div className="sidebar-current-user">
+                                    <CurrentUserDisplayContainer />
+                                </div>
                             </div>
 
                             <div className="focus">
@@ -61,12 +60,7 @@ class AccordApp extends React.Component {
                                     <div className="title-toolbar"></div>
                                 </div>
                                 <div className="focus-content">
-                                    <div className="main-focus">
-                                        <Switch>
-                                            <Route exact path="/channels/@me" component={ConversationMembersList} />
-                                            <Route exact path="/channels/:serverId/:channelId" component={ChatContainer} />
-                                        </Switch>    
-                                    </div>
+                                    <Route exact path="/channels/:serverId/:channelId" component={MainFocusContainer} />
                                     <div className="focus-right-wrapper">
                                         <Switch>
                                             <Route exact path="/channels/@me" component={ConversationMembersList} />

@@ -8,21 +8,32 @@ class ChatChannel < ApplicationCable::Channel
   def speak(data) # create action equivalent?
     @message = Message.new(data['message'])
     if @message.save
-      socket = { 
-        message: {
-          id: @message.id,
-          body: @message.body,
-          authorId: @message.author_id,
-          messageableId: @message.messageable_id,
-          messageableType: @message.messageable_type,
-          createdAt: @message.created_at
-        }
-      }
+      socket = { message: camelize_keys(@message.attributes) }
       ChatChannel.broadcast_to(@chat, socket)
     end
+  end
+
+  def load
+    messages = Message
+      .where(messageable_type: @chat.class.to_s, messageable_id: @chat.id)
+      .order(created_at: :desc)
+      .limit(20)
+    messages.reverse!
+    data = { messages: camelize(messages) }
+    ChatChannel.broadcast_to(@chat, data)
   end
 
   def unsubscribed
     # Any cleanup needed when channel is unsubscribed
   end
+
+  def camelize(objects)
+    objects.map { |object| camelize_keys(object.attributes) }
+  end
+
+  def camelize_keys(hash)
+    pairs = hash.map { |key, value| [key.camelize(:lower), value] }
+    Hash[pairs]
+  end
+
 end

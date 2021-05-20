@@ -12,6 +12,11 @@ class MessageForm extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    componentWillUnmount() {
+        
+        this.props.subscription.unsubscribed();
+    }
+
     update(field) {
         return e => {
             this.setState({
