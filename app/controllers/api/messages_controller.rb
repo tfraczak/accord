@@ -7,14 +7,12 @@ class Api::MessagesController < ApplicationController
                 .where(messageable_type: :Channel, messageable_id: channel.id)
                 .order(created_at: :desc)
                 .limit(50)
-            @messages.reverse!
         else
             conversation = Conversation.find_by(id: params[:conversation_id])
             @messages = Message
                 .where(messageable_type: :Conversation, messageable_id: conversation.id)
                 .order(created_at: :desc)
                 .limit(50)
-            @messages.reverse!
         end
         render :index
     end
