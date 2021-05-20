@@ -24,7 +24,7 @@ class Api::MessagesController < ApplicationController
         chat_type = @message.messageable_type
         @chat = chat_type.constantize.find_by(id: @message.messageable_id)
         if @chat && @message.save
-            ChatChannel.broadcast_to(@chat, serialize(@message)
+            ChatChannel.broadcast_to(@chat, serialize(@message))
             render :show
         else
             render json: @message.errors.full_messages, status: 422
