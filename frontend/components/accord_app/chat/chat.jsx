@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import MessageFormContainer from "./message_form/message_form_container";
 import { extractDateTime } from "../../../utils/func_utils";
+import { nextChat } from "../../../utils/selectors";
 
 class Chat extends Component {
     constructor(props) {
@@ -43,6 +44,14 @@ class Chat extends Component {
 
     componentDidMount() {
         
+    }
+
+    componentWillUnmount() {
+        // this.props.history.location.pathname is the next url path
+        const nextPath = this.props.history.location.pathname;
+        const next = nextChat(nextPath);
+        const type = next[0];
+        const id = next[1];
     }
 
     componentDidUpdate() {

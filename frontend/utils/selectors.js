@@ -66,3 +66,14 @@ export const chatMessages = (chat, chatType, messagesState) => {
         });
     }
 };
+
+export const nextChat = path => {
+    const splitPath = path.split("/").reverse();
+    const chatId = parseInt(path.split("/").reverse()[0]);
+    switch (splitPath[1]) {
+        case "@me":
+            return ["Conversation", chatId];
+        default:
+            return ["Channel", chatId];
+    }
+}

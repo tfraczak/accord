@@ -8,15 +8,15 @@ class Api::MessagesController < ApplicationController
                 .order(created_at: :desc)
                 .limit(50)
             @messages.reverse!
-            render :index
         else
             conversation = Conversation.find_by(id: params[:conversation_id])
             @messages = Message
                 .where(messageable_type: :Conversation, messageable_id: conversation.id)
-                .order(:created_at)
+                .order(created_at: :desc)
                 .limit(50)
-            render :index
+            @messages.reverse!
         end
+        render :index
     end
 
     def create

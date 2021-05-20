@@ -1,18 +1,22 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import ChatContainer from '../chat/chat_container';
-import ConversationMembersList from '../conversations/conversation_members_list/conversation_members_list';
+import ChannelChatContainer from '../chat/channel_chat_container';
+import ConversationChatContainer from '../chat/conversation_chat_container';
+import ChatPlaceholder from './chat_placeholder';
 
 export default props => {
     
     return (
         <div className="main-focus">
             <Switch>
-                <Route exact path="/channels/@me" >
-                    <ConversationMembersList />
+                <Route exact path="/channels/@me/:conversationId" >
+                    <ConversationChatContainer key={`convo-${props.chatId}`}/>
                 </Route>
                 <Route exact path="/channels/:serverId/:channelId" >
-                    <ChatContainer key={`chat-${props.chatId}`} />
+                    <ChannelChatContainer key={`chat-${props.chatId}`} />
+                </Route>
+                <Route>
+                    <ChatPlaceholder />
                 </Route>
             </Switch>
         </div>
