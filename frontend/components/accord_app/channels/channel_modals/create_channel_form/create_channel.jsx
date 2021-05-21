@@ -31,7 +31,6 @@ class CreateChannel extends React.Component {
             .then(newChannel => {
                 closeModal();
                 document.getElementById("add-channel-btn").classList.remove("modal-open");
-                history.push(`/channels/${server.id}/${newChannel.id}`)
             });
     }
 
