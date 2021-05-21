@@ -24,8 +24,6 @@ These two are grouped together because they go hand-in-hand with creating a web 
 
 `Webpack` allows all the front-end code to be bundled into one JavaScript file for the app to run, instead of calling each code file in the `head` section of the root HTML document.
 
-``
-
 ---
 
 ## **Feature Highlights**
