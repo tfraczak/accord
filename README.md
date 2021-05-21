@@ -31,7 +31,7 @@ These two are grouped together because they go hand-in-hand with creating a web 
 ## **Feature Highlights**
 
 ### _**Join server by invitation.**_
-Within the `Servers` feature, I was able to employ a "join server via invitation link" which is a URL safe generated token that can be entered in a join form within the app itself *OR* appending it to the root URL path. On the frontend, I set up my base App routes to make sure to try to first hit the UrlInvitation component if the user appends something that isn't standard to the app. If it's not a valid URL token or it's not in the database, it will render the Error404 component:
+Within the `Servers` feature, I was able to employ a "join server via invitation link" which is a URL safe generated token that can be entered in a join form within the app itself *OR* appending it to the root URL path. On the front-end, I set up my base App routes to make sure to try to first hit the UrlInvitation component if the user appends something that isn't standard to the app. If it's not a valid URL token or it's not in the database, it will render the Error404 component:
 
 ```js
 <div className="app-wrapper">
