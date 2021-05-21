@@ -93,7 +93,7 @@ class AddServerForm extends React.Component {
             case 'create':
                 return (
                     <div className="asf-button-wrapper create">
-                        <button type="submit" className="asf-create submit" value="Create">Create</button>
+                        <button type="submit" disabled={ !this.state.input } className="asf-create submit" value="Create">Create</button>
                         <div className="asf-to-join-wrapper">
                             { formFooter }
                             { otherForm }
@@ -106,7 +106,7 @@ class AddServerForm extends React.Component {
                         { formFooter }
                         <div className="join-footer-buttons-wrapper">
                             { otherForm }
-                            <button type="submit" className="asf-join submit" value="Join Server">Join Server</button>
+                            <button type="submit" disabled={ !this.state.input } className="asf-join submit" value="Join Server">Join Server</button>
                         </div>
                     </div>
                 );
@@ -128,6 +128,7 @@ class AddServerForm extends React.Component {
             inputLabel,
             formType,
         } = this.props;
+        
         return (
             <div className="asf-wrapper">
                 <i className="fas fa-times" onClick={this.clickClose}></i>

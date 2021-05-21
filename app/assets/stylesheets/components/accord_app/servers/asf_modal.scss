@@ -54,6 +54,12 @@
 			box-sizing: border-box;
 			font-weight: 700;
 			cursor: pointer;
+
+			&:disabled {
+				opacity: 50%;
+				cursor: not-allowed;
+			}
+
 		}
 	
 		.add-server-title {
@@ -132,9 +138,18 @@
 					padding: 10px 15px;
 					font-size: 16px;
 					margin-bottom: 15px;
-					color: $font-sub
-	
+					color: $font-sub;
 					
+					transition: 0.2s ease-in-out;
+
+					&:hover {
+						border-color: $font-sub;
+					}
+
+					&:focus {
+						outline: none;
+						border-color: $link-color;
+					}
 	
 				}
 	
@@ -150,6 +165,13 @@
 				background-color: $form-button;
 				color: $form-button-color;
 				font-size: 18px;
+
+				transition: 0.2s ease-in-out;
+
+				&:hover:not(:disabled) {
+					background-color: #ffca58;
+					color: black;
+				}
 				
 			}
 	
@@ -196,7 +218,14 @@
 						font-size: 16px;
 						box-sizing: border-box;
 						padding: 8px 0;
-						width: 100%
+						width: 100%;
+
+						transition: 0.2s ease-in-out;
+
+						&:hover {
+							background-color: #c2c2c2;
+							color: #414141;
+						}
 					}
 				}
 			}

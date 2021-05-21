@@ -5,16 +5,27 @@ export const validUrlToken = path => {
     return null;
 };
 
+const splitName = (name, char) => {
+    let newName = name.split(char).map(word => {
+        for (let i=0; i < word.length; i++) {
+            if (word[i] !== " ") return word[i];
+        }
+    }).join("").slice(0,5);
+    return newName;
+}
+
 export const serverInitials = name => {
     let newName;
     if (name.includes(" ")) {
         newName = name.split(" ").map(word => word[0]).join("");
     } else if (name.includes("-")) {
-        newName = name.split("-").map(word => {
-            for (let i=0; i < word.length; i++) {
-                if (word[i] !== " ") return word[i];
-            }
-        }).join("-").slice(0,5);
+        newName = splitName(name, "-");
+    } else if (name.includes("/")) {
+        newName = splitName(name, "/");
+    } else if (name.includes("_")) {
+        newName = splitName(name, "_");
+    } else {
+        newName = name[0];
     }
     return newName;
 };

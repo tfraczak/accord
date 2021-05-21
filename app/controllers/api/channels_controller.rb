@@ -6,10 +6,19 @@ class Api::ChannelsController < ApplicationController
         render :index
     end
 
+    def show
+        @channel = Channel.find_by(id: params[:id])
+        if @channel
+            render :show
+        else
+            render json: {}
+        end
+    end
+
     def create
         @channel = Channel.new(channel_params)
         if @channel.save
-            render :show
+            render :create
         else
             render json: @channel.errors.full_messages, status: 422
         end

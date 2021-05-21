@@ -51,7 +51,7 @@ json.set! :messages do
         server.channels.each do |channel|
             messages = Message
                 .where(messageable_type: :Channel, messageable_id: channel.id)
-                .order(:created_at)
+                .order(created_at: :desc)
                 .limit(50)
             messages.each do |message|
                 json.set! message.id do

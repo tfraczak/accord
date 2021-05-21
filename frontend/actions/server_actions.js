@@ -1,9 +1,5 @@
 import * as ServerAPIUtil from "../utils/server_utils";
-import { removeUser } from "./user_actions";
 import { convertToSnakeCase } from "../utils/func_utils";
-import { receiveInvitations } from './invitation_actions';
-import * as MembershipActions from './membership_actions';
-import { join } from "lodash";
 
 export const RECEIVE_SERVERS = "RECEIVE_SERVERS";
 export const RECEIVE_SERVER = "RECEIVE_SERVER";
@@ -14,7 +10,9 @@ export const RECEIVE_INVITED_SERVER = "RECEIVE_INVITED_SERVER";
 export const RECEIVE_LOCAL_USERNAME = "RECEIVE_LOCAL_USERNAME";
 export const RECEIVE_NEW_SERVER = "RECEIVE_NEW_SERVER";
 export const RECEIVE_JOINED_SERVER = "RECEIVE_JOINED_SERVER";
+export const LEAVE_SERVER = "LEAVE_SERVER";
 export const REMOVE_ERRORS = "REMOVE_ERRORS";
+export const RECEIVE_SERVER_INFO = "RECEIVE_SERVER_INFO";
 
 export const receiveServers = servers => ({
     type: RECEIVE_SERVERS,
@@ -26,14 +24,16 @@ const receiveServer = server => ({
     server,
 });
 
-export const receiveServerErrors = errors => ({
-    type: RECEIVE_SERVER_ERRORS,
-    errors,
-});
+export const receiveServerErrors = errors => {
+    return {
+        type: RECEIVE_SERVER_ERRORS,
+        errors,
+    };
+};
 
-const removeServer = serverId => ({
+const removeServer = payload => ({
     type: REMOVE_SERVER,
-    serverId,
+    payload,
 });
 
 export const removeServerErrors = () => ({
@@ -50,117 +50,104 @@ const receiveNewServer = payload => ({
     payload,
 });
 
-const receiveJoinedServer = payload => ({
-    type: RECEIVE_JOINED_SERVER,
+const receiveJoinedServer = payload => {
+    
+    return {
+        type: RECEIVE_JOINED_SERVER,
+        payload,
+    }
+};
+
+const receiveServerInfo = payload => ({
+    type: RECEIVE_SERVER_INFO,
+    payload,
+});
+
+const leftServer = payload => ({
+    type: LEAVE_SERVER,
     payload,
 });
 
 export const retrieveUserServers = userId => dispatch => (
-    ServerAPIUtil.getUserServers(userId).then(servers => (
+    ServerAPIUtil.getUserServers(userId).then(servers => {
         dispatch(receiveServers(servers))
-    ), err => (
+    }, err => {
         dispatch(receiveServerErrors(err.responseJSON))
-    ))
+    })
+);
+
+export const retrieveServerInfo = serverId => dispatch => (
+    ServerAPIUtil.getServer(serverId).then(
+        payload => dispatch(receiveServerInfo(payload)),
+        err => dispatch(receiveServerErrors(err.responseJSON))
+    )
 );
 
 export const createServer = server => dispatch => {
     server = convertToSnakeCase(server);
-    return ServerAPIUtil.createServer(server).then(payload => {
-        
-        dispatch(receiveNewServer(payload))
-    }, err => {
-        dispatch(receiveServerErrors(err.responseJSON))
-    });
+    return ServerAPIUtil.createServer(server)
+        .then(
+            payload => dispatch(receiveNewServer(payload)),
+            err => dispatch(receiveServerErrors(err.responseJSON))
+        );
 };
 
 export const updateServer = server => dispatch => {
     server = convertToSnakeCase(server);
-    ServerAPIUtil.updateServer(server).then(server => {
-        dispatch(receiveServer(server))
-    }, err => {
-        dispatch(receiveServerErrors(err.responseJSON))
-    })
+    return ServerAPIUtil.updateServer(server).then(
+        server => dispatch(receiveServer(server)),
+        err => dispatch(receiveServerErrors(err.responseJSON))
+    );
 };
 
-export const deleteServer = (serverId, history) => dispatch => {
-    return ServerAPIUtil.destroyServer(serverId)
-    .then(() => dispatch(removeServer(serverId)),
-    err => {
-        dispatch(receiveServerErrors(err.responseJSON))
-    })
+export const deleteServer = (serverId) => dispatch => {
+    return ServerAPIUtil.destroyServer(serverId).then(
+        payload => dispatch(removeServer(payload)),
+        err => dispatch(receiveServerErrors(err.responseJSON))
+    )
 };
 
 export const joinServer = (membership) => dispatch => {
     membership = convertToSnakeCase(membership);
     
-    return ServerAPIUtil.joinServer(membership).then(payload => {
-        
-        dispatch(receiveJoinedServer(payload));
-    }, () => (
-        dispatch({
-            type: RECEIVE_SERVER_ERRORS,
-            errors: ["Something went wrong. Couldn't join server."],
-        })
-    ));
+    return ServerAPIUtil.joinServer(membership)
+        .then(
+            payload => dispatch(receiveJoinedServer(payload)),
+            () => (dispatch({
+                type: RECEIVE_SERVER_ERRORS,
+                errors: ["Something went wrong. Couldn't join server."],
+            }))
+        );
 };
 
 export const leaveServer = (membershipId) => dispatch => {
-    
-    return ServerAPIUtil.leaveServer(membershipId).then( membership => {
-
-        const payload = {
-            serverId: membership.joinableId,
-            membershipId: membership.id,
-        };
-
-        dispatch({
-            type: "LEAVE_SERVER",
-            payload,
-        });
-    }, err => {
-        dispatch(receiveServerErrors(err.responseJSON));
-    })
+    return ServerAPIUtil.leaveServer(membershipId).then(
+        payload => dispatch(leftServer(payload)),
+        err => dispatch(receiveServerErrors(err.responseJSON))
+    );
 };
 
-export const retrieveServerInvitations = serverId => dispatch => {
-    ServerAPIUtil.getInvitations(serverId).then(invitations => {
-        dispatch(receiveInvitations(invitations));
-    }, err => {
-        dispatch(receiveServerErrors(err.responseJSON));
-    });
-};
-
-export const getServerByJoinForm = (urlToken,currentUserId)  => dispatch => {
-    return ServerAPIUtil.getServerByInvite(urlToken)
-        .then(server => {
-            
+export const getServerByJoinForm = (urlToken,currentUserId) => dispatch => {
+    return ServerAPIUtil.getServerByInvite(urlToken).then(
+        server => {
             let membership = {
                 userId: currentUserId,
                 joinableId: server.id,
                 joinableType: "Server",
             };
             joinServer(membership)(dispatch);
-        }, err => {
-            dispatch(receiveServerErrors(err.responseJSON))
-        });
+        }, err => dispatch(receiveServerErrors(err.responseJSON))
+    );
 };
 
-
 export const getServerByUrl = urlToken => dispatch => (
-    ServerAPIUtil.getServerByInvite(urlToken).then(server => (
-        dispatch(receiveInvitedServer(server))
-    ))  
+    ServerAPIUtil.getServerByInvite(urlToken).then(
+        server => dispatch(receiveInvitedServer(server))
+    )
 );
 
-// export const changeNickname = (membershipId, localUsername) => dispatch => {
-//     const membership = {
-//         id: membershipId,
-//         localUsername: localUsername,
-//     };
-//     return ServerAPIUtil.updateLocalUsername(membership)
-//         .then(membership => {
-//             dispatch(receiveLocalUsername(membership));
-//         });
-// };
-
-// window.changeNickname = changeNickname;
+export const getUpdatedServerInfo = serverId => dispatch => {
+    return ServerAPIUtil.getServer(serverId).then(
+        payload => dispatch(receiveServerInfo(payload))
+    );
+};

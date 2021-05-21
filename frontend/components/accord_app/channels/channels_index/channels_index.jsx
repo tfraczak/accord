@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
 import ChannelListItem from './channel_list_item';
+import CreateChannelButton from '../channel_modals/create_channel_form/create_channel_button';
 
 class ChannelsIndex extends Component {
     constructor(props) {
         super(props);
     }
 
+    modalClick() {
+
+    }
+
     render() {
         const {
             channels,
             server,
+            openModal,
+            currentUserId,
         } = this.props;
         if (server) {
             return (
@@ -17,7 +24,7 @@ class ChannelsIndex extends Component {
                     <div className="channels-title-wrapper">
                         <i className="fas fa-chevron-down channels-list"></i>
                         <h3>TEXT CHANNELS</h3>
-                        <i className="fas fa-plus add-channel"></i>
+                        <CreateChannelButton isOwner={currentUserId === server.ownerId} openModal={openModal} key={`server-channels-${server.id}`} />
                     </div>
                     <ul id="channels-index">
                         {channels.map(channel => <ChannelListItem key={`channel-${channel.id}`} channel={channel} serverId={server.id}/>)}

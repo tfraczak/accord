@@ -8,43 +8,39 @@ class CreateServerInvite extends React.Component {
             serverId: parseInt(this.props.params.serverId),
         };
         this.handleInvite = this.handleInvite.bind(this);
-        this.insertUrlToken = this.insertUrlToken.bind(this);
     }
 
-    componentDidMount() {
+    componentWillUnmount() {
         this.props.removeInvitation();
     }
 
     handleInvite() {
-        if (!this.state.invite) {
-            this.props.createInvite(this.props.serverId).then(() => {
-                this.setState({ receivedInvite: true });
-            });
-        } else {
-            this.props.removeInvitation();
-            this.forceUpdate();
-            this.setState({ receivedInvite: false });
+        if (!this.props.invite) {
+            this.props.createInvite(this.props.serverId);
         }
     }
 
-    insertUrlToken() {
+    insertClickMe() {
         if (this.props.invite && (this.state.serverId === parseInt(this.props.params.serverId))) {
-            return this.props.invite.urlToken;
+            return <p className="urltoken-copy">CLICK TO COPY</p>
         } else {
-            return "";
+            return null;
         }
+    }
+
+    copyClick(e) {
+        navigator.clipboard.writeText(e.currentTarget.textContent);
     }
 
     render() {
         
         return (
-            <li onClick={e => e.stopPropagation()}>
-                <input
-                    type="text"
-                    disabled
-                    value={`accord.com/${this.insertUrlToken()}`}
-                    onClick={e => e.stopPropagation()}/>
-                <button onClick={this.handleInvite}>CREATE INVITE</button>
+            <li>
+                { this.insertClickMe() }
+                <div className="invite" onClick={ this.copyClick }>
+                    { this.props.invite ? this.props.invite.urlToken : "" }
+                </div>
+                <button className="create-button" onClick={ this.handleInvite }>CREATE INVITE</button>
             </li>
         )
     } 

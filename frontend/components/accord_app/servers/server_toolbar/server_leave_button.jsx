@@ -8,13 +8,13 @@ class ServerLeaveButton extends React.Component {
 
     handleClick(e) {
         e.preventDefault();
-        this.props.leaveServer(this.props.membershipId)
-            .then(() => this.props.history.push("/channels/@me"));
+        
+        this.props.history.push("/channels/@me");
+        this.props.leaveServer(this.props.membershipId);
     }
 
 
     render() {
-
         return (
             <li onClick={e => e.stopPropagation()}>
                 <button className="st-leave-server-btn" onClick={this.handleClick}>Leave Server</button>

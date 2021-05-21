@@ -31,7 +31,7 @@ const mSTP = (state, ownProps) => {
 const mDTP = (dispatch, ownProps) => ({
     leaveServer: (membershipId) => dispatch(ServerActions.leaveServer((membershipId))),
     createInvite: (serverId) => dispatch(InviteActions.createInvite((serverId))),
-    deleteServer: (serverId, history) => dispatch(ServerActions.deleteServer(serverId,history)),
+    deleteServer: (serverId) => dispatch(ServerActions.deleteServer(serverId)),
     updateServer: server => dispatch(ServerActions.updateServer(server)),
     removeInvitation: () => dispatch(InviteActions.removeInvitation()),
 });

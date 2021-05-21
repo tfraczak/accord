@@ -10,14 +10,12 @@ class Api::MembershipsController < ApplicationController
     def create
         if params[:server_id]
             @membership = Membership.new(membership_params)
-            @membership.joinable_id = params[:server_id]
-            @membership.joinable_type = :Server
+            
+            
+
             
             if @membership.save
                 @server = Server.find_by(id: @membership.joinable_id)
-                @channels = @server.channels
-                @members = @server.members
-
                 render :create
             else
                 render json: @membership.errors.full_messages, status: 422
@@ -42,6 +40,16 @@ class Api::MembershipsController < ApplicationController
     def destroy
         @membership = Membership.find_by(id: params[:id])
         if @membership
+            joinable = @membership.joinable
+            @server = joinable if joinable.class.to_s == "Server"
+            @conversation = joinable if joinable.class.to_s == "Conversation"
+            if @server
+                @channel_ids = @server.channels.pluck(:id)
+                @invitation_ids = @server.invitations.pluck(:id)
+                @membership_ids = @server.memberships.pluck(:id)
+                @message_ids = @server.messages.pluck(:id)
+                @server_id = @server.id
+            end
             @membership.destroy
             render :destroy
         else

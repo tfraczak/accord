@@ -2,11 +2,10 @@ import {
     RECEIVE_SERVERS,
     RECEIVE_SERVER,
     REMOVE_SERVER,
-    RECEIVE_INVITATIONS,
-    RECEIVE_INVITATION,
-    REMOVE_INVITATION,
+    LEAVE_SERVER,
     RECEIVE_JOINED_SERVER,
     RECEIVE_NEW_SERVER,
+    RECEIVE_SERVER_INFO,
 } from "../../actions/server_actions";
 
 import { RECEIVE_USER_LOAD_DATA } from '../../actions/session_actions';
@@ -15,7 +14,7 @@ import { RECEIVE_USER_LOAD_DATA } from '../../actions/session_actions';
 export default (state = {}, action) => {
     Object.freeze(state);
     let nextState;
-    let server;
+    let server, servers, serverId, serverIds;
     switch(action.type) {
         case RECEIVE_SERVERS:
             return Object.assign({}, action.servers);
@@ -23,11 +22,13 @@ export default (state = {}, action) => {
             return Object.assign({}, action.payload.servers);
         case RECEIVE_SERVER:
             return Object.assign({}, state, { [action.server.id]: action.server });
+        case RECEIVE_SERVER_INFO:
+            return Object.assign({}, state, { [action.payload.server.id]: action.payload.server });
         case REMOVE_SERVER:
             nextState = Object.assign({}, state);
-            delete nextState[action.serverId];
+            delete nextState[action.payload.serverId];
             return nextState;
-        case "LEAVE_SERVER":
+        case LEAVE_SERVER:
             nextState = Object.assign({}, state);
             delete nextState[action.payload.serverId];
             return nextState;

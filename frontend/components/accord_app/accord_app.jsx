@@ -10,6 +10,8 @@ import ChannelChatTitleContainer from './channels/channel_chat_title/channel_cha
 import MainFocusContainer from './main-focus/main_focus_container';
 import CurrentUserDisplayContainer from './current_user/current_user_display_container';
 import SbHeaderContainer from './sb-header/sb_header_container';
+import ChatPlaceholder from './main-focus/chat_placeholder';
+import ChannelModal from './channels/channel_modals/channel_modal';
 
 class AccordApp extends React.Component {
     constructor(props) {
@@ -27,6 +29,7 @@ class AccordApp extends React.Component {
         return (
             <>
                 <AddServerModal />
+                <Route exact path="/channels/:serverId/:channelId" component={ChannelModal}/>
                 <div className="webapp-wrapper">
                     <ServersNavBarContainer />
                     <div className="base wrapper">
@@ -35,7 +38,7 @@ class AccordApp extends React.Component {
                             <div className="sidebar-wrapper">
                                 <nav className="sidebar-nav">
                                     <div className="sb-header wrapper">
-                                        <Route path="/channels/:serverId/" component={SbHeaderContainer} />
+                                        <Route path="/channels/:serverId/" component={SbHeaderContainer}/>
                                     </div>
                                     <div className="focus-channels-dms">
                                         <Switch>
@@ -60,7 +63,10 @@ class AccordApp extends React.Component {
                                     <div className="title-toolbar"></div>
                                 </div>
                                 <div className="focus-content">
-                                    <Route exact path="/channels/:serverId/:channelId" component={MainFocusContainer} />
+                                    <Switch>
+                                        <Route path="/channels/:serverId/:channelId" component={MainFocusContainer} />
+                                        <ChatPlaceholder />
+                                    </Switch>
                                     <div className="focus-right-wrapper">
                                         <Switch>
                                             <Route exact path="/channels/@me" component={ConversationMembersList} />
