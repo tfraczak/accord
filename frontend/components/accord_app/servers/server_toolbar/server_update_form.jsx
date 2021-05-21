@@ -3,9 +3,7 @@ import React, { Component } from 'react';
 class ServerToolbar extends Component {
     constructor(props){
         super(props);
-        this.state = {
-            name: this.props.server.name,
-        }
+        this.state = this.props.server;
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -18,7 +16,8 @@ class ServerToolbar extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        const server = Object.assign({}, this.state);
+        const server = this.state;
+        
         this.props.updateServer(server);
     }
 

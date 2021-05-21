@@ -34,11 +34,3 @@ export const destroyInvite = inviteId => dispatch => {
         dispatch(receiveServerErrors(err.responseJSON));
     });
 };
-
-export const retrieveServerInvitations = serverId => dispatch => {
-    ServerAPIUtil.getInvitations(serverId).then(invitations => {
-        dispatch(receiveInvitations(invitations));
-    }, err => {
-        dispatch(receiveServerErrors(err.responseJSON));
-    });
-};

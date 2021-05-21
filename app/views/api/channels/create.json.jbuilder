@@ -11,26 +11,18 @@ json.set! :users do
 end
 
 json.set! :memberships do
-    if @server.memberships.length > 0
-        @server.memberships.each do |membership|
-            json.set! membership.id do
-                json.partial! "api/memberships/membership", membership: membership
-            end
+    @server.memberships.each do |membership|
+        json.set! membership.id do
+            json.partial! "api/memberships/membership", membership: membership
         end
-    else
-        {}
     end
 end
 
 json.set! :invitations do
-    if @server.invitations.length > 0
-        @server.invitations.each do |invitation|
-            json.set! invitation.id do
-                json.partial! "api/invitations/invitation", invitation: invitation
-            end
+    @server.invitations.each do |invitation|
+        json.set! invitation.id do
+            json.partial! "api/invitations/invitation", invitation: invitation
         end
-    else
-        {}
     end
 end
 
@@ -48,14 +40,10 @@ json.set! :messages do
             .where(messageable_type: :Channel, messageable_id: channel.id)
             .order(created_at: :desc)
             .limit(50)
-        if messages.length > 0
-            messages.each do |message|
-                json.set! message.id do
-                    json.partial! "api/messages/message", message: message
-                end
+        messages.each do |message|
+            json.set! message.id do
+                json.partial! "api/messages/message", message: message
             end
-        else
-            {}
         end
     end
 end

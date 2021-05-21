@@ -33,16 +33,21 @@ class ServerToolbar extends Component {
     }
 
     closeToolbar() {
-        const fadeIn = document.getElementsByClassName("fade-in")
-        if (fadeIn) {
-            document.getElementById("server-tools-wrapper").classList.remove("fade-in");
-            document.getElementById("server-tools-wrapper").classList.add("fade-out");
-        }
+        // const fadeIn = document.getElementsByClassName("fade-in")
+        // if (fadeIn) {
+        //     document.getElementById("st-dropdown-button").classList.remove("dropped");
+        //     document.getElementById("st-chevron").classList.remove("fade-in");
+        //     document.getElementById("server-tools-wrapper").classList.remove("fade-in");
+        //     document.getElementById("server-tools-wrapper").classList.add("fade-out");
+        // }
     }
 
     toggleToolbar(e) {
         e.preventDefault();
-        const fadeIn = document.getElementsByClassName("fade-in")
+        
+        e.currentTarget.classList.toggle("dropped");
+        document.getElementById("st-chevron").classList.toggle("fade-in");
+        const fadeIn = document.getElementsByClassName("fade-in");
         if (fadeIn) {
             document.getElementById("server-tools-wrapper").classList.toggle("fade-out")
         } else {
@@ -67,43 +72,44 @@ class ServerToolbar extends Component {
         const params = this.props.match.params;
         if(server) {
             return (
-                <div
+                <section
                     className="st-wrapper">
                     <button
-                        className={ this.state.isOpen ? `st-dropdown-btn dropped` : `st-dropdown-btn` }
+                        id="st-dropdown-button"
+                        className={`st-dropdown-btn`}
                         type="button"
                         onClick={ this.toggleToolbar }>
                             { server.name }
                         <i 
                             id="st-chevron"
-                            className={ this.state.isOpen ? `fas fa-chevron-down` : `fas fa-chevron-left`}></i>
+                            className={`fas fa-chevron-left`}></i>
                     </button>
                         <section
                             id="server-tools-wrapper"
                             className="server-tools-wrapper fade-out"
-                            tabIndex="0"
                             onBlur={this.closeToolbar}
-                            onClick={e => e.stopPropagation()}
                             ref={this.stWrapperRef}>
                                 
-                            <ul id="server-tools" className="st-closed" onClick={e => e.stopPropagation()}>
-                                <CreateServerInvite 
+                            <ul id="server-tools" className="st-closed">
+                                <CreateServerInvite
+                                    key={`createinvite-${server.id}`}
                                     createInvite={createInvite}
                                     invite={urlToken} 
                                     serverId={server.id}
                                     removeInvitation={removeInvitation}
-                                    params={params} />
+                                    params={params}
+                                    history={history} />
                                 { server.ownerId === currentUserId ? (
                                 <>
-                                    <ServerUpdateForm server={server} updateServer={updateServer}/>
-                                    <ServerDeleteButton deleteServer={() => deleteServer(server.id).then(() => history.push("/channels/@me"))}/>
+                                    <ServerUpdateForm key={`updateserver-${server.id}`} history={history} server={server} updateServer={updateServer}/>
+                                    <ServerDeleteButton key={`deleteserver-${server.id}`} history={history} deleteServer={() => deleteServer(server.id, history)}/>
                                 </>
                                 ) : (
-                                    <ServerLeaveButton history={history} leaveServer={leaveServer} membershipId={membershipId} />
+                                    <ServerLeaveButton key={`serverleave-${server.id}`} history={history} leaveServer={leaveServer} membershipId={membershipId} />
                                 ) }
                             </ul>
                         </section> 
-                </div>
+                </section>
             )
         } else {
             history.push('/channels/@me')

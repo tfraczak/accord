@@ -9,8 +9,8 @@ export default props => {
     return (
         <div className="main-focus">
             <Switch>
-                <Route exact path="/channels/@me/:conversationId" >
-                    <ConversationChatContainer key={`convo-${props.chatId}`}/>
+                <Route path="/channels/@me">
+                    <ChatPlaceholder key={`convo-${props.chatId}`}/>
                 </Route>
                 <Route exact path="/channels/:serverId/:channelId" >
                     <ChannelChatContainer key={`chat-${props.chatId}`} />

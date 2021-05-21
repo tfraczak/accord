@@ -16,13 +16,15 @@ export const createServer = server => (
     })
 );
 
-export const updateServer = server => (
-    $.ajax({
-        method: "POST",
+export const updateServer = server => {
+    server = convertToSnakeCase(server);
+    
+    return $.ajax({
+        method: "PATCH",
         url: `/api/servers/${server.id}`,
         data: { server },
     })
-);
+};
 
 export const destroyServer = serverId => (
     $.ajax({
@@ -82,4 +84,11 @@ export const getServerByInvite = urlToken => {
         method: "GET",
         url: `/api/invitations/${urlToken}`,
     })
+};
+
+export const getServer = serverId => {
+    return $.ajax({
+        method: "GET",
+        url: `/api/channels/${serverId}`,
+    });
 };
