@@ -11,6 +11,8 @@
     background-color: $font-main;
     font-family: $roboto;
 
+    margin-top: 200px;
+
     .footer-grid {
         display: grid;
         grid-template-columns: repeat(12,1fr);

@@ -122,7 +122,7 @@ class SessionForm extends React.Component {
             if (formType === "register") {
                 return (
                     <p className="footer-agreement">
-                        By registering, you agree to Accord's {formFooterTOS()} and {formFooterPrivacy()}.
+                        By registering, you agree to view my {formFooterTOS()} and {formFooterPrivacy()}.
                     </p>
                 )
             }

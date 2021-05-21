@@ -53,17 +53,17 @@
     }
 
     .div-2, .div-3, .div-4 {
-        width: 50%;
+        width: 60%;
         display: grid;
         grid-template-columns: repeat(12,1fr);
         grid-gap: 5%;
         color: $font-main;
         align-items: center;
-        padding: 60px 40px;
+        padding: 50px 40px;
         height: 600px;
 
         img {
-            height: 300px;
+            height: 350px;
         }
 
         .title {
@@ -95,12 +95,12 @@
     .div-3 {
 
         img {
-            grid-column-end: 13;
+            grid-column-end: 12;
         }
 
         .title-desc {
-            grid-column-start: 1;
-            grid-column-end: 6;
+            grid-column-start: 2;
+            grid-column-end: 7;
         }
     }
 
@@ -169,16 +169,17 @@
     }
 
     .div-5 {
-
+        margin-top: 200px;
         .desc {
             margin-top: -20px;
             font-size: 20px;
             line-height: 34px;
             font-weight: 300;
             width: 60%;
-            margin-bottom: 30px;
         }
         img {
+            width: 800px;
+            height: 400px;
             margin-bottom: 30px;
         }
 

@@ -27,7 +27,7 @@ export default props => {
         case 2:
             return (
                 <div className="div-2">
-                    <img src={window.placeholderImg} alt="ph-img" />
+                    <img src={window.splash2} alt="ph-img" />
                     <div className="title-desc">
                         <h1 className="title">An invite-only place with plenty of room to talk</h1>
                         <p className="desc">Accord servers are organized into topic-based channels where you can collaborate, share, and just talk about your day without clogging up a group chat.</p>
@@ -41,13 +41,13 @@ export default props => {
                         <h1 className="title">Where hanging out is easy</h1>
                         <p className="desc">Grab a seat in a voice channel when you’re free. Friends in your server can see you’re around and instantly pop in to talk without having to call.</p>
                     </div>
-                    <img src={window.placeholderImg} alt="ph-img" />
+                    <img src={window.splash3} alt="ph-img" />
                 </div>
             )
         case 4:
             return (
                 <div className="div-4">
-                    <img src={window.placeholderImg} alt="ph-img" />
+                    <img src={window.splash4} alt="ph-img" />
                     <div className="title-desc">
                         <h1 className="title">From a few to a fandom</h1>
                         <p className="desc">Get a community of any size running with moderation tools and custom member access. Give members special powers, set up private channels, and more.</p>
@@ -59,7 +59,7 @@ export default props => {
                 <div className="div-5">
                     <h1 className="title">Reliable tech for staying close</h1>
                     <p className="desc">Low-latency voice and video feels like you’re in the same room. Wave hello over video, watch friends stream their games, or gather up and have a drawing session with screen share.</p>
-                    <img src={window.placeholderImg} alt="ph-img" />
+                    <img src={window.splash5} alt="ph-img" />
                     <h2 className="journey-question">Ready to start your journey?</h2>
                     { props.loggedIn ? (
                                 <Link className="open-accord bottom" to="/app">Open Accord</Link>

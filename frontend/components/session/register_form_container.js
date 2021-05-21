@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import SessionForm from "./session_form";
 import { connect } from "react-redux";
 import { register, removeErrors } from "../../actions/session_actions";
+import { assign } from 'lodash';
 
 const mSTP = (state, ownProps) => ({
     user: {
@@ -13,8 +14,8 @@ const mSTP = (state, ownProps) => ({
     errors: state.errors.session,
     formTitle: "Create an account",
     formButtonText: "Continue",
-    formFooterTOS: () => <Link to="/terms">Terms of Service</Link>,
-    formFooterPrivacy: () => <Link to="/privacy">Privacy Policy</Link>,
+    formFooterTOS: () => <a href="https://github.com/tfraczak" target="_blank">GitHub</a>,
+    formFooterPrivacy: () => <a href="https://www.linkedin.com/in/timothy-fraczak-e-i-t-1393a183/" target="_blank">LinkedIn</a>,
     formType: "register",
 });
 
