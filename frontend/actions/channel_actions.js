@@ -1,5 +1,7 @@
+import { convertToSnakeCase } from '../utils/func_utils';
 import { receiveServerErrors } from './server_actions';
 import { RECEIVE_USER_ERRORS } from './user_actions';
+import * as ChannelAPIUtil from '../utils/channel_utils';
 
 export const RECEIVE_CHANNELS = "RECEIVE_CHANNELS";
 export const RECEIVE_CHANNEL = "RECEIVE_CHANNEL";
@@ -33,10 +35,10 @@ export const recveiveChannelErrors = errors => ({
 
 export const retrieveServerChannels = serverId => dispatch => (
     ServerAPIUtil.getChannels(serverId)
-    .then(
-        payload => dispatch(receiveChannels(payload)),
-        err => dispatch(receiveServerErrors(err.responseJSON))
-    )
+        .then(
+            payload => dispatch(receiveChannels(payload)),
+            err => dispatch(receiveServerErrors(err.responseJSON))
+        )
 );
 
 export const retrieveChannel = channelId => dispatch => (
@@ -47,26 +49,24 @@ export const retrieveChannel = channelId => dispatch => (
         )
 );
 
-export const createChannel = channel => dispatch => (
-    ChannelAPIUtil.createChannel(channel)
+export const createChannel = channel => dispatch => {
+    channel = convertToSnakeCase(channel);
+    return ChannelAPIUtil.createChannel(channel)
         .then(
-            channel => dispatch(receiveCreatedChannel(channel)),
-            err => dispatch(receiveChannelErrors(err.responseJSON))
-        )
-);
+            channel => dispatch(receiveCreatedChannel(channel))
+        );
+};
 
 export const updateChannel = channel => dispatch => (
     ChannelAPIUtil.updateChannel(channel)
         .then(
-            payload => dispatch(receiveChannel(payload)),
-            err => dispatch(receiveChannelErrors(err.responseJSON))
+            channel => dispatch(receiveChannel(channel))
         )
 );
 
 export const deleteChannel = channel => dispatch => (
     ChannelAPIUtil.destroyChannel(channel)
         .then(
-            payload => dispatch(removeChannel(payload)),
-            err => dispatch(receiveChannelErrors(err.responseJSON))
+            payload => dispatch(removeChannel(payload))
         )
 );

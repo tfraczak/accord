@@ -11,6 +11,7 @@ import MainFocusContainer from './main-focus/main_focus_container';
 import CurrentUserDisplayContainer from './current_user/current_user_display_container';
 import SbHeaderContainer from './sb-header/sb_header_container';
 import ChatPlaceholder from './main-focus/chat_placeholder';
+import ChannelModal from './channels/channel_modals/channel_modal';
 
 class AccordApp extends React.Component {
     constructor(props) {
@@ -28,6 +29,7 @@ class AccordApp extends React.Component {
         return (
             <>
                 <AddServerModal />
+                <Route exact path="/channels/:serverId/:channelId" component={ChannelModal}/>
                 <div className="webapp-wrapper">
                     <ServersNavBarContainer />
                     <div className="base wrapper">

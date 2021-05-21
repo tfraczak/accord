@@ -50,10 +50,13 @@ const receiveNewServer = payload => ({
     payload,
 });
 
-const receiveJoinedServer = payload => ({
-    type: RECEIVE_JOINED_SERVER,
-    payload,
-});
+const receiveJoinedServer = payload => {
+    
+    return {
+        type: RECEIVE_JOINED_SERVER,
+        payload,
+    }
+};
 
 const receiveServerInfo = payload => ({
     type: RECEIVE_SERVER_INFO,
@@ -106,6 +109,7 @@ export const deleteServer = (serverId) => dispatch => {
 
 export const joinServer = (membership) => dispatch => {
     membership = convertToSnakeCase(membership);
+    
     return ServerAPIUtil.joinServer(membership)
         .then(
             payload => dispatch(receiveJoinedServer(payload)),

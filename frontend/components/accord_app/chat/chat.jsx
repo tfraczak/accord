@@ -53,6 +53,9 @@ class Chat extends Component {
         const next = nextChat(nextPath);
         const type = next[0];
         const id = next[1];
+        if (type === "Channel") {
+            this.props.retrieveChannel(id);
+        } // else retrieveConversation(id)
     }
 
     componentDidUpdate() {

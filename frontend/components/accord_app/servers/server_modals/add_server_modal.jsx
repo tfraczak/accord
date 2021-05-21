@@ -13,6 +13,7 @@ class ServerFormModal extends React.Component {
 	escModal(e) {
 		if (e.keyCode === 27) {
 			document.getElementById("asf-button").classList.remove("active");
+			document.getElementById("asf-button").blur(); 
 			this.props.closeModal();
 		}
 	}

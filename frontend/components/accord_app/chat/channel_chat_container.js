@@ -6,6 +6,7 @@ import { receiveMessage, receiveMessages } from '../../../actions/message_action
 import { createMessage } from '../../../utils/message_utils';
 import { chatMessages } from '../../../utils/selectors';
 import { serverMembersObj } from '../../../utils/selectors';
+import { retrieveChannel } from '../../../actions/channel_actions';
 
 const mSTP = (state, ownProps) => {
     const chat = state.entities.channels[ownProps.match.params.channelId];
@@ -28,6 +29,7 @@ const mDTP = dispatch => {
         createChatSocket,
         createMessage: message => dispatch(createMessage(message)),
         receiveMessages: messages => dispatch(receiveMessages(messages)),
+        retrieveChannel: channelId => dispatch(retrieveChannel(channelId)),
     };
 };
 

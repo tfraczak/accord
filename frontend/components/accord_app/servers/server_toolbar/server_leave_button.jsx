@@ -8,7 +8,7 @@ class ServerLeaveButton extends React.Component {
 
     handleClick(e) {
         e.preventDefault();
-        debugger
+        
         this.props.history.push("/channels/@me");
         this.props.leaveServer(this.props.membershipId);
     }
