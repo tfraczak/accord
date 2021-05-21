@@ -44,7 +44,7 @@ class Server < ApplicationRecord
         Channel.new(
             name: "general",
             server_id: self.id,
-            media_type: "text"
+            media_type: "Text"
         ).save
     end
 
