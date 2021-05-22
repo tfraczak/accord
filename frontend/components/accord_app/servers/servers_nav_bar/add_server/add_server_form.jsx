@@ -13,6 +13,7 @@ class AddServerForm extends React.Component {
     }
 
     componentWillUnmount() {
+        debugger
         this.props.removeServerErrors();
     }
 
@@ -49,12 +50,13 @@ class AddServerForm extends React.Component {
             case 'join':
                 const urlToken = validUrlToken(this.state.input);
                 if (urlToken) {
-                    processForm(urlToken, currentUser.id).then(() => {
-                        
-                        closeModal();
-                        document.getElementById("asf-button").classList.remove("active");
-                        // history.push(`/channels/${newServer.id}`);
-                    });
+                    processForm(urlToken, currentUser.id)
+                        .then(() => {
+                            closeModal();
+                            document.getElementById("asf-button").classList.remove("active");
+                        }, err => {
+                            receiveServerErrors(err.responseJSON);
+                        });
                     break;
                 } else {
                     receiveServerErrors(["Link or token is invalid"]);
@@ -68,24 +70,39 @@ class AddServerForm extends React.Component {
     labelWithErrors() {
         const errors = this.props.serverErrors;
         let errorMsg;
+        let className;
         switch(errors[0]) {
             case "Name can't be blank":
-                errorMsg = " - Server name can't be empty";
+                errorMsg = " - Server name can't be empty.";
                 break;
             case "Link or token is invalid":
-                errorMsg = " - Link or token is invalid";
+                errorMsg = " - Please enter a valid invite link or invite code.";
                 break;
             default:
                 errorMsg = null;
         }
-
-        const className = "server-form-input-label" + (errorMsg ? " error" : "");
+        className = "server-form-input-label" + (errorMsg ? " error" : "");
+        const inviteLink = () => {
+            if (!errorMsg) {
+                return(
+                    <>
+                        {"INVITE LINK "} <span style={{color: "red"}}>*</span>
+                    </>
+                )
+            } else {
+                return "INVITE LINK";
+            }
+        }
+            
         return (
             <h3 id={errorMsg ? "error" : null} className={className}>
-                { this.props.formType === 'create' ? "SERVER NAME" : "INVITE LINK" }{ errorMsg }
+                { this.props.formType === 'create' ? `SERVER NAME` : inviteLink() }
+                { errorMsg }
             </h3>
         )
     }
+
+        
 
     insertButtons() {
         const { otherForm, formType, formFooter } = this.props;

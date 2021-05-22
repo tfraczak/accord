@@ -125,15 +125,16 @@ export const leaveServer = (membershipId) => dispatch => {
 };
 
 export const getServerByJoinForm = (urlToken,currentUserId) => dispatch => {
-    return ServerAPIUtil.getServerByInvite(urlToken).then(
-        server => {
-            let membership = {
-                userId: currentUserId,
-                joinableId: server.id,
-                joinableType: "Server",
-            };
-            joinServer(membership)(dispatch);
-        }, err => dispatch(receiveServerErrors(err.responseJSON))
+    return ServerAPIUtil.getServerByInvite(urlToken)
+        .then(
+            server => {
+                let membership = {
+                    userId: currentUserId,
+                    joinableId: server.id,
+                    joinableType: "Server",
+                };
+                return joinServer(membership)(dispatch);
+            }, err => dispatch(receiveServerErrors(err.responseJSON))
     );
 };
 

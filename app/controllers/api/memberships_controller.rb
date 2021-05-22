@@ -20,7 +20,7 @@ class Api::MembershipsController < ApplicationController
             else
                 case @membership.errors.full_messages
                 when ["User has already been taken"]
-                    render json: @membership.errors.full_messages, status: 409
+                    render json: ["You're already a member!"], status: 409
                 else
                     render json: @membership.errors.full_messages, status: 422
                 end
