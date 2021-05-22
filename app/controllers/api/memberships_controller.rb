@@ -18,7 +18,12 @@ class Api::MembershipsController < ApplicationController
                 @server = Server.find_by(id: @membership.joinable_id)
                 render :create
             else
-                render json: @membership.errors.full_messages, status: 422
+                case @membership.errors.full_messages
+                when ["User has already been taken"]
+                    render json: @membership.errors.full_messages, status: 409
+                else
+                    render json: @membership.errors.full_messages, status: 422
+                end
             end
         end
     end

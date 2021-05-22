@@ -113,10 +113,7 @@ export const joinServer = (membership) => dispatch => {
     return ServerAPIUtil.joinServer(membership)
         .then(
             payload => dispatch(receiveJoinedServer(payload)),
-            () => (dispatch({
-                type: RECEIVE_SERVER_ERRORS,
-                errors: ["Something went wrong. Couldn't join server."],
-            }))
+            err => err
         );
 };
 

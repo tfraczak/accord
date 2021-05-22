@@ -31,11 +31,11 @@ class UrlInvitation extends React.Component {
         } = this.props;
         
         if (validUrlToken(this.props.urlToken)) {
-            getServerByUrl(urlToken).then(() => (
-                retrieveUserServers(currentUserId)
-            ), () => (
-                history.push("/404")
-            ));
+            getServerByUrl(urlToken)
+                .then(
+                    () => retrieveUserServers(currentUserId),
+                    err => history.push("/404")
+                );
         } else {
             history.push("/404");
         }
@@ -75,18 +75,49 @@ class UrlInvitation extends React.Component {
                 joinableId: invitedServer.id,
                 joinableType: "Server",
             }
-            this.props.joinServer(membership).then(() => {
-                setTimeout(() => this.props.history.push("/app"), redirectTime);
-                this.setState({
-                    join: () => (
-                        <div className="join-wrapper">
-                            <h1 className="joined">Joined!</h1>
-                            <p>You will be redirected to your profile.</p>
-                        </div>
-                    ),
-                    question: () => <div className="separator"></div>,
-                });
-            });
+            this.props.joinServer(membership)
+                .then(
+                    res => {
+                        setTimeout(() => this.props.history.push("/app"), redirectTime);
+                        this.setState({
+                            join: () => (
+                                <div className="join-wrapper">
+                                    <h1 className="joined">Joined!</h1>
+                                    <p>You will be redirected to your profile.</p>
+                                </div>
+                            ),
+                            question: () => <div className="separator"></div>,
+                        });
+                    }, err => {
+                        if (err.status === 409) {
+                            this.setState({
+                                join: () => (
+                                    <div className="join-wrapper">
+                                        <h1 className="already-joined">You're already a member!</h1>
+                                        <p>You will be redirected to your profile.</p>
+                                    </div>
+                                ),
+                                question: () => <div className="separator"></div>,
+                            });
+                            setTimeout(() => {
+                                this.props.history.push("./app");
+                            },redirectTime);
+                        } else {
+                            this.setState({
+                                join: () => (
+                                    <div className="join-wrapper">
+                                        <h1 className="already-joined">Sorry, something went wrong!</h1>
+                                        <p>You will be redirected to your profile.</p>
+                                    </div>
+                                ),
+                                question: () => <div className="separator"></div>,
+                            });
+                            setTimeout(() => {
+                                this.props.history.push("./app");
+                            },redirectTime);
+                        }
+                    }
+                )
         }
     }
 
