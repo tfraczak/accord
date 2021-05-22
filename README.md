@@ -161,7 +161,7 @@ export const extractDateTime = dateTime => {
 };
 ```
 
-Two of the functions I'm excited about are `convertToSnakeCase` and `extractDateTime`. I had found a <a href="https://stackoverflow.com/questions/54246477" target="_blank">solution</a> for converting just 1 string to to snake case on StackOverflow. I made sure what I understood the code, especially the regex, before proceeding with using it myself. This is where I got the inspiration for the `validUrlToken` function. 
+Two of the functions I'm excited about are `convertToSnakeCase` and `extractDateTime`. I had found a <a href="https://stackoverflow.com/questions/54246477" target="_blank">solution</a> for converting just 1 string to to snake case on StackOverflow. I made sure I understood the code, especially the regex, before proceeding with using it myself. This is where I got the inspiration for the `validUrlToken` function. 
 
 For `extractDateTime`, I was having a lot of trouble figuring out what the heck kind of format my back-end `DateTime` object was being converted into. I learned it's an <a href="https://en.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601</a> date format in UTC. Before that, I was trying to manually write code to extract the date and time; convert it myself to GMT-4 (New York); and calculate whether the `dateTime` passed an argument is today, yesterday, or more than a day ago. After some extensive reading of <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">`Date`</a> objects in `JavaScript` on MDN, I figured out a simple, and sort of elegant, way of returning a formatted date/time string to be displayed next to my message when it's displayed in the chat.
 
