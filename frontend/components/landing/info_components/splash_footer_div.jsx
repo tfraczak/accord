@@ -75,7 +75,8 @@ export default props => {
                     <h1 className="projects-title">Projects</h1>
                     <ul className="projects-list">
                         <li><Link to="/">Accord</Link></li>
-                        <li>More coming soon...</li>
+                        <li><a href="https://postcard-triplog.herokuapp.com/#/" target="_blank">Postcard</a></li>
+                        <li><a href="https://tfraczak.github.io/dungeon_crawler/" target="_blank">Dungeon Crawler</a></li>
                     </ul>
                 </div>
             )
