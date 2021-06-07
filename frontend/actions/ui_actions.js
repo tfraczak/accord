@@ -13,3 +13,10 @@ export const closeModal = () => {
     type: CLOSE_MODAL,
   })
 };
+
+export const openFullModal = payload => {
+  return ({
+    type: OPEN_MODAL,
+    payload
+  });
+};

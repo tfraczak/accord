@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_18_152658) do
+ActiveRecord::Schema.define(version: 2021_06_07_191949) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2021_05_18_152658) do
     t.bigint "server_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "default"
+    t.index ["server_id", "default"], name: "unique_default_channel", unique: true
     t.index ["server_id"], name: "index_channels_on_server_id"
   end
 

@@ -7,7 +7,5 @@ class Channel < ApplicationRecord
     has_many :messages, 
         as: :messageable,
         dependent: :destroy
-
-    
-
+        
 end

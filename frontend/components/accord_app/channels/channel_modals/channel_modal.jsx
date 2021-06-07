@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { closeModal } from '../../../../actions/ui_actions';
 import { connect } from 'react-redux';
 import CreateTextChannelContainer from './create_channel_form/create_text_channel_container';
+import ChannelSettingsContainer from './channel_settings/channel_settings_container';
 
 class CreateChannelModal extends Component {
     constructor(props) {
@@ -21,26 +22,35 @@ class CreateChannelModal extends Component {
 	}
 
     render() {
-		const { modal } = this.props;
-		if (!modal) {
+		const { modal, payload } = this.props;
+		if (!modal && !payload) {
 			return null;
 		}
 
-		let component;
+		let component, bgClassName, childClassName;
 		
-		switch (modal) {
-		case 'create channel':
-			component = <CreateTextChannelContainer />;
+		if(payload) {
+			component = <ChannelSettingsContainer channel={payload.channel} />;
+			bgClassName = "csf-modal-background";
+			childClassName = "csf-modal-child";
 			break;
-		default:
-			return null;
+		} else {
+			switch (modal) {
+			case 'create channel':
+				component = <CreateTextChannelContainer />;
+				bgClassName = "acf-modal-background";
+				childClassName = "acf-modal-child";
+				break;
+			default:
+				return null;
+			}
 		}
-		
+
 		return (
-			<div className="acf-modal-background">
+			<div className={ bgClassName }>
 				<div 
-				className="acf-modal-child"
-				onClick={e => e.stopPropagation()}>
+				className={ childClassName }
+				onClick={ e => e.stopPropagation() }>
 
 				{ component }
 				
@@ -53,6 +63,7 @@ class CreateChannelModal extends Component {
 const mSTP = state => {
   return {
     modal: state.ui.modal,
+		payload: state.ui.payload,
   };
 };
 

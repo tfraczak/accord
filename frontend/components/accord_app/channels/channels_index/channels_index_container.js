@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import ChannelsIndex from './channels_index';
 import { serverChannels } from '../../../../utils/selectors';
-import { openModal } from '../../../../actions/ui_actions';
+import { openFullModal, openModal } from '../../../../actions/ui_actions';
 
 const mSTP = (state, ownProps) => {
     const server = state.entities.servers[ownProps.match.params.serverId];
@@ -18,6 +18,7 @@ const mSTP = (state, ownProps) => {
 
 const mDTP = dispatch => ({
     openModal: modal => dispatch(openModal(modal)),
+    openFullModal: (modal, object) => openFullModal(modal, object),
 });
 
 export default withRouter(connect(mSTP, mDTP)(ChannelsIndex));
