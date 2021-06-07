@@ -6,7 +6,7 @@ export default props => {
 
     const scrollToTop = () => {
         window.scrollTo(0,0);
-    }
+    };
 
     switch (divType) {
         case "social":

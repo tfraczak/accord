@@ -10,10 +10,6 @@ class Api::MembershipsController < ApplicationController
     def create
         if params[:server_id]
             @membership = Membership.new(membership_params)
-            
-            
-
-            
             if @membership.save
                 @server = Server.find_by(id: @membership.joinable_id)
                 render :create
