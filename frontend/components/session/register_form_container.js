@@ -15,7 +15,7 @@ const mSTP = (state, ownProps) => ({
     formTitle: "Create an account",
     formButtonText: "Continue",
     formFooterTOS: () => <a href="https://github.com/tfraczak" target="_blank">GitHub</a>,
-    formFooterPrivacy: () => <a href="https://www.linkedin.com/in/timothy-fraczak-e-i-t-1393a183/" target="_blank">LinkedIn</a>,
+    formFooterPrivacy: () => <a href="www.linkedin.com/in/tfraczak" target="_blank">LinkedIn</a>,
     formType: "register",
 });
 
