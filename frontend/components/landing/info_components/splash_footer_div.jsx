@@ -15,7 +15,7 @@ export default props => {
                     <Link to="/" onClick={scrollToTop()}><img src={window.logoUrl} alt="footer-logo" className="footer-logo" /></Link>
                     <div className="social-links">
                         <a 
-                            href="www.linkedin.com/in/tfraczak"
+                            href="https://www.linkedin.com/in/tfraczak/"
                             target="_blank"> 
                             <img className="linkedin-logo" src={window.linkedinLogo} alt="linkedin" />
                         </a>

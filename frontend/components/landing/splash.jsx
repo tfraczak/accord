@@ -34,7 +34,7 @@ export default (props) => {
                 <div className="header-elements">
                     <img id="splash-logo" className="horizontal-logo" src={window.logoUrl} />
                     <nav className="splash-nav">
-                        <a href="www.linkedin.com/in/tfraczak" target="_blank">LinkedIn</a>
+                        <a href="https://www.linkedin.com/in/tfraczak/" target="_blank">LinkedIn</a>
                         <a href="https://github.com/tfraczak" target="_blank">GitHub</a>
                         <a href="https://www.pepplish.com/" target="_blank">Hot Sauce</a>
                     </nav>
