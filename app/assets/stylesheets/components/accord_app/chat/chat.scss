@@ -1,6 +1,15 @@
 .messages-wrapper {
-    
-    .message-wrapper {
+    .message-wrapper.bottom {
+        position: relative;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 20px;
+        width: 100%;
+        padding: 5px 75px 7px 75px;
+    }
+    .message-wrapper:not(.message-wrapper.bottom) {
         position: relative;
         box-sizing: border-box;
         display: flex;

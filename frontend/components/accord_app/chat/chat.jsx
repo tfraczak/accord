@@ -44,7 +44,9 @@ class Chat extends Component {
     }
 
     componentDidMount() {
-        
+        if (this.bottom.current) {
+            this.bottom.current.scrollIntoView();
+        }
     }
 
     componentWillUnmount() {
@@ -86,7 +88,7 @@ class Chat extends Component {
         
         const messageList = this.state.messages.map(message => {
             return (
-                <div ref={this.bottom} key={`message-${message.id}`} className="message-wrapper">
+                <div key={`message-${message.id}`} className="message-wrapper">
                     <div className="message-info-wrapper">
                         <img src={window.defaultAvatarUrl} className="chat-avatar" />
                         <h6 className="author">{ chatMembers[message.authorId] ? chatMembers[message.authorId].username : null}</h6>
@@ -97,13 +99,12 @@ class Chat extends Component {
             );
         });
 
-        // const messageList = this.state.messages.map(message => {
-        //     return <MessageListItem ref={this.bottom} key={`msg-${message.id}`} message={message} chatMembers={chatMembers} />
-        // })
-
         return (
             <>
-                <div key={chat.id} className="messages-wrapper">{ messageList }</div>
+                <div key={chat.id} className="messages-wrapper">
+                    { messageList }
+                    <div ref={this.bottom} key={"bottom"} className="message-wrapper bottom"></div>
+                </div>
                 <div className="msg-form-separator" />
                 <MessageFormContainer
                     subscription={ this.subscription }

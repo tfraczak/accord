@@ -32,7 +32,6 @@
 
     .msg-form-separator {
         width: 100%;
-        margin-top: 20px;
     }
 
     .message-form {
@@ -44,10 +43,12 @@
         box-sizing: border-box;
         padding: 0 20px;
         width: 100%;
-        min-height: 70px;
-        max-height: 70px;
+        min-height: 65px;
+        max-height: 65px;
 
         .message-input {
+            position: relative;
+            top: -5px;
             border: none;
             border-radius: 8px;
             height: 45px;
