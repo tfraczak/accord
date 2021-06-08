@@ -15,6 +15,8 @@ import {
     RECEIVE_CHANNELS,
 } from "../../actions/channel_actions";
 
+import { chatMessages } from "../../utils/selectors";
+
 import { RECEIVE_USER_LOAD_DATA } from '../../actions/session_actions';
 
 
@@ -45,7 +47,8 @@ export default (state = {}, action) => {
             return Object.assign({}, state, messages);
         case REMOVE_CHANNEL:
             nextState = Object.assign({}, state);
-            messages = Object.values(action.payload.messages);
+            messages = chatMessages(action.channel, "Channel", nextState);
+            debugger
             for(let message of messages) { delete nextState[message.id] }
             return nextState;
         case RECEIVE_JOINED_SERVER:

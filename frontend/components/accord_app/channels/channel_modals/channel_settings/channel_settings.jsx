@@ -40,10 +40,11 @@ class ChannelSettings extends React.Component {
     handleDelete(e) {
         e.preventDefault();
         this.props.closeModal();
+        
         if (parseInt(this.props.match.params.channelId) !== this.props.defChannelId) {
             this.props.history.push(`/channels/${this.props.serverId}/${this.props.defChannelId}`);
         }
-        deleteChannel(this.props.channel);
+        this.props.deleteChannel(this.props.channel);
     }
 
     handleReset() {
@@ -199,9 +200,6 @@ class ChannelSettings extends React.Component {
                             </li>
                         </ul>
                     </nav>
-                    
-                    
-                    
                 </div>
                 <div className="csm-content-wrapper">
                     <section>

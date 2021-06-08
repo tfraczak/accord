@@ -38,7 +38,7 @@ class Api::ChannelsController < ApplicationController
         @channel = Channel.find_by(id: params[:id])
         if @channel
             @channel.destroy
-            render :show
+            render :destroy
         else
             render json: ["This channel does not exist"], status: 404
         end
