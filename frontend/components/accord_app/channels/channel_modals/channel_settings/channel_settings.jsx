@@ -187,12 +187,12 @@ class ChannelSettings extends React.Component {
                                 type="text"
                                 value={ this.state.name }
                                 onChange={ this.handleChange }
-                                disabled={ isDefault } />
+                            />
                             <div id="csf-buttons-wrapper" className="buttons-wrapper">
                                 <p className="update-message">Careful — you have unsaved changes!</p>
                                 <div className="buttons">
                                     <button onClick={this.handleReset} className="reset" type="button">Reset</button>
-                                    <button disabled={ isDefault || !this.state.name } className="save" type="submit">Save Changes</button>
+                                    <button disabled={ !this.state.name } className="save" type="submit">Save Changes</button>
                                 </div>
                             </div>
                         </form>

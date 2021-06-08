@@ -70,22 +70,22 @@ Invitation.create!(
 
 Channel.create!(
     server_id: 1,
-    name: "baby things",
+    name: "baby-things",
     media_type: "Text"
 )
 Channel.create!(
     server_id: 1,
-    name: "gourmet milks",
+    name: "gourmet-milks",
     media_type: "Text"
 )
 Channel.create!(
     server_id: 1,
-    name: "best naps",
+    name: "best-naps",
     media_type: "Text"
 )
 Channel.create!(
     server_id: 1,
-    name: "just okay naps",
+    name: "just-okay-naps",
     media_type: "Text"
 )
 Channel.create!(
@@ -95,7 +95,7 @@ Channel.create!(
 )
 Channel.create!(
     server_id: 2,
-    name: "Video games",
+    name: "Videogames",
     media_type: "Text"
 )
 Channel.create!(
@@ -110,7 +110,7 @@ Channel.create!(
 )
 Channel.create!(
     server_id: 3,
-    name: "This is so awesome!",
+    name: "this-is-so-awesome",
     media_type: "Text"
 )
 
