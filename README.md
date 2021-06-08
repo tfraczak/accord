@@ -60,9 +60,9 @@ const validUrlToken = path => {
 * accord.com/ is also optional, but must appear as accord.com/.
 * And finally, the URL token on the end is an alphanumeric string of length 10, no more, no less. And this one is NOT optional, this must appear.
 
-Implmenting this was fun, and allowed me to be creative with how the user interacts with the app.
+Implementing this was fun, and allowed me to be creative with how the user interacts with the app.
 
-### _**Implmenting a dynamic Chat Channel for websockets.**_
+### _**Implementing a dynamic Chat Channel for websockets.**_
 When I started the `Messages` feature, I was bouncing ideas off of the others who were also utilizing websockets. I was finally able to send data from my front-end to the back-end, but I didn't have any logic to handle the data in the back-end yet. There was some discussion about whether or not I'd have to set up another `ApplicationCable` channel to handle either a `Channel` or `Conversation` chat. I came up with a solution for addressing the distinction between my `polymorphic association` for `Messages` concerning `Channels` and `Conversations` (a.k.a. Direct Messages):
 ```ruby
 class ChatChannel < ApplicationCable::Channel
