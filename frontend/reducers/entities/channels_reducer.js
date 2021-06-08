@@ -28,8 +28,12 @@ export default (state = {}, action) => {
         case RECEIVE_USER_LOAD_DATA:
             return Object.assign({}, state, action.payload.channels );
         case RECEIVE_CHANNEL:
-            channel = action.payload.channel;
-            return Object.assign({}, state, { [channel.id]: channel });
+            if (action.payload.channel) {
+                channel = action.payload.channel;
+                return Object.assign({}, state, { [channel.id]: channel });
+            } else {
+                return state;
+            }
         case RECEIVE_CREATED_CHANNEL:
             return Object.assign({}, state, { [action.channel.id]: action.channel });
         case RECEIVE_UPDATED_CHANNEL:
