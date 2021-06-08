@@ -19,7 +19,7 @@ export const createChannel = channel => {
 export const updateChannel = channel => {
     channel = convertToSnakeCase(channel);
     return $.ajax({
-        method: "POST",
+        method: "PATCH",
         url: `/api/channels/${channel.id}`,
         data: { channel },
     })

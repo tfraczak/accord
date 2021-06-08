@@ -12,36 +12,11 @@ class ChannelSettings extends React.Component {
         this.handleReset = this.handleReset.bind(this);
     }
 
-    
-
-    insertContent() {
-        return (
-            <>
-                <h1 className="content-title">{ this.state.content }</h1>
-                <h3 className="edit-channel-label">CHANNEL NAME</h3>
-                <form onSubmit={ this.handleSubmit } className="edit-channel-form">
-                    <input
-                        id="edit-channel-input"
-                        type="text"
-                        value={ this.state.name }
-                        onChange={ this.handleChange } />
-                    <div className="buttons-wrapper">
-                        <p className="update-message">Careful — you have unsaved changes!</p>
-                        <div className="buttons">
-                            <button className="reset" type="button">Reset</button>
-                            <button disabled={ !!this.state.name } className="save" type="submit">Save Changes</button>
-                        </div>
-                    </div>
-                </form>
-            </>
-        );
-    }
-
     handleDelete(e) {
         e.preventDefault();
         this.props.closeModal();
         
-        if (parseInt(this.props.match.params.channelId) !== this.props.defChannelId) {
+        if (parseInt(this.props.match.params.channelId) === this.props.channel.id) {
             this.props.history.push(`/channels/${this.props.serverId}/${this.props.defChannelId}`);
         }
         this.props.deleteChannel(this.props.channel);
@@ -76,6 +51,7 @@ class ChannelSettings extends React.Component {
         e.preventDefault();
         const {
             updateChannel,
+            closeModal,
         } = this.props;
 
         Object.freeze(this.state);

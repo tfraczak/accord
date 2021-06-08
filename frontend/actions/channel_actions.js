@@ -7,6 +7,7 @@ export const RECEIVE_CHANNELS = "RECEIVE_CHANNELS";
 export const RECEIVE_CHANNEL = "RECEIVE_CHANNEL";
 export const REMOVE_CHANNEL = "REMOVE_CHANNEL";
 export const RECEIVE_CREATED_CHANNEL = "RECEIVE_CREATED_CHANNEL";
+export const RECEIVE_UPDATED_CHANNEL = "RECEIVE_UPDATED_CHANNEL";
 
 export const receiveChannels = channels => ({
     type: RECEIVE_CHANNELS,
@@ -21,6 +22,11 @@ export const receiveChannel = payload => ({
 export const receiveCreatedChannel = channel => ({
     type: RECEIVE_CREATED_CHANNEL,
     channel,
+});
+
+export const receiveUpdatedChannel = payload => ({
+    type: RECEIVE_UPDATED_CHANNEL,
+    payload,
 });
 
 export const removeChannel = channel => ({
@@ -60,7 +66,7 @@ export const createChannel = channel => dispatch => {
 export const updateChannel = channel => dispatch => (
     ChannelAPIUtil.updateChannel(channel)
         .then(
-            channel => dispatch(receiveChannel(channel))
+            payload => dispatch(receiveUpdatedChannel(payload))
         )
 );
 

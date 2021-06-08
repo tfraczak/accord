@@ -13,6 +13,7 @@ import {
     RECEIVE_CHANNEL,
     REMOVE_CHANNEL,
     RECEIVE_CHANNELS,
+    RECEIVE_UPDATED_CHANNEL,
 } from "../../actions/channel_actions";
 
 import { chatMessages } from "../../utils/selectors";
@@ -43,6 +44,9 @@ export default (state = {}, action) => {
             messages = action.payload.messages;
             return Object.assign({}, state, messages);
         case RECEIVE_CHANNEL:
+            messages = action.payload.messages;
+            return Object.assign({}, state, messages);
+        case RECEIVE_UPDATED_CHANNEL:
             messages = action.payload.messages;
             return Object.assign({}, state, messages);
         case REMOVE_CHANNEL:

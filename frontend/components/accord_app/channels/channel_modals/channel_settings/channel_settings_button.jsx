@@ -2,7 +2,9 @@ import React from 'react';
 
 
 export default (props) => {
-	const onClick = () => {
+	const onClick = e => {
+		e.stopPropagation();
+		e.preventDefault();
 		document.getElementById("edit-channel-btn").classList.add("modal-open");
 		props.openFullModal();
 	};

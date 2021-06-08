@@ -9,28 +9,42 @@ class CreateChannel extends React.Component {
         this.clickClose = this.clickClose.bind(this);
     }
 
+    componentDidMount() {
+        const input = document.getElementById("create-channel-input");
+        input.addEventListener("paste", e => e.preventDefault());
+    }
+
+    componentWillUnmount() {
+        const input = document.getElementById("create-channel-input");
+        input.removeEventListener("paste", e => e.preventDefault());
+    }
+
     handleChange(e) {
-        this.setState({
-            name: e.currentTarget.value
-        });
+        const isValid = !/[~`()\@\._!#$%\^&*+=\[\]\\';,/{}|\\":<>\?]/g.test(e.currentTarget.value) && !/\-\-+/g.test(e.currentTarget.value);
+        if (isValid) {
+            this.setState({
+                name: e.currentTarget.value
+            });
+        }
+        
     }
 
     handleSubmit(e) {
         
         e.preventDefault();
         const {
-            server,
             closeModal,
-            history,
             processForm,
         } = this.props;
 
         Object.freeze(this.state);
         const channel = this.state;
         processForm(channel)
-            .then(newChannel => {
+            .then(() => {
                 closeModal();
                 document.getElementById("add-channel-btn").classList.remove("modal-open");
+                document.getElementById("toggle-channels-index").classList.remove("hidden");
+                document.getElementById("channels-index").classList.remove("hidden");
             });
     }
 
@@ -57,6 +71,7 @@ class CreateChannel extends React.Component {
                         <input
                             type="text"
                             className="create-channel-input"
+                            id="create-channel-input"
                             placeholder={ inputPlaceholder }
                             value={this.state.name}
                             onChange={this.handleChange} />

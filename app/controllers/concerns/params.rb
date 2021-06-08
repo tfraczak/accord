@@ -11,7 +11,7 @@ module Params
   end
 
   def channel_params
-    params.require(:channel).permit(:name, :media_type, :server_id)
+    params.require(:channel).permit(:name, :media_type, :server_id, :default)
   end
 
   # def conversation_params

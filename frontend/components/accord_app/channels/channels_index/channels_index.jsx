@@ -7,6 +7,13 @@ class ChannelsIndex extends Component {
         super(props);
     }
 
+    showTextChannels(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.currentTarget.classList.toggle("hidden");
+        document.getElementById("channels-index").classList.toggle("hidden");
+    }
+
     modalClick() {
 
     }
@@ -23,7 +30,7 @@ class ChannelsIndex extends Component {
             return (
                 <div className="channels-index-wrapper">
                     <div className="channels-title-wrapper">
-                        <i className="fas fa-chevron-down channels-list"></i>
+                        <i onClick={this.showTextChannels} id="toggle-channels-index" className="fas fa-chevron-down channels-list"></i>
                         <h3>TEXT CHANNELS</h3>
                         <CreateChannelButton
                             isOwner={currentUserId === server.ownerId}

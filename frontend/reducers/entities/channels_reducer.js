@@ -3,6 +3,7 @@ import {
     RECEIVE_CHANNELS,
     REMOVE_CHANNEL,
     RECEIVE_CREATED_CHANNEL,
+    RECEIVE_UPDATED_CHANNEL,
 } from "../../actions/channel_actions";
 
 import {
@@ -31,6 +32,9 @@ export default (state = {}, action) => {
             return Object.assign({}, state, { [channel.id]: channel });
         case RECEIVE_CREATED_CHANNEL:
             return Object.assign({}, state, { [action.channel.id]: action.channel });
+        case RECEIVE_UPDATED_CHANNEL:
+            channel = action.payload.channel;
+            return Object.assign({}, state, { [channel.id]: channel });
         case REMOVE_CHANNEL:
             nextState = Object.assign({}, state);
             debugger
