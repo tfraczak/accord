@@ -84,6 +84,11 @@
                 color: $font-main-negative;
                 font-weight: 500;
                 font-size: 18px;
+                transition: 100ms ease-in-out;
+                &:hover {
+                    color: $form-button;
+                    text-shadow: 0 0 25px rgba($form-button, 0.4);
+                }
             }
         }
     }

@@ -20,7 +20,10 @@ class CreateChannel extends React.Component {
     }
 
     handleChange(e) {
-        const isValid = !/[~`()\@\._!#$%\^&*+=\[\]\\';,/{}|\\":<>\?]/g.test(e.currentTarget.value) && !/\-\-+/g.test(e.currentTarget.value);
+        const isValid = 
+            !/[~`()\@\.\s_!#$%\^&*+=\[\]\\';,/{}|\\":<>\?]/g.test(e.currentTarget.value) && 
+            !/\-\-+/g.test(e.currentTarget.value) && 
+            !/^\-/g.test(e.currentTarget.value);
         if (isValid) {
             this.setState({
                 name: e.currentTarget.value

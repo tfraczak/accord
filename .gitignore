@@ -31,3 +31,5 @@ bundle.js
 bundle.js.map
 tmp/
 .DS_Store
+
+keys.txt

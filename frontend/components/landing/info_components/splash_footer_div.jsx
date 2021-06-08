@@ -17,12 +17,20 @@ export default props => {
                         <a 
                             href="https://www.linkedin.com/in/tfraczak/"
                             target="_blank"> 
-                            <img className="linkedin-logo" src={window.linkedinLogo} alt="linkedin" />
+                            {/* <img className="linkedin-logo" src={window.linkedinLogo} alt="linkedin" /> */}
+                            <i className="fab fa-linkedin-in"></i>
                         </a>
                         <a 
                             href="https://www.github.com/tfraczak"
                             target="_blank">
-                            <img className="github-logo" src={window.githubLogo} alt="github" />
+                            {/* <img className="github-logo" src={window.githubLogo} alt="github" /> */}
+                            <i className="fab fa-github"></i>
+                        </a>
+                        <a 
+                            href="https://angel.co/u/tfraczak"
+                            target="_blank">
+                            {/* <img className="github-logo" src={window.githubLogo} alt="github" /> */}
+                            <i className="fab fa-angellist"></i>
                         </a>
                     </div>
                     <p>Accord is a clone of Discord.</p>

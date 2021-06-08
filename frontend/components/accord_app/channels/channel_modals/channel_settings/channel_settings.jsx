@@ -31,7 +31,10 @@ class ChannelSettings extends React.Component {
     }
 
     handleChange(e) {
-        const isValid = !/[~`()\@\._!#$%\^&*+=\[\]\\';,/{}|\\":<>\?]/g.test(e.currentTarget.value) && !/\-\-+/g.test(e.currentTarget.value);
+        const isValid = 
+            !/[~`()\@\.\s_!#$%\^&*+=\[\]\\';,/{}|\\":<>\?]/g.test(e.currentTarget.value) && 
+            !/\-\-+/g.test(e.currentTarget.value) && 
+            !/^\-/g.test(e.currentTarget.value);
         if (isValid) {
             const save = document.getElementById("csf-buttons-wrapper");
             if (e.currentTarget.value !== this.props.channel.name) {

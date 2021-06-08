@@ -28,6 +28,8 @@ class Server < ApplicationRecord
         through: :channels,
         source: :messages
 
+    has_one_attached :image
+
     def assign_empty_image
         self.image_url ||= ""
     end

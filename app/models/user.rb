@@ -30,6 +30,8 @@ class User < ApplicationRecord
 
     has_many :messages
 
+    has_one_attached :avatar
+
     def self.find_by_credentials(email, pw)
         user = User.find_by(email: email)
         return user if user && user.is_password?(pw)
