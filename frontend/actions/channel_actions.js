@@ -64,9 +64,10 @@ export const updateChannel = channel => dispatch => (
         )
 );
 
-export const deleteChannel = channel => dispatch => (
-    ChannelAPIUtil.destroyChannel(channel)
+export const deleteChannel = channel => dispatch => {
+    debugger
+    return ChannelAPIUtil.destroyChannel(channel)
         .then(
             payload => dispatch(removeChannel(payload))
         )
-);
+};

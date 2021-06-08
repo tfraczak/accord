@@ -1,1 +1,1 @@
-json.extract! channel, :id, :name, :media_type, :server_id
+json.extract! channel, :id, :name, :media_type, :server_id, :default

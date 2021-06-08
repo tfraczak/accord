@@ -18,7 +18,7 @@ const mSTP = (state, ownProps) => {
 
 const mDTP = dispatch => ({
     openModal: modal => dispatch(openModal(modal)),
-    openFullModal: (modal, object) => openFullModal(modal, object),
+    openFullModal: (modal, object) => dispatch(openFullModal(modal, object)),
 });
 
 export default withRouter(connect(mSTP, mDTP)(ChannelsIndex));

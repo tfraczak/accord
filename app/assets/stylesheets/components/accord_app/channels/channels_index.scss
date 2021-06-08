@@ -84,6 +84,7 @@
                 a {
                     display: flex;
                     align-items: center;
+                    justify-content: space-between;
                     box-sizing: border-box;
                     width: 100%;
                     height: 95%;
@@ -109,6 +110,33 @@
                     .channel-name {
                         margin-left: 10px;
                         font-size: 15px;
+                    }
+
+                    #edit-channel-btn {
+                        outline: none;
+                        display: none;
+                        justify-content: center;
+                        align-items: center;
+                        background-color: transparent;
+                        font-size: 14px;
+                        margin-right: 5px;
+                        color: $font-main;
+                        transition: 0.1s ease-in-out;
+
+                        &:focus {
+                            outline: none;
+                        }
+
+                        &:hover {
+                            color: $main-btn;
+                            cursor: pointer;
+                        }
+                    }
+
+                    &:hover #edit-channel-btn, &.active #edit-channel-btn {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
                     }
 
                 }

@@ -22,7 +22,11 @@ class ServerFormModal extends React.Component {
 		document.addEventListener("keydown", this.escModal, false);
 	}
 
-    render() {
+	componentWillUnmount() {
+		document.removeEventListener("keydown", this.escModal);
+	}
+
+  render() {
 		const { modal, closeModal } = this.props;
 		if (!modal) {
 			return null;

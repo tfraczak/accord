@@ -58,6 +58,11 @@ export const serverChannels = (server, channelsState) => {
     }
 };
 
+export const defaultChannelId = (server, channelsState) => {
+    const channels = serverChannels(server, channelsState);
+    for (let channel of channels) { if (channel.default) return channel.id }
+};
+
 export const chatMessages = (chat, chatType, messagesState) => {
     if (chat) {
         const messages = Object.values(messagesState);

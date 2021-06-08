@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ChannelListItem from './channel_list_item';
 import CreateChannelButton from '../channel_modals/create_channel_form/create_channel_button';
-import { openFullModal } from '../../../../actions/ui_actions';
 
 class ChannelsIndex extends Component {
     constructor(props) {
@@ -18,6 +17,7 @@ class ChannelsIndex extends Component {
             server,
             openModal,
             currentUserId,
+            openFullModal,
         } = this.props;
         if (server) {
             return (
@@ -34,9 +34,10 @@ class ChannelsIndex extends Component {
                         {channels.map(channel => (
                             <ChannelListItem 
                                 key={`channel-${channel.id}`}
-                                openFullModal={() => openFullModal({ modal: "channel settings", channel })} 
+                                openFullModal={() => openFullModal({ type: "channel settings", channel })} 
                                 channel={channel} 
-                                serverId={server.id}/>
+                                server={server}
+                                currentUserId={currentUserId}/>
                         ))}
                     </ul>
                 </div>

@@ -1,0 +1,301 @@
+.csf-modal-background {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: transparent;
+  z-index: 10;
+  font-family: $roboto;
+  color: $font-main;
+  button, input {
+    outline: none;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .csf-modal-child {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: $accord-app-2;
+
+    .channel-settings-wrapper {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: space-around;
+      flex: 0 1 auto;
+
+      .sidebar-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        background-color: $accord-app-3;
+        width: 33.3333%;
+        padding: 60px 6px 60px 20px;
+        nav {
+          width: 218px;
+          #csm-title {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 0 10px;
+            padding-bottom: 6px;
+
+            * {
+              transform: scale(1.03, 0.97);
+            }
+
+            h1, h2 {
+              position: relative;
+              bottom: 1px;
+              margin-left: 7px;
+            }
+
+            .fa-hashtag {
+              font-size: 12px;
+            }
+
+            h1 {
+              font-weight: 700;
+              font-size: 14px;
+              text-transform: uppercase;
+            }
+
+            h2 {
+              font-size: 12px;
+            }
+
+          }
+
+          .sidebar-nav {
+            width: 100%;
+            overflow: hidden scroll;
+
+            &::-webkit-scrollbar {
+              display: none;
+            }
+
+            li {
+              padding: 6px 10px;
+              border-radius: 4px;
+              font-weight: 500;
+              font-size: 16px;
+              line-height: 20px;
+              transition: 0.1s ease-in-out;
+              &:not(.list-item-separator):hover, &:not(.list-item-separator).active {
+                background-color: darken($accord-app-3, 10%);
+                cursor: pointer;
+              }
+            }
+
+            .list-item-separator {
+              
+
+              .separator {
+                border-top: 1px solid darken($accord-app-3, 7%);
+              }
+            }
+
+            .channel-settings-item.delete {
+              transition: 0.1s ease-in-out;
+              &:hover {
+                background-color: rgba(226, 0, 0, 0.1);
+                cursor: pointer;
+              }
+
+              .delete-button {
+                font-weight: 400;
+                background-color: transparent;
+                color: rgb(199, 0, 0);
+                transition: 0.1s ease-in-out;
+                &:hover {
+                  cursor: pointer;
+                }
+              }
+            }
+
+          }
+
+        }
+      }
+
+      .csm-content-wrapper {
+        position: relative;
+        padding: 60px 40px 80px 40px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 66.6667%;
+        section {
+          position: relative;
+          display: block;
+          max-width: 740px;
+          min-width: 460px;
+          min-height: 100%;
+          flex: 1 1 auto;
+          margin-right: 40px;
+
+          h1, h3 {
+            position: relative;
+            width: 100%;
+            left: 7px;
+          }
+
+          h1 {
+            font-size: 16px;
+            font-weight: 700;
+            transform: scale(1.03, 0.95);
+            margin-bottom: 20px;
+          }
+          h3 {
+            font-size: 12px;
+            font-weight: 700;
+            transform: scale(1.03, 0.95);
+            color: $font-sub;
+            margin-bottom: 7px;
+          }
+
+          form {
+            position: relative;
+            input {
+              width: 100%;
+              height: 40px;
+              padding: 10px;
+              background-color: $accord-app-1;
+              border: 1px solid darken($accord-app-1, 20%);
+              border-radius: 4px;
+              font-size: 16px;
+              transition: border-color 0.1s ease-in-out;
+
+              &:hover {
+                border: 1px solid darken($accord-app-1, 40%);
+              }
+
+              &:focus {
+                border: 1px solid $link-color;
+              }
+
+            }
+
+            .buttons-wrapper {
+              position: relative;
+              bottom: -25px;
+              display: flex;
+              justify-content: space-between;
+              width: 100%;
+              border-radius: 4px;
+              margin-top: 50px;
+              padding: 10px 0;
+              padding-left: 15px;
+              padding-right: 10px;
+              background-color: $accord-app-5;
+              color: $font-main-negative;
+
+              visibility: hidden;
+              opacity: 0;
+              transition: 0.1s ease-in-out;
+
+              &.active {
+                margin-top: 0;
+                visibility: visible;
+                opacity: 1;
+              }
+
+              p {
+                display: flex;
+                align-items: center;
+                font-size: 15px;
+                &:hover {
+                  cursor: default;
+                }
+              }
+
+              .buttons {
+                .reset {
+                  margin-right: 20px;
+                  font-size: 14px;
+                  font-weight: 400;
+                  background-color: transparent;
+                  color: $font-main-negative;
+                  &:hover {
+                    text-decoration: underline;
+                    cursor: pointer;
+                  }
+                }
+
+                .save {
+                  background-color: $form-button;
+                  color: $form-button-color;
+                  padding: 8px 14px;
+                  border-radius: 4px;
+                  font-size: 14px;
+                  font-weight: 500;
+                  transition: 0.1s ease-in-out;
+
+                  &:hover {
+                    background-color: lighten($form-button, 10%);
+                    cursor: pointer;
+                  }
+
+                  &:disabled {
+                    background-color: lighten($form-button, 20%);
+                    color: lighten($form-button-color, 20%);
+                    cursor: not-allowed;
+                  }
+                }
+
+              }
+
+
+            }
+
+          }
+
+        }
+
+
+
+        .esc-modal {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          button {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            margin-bottom: 5px;
+            width: 36px;
+            height: 36px;
+            border-radius: 20px;
+            border: 2px solid darken($accord-app-2, 15%);
+            p {
+              position: relative;
+              bottom: 1px;
+              font-size: 28px;
+              font-weight: 300;
+              
+            }
+            &:hover {
+              background-color: darken($accord-app-2, 5%);
+              cursor: pointer;
+            }
+          }
+
+          > p {
+            font-size: 12px;
+            font-weight: 500;
+          }
+
+        }
+      }
+    }
+  }
+}

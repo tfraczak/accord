@@ -21,19 +21,28 @@ class CreateChannelModal extends Component {
 		document.addEventListener("keydown", this.escModal, false);
 	}
 
-    render() {
-		const { modal, payload } = this.props;
-		if (!modal && !payload) {
+	componentWillUnmount() {
+		document.removeEventListener("keydown", this.escModal);
+	}
+
+  render() {
+		const { modal } = this.props;
+		if (!modal) {
 			return null;
 		}
 
 		let component, bgClassName, childClassName;
 		
-		if(payload) {
-			component = <ChannelSettingsContainer channel={payload.channel} />;
-			bgClassName = "csf-modal-background";
-			childClassName = "csf-modal-child";
-			break;
+		if(modal.type) {
+			switch(modal.type) {
+				case "channel settings":
+					component = <ChannelSettingsContainer channel={modal.channel} />;
+					bgClassName = "csf-modal-background";
+					childClassName = "csf-modal-child";
+					break;
+				default:
+					return null;
+			}
 		} else {
 			switch (modal) {
 			case 'create channel':

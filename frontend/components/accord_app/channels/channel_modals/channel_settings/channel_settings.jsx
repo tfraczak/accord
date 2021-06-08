@@ -4,49 +4,70 @@ class ChannelSettings extends React.Component {
     constructor(props) {
         super(props);
         this.state = this.props.channel;
+        this.content = "overview";
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.clickClose = this.clickClose.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
+        this.handleReset = this.handleReset.bind(this);
     }
 
-    insertContent() {
-        switch(this.state.content) {
-            case "OVERVIEW":
-                return (
-                    <>
-                        <h1 className="content-title">{ this.state.content }</h1>
-                        <h3 className="edit-channel-label">CHANNEL NAME</h3>
-                        <form onSubmit={ this.handleSubmit } className="edit-channel-form">
-                            <input id="edit-channel-input" type="text" onChange={ this.handleChange } />
-                            <div className="buttons-wrapper">
-                                <p className="update-message">Careful — you have unsaved changes!</p>
-                                <div className="buttons">
-                                    <button className="reset" type="button">Reset</button>
-                                    <button disabled={ !!this.state.name } className="save" type="submit">Save Changes</button>
-                                </div>
-                            </div>
-                        </form>
+    
 
-                    </>
-                );
-            default:
-                return null;
-        }
+    insertContent() {
+        return (
+            <>
+                <h1 className="content-title">{ this.state.content }</h1>
+                <h3 className="edit-channel-label">CHANNEL NAME</h3>
+                <form onSubmit={ this.handleSubmit } className="edit-channel-form">
+                    <input
+                        id="edit-channel-input"
+                        type="text"
+                        value={ this.state.name }
+                        onChange={ this.handleChange } />
+                    <div className="buttons-wrapper">
+                        <p className="update-message">Careful — you have unsaved changes!</p>
+                        <div className="buttons">
+                            <button className="reset" type="button">Reset</button>
+                            <button disabled={ !!this.state.name } className="save" type="submit">Save Changes</button>
+                        </div>
+                    </div>
+                </form>
+            </>
+        );
     }
 
     handleDelete(e) {
         e.preventDefault();
         this.props.closeModal();
-        deleteChannel(this.props.channel)
-            .then(() => {
-                this.props.history.push(`/channels/${this.props.match.params.serverId}`)
-            });
+        if (parseInt(this.props.match.params.channelId) !== this.props.defChannelId) {
+            this.props.history.push(`/channels/${this.props.serverId}/${this.props.defChannelId}`);
+        }
+        deleteChannel(this.props.channel);
+    }
+
+    handleReset() {
+        const save = document.getElementById("csf-buttons-wrapper");
+        save.classList.remove("active");
+        this.setState({
+            name: this.props.channel.name
+        });
     }
 
     handleChange(e) {
-        this.setState({
-            name: e.currentTarget.value,
-        });
+        const isValid = !/[~`()\@\._!#$%\^&*+=\[\]\\';,/{}|\\":<>\?]/g.test(e.currentTarget.value) && !/\-\-+/g.test(e.currentTarget.value);
+        if (isValid) {
+            const save = document.getElementById("csf-buttons-wrapper");
+            if (e.currentTarget.value !== this.props.channel.name) {
+                save.classList.add("active");
+            } else {
+                save.classList.remove("active");
+            }
+            
+            this.setState({
+                name: e.currentTarget.value,
+            });
+        }
     }
 
     handleSubmit(e) {
@@ -65,30 +86,48 @@ class ChannelSettings extends React.Component {
             });
     }
 
+    componentDidMount() {
+        document.addEventListener("keydown", this.escModal, false);
+        const input = document.getElementById("edit-channel-input");
+        input.addEventListener("paste", e => e.preventDefault());
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener("keydown", this.escModal);
+        const input = document.getElementById("edit-channel-input");
+        input.removeEventListener("paste", e => e.preventDefault());
+    }
+
+    escModal(e) {
+		if (e.keyCode === 27) {
+			this.clickClose();
+		}
+	}
+
     clickClose() {
-        this.props.closeModal();
         document.getElementById("edit-channel-btn").classList.remove("modal-open");
+        this.props.closeModal();
     }
 
     render() {
-        const { 
-            channel,
-        } = this.props;
 
-        let title = "# " + this.state.channel.name + "TEXT CHANNEL";
-        const category = channel.mediaType === "Text" ? "TEXT CHANNELS" : "VOICE CHANNELS";
-        let titleLengthDiff = title.length - 21;
+        const textLimit = 19;
+
+        let title = "#" + this.state.name + "TEXT CHANNEL";
+        const category = this.state.mediaType === "Text" ? "TEXT CHANNELS" : "VOICE CHANNELS";
+        let titleLengthDiff = title.length - textLimit;
         let textLengthDiff = "TEXT CHANNELS".length - titleLengthDiff;
         let voiceLengthDiff = "VOICE CHANNELS".length - titleLengthDiff;
+
         const categoryTitle = () => {
             switch(category) {
                 case "TEXT CHANNELS":
-                    if (textLengthDiff < 0) {
+                    if (textLengthDiff > category.length) {
                         return <h2 className="channel-category">{ category }</h2>;
-                    } else if (textLengthDiff === 0) {
+                    } else if (textLengthDiff === category.length) {
                         return <h2 className="channel-category">{ category + "..." }</h2>;
-                    } else if (textLengthDiff < category.length) {
-                        return <h2 className="channel-category">{ category.slice(-category.length, -textLengthDiff) + "..." }</h2>;
+                    } else if (textLengthDiff < category.length && textLengthDiff > 0) {
+                        return <h2 className="channel-category">{ category.slice(-category.length, -(category.length - textLengthDiff)) + "..." }</h2>;
                     } else {
                         return null;
                     }
@@ -106,29 +145,29 @@ class ChannelSettings extends React.Component {
                     return null;
             }
         };
-        let titleWithoutCategory = "# " + channel.name;
-        let channelNameDiff = titleWithoutCategory.length - 21;
+        let titleWithoutCategory = "# " + this.state.name;
+        let channelNameDiff = titleWithoutCategory.length - textLimit;
         const channelTitle = () => {
             if (channelNameDiff < 0) {
                 return (
                     <>
-                        { channel.mediaType === "Text" ? (<i className="fas fa-hashtag"></i>) : (<i className="fas fa-volume-up"></i>) }
-                        <h1 className="channel-name">{ ` ${channel.name} ` }</h1>
+                        { this.state.mediaType === "Text" ? (<i className="fas fa-hashtag"></i>) : (<i className="fas fa-volume-up"></i>) }
+                        <h1 className="channel-name">{ `${this.state.name}` }</h1>
                     </>
                 );
             } else if (channelNameDiff === 0) {
                 return (
                     <>
-                        { channel.mediaType === "Text" ? (<i className="fas fa-hashtag"></i>) : (<i className="fas fa-volume-up"></i>) }
-                        <h1 className="channel-name">{ ` ${channel.name}...` }</h1>
+                        { this.state.mediaType === "Text" ? (<i className="fas fa-hashtag"></i>) : (<i className="fas fa-volume-up"></i>) }
+                        <h1 className="channel-name">{ `${this.state.name}...` }</h1>
                     </>
                 );
             } else {
-                const channelName = channel.name.slice(-titleWithoutCategory.length, -channelNameDiff);
+                const channelName = this.state.name.slice(-titleWithoutCategory.length, -channelNameDiff);
                 return (
                     <>
-                        { channel.mediaType === "Text" ? (<i className="fas fa-hashtag"></i>) : (<i className="fas fa-volume-up"></i>) }
-                        <h1 className="channel-name">{ ` ${channelName}...` }</h1>
+                        { this.state.mediaType === "Text" ? (<i className="fas fa-hashtag"></i>) : (<i className="fas fa-volume-up"></i>) }
+                        <h1 className="channel-name">{ `${channelName}...` }</h1>
                     </>
                 );
             }
@@ -139,20 +178,59 @@ class ChannelSettings extends React.Component {
                 { categoryTitle() }
             </div>
         );
-        
 
+        const isDefault = this.state.id === this.props.defChannelId;
+        
         return (
             <div className="channel-settings-wrapper">
                 <div className="sidebar-wrapper">
-                    { sidebarTitle }
-                    <ul className="sidebar-nav">
-                        <li className="channel-settings-item edit">Overview</li>
-                        <li className="list-item-separator"><div className="separator"></div></li>
-                        <li className="channel-settings-item delete"><button className="delete-button" disabled={ this.state.default } onClick={ this.handleDelete }>Delete Channel</button></li>
-                    </ul>
+                    <nav>
+                        { sidebarTitle }
+                        <ul className="sidebar-nav">
+                            <li className={`channel-settings-item edit ${this.content === "overview" ? "active" : ""}`} >Overview</li>
+                            <li className="list-item-separator"><div className="separator"></div></li>
+                            <li className="channel-settings-item delete">
+                                <button
+                                    className="delete-button"
+                                    disabled={ this.state.default }
+                                    onClick={ this.handleDelete }>
+                                        Delete Channel
+                                </button>
+                            </li>
+                        </ul>
+                    </nav>
+                    
+                    
+                    
                 </div>
-                <div className="csm-content">
-                    { this.insertContent() }
+                <div className="csm-content-wrapper">
+                    <section>
+                        <h1 className="content-title">OVERVIEW</h1>
+                        <h3 className="edit-channel-label">CHANNEL NAME</h3>
+                        <form onSubmit={ this.handleSubmit } className="edit-channel-form">
+                            <input
+                                id="edit-channel-input"
+                                type="text"
+                                value={ this.state.name }
+                                onChange={ this.handleChange }
+                                disabled={ isDefault } />
+                            <div id="csf-buttons-wrapper" className="buttons-wrapper">
+                                <p className="update-message">Careful — you have unsaved changes!</p>
+                                <div className="buttons">
+                                    <button onClick={this.handleReset} className="reset" type="button">Reset</button>
+                                    <button disabled={ isDefault || !this.state.name } className="save" type="submit">Save Changes</button>
+                                </div>
+                            </div>
+                        </form>
+                        
+                    </section>
+                    <div className="esc-modal">
+                        <button onClick={this.clickClose}>
+                            <p>×</p>
+                        </button>
+                        <p>ESC</p>
+                    </div>
+                    
                 </div>
             </div>
         )

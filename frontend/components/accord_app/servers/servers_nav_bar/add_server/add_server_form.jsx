@@ -13,7 +13,6 @@ class AddServerForm extends React.Component {
     }
 
     componentWillUnmount() {
-        debugger
         this.props.removeServerErrors();
     }
 

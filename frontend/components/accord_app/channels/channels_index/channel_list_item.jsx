@@ -7,22 +7,24 @@ class ChannelListItem extends Component {
         super(props);
     }
 
-
     render() {
         const {
             channel,
-            serverId,
-            openFullModal
+            server,
+            openFullModal,
+            currentUserId
         } = this.props;
+
         return (
             <li>
-                <NavLink to={`/channels/${serverId}/${channel.id}`}>
+                <NavLink
+                    to={`/channels/${server.id}/${channel.id}`}>
                     <div className="channel-name-wrapper">
                         <span className="cl type">{ channel.mediaType === "Text" ? (<i className="fas fa-hashtag"></i>) : (<i className="fas fa-volume-up"></i>) }</span>
                         <span className="channel-name">{ channel.name }</span>
                     </div>
                     <div className="channel-options-wrapper">
-                        <ChannelSettingsButton openFullModal={openFullModal} />
+                        <ChannelSettingsButton isOwner={ server.ownerId === currentUserId } openFullModal={openFullModal} />
                     </div>
                 </NavLink>
             </li>
