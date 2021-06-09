@@ -15,6 +15,7 @@
 
         .channels-title-wrapper {
             display: flex;
+            position: relative;
             align-items: center;
             box-sizing: border-box;
             font-size: 12px;
@@ -25,34 +26,53 @@
                 cursor: default;
             }
             
-            .fas.channels-list {
+            .toggle-channels-wrapper {
+                display: flex;
                 position: relative;
-                bottom: 3px;
-                width: 12px;
-                height: 12px;
-                padding: 3px;
-                font-size: 10px;
-                margin: 0 5px;
-                transition: 0.1s ease-in-out;
-
-                &.hidden {
-                    transform: rotate(-90deg);
-                    bottom: 0;
-                }
-
+                align-items: center;
+                box-sizing: border-box;
+                user-select: none;
+                padding-right: 100%;
+                white-space: nowrap;
                 &:hover {
                     cursor: pointer;
+                    width: 100%;
                 }
 
+                .fas.channels-list {
+                    position: relative;
+                    bottom: 3px;
+                    width: 12px;
+                    height: 12px;
+                    padding: 3px;
+                    font-size: 10px;
+                    margin: 0 5px;
+                    transition: 0.1s ease-in-out;
+
+                    &.hidden {
+                        transform: rotate(-90deg);
+                        bottom: 0;
+                    }
+
+                    &:hover {
+                        cursor: pointer;
+                    }
+
+                }
+
+                h3 {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                }
             }
 
-            h3 {
-                width: 100%;
-                display: flex;
-                align-items: center;
-            }
+            
 
             #add-channel-btn {
+                position: absolute;
+                right: 0;
+                z-index: 1;
                 display: flex;
                 justify-content: center;
                 align-items: center;

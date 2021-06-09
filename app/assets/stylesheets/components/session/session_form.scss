@@ -22,8 +22,6 @@
         
     }
 
-    
-
 }
 
 .session-form-wrapper {
@@ -99,6 +97,10 @@
 
             &:focus {
                 border: 1px solid #41aaff;
+            }
+
+            &.input-error {
+                border-color: red;
             }
 
         }

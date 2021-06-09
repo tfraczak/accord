@@ -10,12 +10,8 @@ class ChannelsIndex extends Component {
     showTextChannels(e) {
         e.preventDefault();
         e.stopPropagation();
-        e.currentTarget.classList.toggle("hidden");
+        document.getElementById("toggle-channels-index").classList.toggle("hidden");
         document.getElementById("channels-index").classList.toggle("hidden");
-    }
-
-    modalClick() {
-
     }
 
     render() {
@@ -30,8 +26,10 @@ class ChannelsIndex extends Component {
             return (
                 <div className="channels-index-wrapper">
                     <div className="channels-title-wrapper">
-                        <i onClick={this.showTextChannels} id="toggle-channels-index" className="fas fa-chevron-down channels-list"></i>
-                        <h3>TEXT CHANNELS</h3>
+                        <div onClick={this.showTextChannels} className="toggle-channels-wrapper">
+                            <i id="toggle-channels-index" className="fas fa-chevron-down channels-list"></i>
+                            <h3>TEXT CHANNELS</h3>
+                        </div>
                         <CreateChannelButton
                             isOwner={currentUserId === server.ownerId}
                             openModal={openModal}
