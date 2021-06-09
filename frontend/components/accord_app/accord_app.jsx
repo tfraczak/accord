@@ -4,7 +4,7 @@ import ServersNavBarContainer from './servers/servers_nav_bar/servers_nav_bar_co
 import ServerMembersListContainer from './servers/server_members_list/server_members_list_container';
 import ConversationMembersList from './conversations/conversation_members_list/conversation_members_list_container';
 import ServerToolbarContainer from './servers/server_toolbar/server_toolbar_container';
-import AddServerModal from './servers/server_modals/add_server_modal';
+import ServerModal from './servers/server_modals/server_modal';
 import ChannelsIndexContainer from './channels/channels_index/channels_index_container';
 import ChannelChatTitleContainer from './channels/channel_chat_title/channel_chat_title_container';
 import MainFocusContainer from './main-focus/main_focus_container';
@@ -28,7 +28,7 @@ class AccordApp extends React.Component {
     render() {
         return (
             <>
-                <AddServerModal />
+                <ServerModal />
                 <Route exact path="/channels/:serverId/:channelId" component={ChannelModal}/>
                 <div className="webapp-wrapper">
                     <ServersNavBarContainer />

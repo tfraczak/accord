@@ -65,7 +65,8 @@ class CreateChannel extends React.Component {
 
         return (
             <div className="create-channel-wrapper">
-                <i className="fas fa-times" onClick={this.clickClose}></i>
+                {/* <i className="fas fa-times" onClick={this.clickClose}></i> */}
+                <h6 className="close" onClick={this.clickClose}>+</h6>
                 <h1 className="create-channel-title">{formTitle}</h1>
                 { formSubtitle }
                 <form onSubmit={this.handleSubmit} className="add-channel-form">

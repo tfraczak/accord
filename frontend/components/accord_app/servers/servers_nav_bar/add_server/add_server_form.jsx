@@ -214,7 +214,8 @@ class AddServerForm extends React.Component {
         
         return (
             <div className="asf-wrapper">
-                <i className="fas fa-times" onClick={ this.clickClose }></i>
+                {/* <i className="fas fa-times" onClick={ this.clickClose }></i> */}
+                <h6 className="close" onClick={ this.clickClose }>+</h6>
                 <h1 className="add-server-title">{ formTitle }</h1>
                 { formSubtitle }
                 {/* { formType === 'create' ? ( <img className="asf-create-img" alt='upload-img-placeholder' src={window.defaultServerImg} /> ) : <div className="asf-form-separator"></div> } */}

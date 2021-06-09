@@ -4,6 +4,7 @@ import * as InviteActions from '../../../../actions/invitation_actions';
 import * as ServerActions from '../../../../actions/server_actions';
 import ServerToolbar from "./server_toolbar";
 import { currentUsersMembershipId } from '../../../../utils/selectors';
+import { openModal, openFullModal } from '../../../../actions/ui_actions';
 
 const mSTP = (state, ownProps) => {
 
@@ -11,7 +12,7 @@ const mSTP = (state, ownProps) => {
     const currentUserId = state.session.id;
     const memberships = state.entities.memberships;
     const users = state.entities.users;
-    const urlToken = state.session.invitation;
+    const invitation = state.session.invitation;
 
     const membershipId = currentUsersMembershipId(
         currentUserId,
@@ -24,11 +25,13 @@ const mSTP = (state, ownProps) => {
         server,
         currentUserId,
         membershipId,
-        urlToken,
+        invitation,
     };
 };
 
 const mDTP = (dispatch, ownProps) => ({
+    openModal: modal => dispatch(openModal(modal)),
+    openFullModal: payload => dispatch(openFullModal(payload)),
     leaveServer: (membershipId) => dispatch(ServerActions.leaveServer((membershipId))),
     createInvite: (serverId) => dispatch(InviteActions.createInvite((serverId))),
     deleteServer: (serverId) => dispatch(ServerActions.deleteServer(serverId)),

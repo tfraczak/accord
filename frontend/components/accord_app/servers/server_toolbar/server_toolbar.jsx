@@ -3,6 +3,7 @@ import ServerUpdateForm from './server_update_form';
 import ServerDeleteButton from './server_delete_button';
 import ServerLeaveButton from './server_leave_button';
 import CreateServerInvite from './server_create_invite';
+import ServerToolbarMenu from './server_toolbar_menu';
 
 
 class ServerToolbar extends Component {
@@ -18,13 +19,13 @@ class ServerToolbar extends Component {
 
     }
 
-    componentDidMount() {
-        document.addEventListener('mousedown', this.handleClickOutside);
-    }
+    // componentDidMount() {
+    //     document.addEventListener('mousedown', this.handleClickOutside);
+    // }
 
-    componentWillUnmount() {
-        document.removeEventListener('mousedown', this.handleClickOutside);
-    }
+    // componentWillUnmount() {
+    //     document.removeEventListener('mousedown', this.handleClickOutside);
+    // }
 
     handleClickOutside(e) {
         if (this.stWrapperRef && !this.stWrapperRef.current.contains(e.target)) {
@@ -33,20 +34,21 @@ class ServerToolbar extends Component {
     }
 
     closeToolbar() {
-        // const fadeIn = document.getElementsByClassName("fade-in")
-        // if (fadeIn) {
-        //     document.getElementById("st-dropdown-button").classList.remove("dropped");
-        //     document.getElementById("st-chevron").classList.remove("fade-in");
-        //     document.getElementById("server-tools-wrapper").classList.remove("fade-in");
-        //     document.getElementById("server-tools-wrapper").classList.add("fade-out");
-        // }
+        const fadeIn = document.getElementsByClassName("fade-in");
+        if (fadeIn) {
+            document.getElementById("st-dropdown-button").classList.remove("dropped");
+            document.getElementById("st-chevron").classList.remove("fade-in");
+            document.getElementById("st-x").classList.remove("fade-in");
+            document.getElementById("server-tools-wrapper").classList.remove("fade-in");
+            document.getElementById("server-tools-wrapper").classList.add("fade-out");
+        }
     }
 
     toggleToolbar(e) {
         e.preventDefault();
-        
         e.currentTarget.classList.toggle("dropped");
         document.getElementById("st-chevron").classList.toggle("fade-in");
+        document.getElementById("st-x").classList.toggle("fade-in");
         const fadeIn = document.getElementsByClassName("fade-in");
         if (fadeIn) {
             document.getElementById("server-tools-wrapper").classList.toggle("fade-out")
@@ -65,12 +67,15 @@ class ServerToolbar extends Component {
             updateServer,
             leaveServer,
             createInvite,
-            urlToken,
+            invitation,
             removeInvitation,
+            openModal,
+            openFullModal,
         } = this.props;
 
         const params = this.props.match.params;
         if(server) {
+            
             return (
                 <section
                     className="st-wrapper">
@@ -78,19 +83,34 @@ class ServerToolbar extends Component {
                         id="st-dropdown-button"
                         className={`st-dropdown-btn`}
                         type="button"
-                        onClick={ this.toggleToolbar }>
+                        onMouseDown={ this.toggleToolbar }>
                             { server.name }
                         <i 
                             id="st-chevron"
                             className={`fas fa-chevron-left`}></i>
+                        <h6 id="st-x">+</h6>
                     </button>
                         <section
                             id="server-tools-wrapper"
                             className="server-tools-wrapper fade-out"
-                            onBlur={this.closeToolbar}
+                            // onBlur={this.closeToolbar}
                             ref={this.stWrapperRef}>
-                                
-                            <ul id="server-tools" className="st-closed">
+                            <ServerToolbarMenu
+                                isOwner={ server.ownerId === currentUserId ? true : false }
+                                server={ server }
+                                openModal={ openModal }
+                                openFullModal={ openFullModal }
+                                closeToolbar={ this.closeToolbar }
+                                invitation={ invitation }
+                                removeInvitation={ removeInvitation }
+                                currentUserId={ currentUserId }
+                                membershipId={ membershipId }
+                                updateServer={ updateServer }
+                                deleteServer={ () => deleteServer(server.id) }
+                                leaveServer={ () => leaveServer(membershipId) }
+                                createInvite={ () => createInvite(server.id) }
+                            />
+                            {/* <ul id="server-tools" className="st-closed">
                                 <CreateServerInvite
                                     key={`createinvite-${server.id}`}
                                     createInvite={createInvite}
@@ -107,7 +127,7 @@ class ServerToolbar extends Component {
                                 ) : (
                                     <ServerLeaveButton key={`serverleave-${server.id}`} history={history} leaveServer={leaveServer} membershipId={membershipId} />
                                 ) }
-                            </ul>
+                            </ul> */}
                         </section> 
                 </section>
             )

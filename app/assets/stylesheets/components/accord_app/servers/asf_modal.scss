@@ -76,30 +76,23 @@
 				}
 			}
 
-			.fas {
-				top: 8px;
-				right: 8px;
-				font-size: 14px;
-				color: $font-main;
-				z-index: 1;
-				transition: 100ms ease-in-out;
-				&:hover, &.hovered {
-					cursor: pointer;
-				}
-			}
-
 			.asf-create-img {
 				width: 125px;
 				height: 125px;
 				border-radius: 150px;
 				background-color: transparent;
 				&.img {
-					top: 12px;
+					top: 14px;
+					box-shadow: 0 2px 20px rgba(0, 0, 0, 0.247);
+					background-color: darken($form-color, 20%);
+					border: 1px solid darken($form-color, 23%);
 				}
 
 				&.input {
 					outline: none;
 					background-color: darken($form-color, 20%);
+					box-shadow: 0 2px 20px rgba(0, 0, 0, 0.247);
+					border: 1px solid darken($form-color, 23%);
 	
 					input {
 						position: absolute;
@@ -121,12 +114,15 @@
 
 		}
 
-		.fas.fa-times {
+		.close {
 			position: absolute;
-			top: 0;
-			right: 0;
+			transform: rotate(45deg);
+			top: -15px;
+			right: -5px;
 			cursor: pointer;
 			transition: 0.1s ease-in-out;
+			font-size: 42px;
+			font-weight: 300;
 			color: $font-main;
 			&:hover {
 				color: $form-button;

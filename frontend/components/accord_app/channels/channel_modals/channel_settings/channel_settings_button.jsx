@@ -10,6 +10,7 @@ export default (props) => {
 	};
 
 	if (props.isOwner) {
+		
 		return (
 			<button id="edit-channel-btn" onClick={onClick}>
 				<i className="fas fa-cog"></i>

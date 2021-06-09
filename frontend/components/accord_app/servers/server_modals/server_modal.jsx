@@ -3,8 +3,9 @@ import { closeModal } from '../../../../actions/ui_actions';
 import { connect } from 'react-redux';
 import CreateServerFormContainer from '../servers_nav_bar/add_server/create_server_form_container';
 import JoinServerFormContainer from '../servers_nav_bar/add_server/join_server_form_container';
+import ServerInvitationContainer from '../server_toolbar/invitation/server_invitation_container';
 
-class ServerFormModal extends React.Component {
+class ServerModal extends React.Component {
     constructor(props) {
       super(props);
 	  this.escModal = this.escModal.bind(this);
@@ -32,23 +33,42 @@ class ServerFormModal extends React.Component {
 			return null;
 		}
 
-		let component;
-		
-		switch (modal) {
-		case 'create server':
-			component = <CreateServerFormContainer />;
-			break;
-		case 'join server':
-			component = <JoinServerFormContainer />;
-			break;
-		default:
-			return null;
+		let component, className, childClassName;
+
+		if (modal.type) {
+
+		} else {
+			switch (modal) {
+			case 'create server':
+				className = "asf-modal-background";
+				childClassName = "asf-modal-child";
+				component = <CreateServerFormContainer />;
+				break;
+			case 'join server':
+				className = "asf-modal-background";
+				childClassName = "asf-modal-child";
+				component = <JoinServerFormContainer />;
+				break;
+			case 'invitation':
+				className = "invite-modal-background";
+				childClassName = "invite-modal-child";
+				component = <ServerInvitationContainer />;
+				break;
+			case 'nickname':
+				className = "nickname-modal-background";
+				childClassName = "nickname-modal-child";
+				// component = <NicknameFormContainer />;
+				break;
+			default:
+				return null;
+			}
 		}
 		
+		
 		return (
-			<div className="asf-modal-background">
+			<div className={ className }>
 				<div 
-				className="asf-modal-child"
+				className={ childClassName }
 				onClick={e => e.stopPropagation()}>
 
 				{ component }
@@ -71,4 +91,4 @@ const mDTP = dispatch => {
   };
 };
 
-export default connect(mSTP, mDTP)(ServerFormModal);
+export default connect(mSTP, mDTP)(ServerModal);

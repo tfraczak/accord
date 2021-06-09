@@ -21,8 +21,8 @@ class CreateServerInvite extends React.Component {
     }
 
     insertClickMe() {
-        if (this.props.invite && (this.state.serverId === parseInt(this.props.params.serverId))) {
-            return <p className="urltoken-copy">CLICK TO COPY</p>
+        if (this.props.invite && (this.state.serverId === parseInt(this.props.match.params.serverId))) {
+            return <h6 className="urltoken-copy">CLICK TO COPY</h6>
         } else {
             return null;
         }

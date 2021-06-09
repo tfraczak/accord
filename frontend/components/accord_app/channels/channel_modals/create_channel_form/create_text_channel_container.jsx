@@ -1,10 +1,10 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { closeModal } from '../../../../../actions/ui_actions';
 
 import { createChannel } from '../../../../../actions/channel_actions';
 
-import { closeModal } from '../../../../../actions/ui_actions';
 import CreateChannel from './create_channel';
 
 const mSTP = (state, ownProps) => {
