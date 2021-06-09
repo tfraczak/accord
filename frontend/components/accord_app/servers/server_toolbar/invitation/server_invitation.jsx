@@ -74,8 +74,8 @@ class ServerInvitation extends React.Component {
                     </div>
                 </div>
                 <div className="create-invite-btns-wrapper">
-                    <button onClick={ this.clickClose } className="create-invite-cancel">Cancel</button>
-                    <button onClick={ this.handleInvite } className="create-invite-btn">Create Invite Link</button>
+                    <button onClick={ this.clickClose } className="create-invite-back">Back</button>
+                    <button onClick={ this.handleInvite } disabled={!!invitation} className="create-invite-btn">Create Invite Token</button>
                 </div>
             </div>
         )
