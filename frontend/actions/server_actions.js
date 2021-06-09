@@ -84,7 +84,7 @@ export const retrieveServerInfo = serverId => dispatch => (
 );
 
 export const createServer = server => dispatch => {
-    server = convertToSnakeCase(server);
+    // server = convertToSnakeCase(server);
     return ServerAPIUtil.createServer(server)
         .then(
             payload => dispatch(receiveNewServer(payload)),

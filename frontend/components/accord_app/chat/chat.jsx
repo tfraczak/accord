@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import MessageFormContainer from "./message_form/message_form_container";
 import { extractDateTime } from "../../../utils/func_utils";
 import { nextChat } from "../../../utils/selectors";
-import MessageListItem from "./message_form/message_list_item";
 
 class Chat extends Component {
     constructor(props) {

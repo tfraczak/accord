@@ -12,7 +12,8 @@ export default (state = [], action) => {
     Object.freeze(state)
     switch (action.type) {
         case RECEIVE_SERVER_ERRORS:
-            return action.errors;
+            if (action.errors) return action.errors;
+            return state;
         case RECEIVE_SERVERS:
             return [];
         case RECEIVE_SERVER:

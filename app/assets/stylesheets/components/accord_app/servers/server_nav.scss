@@ -20,21 +20,29 @@
         padding-top: 12px;
     }
 
-    .server {
-        
+    .server, .profile {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex: 0 0 auto;
+        width: 100%;
+        height: 48px;
+        margin-bottom: 8px;
         a {
-
             display: flex;
             justify-content: center;
             align-items: center;
             
             width: 48px;
             height: 48px;
-            background-color: $accord-app-4;
+            border-radius: 50px;
+
+            transition: 0.1s ease-in-out;
+            border: transparent;
             
             text-decoration: none;
             font-family: $roboto;
-            
             font-weight: 500;
             color: $link-button-color;
 
@@ -42,11 +50,71 @@
                 font-size: 100%;
             }
 
+            &.no-image {
+                background-color: $accord-app-4;
+                &:hover, &.active {
+                    border-radius: 35%;
+                    background-color: $link-button-color;
+                    color: $font-main;
+                    cursor: pointer;
+                }
+            }
+
+            &.image-present {
+                background-color: none;
+                &:hover, &.active {
+                    border-radius: 35%;
+                    cursor: pointer;
+                    background-color: none;
+                }
+            }
+
         }
+
+    }
+
+    #profile {
+        &:hover, &.active {
+            border-radius: 35%;
+            cursor: pointer;
+            background-color: none;
+        }
+    }
+
+    .add-server-button {
+        font-size: 20px;
+        font-weight: 300;
+        color: $link-button-color;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        width: 48px;
+        height: 48px;
+        background-color: $accord-app-4;
+        border-radius: 50%;
+
+        transition: 0.1s ease-in-out;
+        border: transparent;
+
+        &:hover, &.active {
+            border-radius: 35%;
+            background-color: $link-color;
+            color: $font-main;
+            cursor: pointer;
+        }
+
+    }
+    
+    img {
+        width: 48px;
+        height: 48px;
+        border-radius: inherit;
     }
 
     .profile-servers-separator {
         height: 2px;
+        margin-bottom: 8px;
         div {
             width: 32px;
             height: 2px;
@@ -56,66 +124,8 @@
     }
 
     li {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        flex: 0 0 auto;
-        width: 100%;
-        height: 48px;
-        margin-bottom: 8px;
-
-        a {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            
-            width: 48px;
-            height: 48px;
-            background-color: $accord-app-4;
-            border-radius: 50%;
-
-            transition: 0.1s ease-in-out;
-            border: transparent;
-
-            &:first-child:hover, &.active {
-                border-radius: 35%;
-                background-color: $link-button-color;
-                color: $font-main;
-                cursor: pointer;
-            }
-        }
+                
         
-        .add-server-button {
-            font-size: 20px;
-            font-weight: 300;
-            color: $link-button-color;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            
-            width: 48px;
-            height: 48px;
-            background-color: $accord-app-4;
-            border-radius: 50%;
-    
-            transition: 0.1s ease-in-out;
-            border: transparent;
-    
-            &:first-child:hover, &.active {
-                border-radius: 35%;
-                background-color: $link-color;
-                color: $font-main;
-                cursor: pointer;
-            }
-
-        }
-        
-        img {
-            width: 48px;
-            height: 48px;
-            border-radius: inherit;
-        }
     }
 
     .profile-link {

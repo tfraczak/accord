@@ -1,25 +1,44 @@
 import React from 'react';
 import { validUrlToken } from '../../../../../utils/func_utils';
+import ImageInput from "../../../util/image_input";
 
 class AddServerForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = this.props.submitObj;
-        this.handleChange = this.handleChange.bind(this);
+        this.handleInput = this.handleInput.bind(this);
+        this.handleImage = this.handleImage.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.insertButtons = this.insertButtons.bind(this);
+        this.insertServerImg = this.insertServerImg.bind(this);
         this.labelWithErrors = this.labelWithErrors.bind(this);
         this.clickClose = this.clickClose.bind(this);
+
     }
 
     componentWillUnmount() {
         this.props.removeServerErrors();
     }
 
-    handleChange(e) {
+    handleInput(e) {
         this.setState({
             input: e.currentTarget.value
         });
+    }
+
+    hovered(e) {
+        e.stopPropagation();
+        document.getElementById("plus").classList.add("hovered");
+    }
+
+    notHovered(e) {
+        e.stopPropagation();
+        document.getElementById("plus").classList.remove("hovered");
+    }
+
+    fileOpen() {
+        const input = document.getElementById("img-input");
+        input.click();
     }
 
     handleSubmit(e) {
@@ -36,15 +55,19 @@ class AddServerForm extends React.Component {
         Object.freeze(this.state);
         switch(formType) {
             case 'create':
-                const server = {
-                    name: this.state.input,
-                    ownerId: currentUser.id,
-                };
-                processForm(server).then(newServer => {
-                    closeModal();
-                    document.getElementById("asf-button").classList.remove("active");
-                    // history.push(`./channels/${newServer.id}`);
-                });
+                const formData = new FormData();
+                
+                formData.append('server[name]', this.state.input);
+                formData.append('server[owner_id]', currentUser.id);
+                if (this.state.imageFile) formData.append('server[image]', this.state.imageFile);
+                
+                processForm(formData)
+                    .then(newServer => {
+                        closeModal();
+                        document.getElementById("asf-button").classList.remove("active");
+                        // history.push(`./channels/${newServer.id}`);
+                    });
+
                 break;
             case 'join':
                 const urlToken = validUrlToken(this.state.input);
@@ -101,8 +124,6 @@ class AddServerForm extends React.Component {
         )
     }
 
-        
-
     insertButtons() {
         const { otherForm, formType, formFooter } = this.props;
         switch(formType) {
@@ -131,6 +152,46 @@ class AddServerForm extends React.Component {
         }
     }
 
+    insertServerImg() {
+        switch(this.props.formType) {
+            case "create":
+                return (
+                    <div className="image-upload-wrapper">
+                        <ImageInput 
+                            hovered={ this.hovered }
+                            notHovered={ this.notHovered }
+                            handleImage={ this.handleImage }
+                            imageUrl={ this.state.imageUrl }
+                        />
+                        {
+                            this.state.imageUrl ? 
+                            <img src={ this.state.imageUrl } className="asf-create-img img" type="text" /> :
+                            null
+                        }
+                        <p onClick={this.fileOpen} onMouseOver={ this.hovered } onMouseOut={ this.notHovered } id="plus" className="plus">
+                            <span>+</span>
+                            <i onClick={this.fileOpen} onMouseOver={ this.hovered } onMouseOut={ this.notHovered } className="fas fa-camera"></i>
+                        </p>
+                    </div>
+                );
+            case "join":
+                return <div className="asf-form-separator"></div>;
+            default:
+                return null;
+        }
+    }
+
+    handleImage(e) {
+		const reader = new FileReader();
+		const file = e.currentTarget.files[0];
+		reader.onloadend = () => this.setState({ imageUrl: reader.result, imageFile: file });
+		if (file) {
+			reader.readAsDataURL(file);
+		} else {
+			this.setState({ imageUrl: "", imageFile: null });
+		}
+	}
+
     clickClose() {
         document.getElementById("asf-button").classList.remove("active");
         this.props.closeModal();
@@ -141,25 +202,25 @@ class AddServerForm extends React.Component {
             formTitle,
             formSubtitle,
             inputPlaceholder,
-            inputLabel,
             formType,
         } = this.props;
         
         return (
             <div className="asf-wrapper">
-                <i className="fas fa-times" onClick={this.clickClose}></i>
-                <h1 className="add-server-title">{formTitle}</h1>
+                <i className="fas fa-times" onClick={ this.clickClose }></i>
+                <h1 className="add-server-title">{ formTitle }</h1>
                 { formSubtitle }
-                { formType === 'create' ? ( <img className="asf-create-img" alt='upload-img-placeholder' src={window.defaultServerImg} /> ) : <div className="asf-form-separator"></div> }
-                <form onSubmit={this.handleSubmit} className="add-server-form">
+                {/* { formType === 'create' ? ( <img className="asf-create-img" alt='upload-img-placeholder' src={window.defaultServerImg} /> ) : <div className="asf-form-separator"></div> } */}
+                { formType === 'create' ? ( this.insertServerImg() ) : <div className="asf-form-separator"></div> }
+                <form onSubmit={ this.handleSubmit } className="add-server-form">
                     <div className="asf-input-wrapper">
                         { this.labelWithErrors() }
                         <input
                             type="text"
                             className="add-server-input"
-                            placeholder={inputPlaceholder}
-                            value={this.state.input}
-                            onChange={this.handleChange} />
+                            placeholder={ inputPlaceholder }
+                            value={ this.state.input }
+                            onChange={ this.handleInput } />
                     </div>
 
                     { this.insertButtons() }

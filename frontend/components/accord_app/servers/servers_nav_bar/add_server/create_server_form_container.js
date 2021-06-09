@@ -14,7 +14,9 @@ import AddServerForm from './add_server_form';
 const mSTP = (state, ownProps) => ({
     currentUser: state.entities.users[state.session.id],
     submitObj: {
-      input: `${state.entities.users[state.session.id].username}'s server`
+      input: `${state.entities.users[state.session.id].username}'s server`,
+      imageFile: null,
+      imageUrl: "",
     },
     formType: "create",
     formTitle: "Create a server",

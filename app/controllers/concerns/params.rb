@@ -7,7 +7,7 @@ module Params
   end
 
   def server_params
-    params.require(:server).permit(:name, :image_url, :owner_id)
+    params.require(:server).permit(:name, :image_url, :owner_id, :image)
   end
 
   def channel_params

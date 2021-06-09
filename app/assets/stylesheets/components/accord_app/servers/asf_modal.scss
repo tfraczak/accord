@@ -37,6 +37,93 @@
 		align-items: center;
 		box-sizing: border-box;
 
+		.image-upload-wrapper {
+			position: relative;
+			box-sizing: border-box;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			height: 100%;
+			.asf-create-img, .plus, .fas, .plus > span {
+				position: absolute;
+			}
+
+			.plus {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 32px;
+				width: 32px;
+				border-radius: 50px;
+				top: 18px;
+				left: 232px;
+				background-color: darken($form-color, 40%);
+				transition: 100ms ease-in-out;
+				span {
+					font-weight: 400;
+					line-height: 20px;
+					font-size: 16px;
+					color: $form-color;
+					top: 0;
+					right: 5px;
+					z-index: 2;
+					&:hover, &.hovered {
+
+					}
+
+				}
+				&:hover, &.hovered {
+					cursor: pointer;
+					background-color: darken($link-color, 5%);
+				}
+			}
+
+			.fas {
+				top: 8px;
+				right: 8px;
+				font-size: 14px;
+				color: $font-main;
+				z-index: 1;
+				transition: 100ms ease-in-out;
+				&:hover, &.hovered {
+					cursor: pointer;
+				}
+			}
+
+			.asf-create-img {
+				width: 125px;
+				height: 125px;
+				border-radius: 150px;
+				background-color: transparent;
+				&.img {
+					top: 12px;
+				}
+
+				&.input {
+					outline: none;
+					background-color: darken($form-color, 20%);
+	
+					input {
+						position: absolute;
+						opacity: 0;
+						width: 0.1px;
+						height: 0.1px;
+	
+					}
+	
+					&:hover {
+						cursor: pointer;
+					}
+					&:focus {
+						outline: none;
+					}
+				}
+
+			}
+
+		}
+
 		.fas.fa-times {
 			position: absolute;
 			top: 0;

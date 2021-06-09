@@ -25,11 +25,12 @@ const ServerListItem = props => {
         e.currentTarget.classList.add("active");
         props.history.push(`/channels/${id}/${props.defaultChannelId}`);
     }
-    const imgUrl = props.server.imgUrl;
+    const imgUrl = props.server.imageUrl;
     const name = props.server.name;
     const id = props.server.id;
+    const itemClassName = imgUrl ? "server-item image-present" : "server-item no-image";
 
-    const insertServerImg = () => {
+    const insertServerIcon = () => {
         if (imgUrl) {
             return <img className="server-icon img" src={imgUrl} key={`i-${id}`} alt={`img-${name}-${id}`} />
         } else {
@@ -40,12 +41,11 @@ const ServerListItem = props => {
             );
         }
     }
-    const imgSrc = imgUrl || window.defaultAvatarUrl;
 
     return (
         <li className={`server`}>
-            <a onClick={classRemoveClick} to={`/channels/${id}/${props.defaultChannelId}`} className="server-item">
-                {insertServerImg()}
+            <a id={`server-item-${id}`} onClick={classRemoveClick} to={`/channels/${id}/${props.defaultChannelId}`} className={itemClassName}>
+                { insertServerIcon() }
             </a>
         </li>
     )

@@ -8,13 +8,16 @@ export const getUserServers = userId => {
     })
 };
 
-export const createServer = server => (
-    $.ajax({
+export const createServer = formData => {
+    debugger
+    return $.ajax({
         method: "POST",
         url: "/api/servers",
-        data: { server },
-    })
-);
+        data: formData,
+        contentType: false,
+        processData: false,
+    });
+};
 
 export const updateServer = server => {
     server = convertToSnakeCase(server);
