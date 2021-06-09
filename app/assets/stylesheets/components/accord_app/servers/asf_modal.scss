@@ -75,7 +75,7 @@
 				}
 				&:hover, &.hovered {
 					cursor: pointer;
-					background-color: darken($link-color, 5%);
+					background-color: $link-color;
 				}
 			}
 
@@ -206,13 +206,17 @@
 				width: 100%;
 	
 				h3 {
+					display: flex;
 					font-size: 11px;
 					color: $gray;
 					font-weight: 700;
 					margin-bottom: 5px;
 					&.error {
 						color: red;
+					}
+					h6 {
 						font-style: italic;
+						line-height: 11px;
 					}
 				}
 	
@@ -236,6 +240,10 @@
 					&:focus {
 						outline: none;
 						border-color: $link-color;
+					}
+
+					&.input-error {
+						border-color: red;
 					}
 	
 				}

@@ -36,7 +36,9 @@ class AddServerForm extends React.Component {
         document.getElementById("plus").classList.remove("hovered");
     }
 
-    fileOpen() {
+    fileOpen(e) {
+        e.preventDefault();
+        e.stopPropagation();
         const input = document.getElementById("img-input");
         input.click();
     }
@@ -100,6 +102,9 @@ class AddServerForm extends React.Component {
             case "Link or token is invalid":
                 errorMsg = " - Please enter a valid invite link or invite code.";
                 break;
+            case "Invitation does not exist.":
+                errorMsg = " - The invite is invalid or has expired.";
+                break;
             default:
                 errorMsg = null;
         }
@@ -116,12 +121,14 @@ class AddServerForm extends React.Component {
             }
         }
             
-        return (
+        return [(
             <h3 id={errorMsg ? "error" : null} className={className}>
-                { this.props.formType === 'create' ? `SERVER NAME` : inviteLink() }
-                { errorMsg }
+                { this.props.formType === 'create' ? `SERVER NAME` : inviteLink() }&nbsp;
+                <h6>
+                    { errorMsg }
+                </h6>
             </h3>
-        )
+        ), errorMsg ? true : false];
     }
 
     insertButtons() {
@@ -214,10 +221,10 @@ class AddServerForm extends React.Component {
                 { formType === 'create' ? ( this.insertServerImg() ) : <div className="asf-form-separator"></div> }
                 <form onSubmit={ this.handleSubmit } className="add-server-form">
                     <div className="asf-input-wrapper">
-                        { this.labelWithErrors() }
+                        { this.labelWithErrors()[0] }
                         <input
                             type="text"
-                            className="add-server-input"
+                            className={this.labelWithErrors()[1] ? "add-server-input input-error" : "add-server-input"}
                             placeholder={ inputPlaceholder }
                             value={ this.state.input }
                             onChange={ this.handleInput } />
