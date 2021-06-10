@@ -6,7 +6,7 @@ export default props => {
 
     const scrollToTop = () => {
         window.scrollTo(0,0);
-    }
+    };
 
     switch (divType) {
         case "social":
@@ -15,14 +15,22 @@ export default props => {
                     <Link to="/" onClick={scrollToTop()}><img src={window.logoUrl} alt="footer-logo" className="footer-logo" /></Link>
                     <div className="social-links">
                         <a 
-                            href="https://www.linkedin.com/in/timothy-fraczak-e-i-t-1393a183/"
+                            href="https://www.linkedin.com/in/tfraczak/"
                             target="_blank"> 
-                            <img className="linkedin-logo" src={window.linkedinLogo} alt="linkedin" />
+                            {/* <img className="linkedin-logo" src={window.linkedinLogo} alt="linkedin" /> */}
+                            <i className="fab fa-linkedin-in"></i>
                         </a>
                         <a 
                             href="https://www.github.com/tfraczak"
                             target="_blank">
-                            <img className="github-logo" src={window.githubLogo} alt="github" />
+                            {/* <img className="github-logo" src={window.githubLogo} alt="github" /> */}
+                            <i className="fab fa-github"></i>
+                        </a>
+                        <a 
+                            href="https://angel.co/u/tfraczak"
+                            target="_blank">
+                            {/* <img className="github-logo" src={window.githubLogo} alt="github" /> */}
+                            <i className="fab fa-angellist"></i>
                         </a>
                     </div>
                     <p>Accord is a clone of Discord.</p>
@@ -75,7 +83,8 @@ export default props => {
                     <h1 className="projects-title">Projects</h1>
                     <ul className="projects-list">
                         <li><Link to="/">Accord</Link></li>
-                        <li>More coming soon...</li>
+                        <li><a href="https://postcard-triplog.herokuapp.com/#/" target="_blank">Postcard</a></li>
+                        <li><a href="https://tfraczak.github.io/dungeon_crawler/" target="_blank">Dungeon Crawler</a></li>
                     </ul>
                 </div>
             )

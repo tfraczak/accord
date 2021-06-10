@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import SessionForm from "./session_form";
 import { connect } from "react-redux";
-import { register, removeSessionErrors } from "../../actions/session_actions";
+import { register, removeErrors } from "../../actions/session_actions";
+import { assign } from 'lodash';
 
 const mSTP = (state, ownProps) => ({
     user: {
@@ -13,14 +14,14 @@ const mSTP = (state, ownProps) => ({
     errors: state.errors.session,
     formTitle: "Create an account",
     formButtonText: "Continue",
-    formFooterTOS: () => <Link to="/terms">Terms of Service</Link>,
-    formFooterPrivacy: () => <Link to="/privacy">Privacy Policy</Link>,
+    formFooterTOS: () => <a href="https://github.com/tfraczak" target="_blank">GitHub</a>,
+    formFooterPrivacy: () => <a href="https://www.linkedin.com/in/tfraczak/" target="_blank">LinkedIn</a>,
     formType: "register",
 });
 
 const mDTP = (dispatch, ownProps) => ({
     processForm: user => dispatch(register(user)),
-    removeSessionErrors: () => dispatch(removeSessionErrors()),
+    removeErrors: () => dispatch(removeErrors()),
 });
 
 export default connect(mSTP, mDTP)(SessionForm);

@@ -1,0 +1,118 @@
+.server-settings-modal-background {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: transparent;
+  z-index: 10;
+  font-family: $roboto;
+  color: $font-main;
+  button, input {
+    outline: none;
+    &:focus {
+      outline: none;
+    }
+  }
+  .server-settings-modal-child {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: $accord-app-2;
+    .server-settings-wrapper {
+      height: 100%;
+      display: flex;
+      justify-content: space-around;
+      flex: 0 1 auto;
+      
+
+      .sidebar-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        background-color: $accord-app-3;
+        width: 33.3333%;
+        padding: 60px 10px 60px 20px;
+        nav {
+          width: 218px;
+          .server-name {
+            position: relative;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 0 10px;
+            padding-bottom: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transform: scale(1.03, 0.95);
+          }
+
+          .sidebar-nav {
+            width: 100%;
+            overflow: hidden scroll;
+
+            &::-webkit-scrollbar {
+              display: none;
+            }
+
+            li:not(.delete) {
+              padding: 6px 10px;
+              border-radius: 4px;
+              font-weight: 500;
+              font-size: 16px;
+              line-height: 20px;
+              cursor: pointer;
+              transition: 0.1s ease-in-out;
+              &:hover, &.active {
+                background-color: darken($accord-app-3, 10%);
+              }
+            }
+
+            .separator {
+              border-top: 1px solid darken($accord-app-3, 7%);
+              margin: 8px 0;
+              width: 100%;
+              height: 0;
+            }
+
+            .server-settings-item.delete {
+              padding: 0;
+              .delete-button {
+                display: flex;
+                justify-content: flex-start;
+                border-radius: 4px;
+                padding: 6px 10px;
+                width: 100%;
+                height: 100%;
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 20px;
+                background-color: transparent;
+                color: rgb(218, 0, 0);
+                transition: 0.1s ease-in-out;
+                &:hover {
+                  background-color: rgb(255, 34, 34);
+                  color: $font-main;
+                  cursor: pointer;
+                }
+                &:disabled {
+                  cursor: not-allowed;
+                  &:hover {
+                    color: rgb(167, 61, 61);
+                    background-color: rgba(255, 36, 36, 0.301);
+                  }
+                }
+              }
+            }
+
+          }
+
+        }
+      }
+
+
+    }
+  }
+}

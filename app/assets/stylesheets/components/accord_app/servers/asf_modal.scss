@@ -1,0 +1,394 @@
+.asf-modal-background {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	background: $modal-bg-color;
+	z-index: 10;
+}
+
+.asf-modal-child {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	box-sizing: border-box;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: $form-color;
+	width: 450px;
+	height: 450px;
+	padding: 20px;
+	font-family: $roboto;
+	border-radius: 7px;
+
+	
+
+	.asf-wrapper{ 
+		position: relative;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+		box-sizing: border-box;
+
+		.image-upload-wrapper {
+			position: relative;
+			box-sizing: border-box;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			height: 100%;
+			.asf-create-img, .plus, .fas, .plus > span {
+				position: absolute;
+			}
+
+			.plus {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 32px;
+				width: 32px;
+				border-radius: 50px;
+				top: 18px;
+				left: 232px;
+				background-color: darken($form-color, 40%);
+				transition: 100ms ease-in-out;
+				span {
+					font-weight: 400;
+					line-height: 20px;
+					font-size: 16px;
+					color: $form-color;
+					top: 0;
+					right: 5px;
+					z-index: 2;
+
+				}
+				&:hover, &.hovered {
+					cursor: pointer;
+					background-color: $link-color;
+				}
+			}
+
+			.upload-img {
+				width: 125px;
+				height: 125px;
+				border-radius: 150px;
+				background-color: transparent;
+				&.img {
+					top: 14px;
+					box-shadow: 0 2px 20px rgba(0, 0, 0, 0.247);
+					background-color: darken($form-color, 20%);
+					border: 1px solid darken($form-color, 23%);
+				}
+
+				&.input {
+					outline: none;
+					background-color: darken($form-color, 20%);
+					box-shadow: 0 2px 20px rgba(0, 0, 0, 0.247);
+					border: 1px solid darken($form-color, 23%);
+	
+					input {
+						position: absolute;
+						opacity: 0;
+						width: 0.1px;
+						height: 0.1px;
+	
+					}
+	
+					&:hover {
+						cursor: pointer;
+					}
+					&:focus {
+						outline: none;
+					}
+				}
+
+			}
+
+		}
+
+		.close {
+			position: absolute;
+			transform: rotate(45deg);
+			top: -15px;
+			right: -5px;
+			cursor: pointer;
+			transition: 0.1s ease-in-out;
+			font-size: 42px;
+			font-weight: 300;
+			color: $font-main;
+			&:hover {
+				color: $form-button;
+			}
+		}
+
+		button {
+			border-radius: 5px;
+			box-sizing: border-box;
+			font-weight: 700;
+			cursor: pointer;
+
+			&:disabled {
+				opacity: 50%;
+				cursor: not-allowed;
+			}
+
+		}
+	
+		.add-server-title {
+			font-size: 32px;
+			font-weight: 700;
+			color: $font-main;
+			margin-bottom: 8px;
+		}
+	
+		> p {
+			color: $font-sub;
+			font-size: 14px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			
+		}
+		
+		p:last-of-type {
+			margin-bottom: 12px;
+		}
+	
+		////////////////// create has an img
+	
+		img {
+			width: 150px;
+			height: 150px;
+			margin-bottom: 12px;
+		}
+	
+		////////////////// join has a div separator
+		.asf-form-separator {
+			width: 100%;
+			height: 150px;
+		}
+	
+	
+		.add-server-form {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			align-items: center;
+			box-sizing: border-box;
+			
+			width: 100%;
+			height: 100%;
+		
+			.asf-input-wrapper {
+				position: relative;
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-start;
+				align-items: flex-start;
+				box-sizing: border-box;
+				width: 100%;
+	
+				h3 {
+					display: flex;
+					font-size: 11px;
+					color: $gray;
+					font-weight: 700;
+					margin-bottom: 5px;
+					&.error {
+						color: red;
+					}
+					h6 {
+						font-style: italic;
+						line-height: 11px;
+					}
+				}
+	
+				input {
+					box-sizing: border-box;
+					width: 100%;
+					height: 40px;
+					border: 1px solid $input-outline-color;
+					border-radius: 3px;
+					padding: 10px 15px;
+					font-size: 16px;
+					margin-bottom: 15px;
+					color: $font-sub;
+					
+					transition: 0.2s ease-in-out;
+
+					&:hover {
+						border-color: $font-sub;
+					}
+
+					&:focus {
+						outline: none;
+						border-color: $link-color;
+					}
+
+					&.input-error {
+						border-color: red;
+					}
+	
+				}
+	
+				::placeholder {
+					color: #aaaaaa;
+					font-size: 16px;
+					font-style: italic;
+				}
+	
+			}
+	
+			.submit {
+				background-color: $form-button;
+				color: $form-button-color;
+				font-size: 18px;
+
+				transition: 0.2s ease-in-out;
+
+				&:hover:not(:disabled) {
+					background-color: #ffca58;
+					color: black;
+				}
+				
+			}
+	
+			.asf-create.submit {
+				box-sizing: border-box;
+				margin-bottom: 15px;
+				width: 100%;
+				padding: 10px 0;
+			}
+	
+			.asf-button-wrapper {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				box-sizing: border-box;
+				width: 100%;
+				height: 100%;
+			}
+			
+			///////////// create form
+			.asf-button-wrapper.create {
+				justify-content: space-between;
+				
+				.asf-to-join-wrapper {
+					display: flex;
+					flex-direction: column;
+					justify-content: flex-end;
+					align-items: center;
+					box-sizing: border-box;
+					width: 100%;
+					height: 100%;
+					
+					.asf-create-footer {
+						font-weight: 500;
+						font-size: 16px;
+						color: $gray;
+						margin-bottom: 5px;
+						font-style: italic;
+					}
+	
+					button {
+						background-color: $form-button-sub;
+						color: $form-button-color;
+						font-size: 16px;
+						box-sizing: border-box;
+						padding: 8px 0;
+						width: 100%;
+
+						transition: 0.2s ease-in-out;
+
+						&:hover {
+							background-color: #c2c2c2;
+							color: #414141;
+						}
+					}
+				}
+			}
+	
+			.asf-button-wrapper.join {
+				.asf-footer-wrapper {
+					display: flex;
+					flex-direction: column;
+					align-items: flex-start;
+					box-sizing: border-box;
+					width: 100%;
+					height: 100%;
+	
+					h6 {
+						text-transform: uppercase;
+						font-size: 12px;
+						font-weight: 700;
+						color: $gray;
+						margin-top:15px;
+					}
+	
+					ul {
+						display: flex;
+						flex-direction: column;
+						align-items: flex-start;
+						box-sizing: border-box;
+						width: 100%;
+						height: 100%;
+						li {
+							margin-top: 10px;
+							font-size: 14px;
+							font-weight: 300;
+							font-style: italic;
+							color: #5c5c5c;
+						}
+					}
+	
+				}
+	
+				.join-footer-buttons-wrapper {
+					display: flex;
+					justify-content: space-between;
+					align-items: flex-end;
+					box-sizing: border-box;
+					width: 100%;
+					height: 100%;
+	
+					.asf-to-create {
+						font-weight: 300;
+						background-color: transparent;
+						&:hover {
+							text-decoration: underline;
+						}
+					}
+	
+					.submit {
+						padding: 10px 20px;
+						font-size: 16px;
+					}
+	
+				}
+			}
+	
+			
+	
+	
+	
+		}
+
+		
+
+	}
+
+	
+
+	
+
+}

@@ -1,0 +1,91 @@
+.main-focus {
+
+    .messages-wrapper {
+        position: relative;
+        // display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-end;
+        overflow: hidden auto;
+        padding-right: 12px;
+        width: auto;
+        height: auto;
+        font-family: $roboto;
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+            display: block;
+            width: 7px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            display: block;
+            background-color: $accord-app-5;
+            border-radius: 20px;
+        }
+        &::-webkit-scrollbar-track {
+            display: block;
+            background-color: transparent;
+        }
+
+    }
+
+    .msg-form-separator {
+        width: 100%;
+    }
+
+    .message-form {
+        position: relative;
+        display: flex;
+        flex: 0 1 auto;
+        align-items: flex-start;
+        justify-content: center;
+        box-sizing: border-box;
+        padding: 0 20px;
+        width: 100%;
+        min-height: 65px;
+        max-height: 65px;
+
+        .message-input {
+            position: relative;
+            top: -5px;
+            border: none;
+            border-radius: 8px;
+            height: 45px;
+            width: 100%;
+            background-color: $splash-bg-color;
+            padding: 0 20px;
+            font-size: 16px;
+            font-family: $roboto;
+            color: $font-main;
+
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+
+    .messages-wrapper.placeholder {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        overflow: hidden;
+        width: 100%;
+        min-height: 100vh;
+
+        .construction-img {
+            height: 400px;
+            width: 400px;
+            opacity: 70%;
+        }
+
+        h1 {
+            margin-top: 20px;
+            font-size: 48px;
+            color: $font-sub;
+            font-style: italic;
+        }
+    }
+}

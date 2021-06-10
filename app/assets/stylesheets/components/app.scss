@@ -3,6 +3,10 @@
 @import "./landing/splash_divs.scss";
 @import "./landing/splash_footer.scss";
 @import "./landing/splash.scss";
+@import "./loading/loading.scss";
+@import "./error_404/error_404.scss";
+@import "./accord_app/accord_app.scss";
+@import "./url_invite_page/url_invite_page.scss";
 
 html {
     background-color: #fdf9f6;
@@ -15,5 +19,8 @@ html {
         display: flex;
         justify-content: center;
         align-items: center;
+        z-index: -1;
     }
+    overflow-x: hidden;
+    
 }

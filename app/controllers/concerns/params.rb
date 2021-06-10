@@ -6,25 +6,25 @@ module Params
     params.require(:user).permit(:email, :password, :username)
   end
 
-  # def server_params
-  #   params.require(:server).permit(:name, :image_url, :owner_id)
-  # end
+  def server_params
+    params.require(:server).permit(:name, :image_url, :owner_id, :image)
+  end
 
-  # def channel_params
-  #   params.require(:channel).permit(:name, :type, :server_id)
-  # end
+  def channel_params
+    params.require(:channel).permit(:name, :media_type, :server_id, :default)
+  end
 
   # def conversation_params
   #   params.require(:conversation).permit(:initiator_id)
   # end
 
-  # def membership_params
-  #   params.require(:membership).permit(:user_id, :local_username, :joinable_id, :joinable_type)
-  # end
+  def membership_params
+    params.require(:membership).permit(:user_id, :joinable_id, :joinable_type, :local_username)
+  end
 
-  # def messages_params
-  #   params.require(:messages).permit(:body, :author_id, :messageable_id, :messageable_type)
-  # end
+  def message_params
+    params.require(:messages).permit(:body, :author_id, :messageable_id, :messageable_type)
+  end
 
   # def role_params
   #   params.require(:role).permit(:user_id, :ord, :roleable_id, :roleable_type)
@@ -37,5 +37,9 @@ module Params
   # def mention_params
   #   params.require(:mention).permit(:mentioner_id, :mentionee_id, :message_id)
   # end
+
+  def invitation_params
+    params.require(:invitation).permit(:expiration)
+  end
 
 end

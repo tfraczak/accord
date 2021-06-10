@@ -1,5 +1,15 @@
 class Api::UsersController < ApplicationController
 
+    def index
+        if params[:server_id]
+            server = Server.find_by(id: params[:server_id])
+            @server_id = params[:server_id]
+            @type = :Server
+            @users = server.members
+        end
+        render :index
+    end
+
     def show
         @user = User.find_by(id: params[:id])
         render :show

@@ -1,0 +1,31 @@
+.focus-content {
+
+    .focus-right-wrapper {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        flex: 0 0 auto;
+        box-sizing: border-box;
+        width: 240px;
+        height: 100%;
+        background-color: $accord-app-3;
+        font-family: $roboto;
+    }
+
+        
+    .main-focus {
+        position: relative;
+        display: flex;
+        flex-shrink: 1;
+        flex-direction: column;
+        justify-content: flex-end;
+        width: 100%;
+        height: auto;
+    }
+
+
+    
+    
+}

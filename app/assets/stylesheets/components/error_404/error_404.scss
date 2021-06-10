@@ -1,0 +1,57 @@
+.error-404-wrapper {
+    .broken-bg-container {
+        position: absolute;
+        top: 0;
+        background-size: cover;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: -1;
+    }
+    position: absolute;
+    top: 20px;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    font-family: $roboto;
+    color: $font-sub;
+
+    h1 {
+        color: $link-button-color;
+        font-size: 15vw;
+        font-weight: 700;
+        text-shadow: 0 0 50px rgba(255, 208, 0, 0.3);
+    }
+    p {
+        color: $font-sub-negative;
+        font-size: 2vw;
+        font-weight: 500;
+        text-shadow: 0 0 50px rgba(150, 150, 150, 0.4);
+    }
+    a {
+        text-decoration: none;
+        background-color: $link-button-color;
+        color: $font-main;
+        padding: 18px 30px;
+        font-family: $roboto;
+        font-weight: 500;
+        font-size: 1vw;
+        border-radius: 50px;
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        margin-top: 50px;
+
+        &:hover {
+            cursor: pointer;
+            background-color: $link-button-color-hover;
+            box-shadow: 0 0 30px rgba(255, 196, 0, 0.2);
+        }
+    }
+
+}

@@ -1,18 +1,21 @@
 .splash-footer-wrapper {
-    padding: 50px 0;
+    box-sizing: border-box;
     position: absolute;
     top: 3900px;
     display: flex;
-    bottom: 0;
+    bottom: 0px;
     align-items: flex-start;
     justify-content: center;
-    height: 25rem;
+    height: 30rem;
     width: 100vw;
     background-color: $font-main;
     font-family: $roboto;
-
+    margin-top: 200px;
+    padding: 50px 0;
+    
     .footer-grid {
         display: grid;
+        box-sizing: border-box;
         grid-template-columns: repeat(12,1fr);
         grid-gap: 20px;
         max-width: 1080px;
@@ -32,10 +35,15 @@
                 height: 40px;
                 margin-bottom: 20px;
             }
-            .linkedin-logo, .github-logo {
-                height: 20px;
-                margin-right: 20px;
+            .fab {
+                color: $bg-color;
+                font-size: 24px;
+                margin-right: 10px;
                 margin-bottom: 10px;
+                transition: 0.1s ease-in-out;
+                &:hover {
+                    color: $link-color;
+                }
             }
 
             p {
