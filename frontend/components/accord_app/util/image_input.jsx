@@ -14,7 +14,7 @@ const ImageInput = (props) => {
         onMouseEnter={ hovered } 
         onMouseOut={ notHovered } 
         id="server-img-input" 
-        className={ `asf-create-img input${imageUrl ? " img-present" : ""}` }
+        className={ `upload-img input${imageUrl ? " img-present" : ""}` }
         htmlFor="img-input">
         <input 
           id="img-input"

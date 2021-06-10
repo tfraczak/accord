@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import CreateServerFormContainer from '../servers_nav_bar/add_server/create_server_form_container';
 import JoinServerFormContainer from '../servers_nav_bar/add_server/join_server_form_container';
 import ServerInvitationContainer from '../server_toolbar/invitation/server_invitation_container';
+import ServerSettingsContainer from '../server_toolbar/settings/server_settings_container';
 
 class ServerModal extends React.Component {
     constructor(props) {
@@ -35,10 +36,7 @@ class ServerModal extends React.Component {
 
 		let component, className, childClassName;
 
-		if (modal.type) {
-
-		} else {
-			switch (modal) {
+		switch (modal) {
 			case 'create server':
 				className = "asf-modal-background";
 				childClassName = "asf-modal-child";
@@ -54,6 +52,11 @@ class ServerModal extends React.Component {
 				childClassName = "invite-modal-child";
 				component = <ServerInvitationContainer />;
 				break;
+			case 'server settings':
+				className = "server-settings-modal-background";
+				childClassName = "server-settings-modal-child";
+				component = <ServerSettingsContainer />;
+				break;
 			case 'nickname':
 				className = "nickname-modal-background";
 				childClassName = "nickname-modal-child";
@@ -61,7 +64,6 @@ class ServerModal extends React.Component {
 				break;
 			default:
 				return null;
-			}
 		}
 		
 		

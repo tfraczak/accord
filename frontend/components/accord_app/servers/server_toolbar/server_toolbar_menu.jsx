@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import CreateChannelButton from '../../channels/channel_modals/create_channel_form/create_channel_button';
 import ServerInvitationButton from './invitation/server_invitation_button';
+import ServerSettingsButton from './settings/server_settings_button';
 
 class ServerToolbarMenu extends Component {
   constructor(props) {
@@ -27,14 +28,11 @@ class ServerToolbarMenu extends Component {
           closeToolbar={ () => closeToolbar() }
         />
 
-        <li>
-          {/* open full modal */}
-          {/* <ServerSettingsButton key={`server-settings-${server.id}`} /> */}
-          <button onClick={closeToolbar} className="st-menu-btn server-settings">
-            <h6>Server Settings</h6>
-            <i className="fas fa-cog"></i>
-          </button>
-        </li>
+        <ServerSettingsButton 
+          key={`server-settings-${server.id}`} 
+          openModal={ () => openModal("server settings") }
+          closeToolbar={ () => closeToolbar() }
+        />
 
         <CreateChannelButton
           key={`create-channel-${server.id}`}

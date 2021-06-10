@@ -32,11 +32,9 @@ const receiveUserErrors = errors => ({
 });
 
 export const retrieveServerMembers = serverId => dispatch => {
-    UserAPIUtil.getServerMembers(serverId).then(users => {
-        dispatch(receiveUsers(users))
-    }, err => {
-        dispatch(receiveUserErrors(err.responseJSON))
-    });
+    UserAPIUtil.getServerMembers(serverId)
+        .then(
+            users => dispatch(receiveUsers(users)),
+            err => dispatch(receiveUserErrors(err.responseJSON))
+        );
 };
-
-window.retrieveServerMembers = retrieveServerMembers;

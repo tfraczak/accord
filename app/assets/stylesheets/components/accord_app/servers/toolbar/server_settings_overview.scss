@@ -1,0 +1,341 @@
+.server-settings-modal-background {
+
+  .server-settings-modal-child {
+
+    .server-settings-wrapper {
+
+      .server-settings-content-wrapper {
+        position: relative;
+        padding: 60px 40px 80px 40px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 66.6667%;
+
+        section {
+          position: relative;
+          display: block;
+          max-width: 740px;
+          min-width: 460px;
+          min-height: 100%;
+          margin-right: 40px;
+
+          .content-title {
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            width: 100%;
+          }
+
+          .edit-server-form {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+
+            main {
+              display: flex;
+
+              .edit-server-image-wrapper {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 175px;
+                min-width: 150px;
+
+                .image-upload-wrapper {
+                  position: relative;
+                  box-sizing: border-box;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  width: 100%;
+                  height: 100%;
+                  margin-bottom: 10px;
+
+                  .upload-img, .plus, .fas {
+                    position: absolute;
+                  }
+            
+                  .initials {
+                    position: relative;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 150px;
+                    width: 100px;
+                    height: 100px;
+                    font-size: 48px;
+                    font-weight: 400;
+                    color: $font-main;
+                    cursor: pointer;
+                  }
+
+                  .plus {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 32px;
+                    width: 32px;
+                    border-radius: 50px;
+                    top: 0;
+                    right: 28px;
+                    background-color: darken($form-color, 40%);
+                    transition: 100ms ease-in-out;
+                    .fas {
+                      transform: translate(1px, -1px);
+                    }
+                    span {
+                      position: absolute;
+                      font-weight: 400;
+                      line-height: 20px;
+                      font-size: 16px;
+                      color: $form-color;
+                      top: 1px;
+                      right: 4px;
+                      z-index: 2;
+                    }
+                    &:hover, &.hovered {
+                      cursor: pointer;
+                      background-color: $link-color;
+                    }
+                  }
+            
+                  .upload-img {
+                    width: 100px;
+                    height: 100px;
+                    border-radius: 150px;
+                    background-color: transparent;
+                    &.img {
+                      position: relative;
+                      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+                      background-color: darken($form-color, 20%);
+                    }
+            
+                    &.input {
+                      outline: none;
+                      background-color: darken($form-color, 20%);
+                      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+                      border: 1px solid darken($form-color, 23%);
+              
+                      input {
+                        position: absolute;
+                        opacity: 0;
+                        width: 0.1px;
+                        height: 0.1px;
+              
+                      }
+              
+                      &:hover {
+                        cursor: pointer;
+                      }
+                      &:focus {
+                        outline: none;
+                      }
+                    }
+                  }
+
+                }
+
+                button {
+                  box-sizing: border-box;
+                  background-color: transparent;
+                  font-size: 14px;
+                  font-weight: 500;
+                  color: #2e2e2e;
+                  cursor: pointer;
+                  transition: 100ms ease-in-out;
+                  &:hover {
+                    color: black;
+                  }
+                }
+
+              }
+
+              .edit-server-image-alt {
+                display: flex;
+                flex-direction: column;
+                max-width: 180px;
+                flex: 1 1 auto;
+                flex-wrap: nowrap;
+                margin-right: 10px;
+                h6 {
+                  font-size: 13px;
+                  line-height: 18px;
+                }
+                .upload-img-btn {
+                  min-width: 96px;
+                  max-width: 115px;
+                  height: 38px;
+                  margin-top: 8px;
+                  padding: 8px 15px;
+                  font-size: 13px;
+                  font-weight: 500;
+                  color: $font-main;
+                  background-color: transparent;
+                  border: 1px solid $font-main;
+                  border-radius: 3px;
+                  cursor: pointer;
+                }
+              }
+
+              .edit-server-name-wrapper {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                margin-left: 5px;
+                flex: 1 1 50%;
+                
+                .edit-server-label {
+                  position: relative;
+                  left: 4px;
+                  font-size: 12px;
+                  font-weight: 700;
+                  transform: scale(1.03, 0.97);
+                  margin-bottom: 8px;
+                }
+
+                #edit-server-input {
+                  width: 320px;
+                  height: 40px;
+                  padding: 10px;
+                  background-color: $accord-app-1;
+                  border: 1px solid darken($accord-app-1, 20%);
+                  border-radius: 4px;
+                  font-size: 16px;
+                  transition: border-color 0.1s ease-in-out;
+    
+                  &:hover {
+                    border: 1px solid darken($accord-app-1, 40%);
+                  }
+    
+                  &:focus {
+                    border: 1px solid $link-color;
+                  }
+    
+                }
+              }
+            }
+
+            
+
+
+            .buttons-wrapper {
+              position: relative;
+              bottom: -25px;
+              display: flex;
+              justify-content: space-between;
+              width: 100%;
+              border-radius: 4px;
+              margin-top: 50px;
+              padding: 10px 0;
+              padding-left: 15px;
+              padding-right: 10px;
+              background-color: $accord-app-5;
+              color: $font-main-negative;
+
+              visibility: hidden;
+              opacity: 0;
+              transition: 0.1s ease-in-out;
+
+              &.active {
+                margin-top: 0;
+                visibility: visible;
+                opacity: 1;
+              }
+
+              p {
+                display: flex;
+                align-items: center;
+                font-size: 15px;
+                &:hover {
+                  cursor: default;
+                }
+              }
+
+              .buttons {
+                .reset {
+                  margin-right: 20px;
+                  font-size: 14px;
+                  font-weight: 400;
+                  background-color: transparent;
+                  color: $font-main-negative;
+                  &:hover {
+                    text-decoration: underline;
+                    cursor: pointer;
+                  }
+                }
+
+                .save {
+                  background-color: $form-button;
+                  color: $form-button-color;
+                  padding: 8px 14px;
+                  border-radius: 4px;
+                  font-size: 14px;
+                  font-weight: 500;
+                  transition: 0.1s ease-in-out;
+
+                  &:hover {
+                    background-color: lighten($form-button, 10%);
+                    cursor: pointer;
+                  }
+
+                  &:disabled {
+                    background-color: lighten($form-button, 20%);
+                    color: lighten($form-button-color, 20%);
+                    cursor: not-allowed;
+                  }
+                }
+
+              }
+
+            }
+
+          }
+
+        }
+
+
+
+        .esc-modal {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          button {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: transparent;
+            margin-bottom: 5px;
+            width: 36px;
+            height: 36px;
+            border-radius: 20px;
+            border: 2px solid darken($accord-app-2, 15%);
+            p {
+              position: relative;
+              bottom: 1px;
+              font-size: 28px;
+              font-weight: 300;
+              
+            }
+            &:hover {
+              background-color: darken($accord-app-2, 5%);
+              cursor: pointer;
+            }
+          }
+
+          > p {
+            font-size: 12px;
+            font-weight: 500;
+          }
+
+        }
+      }
+    }
+  }
+}

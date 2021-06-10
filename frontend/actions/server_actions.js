@@ -92,9 +92,8 @@ export const createServer = server => dispatch => {
         );
 };
 
-export const updateServer = server => dispatch => {
-    server = convertToSnakeCase(server);
-    return ServerAPIUtil.updateServer(server).then(
+export const updateServer = (server, serverId) => dispatch => {
+    return ServerAPIUtil.updateServer(server, serverId).then(
         server => dispatch(receiveServer(server)),
         err => dispatch(receiveServerErrors(err.responseJSON))
     );

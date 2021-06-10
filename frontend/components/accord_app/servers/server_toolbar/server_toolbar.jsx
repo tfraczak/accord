@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-import ServerUpdateForm from './server_update_form';
-import ServerDeleteButton from './server_delete_button';
-import ServerLeaveButton from './server_leave_button';
-import CreateServerInvite from './server_create_invite';
 import ServerToolbarMenu from './server_toolbar_menu';
 
 

@@ -23,6 +23,10 @@ export default (state = {}, action) => {
         case RECEIVE_USER_LOAD_DATA:
             invitations = action.payload.invitations;
             return Object.assign({}, state, invitations);
+        case REMOVE_INVITATION:
+            nextState = Object.assign({}, state);
+            delete nextState[action.inviteId];
+            return nextState;
         case RECEIVE_SERVER_INFO:
             invitations = action.payload.invitations;
             return Object.assign({}, state, invitations);

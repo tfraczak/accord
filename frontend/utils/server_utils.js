@@ -9,7 +9,6 @@ export const getUserServers = userId => {
 };
 
 export const createServer = formData => {
-    debugger
     return $.ajax({
         method: "POST",
         url: "/api/servers",
@@ -19,13 +18,13 @@ export const createServer = formData => {
     });
 };
 
-export const updateServer = server => {
-    server = convertToSnakeCase(server);
-    
+export const updateServer = (formData, serverId) => {
     return $.ajax({
         method: "PATCH",
-        url: `/api/servers/${server.id}`,
-        data: { server },
+        url: `/api/servers/${serverId}`,
+        data: formData,
+        contentType: false,
+        processData: false,
     })
 };
 

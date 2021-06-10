@@ -1,5 +1,5 @@
 import { receiveServerErrors } from './server_actions';
-import * as ServerAPIUtil from '../utils/server_utils';
+import * as InviteAPIUtil from '../utils/invitation_utils';
 
 export const RECEIVE_INVITATIONS = "RECEIVE_INVITATIONS";
 export const RECEIVE_INVITATION = "RECEIVE_INVITATION";
@@ -15,22 +15,31 @@ const receiveInvitation = invitation => ({
     invitation,
 });
 
-export const removeInvitation = () => ({
+export const removeInvitation = inviteId => ({
     type: REMOVE_INVITATION,
+    inviteId,
 });
 
 export const createInvite = (serverId, expiration=null) => dispatch => {
-    return ServerAPIUtil.createInvite(serverId,expiration).then(invitation => {
-        dispatch(receiveInvitation(invitation));
-    }, err => {
-        dispatch(receiveServerErrors(err.responseJSON));
-    });
+    return InviteAPIUtil.createInvite(serverId,expiration)
+        .then(
+            invitation => dispatch(receiveInvitation(invitation)),
+            err => dispatch(receiveServerErrors(err.responseJSON))
+        );
 };
 
 export const destroyInvite = inviteId => dispatch => {
-    ServerAPIUtil.destroyInvite(inviteId).then(invitation => {
-        dispatch(removeInvitation(invitation.id));
-    }, err => {
-        dispatch(receiveServerErrors(err.responseJSON));
-    });
+    InviteAPIUtil.destroyInvite(inviteId)
+        .then(
+            () => dispatch(removeInvitation(inviteId)),
+            err => dispatch(receiveServerErrors(err.responseJSON))
+        );
+};
+
+export const retrieveServerInvites = serverId => dispatch => {
+    InviteAPIUtil.getServerInvites(serverId)
+        .then(
+            invitations => dispatch(receiveInvitation(invitations)),
+            err => dispatch(receiveServerErrors(err.responseJSON))
+        );
 };
