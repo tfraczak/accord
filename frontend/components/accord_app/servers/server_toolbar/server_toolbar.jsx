@@ -106,24 +106,6 @@ class ServerToolbar extends Component {
                                 leaveServer={ () => leaveServer(membershipId) }
                                 createInvite={ () => createInvite(server.id) }
                             />
-                            {/* <ul id="server-tools" className="st-closed">
-                                <CreateServerInvite
-                                    key={`createinvite-${server.id}`}
-                                    createInvite={createInvite}
-                                    invite={urlToken} 
-                                    serverId={server.id}
-                                    removeInvitation={removeInvitation}
-                                    params={params}
-                                    history={history} />
-                                { server.ownerId === currentUserId ? (
-                                <>
-                                    <ServerUpdateForm key={`updateserver-${server.id}`} history={history} server={server} updateServer={updateServer}/>
-                                    <ServerDeleteButton key={`deleteserver-${server.id}`} history={history} deleteServer={() => deleteServer(server.id, history)}/>
-                                </>
-                                ) : (
-                                    <ServerLeaveButton key={`serverleave-${server.id}`} history={history} leaveServer={leaveServer} membershipId={membershipId} />
-                                ) }
-                            </ul> */}
                         </section> 
                 </section>
             )
