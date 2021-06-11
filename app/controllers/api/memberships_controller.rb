@@ -52,7 +52,12 @@ class Api::MembershipsController < ApplicationController
                 @server_id = @server.id
             end
             @membership.destroy
-            render :destroy
+            if @membership.user_id != current_user.id
+                @user = User.find_by(id: @membership.user_id)
+                render "/api/users/show"
+            else
+                render :destroy
+            end
         else
             render json: ["User doesn't belong to this server."], status: 422
         end

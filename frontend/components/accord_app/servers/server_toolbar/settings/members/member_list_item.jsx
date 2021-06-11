@@ -1,4 +1,5 @@
 import React from 'react';
+import { currentUsersMembershipId } from '../../../../../../utils/selectors';
 
 export default (props) => {
     const {
@@ -24,32 +25,45 @@ export default (props) => {
                         alt={`${ username }-avatar-${ member.id }`}
                         className="m-avatar" />
                     <div className="usernames-wrapper">
-                        <span className="m-local-username">{ username }</span>
-                        <h6 className="m-global-username wrapper">
-                            { `@${member.username}#${member.usernameId}` }
-                        </h6>
+                        <div className="usernames">
+                            <span className="m-local-username">{ username }</span>
+                            <h6 className="m-global-username">
+                                { `@${member.username}#${member.usernameId}` }
+                            </h6>
+                        </div>
+                        { member.id === server.ownerId ? <i className="fas fa-star"></i> : null }
                     </div>
-                    { member.id === server.ownerId ? <i className="fas fa-crown"></i> : null }
                 </div>
-                <i className="fas fa-ellipsis-v">
+                <div id={ `member-options-${member.username}#${member.usernameId}` } className="member-options hidden">
+                    {/* <i className="fas fa-ellipsis-v"></i> */}
+                    { isOwner && member.id !== server.ownerId ? (
                     <ul>
-                        <li>
-                            <button onClick={ kickMember }>
-                                Kick
-                            </button>
-                        </li>
-                        { isOwner ? 
+                        { isOwner && member.id !== server.ownerId ?
                             (
                                 <li>
-                                    <button onClick={ transferOwnership }>
-                                        Transfer Ownership
+                                    <button onClick={ kickMember }>
+                                        {`Kick ${member.username}`}
                                     </button>
                                 </li>
                             ) : null
                         }
                         
+                        { isOwner && member.id !== server.ownerId ? 
+                            (
+                                <>
+                                    <div className="separator"></div>
+                                    <li>
+                                        <button onClick={ transferOwnership }>
+                                            Transfer Ownership
+                                        </button>
+                                    </li>
+                                </>
+                            ) : null
+                        }
                     </ul>
-                </i>
+                    ) : null }
+                </div>
+                
             </li>
             <div className="separator" />
         </>

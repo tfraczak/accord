@@ -13,6 +13,7 @@ export const RECEIVE_JOINED_SERVER = "RECEIVE_JOINED_SERVER";
 export const LEAVE_SERVER = "LEAVE_SERVER";
 export const REMOVE_ERRORS = "REMOVE_ERRORS";
 export const RECEIVE_SERVER_INFO = "RECEIVE_SERVER_INFO";
+export const KICK_MEMBER = "KICK_MEMBER";
 
 export const receiveServers = servers => ({
     type: RECEIVE_SERVERS,
@@ -51,7 +52,6 @@ const receiveNewServer = payload => ({
 });
 
 const receiveJoinedServer = payload => {
-    
     return {
         type: RECEIVE_JOINED_SERVER,
         payload,
@@ -65,6 +65,11 @@ const receiveServerInfo = payload => ({
 
 const leftServer = payload => ({
     type: LEAVE_SERVER,
+    payload,
+});
+
+const removeKickedMember = payload => ({
+    type: KICK_MEMBER,
     payload,
 });
 
@@ -121,6 +126,14 @@ export const leaveServer = (membershipId) => dispatch => {
         payload => dispatch(leftServer(payload)),
         err => dispatch(receiveServerErrors(err.responseJSON))
     );
+};
+
+export const kickMember = (membershipId) => dispatch => {
+    return ServerAPIUtil.leaveServer(membershipId)
+        .then(
+            payload => dispatch(removeKickedMember(payload)),
+            err => dispatch(receiveServerErrors(err.responseJSON))
+        );
 };
 
 export const getServerByJoinForm = (urlToken,currentUserId) => dispatch => {

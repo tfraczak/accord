@@ -67,3 +67,22 @@ export const extractDateTime = dateTime => {
     // more than a day ago
     return date;
 };
+
+export const membersAlphaAsc = (m1, m2) => {
+    if (m1.localUsername && m2.localUsername) {
+        if (m1.localUsername < m2.localUsername) return -1;
+        if (m2.localUsername <= m1.localUsername) return 1;
+    }
+    if (m1.localUsername && !m2.localUsername) {
+        if (m1.localUsername < m2.username) return -1;
+        if (m2.username <= m1.localUsername) return 1;
+    }
+    if (!m1.localUsername && m2.localUsername) {
+        if (m1.username < m2.localUsername) return -1;
+        if (m2.localUsername <= m1.username) return 1;
+    }
+    if (!m1.localUsername && !m2.localUsername) {
+        if (m1.username < m2.username) return -1;
+        if (m2.username <= m1.username) return 1;
+    }
+};

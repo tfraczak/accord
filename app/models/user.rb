@@ -45,12 +45,34 @@ class User < ApplicationRecord
     def self.generate_username_id(username)
         users = self.where(username: username)
         if users.length == 0
-            return 1000
+            rand_user_id = (10000*rand()).floor.to_s
+            return rand_user_id if rand_user_id.length == 4
+            case rand_user_id.length
+            when 3
+                return "0" + rand_user_id
+            when 2
+                return "00" + rand_user_id
+            when 1
+                return "000" + rand_user_id
+            end
             
-        elsif users.length >= 9000
+        elsif users.length >= 10000
             raise "Too many users have this username, please try another"
         else
-            return users.last.username_id + 1
+            taken = true
+            while taken
+                rand_user_id = ((10000*rand())).floor
+                taken = User.find_by(username_id: rand_user_id)
+            end
+            return rand_user_id if rand_user_id.length == 4
+            case rand_user_id.length
+            when 3
+                return "0" + rand_user_id
+            when 2
+                return "00" + rand_user_id
+            when 1
+                return "000" + rand_user_id
+            end
         end
     end
 
@@ -78,7 +100,7 @@ class User < ApplicationRecord
     end
 
     def assign_default_avatar
-        self.avatar_url ||= "assets/default_avatar.png"
+        self.avatar_url ||= ""
     end
 
     private

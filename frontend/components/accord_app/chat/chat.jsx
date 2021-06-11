@@ -86,11 +86,13 @@ class Chat extends Component {
 
         
         const messageList = this.state.messages.map(message => {
+            debugger
             return (
                 <div key={`message-${message.id}`} className="message-wrapper">
                     <div className="message-info-wrapper">
-                        <img src={window.defaultAvatarUrl} className="chat-avatar" />
-                        <h6 className="author">{ chatMembers[message.authorId] ? chatMembers[message.authorId].username : null}</h6>
+                        <img src={ message.author.avatarUrl ? message.author.avatarUrl : window.defaultAvatarUrl} className="chat-avatar" />
+                        {/* <h6 className="author">{ chatMembers[message.authorId] ? chatMembers[message.authorId].username : null}</h6> */}
+                        <h6 className="author">{ message.author ? message.author.username : null}</h6>
                         <p className="date-time">{extractDateTime(message.createdAt)}</p>
                     </div>
                     <p className="message" >{ message.body }</p>

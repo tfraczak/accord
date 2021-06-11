@@ -72,10 +72,19 @@
     
                 .ml-username {
                     box-sizing: border-box;
-                    width: 100%;
+                    width: auto;
                     height: auto;
-                    margin-left: 8px;
+                    margin: 0 8px;
                     font-size: 14px;
+                }
+
+                .fas.fa-star {
+                    display: block;
+                    position: relative;
+                    color: $form-button;
+                    font-size: 12px;
+                    -webkit-text-stroke-width: 1px;
+                    -webkit-text-stroke-color: darken($form-button, 10%);
                 }
             }
     

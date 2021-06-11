@@ -48,7 +48,7 @@ export default props => {
   }
 
   return (
-    <section>
+    <section className="overview-wrapper">
       <h1 className="content-title">Server Overview</h1>
       <form onSubmit={ handleSubmit } className="edit-server-form">
       	<main>

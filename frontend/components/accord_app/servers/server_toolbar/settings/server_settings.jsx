@@ -1,5 +1,6 @@
 import React from 'react';
 import ServerSettingsOverview from './server_settings_overview';
+import ServerMembersListContainer from './members/server_members_list_container';
 
 class ServerSettings extends React.Component {
     constructor(props) {
@@ -20,6 +21,7 @@ class ServerSettings extends React.Component {
         this.handleReset = this.handleReset.bind(this);
 		this.fileOpen = this.fileOpen.bind(this);
 		this.insertContent = this.insertContent.bind(this);
+        this.setState = this.setState.bind(this);
     }
 
 	hovered(e) {
@@ -153,6 +155,10 @@ class ServerSettings extends React.Component {
                         isOwner={ this.props.isOwner }
 					/>
 				);
+            case "members":
+                return (
+                    <ServerMembersListContainer />
+                )
 			default:
 				return null;
 		}
@@ -179,10 +185,10 @@ class ServerSettings extends React.Component {
                     <nav>
                         { sidebarTitle }
                         <ul className="sidebar-nav">
-                            <li className={`server-settings-item edit ${this.state.content === "overview" ? "active" : ""}`} >Overview</li>
+                            <li onClick={ () => this.setState({ content: "overview" }) }className={`server-settings-item edit ${this.state.content === "overview" ? "active" : ""}`} >Overview</li>
                             <div className="separator"></div>
-							<li className={`server-settings-item members ${this.state.content === "members" ? "active" : ""}`} >Members</li>
-							<li className={`server-settings-item invites ${this.state.content === "invites" ? "active" : ""}`} >Invites</li>
+							<li onClick={ () => this.setState({ content: "members" }) }className={`server-settings-item members ${this.state.content === "members" ? "active" : ""}`} >Members</li>
+							<li onClick={ () => this.setState({ content: "invites" }) }className={`server-settings-item invites ${this.state.content === "invites" ? "active" : ""}`} >Invites</li>
                             <div className="separator"></div>
                             <li className="server-settings-item delete">
                                 <button

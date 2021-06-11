@@ -13,7 +13,7 @@ class ServerMembersList extends Component {
                 <div className="members-list-wrapper">
                     <h3 className="ml-title">MEMBERS - {serverMembers.length}</h3>
                     <ul className="ml-ul">
-                        { serverMembers.map(member => <MemberListItem key={ `ml-${member.id}-${server.id}` } member={member} serverId={server.id} />) }
+                        { serverMembers.map(member => <MemberListItem key={ `ml-${member.id}-${server.id}` } member={member} server={server} />) }
                     </ul>
                 </div>
             )

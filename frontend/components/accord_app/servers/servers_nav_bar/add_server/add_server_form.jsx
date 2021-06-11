@@ -105,6 +105,9 @@ class AddServerForm extends React.Component {
             case "Invitation does not exist.":
                 errorMsg = " - The invite is invalid or has expired.";
                 break;
+            case "You're already a member!":
+                errorMsg = " - " + errors[0];
+                break;
             default:
                 errorMsg = null;
         }
@@ -229,7 +232,8 @@ class AddServerForm extends React.Component {
                             className={this.labelWithErrors()[1] ? "add-server-input input-error" : "add-server-input"}
                             placeholder={ inputPlaceholder }
                             value={ this.state.input }
-                            onChange={ this.handleInput } />
+                            onChange={ this.handleInput }
+                            disabled={ false } />
                     </div>
 
                     { this.insertButtons() }

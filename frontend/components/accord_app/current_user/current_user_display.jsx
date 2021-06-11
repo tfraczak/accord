@@ -6,7 +6,7 @@ export default props => {
     const { currentUser, logout } = props;
     return (
         <>
-            <img src={window.defaultAvatarUrl} className="currentuser-avatar" />
+            <img src={ currentUser.avatarUrl ? currentUser.avatarUrl : window.defaultAvatarUrl } className="currentuser-avatar" />
             <div className="username-wrapper" onClick={() => navigator.clipboard.writeText(`${currentUser.username}#${currentUser.usernameId}`)}>
                 <h1 className="username">{ currentUser.username }</h1>
                 <p className="username-id">#{ currentUser.usernameId }</p>

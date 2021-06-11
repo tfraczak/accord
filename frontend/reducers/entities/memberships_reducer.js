@@ -10,6 +10,7 @@ import {
     RECEIVE_NEW_SERVER,
     RECEIVE_SERVER_INFO,
     LEAVE_SERVER,
+    KICK_MEMBER,
 } from '../../actions/server_actions';
 
 import { RECEIVE_USER_LOAD_DATA } from '../../actions/session_actions';
@@ -43,6 +44,11 @@ export default (state = {}, action) => {
         case RECEIVE_NEW_SERVER:
             membership = action.payload.membership;
             return Object.assign({}, state, { [membership.id]: membership });
+        case KICK_MEMBER:
+            nextState = Object.assign({}, state);
+            membership = action.payload.membership;
+            delete nextState[membership.id];
+            return nextState;
         case RECEIVE_SERVER_INFO:
             memberships = action.payload.memberships;
             return Object.assign({}, state, memberships);

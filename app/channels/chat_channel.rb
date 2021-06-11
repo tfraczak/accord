@@ -9,6 +9,9 @@ class ChatChannel < ApplicationCable::Channel
     @message = Message.new(data['message'])
     if @message.save
       socket = { message: camelize_keys(@message.attributes) }
+      author = camelize_keys(User.find_by(id: @message.author_id).attributes)
+      secure_author!(author)
+      socket[:message]["author"] = author
       ChatChannel.broadcast_to(@chat, socket)
     end
   end
@@ -34,6 +37,14 @@ class ChatChannel < ApplicationCable::Channel
   def camelize_keys(hash)
     pairs = hash.map { |key, value| [key.camelize(:lower), value] }
     Hash[pairs]
+  end
+
+  def secure_author!(author)
+    author.delete("email")
+    author.delete("passwordDigest")
+    author.delete("sessionToken")
+    author.delete("createdAt")
+    author.delete("updatedAt")
   end
 
 end
