@@ -1,6 +1,8 @@
 .members-list-wrapper {
   position: relative;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
   max-width: 740px;
   min-width: 460px;
   min-height: 100%;
@@ -15,6 +17,7 @@
   .content-header {
     display: flex;
     flex-direction: column;
+    width: 100%;
 
     .content-title {
       box-sizing: border-box;
@@ -29,6 +32,7 @@
     .num-members {
       margin-bottom: 10px;
       font-size: 14px;
+      width: 100%;
       color: $font-sub;
     }
 
@@ -37,6 +41,7 @@
   .member-list {
     display: flex;
     flex-direction: column;
+    width: 100%;
 
     .separator {
       height: 1px;
@@ -119,14 +124,16 @@
           left: 4px;
           top: 7px;
           width: 180px;
-          padding: 6px 8px;
+          padding: 8px 8px;
           background-color: $form-color;
-          border-radius: 3px;
+          border-radius: 4px;
+          box-shadow: 0 3px 20px rgba(0,0,0,0.2);
 
           .separator {
-            height: 1px;
-            border-top: 1px solid darken($form-color, 10%);
-            margin: 5px 0;
+            height: 0;
+            width: 95%;
+            border-top: 1px solid darken($form-color, 15%);
+            margin: 5px auto;
           }
 
           li {

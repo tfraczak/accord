@@ -28,15 +28,29 @@ User.create!(
 Server.create!(
     name: "Teddy's Hangout",
     owner_id: 1,
-)
+).image.attach
+    io: 
+        File.open("#{Rails.root}/app/assets/images/server_image_seeds/little_pea.jpg"),
+        filename: "little_pea.jpg",
+        content_type: "image/jpg"
+
 Server.create!(
     name: "The Apiary",
     owner_id: 2,
-)
+).image.attach
+    io: 
+        File.open("#{Rails.root}/app/assets/images/server_image_seeds/bee.png"),
+        filename: "bee.png",
+        content_type: "image/png"
+
 Server.create!(
     name: "My Awesome Hangout",
     owner_id: 3,
-)
+).image.attach
+    io: 
+        File.open("#{Rails.root}/app/assets/images/server_image_seeds/purple.jpg"),
+        filename: "purple.jpg",
+        content_type: "image/jpg"
 
 Membership.create!(
     user_id: 2,

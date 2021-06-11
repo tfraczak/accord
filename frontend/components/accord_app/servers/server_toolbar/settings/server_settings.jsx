@@ -102,7 +102,6 @@ class ServerSettings extends React.Component {
         e.preventDefault();
         const {
             updateServer,
-            closeModal,
             server
         } = this.props;
 

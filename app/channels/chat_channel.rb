@@ -9,9 +9,10 @@ class ChatChannel < ApplicationCable::Channel
     @message = Message.new(data['message'])
     if @message.save
       socket = { message: camelize_keys(@message.attributes) }
-      author = camelize_keys(User.find_by(id: @message.author_id).attributes)
-      secure_author!(author)
-      socket[:message]["author"] = author
+      author = camelize_keys(@message.author.attributes)
+      socket[:message]["author"] = secure_author!(author)
+      socket[:message]["author"]["localUsername"] = @message.local_username
+      socket[:message]["author"]["membershipId"] = @message.membership.id
       ChatChannel.broadcast_to(@chat, socket)
     end
   end
@@ -45,6 +46,7 @@ class ChatChannel < ApplicationCable::Channel
     author.delete("sessionToken")
     author.delete("createdAt")
     author.delete("updatedAt")
+    author
   end
 
 end

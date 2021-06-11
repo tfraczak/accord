@@ -7,7 +7,8 @@ export default (props) => {
         server,
         kickMember,
         transferOwnership,
-        isOwner
+        isOwner,
+        handleContext
     } = props;
     let username;
     if (member.localUsername) {
@@ -18,7 +19,7 @@ export default (props) => {
 
     return (
         <> 
-            <li className="m-item">
+            <li id={`m-item-${member.id}`} className="m-item" onContextMenu={ handleContext }>
                 <div className="member-wrapper">
                     <img
                         src={ member.avatarUrl ?  member.avatarUrl : window.defaultAvatarUrl }

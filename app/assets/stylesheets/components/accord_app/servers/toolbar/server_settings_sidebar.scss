@@ -57,6 +57,10 @@
               display: none;
             }
 
+            li {
+              margin: 2px 0;
+            }
+
             li:not(.delete) {
               padding: 6px 10px;
               border-radius: 4px;
@@ -72,7 +76,7 @@
 
             .separator {
               border-top: 1px solid darken($accord-app-3, 7%);
-              margin: 8px 0;
+              margin: 6px 0;
               width: 100%;
               height: 0;
             }

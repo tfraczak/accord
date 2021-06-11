@@ -98,17 +98,19 @@ export const createServer = server => dispatch => {
 };
 
 export const updateServer = (server, serverId) => dispatch => {
-    return ServerAPIUtil.updateServer(server, serverId).then(
-        server => dispatch(receiveServer(server)),
-        err => dispatch(receiveServerErrors(err.responseJSON))
-    );
+    return ServerAPIUtil.updateServer(server, serverId)
+        .then(
+            server => dispatch(receiveServer(server)),
+            err => dispatch(receiveServerErrors(err.responseJSON))
+        );
 };
 
 export const deleteServer = (serverId) => dispatch => {
-    return ServerAPIUtil.destroyServer(serverId).then(
-        payload => dispatch(removeServer(payload)),
-        err => dispatch(receiveServerErrors(err.responseJSON))
-    )
+    return ServerAPIUtil.destroyServer(serverId)
+        .then(
+            payload => dispatch(removeServer(payload)),
+            err => dispatch(receiveServerErrors(err.responseJSON))
+        )
 };
 
 export const joinServer = (membership) => dispatch => {
@@ -122,10 +124,11 @@ export const joinServer = (membership) => dispatch => {
 };
 
 export const leaveServer = (membershipId) => dispatch => {
-    return ServerAPIUtil.leaveServer(membershipId).then(
-        payload => dispatch(leftServer(payload)),
-        err => dispatch(receiveServerErrors(err.responseJSON))
-    );
+    return ServerAPIUtil.leaveServer(membershipId)
+        .then(
+            payload => dispatch(leftServer(payload)),
+            err => dispatch(receiveServerErrors(err.responseJSON))
+        );
 };
 
 export const kickMember = (membershipId) => dispatch => {
@@ -151,13 +154,15 @@ export const getServerByJoinForm = (urlToken,currentUserId) => dispatch => {
 };
 
 export const getServerByUrl = urlToken => dispatch => (
-    ServerAPIUtil.getServerByInvite(urlToken).then(
-        server => dispatch(receiveInvitedServer(server))
-    )
+    ServerAPIUtil.getServerByInvite(urlToken)
+        .then(
+            server => dispatch(receiveInvitedServer(server))
+        )
 );
 
 export const getUpdatedServerInfo = serverId => dispatch => {
-    return ServerAPIUtil.getServer(serverId).then(
-        payload => dispatch(receiveServerInfo(payload))
-    );
+    return ServerAPIUtil.getServer(serverId)
+        .then(
+            payload => dispatch(receiveServerInfo(payload))
+        );
 };

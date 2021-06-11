@@ -6,6 +6,10 @@
     width: 100vw;
     height: 100vh;
 
+    img:not(.construction-img) {
+        object-fit: cover;
+    }
+
 }
 
 @import './accord_app_content.scss';

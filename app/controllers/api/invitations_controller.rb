@@ -1,8 +1,7 @@
 class Api::InvitationsController < ApplicationController
 
     def index
-        server = Server.find_by(id: params[:server_id])
-        @invitations = Invitation.where(server_id: server.id)
+        @invitations = Invitation.where(server_id: params[:server_id])
         render :index
     end
 

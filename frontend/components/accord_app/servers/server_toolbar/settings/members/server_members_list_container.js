@@ -22,7 +22,7 @@ const mSTP = (state, ownProps) => {
 
 const mDTP = dispatch => ({
     kickMember: membershipId => dispatch(kickMember(membershipId)),
-    transferOwnership: server => dispatch(updateServer({server})),
+    transferOwnership: (formData, serverId) => dispatch(updateServer(formData, serverId)),
     closeModal: () => dispatch(closeModal()),
 });
 

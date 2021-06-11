@@ -1,87 +1,55 @@
 import React, { Component } from 'react';
 import MemberListItem from './member_list_item';
-import { membersAlphaAsc } from '../../../../../../utils/func_utils';
+import { convertToSnakeCase } from '../../../../../../utils/func_utils';
 
 class ServerMembersList extends Component {
     constructor(props) {
         super(props);
-        this.members = {};
         this.closeMemberOptions = this.closeMemberOptions.bind(this);
+        this.handleContext = this.handleContext.bind(this);
         this.handleTransferOwnership = this.handleTransferOwnership.bind(this);
     }
 
-    componentDidMount() {
-        const members = document.getElementsByClassName("m-item");
-        for(let member of members) {
-            member.addEventListener('contextmenu', e => {
-                e.preventDefault();
-                this.members[`${member.innerText.split("\n")[1].split("@")[1]}`] = member;
-                const rect = member.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const memberOptions = document.getElementById(`member-options-${member.innerText.split("\n")[1].split("@")[1]}`);
-                memberOptions.style.top = `${y+memberOptions.offsetHeight-14}px`;
-                memberOptions.style.left = `${x}px`;
-                memberOptions.classList.remove('hidden');
-                document.addEventListener('mousedown', e => {
-                    e.preventDefault();
-                    const clickedOutside = !memberOptions.contains(e.target);
-                    if (clickedOutside) {
-                        memberOptions.classList.add("hidden");
-                        document.removeEventListener('click', this.closeMemberOptions);
-                    }
-                });
-            });
-
+    handleContext(member) {
+        return e => {
+            e.preventDefault();
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const memberOptions = document.getElementById(`member-options-${member.username}#${member.usernameId}`);
+            memberOptions.style.top = `${y+memberOptions.offsetHeight-14}px`;
+            memberOptions.style.left = `${x}px`;
+            memberOptions.classList.remove('hidden');
+            document.addEventListener('mousedown', this.closeMemberOptions(memberOptions));
         }
     }
 
-    componentWillUnmount() {
-        const members = document.getElementsByClassName("m-item");
-        for(let member of members) {
-            member.removeEventListener('contextmenu', e => {
-                e.preventDefault();
-                this.members[`${member.innerText.split("\n")[1].split("@")[1]}`] = member;
-                const rect = member.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const memberOptions = document.getElementById(`member-options-${member.innerText.split("\n")[1].split("@")[1]}`);
-                memberOptions.style.top = `${y}px`;
-                memberOptions.style.left = `${x}px`;
-                memberOptions.classList.remove('hidden');
-                document.removeEventListener('mousedown', e => {
-                    e.preventDefault();
-                    const clickedOutside = !memberOptions.contains(e.target);
-                    if (clickedOutside) {
-                        memberOptions.classList.add("hidden");
-                        document.removeEventListener('click', this.closeMemberOptions);
-                    }
-                });
-            });
+    closeMemberOptions(memberOptions) {
+        return e => {
+            const clickedOutside = !memberOptions.contains(e.target);
+            if (clickedOutside) {
+                memberOptions.classList.add("hidden");
+                document.removeEventListener('mousedown', this.closeMemberOptions(memberOptions));
+            }
         }
     }
 
-    closeMemberOptions(e) {
-        const members = document.getElementsByClassName("m-item");
-        for(let member of members) {
-            const memberOptions = document.getElementById(`member-options-${member.innerText.split("\n")[1].split("@")[1]}`);
-            document.removeEventListener('mousedown', e => {
-                e.preventDefault();
-                const clickedOutside = !memberOptions.contains(e.target);
-                if (clickedOutside) {
-                    memberOptions.classList.add("hidden");
-                    document.addEventListener('click', this.closeMemberOptions);
-                }
-            });
-        }
-    }
-
-    handleTransferOwnership(memberId) {
-        const { transferOwnership, closeModal } = this.props;
-        const server = Object.assign({}, this.props.server);
-        server.ownerId = memberId;
+    handleTransferOwnership(member) {
+        const {
+            transferOwnership,
+            closeModal,
+            server,
+        } = this.props;
+        
+        const formData = new FormData();
+        formData.append('server[owner_id]', member.id);
+        
+        const memberOptions = document.getElementById(`member-options-${member.username}#${member.usernameId}`);
+        memberOptions.classList.add('hidden');
+        document.removeEventListener('mousedown', this.closeMemberOptions(memberOptions));
         closeModal();
-        transferOwnership(server);
+        
+        transferOwnership(formData, server.id);
     }
 
     render() {
@@ -103,12 +71,13 @@ class ServerMembersList extends Component {
                         { 
                             serverMembers.map(member => (
                                 <MemberListItem
+                                    handleContext={ this.handleContext(member) }
                                     key={ `m-${member.id}-${server.id}` }
                                     member={ member }
                                     server={ server }
                                     isOwner={ isOwner }
                                     kickMember={ () => kickMember(member.membershipId) }
-                                    transferOwnership={ () => this.handleTransferOwnership(member.id) }
+                                    transferOwnership={ () => this.handleTransferOwnership(member) }
                                 />
                             ))
                         }

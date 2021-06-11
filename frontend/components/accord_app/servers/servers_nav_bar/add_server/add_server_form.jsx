@@ -222,7 +222,7 @@ class AddServerForm extends React.Component {
                 <h6 className="close" onClick={ this.clickClose }>+</h6>
                 <h1 className="add-server-title">{ formTitle }</h1>
                 { formSubtitle }
-                {/* { formType === 'create' ? ( <img className="asf-create-img" alt='upload-img-placeholder' src={window.defaultServerImg} /> ) : <div className="asf-form-separator"></div> } */}
+                {/* { formType === 'create' ? ( <img style="object-fit: cover" className="asf-create-img" alt='upload-img-placeholder' src={window.defaultServerImg} /> ) : <div className="asf-form-separator"></div> } */}
                 { formType === 'create' ? ( this.insertServerImg() ) : <div className="asf-form-separator"></div> }
                 <form onSubmit={ this.handleSubmit } className="add-server-form">
                     <div className="asf-input-wrapper">
