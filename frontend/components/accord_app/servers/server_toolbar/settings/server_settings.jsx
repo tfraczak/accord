@@ -1,7 +1,7 @@
 import React from 'react';
 import ServerSettingsOverview from './server_settings_overview';
 
-class ChannelSettings extends React.Component {
+class ServerSettings extends React.Component {
     constructor(props) {
         super(props);
 
@@ -35,11 +35,10 @@ class ChannelSettings extends React.Component {
     handleDelete(e) {
         e.preventDefault();
         this.props.closeModal();
-        
-        if (parseInt(this.props.match.params.serverId) === this.props.server.id) {
+        if (parseInt(this.props.location.pathname.split("/")[2]) === this.props.server.id) {
             this.props.history.push(`/channels/@me`);
         }
-        this.props.deleteServer(this.props.server);
+        this.props.deleteServer(this.props.server.id);
     }
 
     handleReset() {
@@ -163,6 +162,7 @@ class ChannelSettings extends React.Component {
 		const {
 			server,
 		} = this.props;
+        if (!server) return null;
         const textLimit = 24;
 		let title;
         if (this.state.name.length <= textLimit) {
@@ -210,4 +210,4 @@ class ChannelSettings extends React.Component {
     }
 }
 
-export default ChannelSettings;
+export default ServerSettings;

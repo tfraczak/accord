@@ -9,6 +9,7 @@ import ServerSettings from './server_settings';
 const mSTP = (state, ownProps) => {
     const currentUser = state.entities.users[state.session.id];
     const server = state.entities.servers[ownProps.location.pathname.split("/")[2]];
+    if (!server) return {};
     const isOwner = currentUser.id === server.ownerId;
     return {
         isOwner,

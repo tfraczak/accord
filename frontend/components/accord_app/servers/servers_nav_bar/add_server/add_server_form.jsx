@@ -122,12 +122,12 @@ class AddServerForm extends React.Component {
         }
             
         return [(
-            <h3 id={errorMsg ? "error" : null} className={className}>
+            <div id={errorMsg ? "error" : null} className={className}>
                 { this.props.formType === 'create' ? `SERVER NAME` : inviteLink() }&nbsp;
                 <h6>
                     { errorMsg }
                 </h6>
-            </h3>
+            </div>
         ), errorMsg ? true : false];
     }
 
