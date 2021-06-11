@@ -8,7 +8,7 @@ class Chat extends Component {
         super(props);
         this.state = { messages: props.messages || [] };
         this.bottom = React.createRef();
-        this.subscription = App.cable.subscriptions.create(
+        this.subscription = this.props.chat ? App.cable.subscriptions.create(
             {
                 channel: `ChatChannel`,
                 type: `${this.props.type}`,
@@ -39,7 +39,7 @@ class Chat extends Component {
                     return this.subscription.perform("load");
                 }
             }
-        );
+        ) : undefined;
     }
 
     componentDidMount() {
@@ -68,7 +68,7 @@ class Chat extends Component {
     
 
     render() {
-
+        if (!this.props.chat) return null;
         const {
             currentUserId,
             chat,

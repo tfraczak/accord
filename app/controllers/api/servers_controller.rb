@@ -22,6 +22,10 @@ class Api::ServersController < ApplicationController
     def create
         @server = Server.new(server_params)
         if @server.save
+            if @server.image.attached?
+                @server.image_url = url_for(@server.image)
+                @server.save
+            end
             @channel = Channel.find_by(server_id: @server.id)
             @membership = Membership.find_by(joinable_id: @server.id, joinable_type: :Server, user_id: current_user.id)
             render :create
@@ -32,6 +36,7 @@ class Api::ServersController < ApplicationController
 
     def update
         @server = Server.find_by(id: params[:id])
+        @server.image.purge if @server.image.attached? && (server_params[:image_url] == "")
         if @server && @server.update(server_params)
             render :update
         elsif !@server

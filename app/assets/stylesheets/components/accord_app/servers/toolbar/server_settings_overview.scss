@@ -68,10 +68,13 @@
                     border-radius: 150px;
                     width: 100px;
                     height: 100px;
-                    font-size: 48px;
+                    font-size: 28px;
                     font-weight: 400;
                     color: $font-main;
                     cursor: pointer;
+                    &.disabled {
+                      cursor: not-allowed;
+                    }
                   }
 
                   .plus {
@@ -113,6 +116,9 @@
                       position: relative;
                       box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
                       background-color: darken($form-color, 20%);
+                      &.disabled {
+                        cursor: not-allowed;
+                      }
                     }
             
                     &.input {
@@ -135,6 +141,9 @@
                       &:focus {
                         outline: none;
                       }
+                      &:disabled {
+                        cursor: not-allowed;
+                      }
                     }
                   }
 
@@ -148,8 +157,11 @@
                   color: #2e2e2e;
                   cursor: pointer;
                   transition: 100ms ease-in-out;
-                  &:hover {
+                  &:hover:not(:disabled) {
                     color: black;
+                  }
+                  &:disabled {
+                    cursor: not-allowed;
                   }
                 }
 
@@ -179,6 +191,9 @@
                   border: 1px solid $font-main;
                   border-radius: 3px;
                   cursor: pointer;
+                  &:disabled {
+                    cursor: not-allowed;
+                  }
                 }
               }
 

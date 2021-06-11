@@ -34,6 +34,13 @@ class Server < ApplicationRecord
         self.image_url ||= ""
     end
 
+    def assign_image_url
+        if self.image.attached?
+            self.image_url = url_for(self.image)
+            self.save
+        end
+    end
+
     def assign_owner_as_member
         Membership.new(
             user_id: self.owner_id,

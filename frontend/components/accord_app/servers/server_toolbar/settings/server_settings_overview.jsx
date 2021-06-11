@@ -14,6 +14,7 @@ export default props => {
 		hovered,
 		notHovered,
 		fileOpen,
+    isOwner,
   } = props;
 
   const insertServerImg = () => {
@@ -24,16 +25,24 @@ export default props => {
               notHovered={ notHovered }
               handleImage={ handleImage }
               imageUrl={ imageUrl }
+              isOwner={ isOwner }
           />
           {
               imageUrl ? 
-              <img src={ imageUrl } className="upload-img img" /> :
-              <h2 onClick={ fileOpen } onMouseOver={ hovered } onMouseOut={ notHovered } className="initials">{ serverInitials(name) }</h2>
+              <img src={ imageUrl } className={ `upload-img img${isOwner ? "" : " disabled"}` } /> :
+              <h2 onClick={ fileOpen } onMouseOver={ hovered } onMouseOut={ notHovered } className={ `initials${isOwner ? "" : " disabled"}` }>{ serverInitials(name) }</h2>
           }
-          <h6 onClick={ fileOpen } onMouseOver={ hovered } onMouseOut={ notHovered } id="plus" className="plus">
-              <span>+</span>
-              <i onClick={ fileOpen } onMouseOver={ hovered } onMouseOut={ notHovered } className="fas fa-camera"></i>
-          </h6>
+          {
+            isOwner ?
+            (
+              <h6 onClick={ fileOpen } onMouseOver={ hovered } onMouseOut={ notHovered } id="plus" className="plus">
+                  <span>+</span>
+                  <i onClick={ fileOpen } onMouseOver={ hovered } onMouseOut={ notHovered } className="fas fa-camera"></i>
+              </h6>
+            ) :
+            null
+          }
+          
       </div>
   	);
   }
@@ -45,12 +54,12 @@ export default props => {
       	<main>
 					<div className="edit-server-image-wrapper">
 						{ insertServerImg() }
-						<button type="button" onClick={ removeImage }>Remove</button>
+						<button disabled={ !isOwner } type="button" onClick={ removeImage }>Remove</button>
 					</div>
 
 					<div className="edit-server-image-alt">
 						<h6>We recommend an image of at least 512x512 for the server.</h6>
-						<button className="upload-img-btn" onClick={ fileOpen } >Upload Image</button>
+						<button disabled={ !isOwner } className="upload-img-btn" onClick={ fileOpen } >Upload Image</button>
 					</div>
 
 					<div className="edit-server-name-wrapper">
@@ -60,6 +69,7 @@ export default props => {
 								type="text"
 								value={ name }
 								onChange={ handleName }
+                disabled={ !isOwner }
 						/>
 					</div>
 				</main>
@@ -67,7 +77,7 @@ export default props => {
 						<p className="update-message">Careful — you have unsaved changes!</p>
 						<div className="buttons">
 								<button onClick={ handleReset } className="reset" type="button">Reset</button>
-								<button disabled={ !name } className="save" type="submit">Save Changes</button>
+								<button disabled={ !name || !isOwner } className="save" type="submit">Save Changes</button>
 						</div>
 				</div>
 

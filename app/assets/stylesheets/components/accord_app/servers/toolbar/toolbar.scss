@@ -1,5 +1,5 @@
 .sb-header.wrapper {
-
+    user-select: none;
     .server-toolbar {
         position: relative;
         width: 100%;
@@ -29,22 +29,22 @@
                 color: $font-main;
                 font-size: 16px;
                 padding: 12px 20px;
+                cursor: pointer;
 
                 width: 100%;
                 height: 100%;
                 transition: 0.2s ease-in-out;
 
-                &:hover, &.dropped {
-                    background-color: $form-button;
-                    cursor: pointer;
+                &.dropped {
+                    background-color: darken($accord-app-3, 5%);
                 }
 
             }
 
             #st-x {
                 position: absolute;
-                font-size: 28px;
-                right: 17px;
+                font-size: 30px;
+                right: 19px;
                 transition: 100ms ease-in-out;
                 opacity: 0;
 
@@ -81,13 +81,16 @@
                 &.fade-out {
                     visibility: hidden;
                     opacity: 0;
-                    height: 0;
-                    transition: visibility 0s ease-in-out 0.5s, opacity 0.2s, height 0.3s;
+                    top: -50px;
+                    transition: visibility 0.2s ease-in-out 0.5s, opacity 0.2s, 0.2s;
+                    * {
+                        visibility: hidden;
+                    }
                 }
                 &.fade-in {
                     visibility: visible;
                     opacity: 1;
-                    transition: visibility 0s ease-in-out 0.5s, opacity 0.2s, height 0.3s;
+                    transition: visibility 0s ease-in-out 0.5s, opacity 0.2s, 0.2s;
                 }
                 
                 
@@ -135,8 +138,29 @@
                             transition: 100ms ease-in-out;
                             color: $font-main;
 
+                            &.invitation {
+                                color: #7940ff;
+                            }
+
+                            &.leave-server {
+                                color: rgb(192, 0, 0);
+
+                                &:hover {
+                                    background-color: rgb(187, 53, 53);
+                                    color: $form-color;
+                                }
+
+                                .fa-sign-out-alt {
+                                    position: relative;
+                                    right: 2px;
+                                    transform: rotate(180deg);
+                                    
+                                }
+                            }
+
                             &:hover {
-                                background-color: darken($form-color, 20%);
+                                background-color: $form-button;
+                                color: $font-main;
                             }
 
                             .fa-cog, .fa-pencil-alt, .fa-plus-circle {

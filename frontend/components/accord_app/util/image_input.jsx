@@ -5,7 +5,8 @@ const ImageInput = (props) => {
     handleImage,
     hovered,
     notHovered,
-    imageUrl
+    imageUrl,
+    isOwner
   } = props;
 
   return (
@@ -19,7 +20,8 @@ const ImageInput = (props) => {
         <input 
           id="img-input"
           onChange={ handleImage }
-          type="file" />
+          type="file"
+          disabled={ !isOwner } />
       </label>
     </>
   )

@@ -83,7 +83,7 @@ class ServerToolbar extends Component {
                             { server.name }
                         <i 
                             id="st-chevron"
-                            className={`fas fa-chevron-left`}></i>
+                            className={`fas fa-chevron-down`}></i>
                         <h6 id="st-x">+</h6>
                     </button>
                         <section
@@ -105,6 +105,7 @@ class ServerToolbar extends Component {
                                 deleteServer={ () => deleteServer(server.id) }
                                 leaveServer={ () => leaveServer(membershipId) }
                                 createInvite={ () => createInvite(server.id) }
+                                history={ this.props.history }
                             />
                         </section> 
                 </section>

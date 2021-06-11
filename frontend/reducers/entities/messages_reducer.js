@@ -52,7 +52,7 @@ export default (state = {}, action) => {
         case REMOVE_CHANNEL:
             nextState = Object.assign({}, state);
             messages = chatMessages(action.channel, "Channel", nextState);
-            debugger
+            
             for(let message of messages) { delete nextState[message.id] }
             return nextState;
         case RECEIVE_JOINED_SERVER:

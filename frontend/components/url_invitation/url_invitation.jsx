@@ -131,9 +131,16 @@ class UrlInvitation extends React.Component {
             const { invitedServer } = this.props;
             return (
             <div className="ui-server-info-wrapper">
-                <h1 className="default-server-icon">
-                    { this.props.serverInitials(invitedServer.name) }
-                </h1>
+                { invitedServer.imageUrl ?
+                    (
+                        <img src={ invitedServer.imageUrl } className="server-icon img" />
+                    ) :
+                    (
+                        <h1 className="server-icon default">
+                            { this.props.serverInitials(invitedServer.name) }
+                        </h1>
+                    )
+                }
                 <h2 className="server-name">
                     { invitedServer.name }
                 </h2>

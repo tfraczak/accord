@@ -6,7 +6,14 @@ import ServerSettingsButton from './settings/server_settings_button';
 class ServerToolbarMenu extends Component {
   constructor(props) {
     super(props);
+    this.handleLeave = this.handleLeave.bind(this);
+  }
 
+  handleLeave() {
+    this.props.closeToolbar();
+    this.props.history.push("/channels/@me");
+    this.props.leaveServer();
+    
   }
 
   render() {
@@ -14,7 +21,6 @@ class ServerToolbarMenu extends Component {
       server,
       isOwner,
       openModal,
-      openFullModal,
       closeToolbar,
     } = this.props;
     return (
@@ -28,11 +34,16 @@ class ServerToolbarMenu extends Component {
           closeToolbar={ () => closeToolbar() }
         />
 
-        <ServerSettingsButton 
-          key={`server-settings-${server.id}`} 
-          openModal={ () => openModal("server settings") }
-          closeToolbar={ () => closeToolbar() }
-        />
+        {
+          isOwner ?
+          (
+            <ServerSettingsButton 
+              key={`server-settings-${server.id}`} 
+              openModal={ () => openModal("server settings") }
+              closeToolbar={ () => closeToolbar() }
+            />
+          ) : null
+        }
 
         <CreateChannelButton
           key={`create-channel-${server.id}`}
@@ -51,6 +62,17 @@ class ServerToolbarMenu extends Component {
             <h6>Change Nickname</h6>
             <i className="fas fa-pencil-alt"></i>
           </button>
+        </li>
+        
+        <li>
+        { isOwner ? null :
+            (
+              <button onClick={this.handleLeave} className="st-menu-btn leave-server">
+                <h6>Leave Server</h6>
+                <i className="fas fa-sign-out-alt"></i>
+              </button>
+            )
+          }
         </li>
 
       </ul>

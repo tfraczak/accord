@@ -77,7 +77,9 @@ class ChannelSettings extends React.Component {
         const save = document.getElementById("ssf-buttons-wrapper");
 		reader.onload = () => {
 			this.setState({ imageUrl: reader.result, imageFile: file });
-            save.classList.add("active");
+            if (this.state.imageUrl !== this.props.server.imageUrl) {
+                save.classList.add("active");
+            }
             document.getElementById("plus").classList.remove("hovered");
 		}
 		if (file) {
@@ -89,7 +91,9 @@ class ChannelSettings extends React.Component {
 	}
 
 	removeImage() {
-        if (this.state.name === this.props.server.name) document.getElementById("ssf-buttons-wrapper").classList.remove("active");
+        if (this.state.name === this.props.server.name) {
+            document.getElementById("ssf-buttons-wrapper").classList.add("active");
+        }
 		this.setState({ imageUrl: "", imageFile: null });
 	}
 
@@ -105,7 +109,7 @@ class ChannelSettings extends React.Component {
         const formData = new FormData();
 
         formData.append('server[name]', this.state.name);
-        if(this.state.imageFile) formData.append('server[image]', this.state.imageFile);
+        if(this.state.imageUrl !== this.props.server.imageUrl) formData.append('server[image_url]', this.state.imageUrl);
 
         updateServer(formData, server.id)
             .then(() => {
@@ -128,7 +132,6 @@ class ChannelSettings extends React.Component {
 	}
 
     clickClose() {
-        document.getElementById("edit-channel-btn").classList.remove("modal-open");
         this.props.closeModal();
     }
 
@@ -148,6 +151,7 @@ class ChannelSettings extends React.Component {
 						hovered={ this.hovered }
 						notHovered={ this.notHovered }
 						fileOpen={ this.fileOpen }
+                        isOwner={ this.props.isOwner }
 					/>
 				);
 			default:

@@ -169,10 +169,11 @@ class AddServerForm extends React.Component {
                             notHovered={ this.notHovered }
                             handleImage={ this.handleImage }
                             imageUrl={ this.state.imageUrl }
+                            isOwner={ true }
                         />
                         {
                             this.state.imageUrl ? 
-                            <img src={ this.state.imageUrl } className="asf-create-img img" type="text" /> :
+                            <img src={ this.state.imageUrl } className="upload-img img" type="text" /> :
                             null
                         }
                         <p onClick={this.fileOpen} onMouseOver={ this.hovered } onMouseOut={ this.notHovered } id="plus" className="plus">
