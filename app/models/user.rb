@@ -30,6 +30,9 @@ class User < ApplicationRecord
 
     has_many :messages
 
+    has_many :invitations,
+        foreign_key: :inviter_id
+
     has_one_attached :avatar
 
     def self.find_by_credentials(email, pw)
@@ -101,6 +104,16 @@ class User < ApplicationRecord
 
     def assign_default_avatar
         self.avatar_url ||= ""
+    end
+
+    def local_username(server_id)
+        membership = Membership.find_by(
+            joinable_id: server_id,
+            joinable_type: "Server",
+            user_id: self.id,
+        )
+        return membership.local_username if membership && (membership.local_username != "")
+        return self.username
     end
 
     private

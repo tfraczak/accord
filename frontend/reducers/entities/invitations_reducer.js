@@ -18,6 +18,8 @@ export default (state = {}, action) => {
     let nextState;
     let invitation, invitations, invitationId, invitationIds;
     switch (action.type) {
+        case RECEIVE_INVITATION:
+            return Object.assign({}, state, { [action.invitation.id]: action.invitation });
         case RECEIVE_INVITATIONS:
             return Object.assign({}, state, action.invitations);
         case RECEIVE_USER_LOAD_DATA:

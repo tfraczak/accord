@@ -58,6 +58,14 @@ export const serverChannels = (server, channelsState) => {
     }
 };
 
+export const serverInvites = (server, invitesState) => {
+    if(server) {
+        const invites = Object.values(Object.assign({}, invitesState));
+        const invitesForServer = invites.filter(invite => invite.serverId === server.id);
+        return invitesForServer;
+    }
+};
+
 export const defaultChannelId = (server, channelsState) => {
     const channels = serverChannels(server, channelsState);
     for (let channel of channels) { if (channel.default) return channel.id }

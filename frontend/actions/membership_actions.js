@@ -20,9 +20,13 @@ export const removeMembership = membershipId => ({
 });
 
 export const retrieveServerMemberships = serverId => dispatch => {
-    ServerAPIUtil.getMemberships(serverId).then(memberships => {
+    return ServerAPIUtil.getMemberships(serverId).then(memberships => {
         dispatch(receiveMemberships(memberships));
     }, err => {
         dispatch(receiveServerErrors(err.responseJSON));
     });
 };
+
+export const updateNickname = membership => dispatch => {
+    return 
+}

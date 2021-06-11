@@ -20,18 +20,18 @@ export const removeInvitation = inviteId => ({
     inviteId,
 });
 
-export const createInvite = (serverId, expiration=null) => dispatch => {
-    return InviteAPIUtil.createInvite(serverId,expiration)
+export const createInvite = (invitation) => dispatch => {
+    return InviteAPIUtil.createInvite(invitation)
         .then(
             invitation => dispatch(receiveInvitation(invitation)),
             err => dispatch(receiveServerErrors(err.responseJSON))
         );
 };
 
-export const destroyInvite = inviteId => dispatch => {
-    InviteAPIUtil.destroyInvite(inviteId)
+export const deleteInvite = invite => dispatch => {
+    InviteAPIUtil.destroyInvite(invite.id)
         .then(
-            () => dispatch(removeInvitation(inviteId)),
+            () => dispatch(removeInvitation(invite.id)),
             err => dispatch(receiveServerErrors(err.responseJSON))
         );
 };

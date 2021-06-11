@@ -1,6 +1,7 @@
 import React from 'react';
 import ServerSettingsOverview from './server_settings_overview';
 import ServerMembersListContainer from './members/server_members_list_container';
+import InvitesListContainer from './invitations/invites_list_container';
 
 class ServerSettings extends React.Component {
     constructor(props) {
@@ -157,6 +158,10 @@ class ServerSettings extends React.Component {
             case "members":
                 return (
                     <ServerMembersListContainer />
+                )
+            case "invites":
+                return (
+                    <InvitesListContainer />
                 )
 			default:
 				return null;

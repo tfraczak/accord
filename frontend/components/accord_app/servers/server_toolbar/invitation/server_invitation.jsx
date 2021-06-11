@@ -3,6 +3,7 @@ import React from 'react';
 class ServerInvitation extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
             invite: props.invitation ? props.invitation : "",
             serverId: parseInt(props.location.pathname.split("/")[2]),
@@ -27,8 +28,13 @@ class ServerInvitation extends React.Component {
     handleInvite(e) {
         e.preventDefault();
         e.stopPropagation();
+        
         if (!this.props.invitation) {
-            this.props.createInvite(this.props.server.id);
+            const invitation = {};
+            invitation['serverId'] = this.props.server.id;
+            invitation['inviterId'] = this.props.currentUser.id;
+            invitation['expiration'] = null;
+            this.props.createInvite(invitation);
         }
     }
 

@@ -1,10 +1,13 @@
-export const createInvite = (serverId, expiration=null) => (
-  $.ajax({
+import { convertToSnakeCase } from "./func_utils";
+
+export const createInvite = (invitation) => {
+  invitation = convertToSnakeCase(invitation);
+  return $.ajax({
       method: "POST",
-      url: `/api/servers/${serverId}/invitations`,
-      data: { invitation: {expiration} },
+      url: `/api/invitations`,
+      data: { invitation },
   })
-);
+};
 
 export const getServerInvites = serverId => (
   $.ajax({

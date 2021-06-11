@@ -39,7 +39,7 @@ module Params
   # end
 
   def invitation_params
-    params.require(:invitation).permit(:expiration)
+    params.require(:invitation).permit(:expiration, :inviter_id, :server_id)
   end
 
 end

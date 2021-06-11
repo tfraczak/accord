@@ -7,6 +7,10 @@ class Invitation < ApplicationRecord
 
     belongs_to :server
 
+    belongs_to :inviter,
+        foreign_key: :inviter_id,
+        class_name: :User
+
     def self.generate_url_token
         SecureRandom.urlsafe_base64(7)
     end

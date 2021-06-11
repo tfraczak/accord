@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       resources :users, only: :index
       resources :channels, only: :index
       resources :roles, only: :index
-      resources :invitations, only: [:index, :create]
+      resources :invitations, only: :index
       resources :memberships, only: [:index, :create]
     end
     resources :channels, only: [:create, :update, :destroy, :show] do
@@ -26,7 +26,7 @@ Rails.application.routes.draw do
     resources :messages, only: [:create, :update, :destroy]
     resources :roles, only: [:create, :destroy]
     get '/invitations/:url_token', to: 'invitations#show', as: :invitation
-    resources :invitations, only: :destroy
+    resources :invitations, only: [:destroy, :create]
   end
 
 end
