@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_11_170542) do
+ActiveRecord::Schema.define(version: 2021_06_12_030817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 2021_06_11_170542) do
   create_table "invitations", force: :cascade do |t|
     t.string "url_token"
     t.bigint "server_id", null: false
-    t.integer "expiration"
+    t.float "expiration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "inviter_id", null: false

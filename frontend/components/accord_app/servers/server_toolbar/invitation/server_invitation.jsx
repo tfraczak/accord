@@ -1,18 +1,20 @@
 import React from 'react';
+import Select from 'react-select';
 
 class ServerInvitation extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            invite: props.invitation ? props.invitation : "",
-            serverId: parseInt(props.location.pathname.split("/")[2]),
+            expiration: ""
         };
 
         this.handleInvite = this.handleInvite.bind(this);
         this.clickClose = this.clickClose.bind(this);
         this.copyClick = this.copyClick.bind(this);
         this.canCopy = this.canCopy.bind(this);
+        this.check = this.check.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     componentWillUnmount() {
@@ -29,11 +31,11 @@ class ServerInvitation extends React.Component {
         e.preventDefault();
         e.stopPropagation();
         
-        if (!this.props.invitation) {
+        if (!this.props.invitation && (this.state.expiration !== "")) {
             const invitation = {};
             invitation['serverId'] = this.props.server.id;
             invitation['inviterId'] = this.props.currentUser.id;
-            invitation['expiration'] = null;
+            invitation['expiration'] = this.state.expiration.value;
             this.props.createInvite(invitation);
         }
     }
@@ -55,11 +57,34 @@ class ServerInvitation extends React.Component {
         }
     }
 
+    check() {
+        return (
+            !!this.props.invitation ||
+            this.state.expiration === ""
+        )
+    }
+
+    handleChange(option) {
+        debugger
+        this.setState({ expiration: option });
+    }
+
     render() {
         const { 
             server,
             invitation,
         } = this.props;
+
+        const options = [
+            { isSelected: true, isDisabled: true, label: 'Select' },
+            { value: 0.5, label: '30 minutes' },
+            { value: 1, label: '1 hour' },
+            { value: 6, label: '6 hours' },
+            { value: 12, label: '12 hours' },
+            { value: 24, label: '1 day' },
+            { value: 27*7, label: '7 days' },
+            { value: null, label: 'Never' },
+        ];
 
         return (
             <div className="create-invite-wrapper">
@@ -78,10 +103,18 @@ class ServerInvitation extends React.Component {
                         </div>
                         <button onClick={ this.copyClick } disabled={ !this.canCopy() }>Copy</button>
                     </div>
+                    <div className="expiration-options-wrapper">
+                        <h6 className="select-label">EXPIRE AFTER</h6>
+                        <Select 
+                            options={ options }
+                            onChange={ this.handleChange }
+                            value={ this.state.expiration }
+                        />
+                    </div>
                 </div>
                 <div className="create-invite-btns-wrapper">
                     <button onClick={ this.clickClose } className="create-invite-back">Back</button>
-                    <button onClick={ this.handleInvite } disabled={!!invitation} className="create-invite-btn">Create Invite Token</button>
+                    <button onClick={ this.handleInvite } disabled={ this.check() } className="create-invite-btn">Create Invite Token</button>
                 </div>
             </div>
         )
