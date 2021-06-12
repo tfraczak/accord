@@ -25,4 +25,11 @@ class Invitation < ApplicationRecord
         self.url_token = Invitation.valid_url_token
     end
 
+    def expired?
+        if self.expiration
+            return ((self.created_at.localtime + (self.expiration * 3600)) - Time.now) <= 0
+        end
+        return false
+    end
+
 end

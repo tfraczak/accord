@@ -50,9 +50,9 @@ Server.create!(
     owner_id: 3,
 ).image.attach(
     io: 
-        File.open("#{Rails.root}/app/assets/images/server_image_seeds/purple.jpg"),
-        filename: "purple.jpg",
-        content_type: "image/jpg"
+        File.open("#{Rails.root}/app/assets/images/server_image_seeds/gengar.png"),
+        filename: "genger.png",
+        content_type: "image/png"
 )
 
 Membership.create!(
@@ -77,7 +77,7 @@ Invitation.create!(
 )
 Invitation.create!(
     server_id: 1,
-    expiration: 12,
+    expiration: 0,
     inviter_id: 2
 )
 Invitation.create!(

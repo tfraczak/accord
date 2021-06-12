@@ -13,7 +13,7 @@
     height: 0;
     width: 100%;
     border-top: 1px solid darken($form-color, 15%);
-    margin: 5px auto;
+    margin: 0 auto;
   }
 
   .inviter, .invite-code, .expires {
@@ -40,7 +40,9 @@
       }
 
       .expired {
-
+        font-weight: 500;
+        font-size: 16px;
+        color: $danger;
       }
       .expiration-time {
 
@@ -102,12 +104,12 @@
     position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    height: 62px;
+    height: 64px;
 
     .delete-wrapper {
       position: absolute;
       right: 0;
-      top: -20px;
+      top: -17px;
       display: flex;
       align-items: center;
       justify-content: center;

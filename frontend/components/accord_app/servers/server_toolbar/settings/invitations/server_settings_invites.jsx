@@ -4,7 +4,9 @@ import InviteListItem from './invite_list_item';
 class ServerSettingsInvites extends Component {
     constructor(props) {
         super(props);
+
     }
+
    
     render() {
         const {

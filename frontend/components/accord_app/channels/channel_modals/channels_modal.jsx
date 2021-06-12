@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import CreateTextChannelContainer from './create_channel_form/create_text_channel_container';
 import ChannelSettingsContainer from './channel_settings/channel_settings_container';
 
-class CreateChannelModal extends Component {
+class ChannelsModal extends Component {
     constructor(props) {
       super(props);
+			this.escModal = this.escModal.bind(this);
     }
 
 	escModal(e) {
@@ -82,4 +83,4 @@ const mDTP = dispatch => {
   };
 };
 
-export default connect(mSTP, mDTP)(CreateChannelModal);
+export default connect(mSTP, mDTP)(ChannelsModal);

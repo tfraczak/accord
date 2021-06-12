@@ -4,14 +4,14 @@ import ServersNavBarContainer from './servers/servers_nav_bar/servers_nav_bar_co
 import ServerMembersListContainer from './servers/server_members_list/server_members_list_container';
 import ConversationMembersList from './conversations/conversation_members_list/conversation_members_list_container';
 import ServerToolbarContainer from './servers/server_toolbar/server_toolbar_container';
-import ServerModal from './servers/server_modals/server_modal';
+import ServersModal from './servers/server_modals/servers_modal';
 import ChannelsIndexContainer from './channels/channels_index/channels_index_container';
 import ChannelChatTitleContainer from './channels/channel_chat_title/channel_chat_title_container';
 import MainFocusContainer from './main-focus/main_focus_container';
 import CurrentUserDisplayContainer from './current_user/current_user_display_container';
 import SbHeaderContainer from './sb-header/sb_header_container';
 import ChatPlaceholder from './main-focus/chat_placeholder';
-import ChannelModal from './channels/channel_modals/channel_modal';
+import ChannelsModal from './channels/channel_modals/channels_modal';
 
 class AccordApp extends React.Component {
     constructor(props) {
@@ -28,8 +28,8 @@ class AccordApp extends React.Component {
     render() {
         return (
             <>
-                <ServerModal />
-                <Route exact path="/channels/:serverId/:channelId" component={ChannelModal}/>
+                <Route path="/channels/:serverId" component={ ServersModal } />
+                <Route exact path="/channels/:serverId/:channelId" component={ ChannelsModal }/>
                 <div className="webapp-wrapper">
                     <ServersNavBarContainer />
                     <div className="base wrapper">

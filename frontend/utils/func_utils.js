@@ -40,6 +40,32 @@ export const convertToSnakeCase = obj => {
     return newObj;
 };
 
+export const printTime = (createdAt, expiration) => {
+    createdAt = new Date(createdAt).getTime();
+    const expiryTime = (expiration * 3600000) + createdAt;
+    let now = new Date().getTime();
+    return formatTime(Math.floor((expiryTime - now)/1000));
+};
+
+const prependZeroes = string => {
+    if (string.length < 2) return "0".concat(string);
+    return string;
+}
+
+const formatTime = diffTime => {
+    let days = diffTime/86400;
+    let hours = (days - Math.floor(days)) * 24;
+    let minutes = (hours - Math.floor(hours)) * 60;
+    let seconds = prependZeroes(Math.floor((minutes - Math.floor(minutes)) * 60).toString());
+    minutes = prependZeroes(Math.floor(minutes).toString());
+    hours = prependZeroes(Math.floor(hours).toString());
+    days = prependZeroes(Math.floor(days).toString());
+
+    return `${days}:${hours}:${minutes}:${seconds}`;
+};
+
+
+
 export const extractDateTime = dateTime => {
     let dateObject = new Date(dateTime);
     

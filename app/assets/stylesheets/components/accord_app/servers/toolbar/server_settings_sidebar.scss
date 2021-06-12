@@ -69,7 +69,12 @@
               line-height: 20px;
               cursor: pointer;
               transition: 0.1s ease-in-out;
-              &:hover, &.active {
+              
+              &:hover {
+                background-color: darken($accord-app-3, 5%);
+              }
+
+              &.active {
                 background-color: darken($accord-app-3, 10%);
               }
             }

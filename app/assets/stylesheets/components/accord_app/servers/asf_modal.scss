@@ -83,6 +83,7 @@
 				background-color: transparent;
 				&.img {
 					top: 14px;
+					object-fit: cover;
 					box-shadow: 0 2px 20px rgba(0, 0, 0, 0.247);
 					background-color: darken($form-color, 20%);
 					border: 1px solid darken($form-color, 23%);

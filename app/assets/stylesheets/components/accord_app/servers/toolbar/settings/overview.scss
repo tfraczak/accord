@@ -114,6 +114,7 @@
                     background-color: transparent;
                     &.img {
                       position: relative;
+                      object-fit: cover;
                       box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
                       background-color: darken($form-color, 20%);
                       &.disabled {

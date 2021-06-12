@@ -8,9 +8,13 @@ class Api::InvitationsController < ApplicationController
     def show
         invitation = Invitation.find_by(url_token: params[:url_token])
         
-        if invitation
+
+
+        if invitation && ((invitation.expiration && !invitation.expired?) || !invitation.expiration)
             @server = Server.find_by(id: invitation.server_id)
             render :show
+        elsif invitation.expired?
+            render json: ["Invite code is expired."], status: 401
         else
             render json: ["Invitation does not exist."], status: 404
         end
@@ -34,6 +38,6 @@ class Api::InvitationsController < ApplicationController
         else
             render json: ["Invitation does not exist."], status: 404
         end
-    end
+    end    
 
 end

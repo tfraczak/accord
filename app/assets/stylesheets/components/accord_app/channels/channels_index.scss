@@ -137,7 +137,12 @@
                     margin-left: 6px;
                     border-radius: 3px;
 
-                    &:hover, &.active {
+                    &:hover {
+                        background-color: rgb(131, 131, 131);
+                        color: #252525;
+                    }
+
+                    &.active {
                         background-color: rgb(107, 107, 107);
                         color: #252525;
                     }

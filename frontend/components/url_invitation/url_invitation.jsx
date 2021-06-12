@@ -6,6 +6,7 @@ class UrlInvitation extends React.Component {
         super(props);
         this.handleYes = this.handleYes.bind(this);
         this.handleNo = this.handleNo.bind(this);
+        this.expired = false;
         this.state = {
             join: () => (
                 <div className="yes-no-wrapper">
@@ -34,7 +35,31 @@ class UrlInvitation extends React.Component {
             getServerByUrl(urlToken)
                 .then(
                     () => retrieveUserServers(currentUserId),
-                    err => history.push("/404")
+                    err => {
+                        if (err.status !== 401) {
+                            history.push("/404");
+                        } else {
+                            if (!this.expired) {
+                                this.setState({
+                                    join: () => (
+                                        <h6 className="redirect">You will be redirected to your profile.</h6>
+                                    ),
+                                    question: () => (
+                                        <h1 className="expired">This invite code is expired!</h1>
+                                    ),
+                                    x: () => (
+                                        <div className="x">
+                                            <h6>+</h6>
+                                        </div>
+                                    )
+                                })
+                            }
+                            this.expired = true;
+                            setTimeout(() => {
+                                history.push("/app");
+                            }, 3000);
+                        }
+                    }
                 );
         } else {
             history.push("/404");
@@ -61,6 +86,16 @@ class UrlInvitation extends React.Component {
                 this.props.history.push("./app");
             },redirectTime);
             return;
+        } else if (this.props.errors[0] === "Invite code is expired.") {
+            this.setState({
+                join: () => (
+                    <div className="join-wrapper">
+                        <h1 className="code-expired">This invite code expired!</h1>
+                        <p>You will be redirected to your profile.</p>
+                    </div>
+                ),
+                question: () => <div className="separator"></div>,
+            });
         } else {
             this.setState({
                 join: () => (
@@ -146,6 +181,8 @@ class UrlInvitation extends React.Component {
                 </h2>
             </div>
             );
+        } else if (this.expired) {
+            return ( <h3 className="x">+</h3> )
         }
     }
 
@@ -157,7 +194,7 @@ class UrlInvitation extends React.Component {
                 <div className="url-invite-wrapper">
                     <div className="url-invite-content-box">
                         { this.state.join() }
-                        { this.insertServerInfo() }
+                        { this.state.x ? this.state.x() : this.insertServerInfo() }
                         { this.state.question() }
                     </div>
                 </div>

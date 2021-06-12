@@ -108,6 +108,9 @@ class AddServerForm extends React.Component {
             case "You're already a member!":
                 errorMsg = " - " + errors[0];
                 break;
+            case "Invite code is expired.":
+                errorMsg = " - The invite is invalid or has expired.";
+                break;
             default:
                 errorMsg = null;
         }

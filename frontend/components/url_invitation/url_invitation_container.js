@@ -5,10 +5,11 @@ import { validUrlToken, serverInitials } from "../../utils/func_utils";
 
 const mSTP = (state, ownProps) => {
     return {
-    currentUserId: state.session.id,
-    invitedServer: state.session.invitedServer,
-    urlToken: ownProps.location.pathname.slice(-10),
-    serverIds: Object.keys(state.entities.servers),
+        currentUserId: state.session.id,
+        invitedServer: state.session.invitedServer,
+        urlToken: ownProps.location.pathname.slice(-10),
+        serverIds: Object.keys(state.entities.servers),
+        errors: state.errors.servers,
     }
 };
 
