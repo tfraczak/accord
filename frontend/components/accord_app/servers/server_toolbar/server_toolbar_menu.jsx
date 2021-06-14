@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import CreateChannelButton from '../../channels/channel_modals/create_channel_form/create_channel_button';
 import ServerInvitationButton from './invitation/server_invitation_button';
 import ServerSettingsButton from './settings/server_settings_button';
+import ChangeNicknameButton from './nickname/server_nickname_button';
 
 class ServerToolbarMenu extends Component {
   constructor(props) {
@@ -31,7 +32,7 @@ class ServerToolbarMenu extends Component {
         <ServerInvitationButton 
           key={`invitation-${server.id}`}
           openModal={ () => openModal("invitation") }
-          closeToolbar={ () => closeToolbar() }
+          closeToolbar={ closeToolbar }
         />
 
         {
@@ -40,13 +41,13 @@ class ServerToolbarMenu extends Component {
             <ServerSettingsButton 
               key={`server-settings-${server.id}`} 
               openModal={ () => openModal("server settings") }
-              closeToolbar={ () => closeToolbar() }
+              closeToolbar={ closeToolbar }
             />
           ) : null
         }
 
         <CreateChannelButton
-          key={`create-channel-${server.id}`}
+          key={ `create-channel-${server.id}` }
           inServerMenu={ true }
           isOwner={ isOwner }
           openModal={ openModal }
@@ -55,19 +56,16 @@ class ServerToolbarMenu extends Component {
 
         <div className="separator"></div>
 
-        <li>
-          {/* open modal */}
-          {/* <ChangeNicknameButton key={`change-nickname-${server.id}`} /> */}
-          <button onClick={closeToolbar} className="st-menu-btn change-nickname">
-            <h6>Change Nickname</h6>
-            <i className="fas fa-pencil-alt"></i>
-          </button>
-        </li>
+        <ChangeNicknameButton 
+          key={ `change-nickname-${server.id}` }
+          openModal={ () => openModal("nickname") }
+          closeToolbar={ closeToolbar }
+        />
         
         <li>
         { isOwner ? null :
             (
-              <button onClick={this.handleLeave} className="st-menu-btn leave-server">
+              <button onClick={ this.handleLeave } className="st-menu-btn leave-server">
                 <h6>Leave Server</h6>
                 <i className="fas fa-sign-out-alt"></i>
               </button>

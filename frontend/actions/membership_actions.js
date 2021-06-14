@@ -1,8 +1,11 @@
 import { receiveServerErrors } from './server_actions';
+import * as ServerAPIUtil from '../utils/server_utils';
+import * as MembershipAPIUtil from '../utils/membership_utils';
 
 export const RECEIVE_MEMBERSHIPS = "RECEIVE_MEMBERSHIPS";
 export const RECEIVE_MEMBERSHIP = "RECEIVE_MEMBERSHIP";
 export const REMOVE_MEMBERSHIP = "REMOVE_MEMBERSHIP";
+export const RECEIVE_NICKNAME = "RECEIVE_NICKNAME";
 
 export const receiveMemberships = memberships => ({
     type: RECEIVE_MEMBERSHIPS,
@@ -19,6 +22,11 @@ export const removeMembership = membershipId => ({
     membershipId,
 });
 
+export const receiveNickname = payload => ({
+    type: RECEIVE_NICKNAME,
+    payload,
+})
+
 export const retrieveServerMemberships = serverId => dispatch => {
     return ServerAPIUtil.getMemberships(serverId).then(memberships => {
         dispatch(receiveMemberships(memberships));
@@ -28,5 +36,8 @@ export const retrieveServerMemberships = serverId => dispatch => {
 };
 
 export const updateNickname = membership => dispatch => {
-    return 
+    return MembershipAPIUtil.updateNickname(membership)
+        .then(
+            payload => dispatch(receiveNickname(payload))
+        )
 }

@@ -5,6 +5,7 @@ import CreateServerFormContainer from '../servers_nav_bar/add_server/create_serv
 import JoinServerFormContainer from '../servers_nav_bar/add_server/join_server_form_container';
 import ServerInvitationContainer from '../server_toolbar/invitation/server_invitation_container';
 import ServerSettingsContainer from '../server_toolbar/settings/server_settings_container';
+import ServerNicknameContainer from '../server_toolbar/nickname/server_nickname_container';
 
 class ServerModal extends React.Component {
     constructor(props) {
@@ -60,12 +61,11 @@ class ServerModal extends React.Component {
 			case 'nickname':
 				className = "nickname-modal-background";
 				childClassName = "nickname-modal-child";
-				// component = <NicknameFormContainer />;
+				component = <ServerNicknameContainer />;
 				break;
 			default:
 				return null;
 		}
-		
 		
 		return (
 			<div className={ className }>
