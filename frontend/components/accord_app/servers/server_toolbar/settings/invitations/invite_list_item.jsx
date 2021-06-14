@@ -1,18 +1,13 @@
 import React from 'react';
 import { printTime } from '../../../../../../utils/func_utils';
-
+import InviteExpiration from './invite_expiration';
 
 class InviteListItem extends React.Component {
     constructor(props) {
         super(props);
-        
-        this.setTime = this.setTime.bind(this);
+    
         this.mouseOver = this.mouseOver.bind(this);
         this.mouseLeave = this.mouseLeave.bind(this);
-        if (!props.invite.isExpired && props.invite.expiration) {
-            this.state = { timeLeft: printTime(props.invite.createdAt, props.invite.expiration) }
-            setInterval(this.setTime, 1000);
-        }
     }
 
     mouseOver() {
@@ -23,11 +18,6 @@ class InviteListItem extends React.Component {
     mouseLeave() {
         const deleteInvite = document.getElementById(`delete-invite-${this.props.invite.id}`);
         deleteInvite.classList.add("hidden");
-    }
-
-    setTime() {
-        const { invite } = this.props;
-        this.setState({timeLeft: printTime(invite.createdAt, invite.expiration)});
     }
 
 
@@ -68,7 +58,7 @@ class InviteListItem extends React.Component {
                             { invite.isExpired ?
                                 ( <span className="expired">EXPIRED</span> ) :
                                 invite.expiration ?
-                                    ( <span className="expiration-time">{ `${this.state.timeLeft}` }</span> ) :
+                                    ( <InviteExpiration invite={ invite } /> ) :
                                     ( <span className="no-expiration">∞</span> )
                             }
                     </div>

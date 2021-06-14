@@ -41,10 +41,11 @@ export const convertToSnakeCase = obj => {
 };
 
 export const printTime = (createdAt, expiration) => {
-    createdAt = new Date(createdAt).getTime();
-    const expiryTime = (expiration * 3600000) + createdAt;
-    let now = new Date().getTime();
-    return formatTime(Math.floor((expiryTime - now)/1000));
+    createdAt = new Date(createdAt);
+    let expiryTime = (expiration * 3600 * 1000) + createdAt.getTime();
+    expiryTime = new Date(expiryTime);
+    let now = new Date();
+    return formatTime((expiryTime - now)/1000);
 };
 
 const prependZeroes = string => {

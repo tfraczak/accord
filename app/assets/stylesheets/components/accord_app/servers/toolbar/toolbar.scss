@@ -35,7 +35,7 @@
                 height: 100%;
                 transition: 0.2s ease-in-out;
 
-                &.dropped {
+                &.dropped, &:hover {
                     background-color: darken($accord-app-3, 5%);
                 }
 
@@ -103,15 +103,15 @@
                     flex-direction: column;
                     width: 100%;
                     height: 100%;
-                    background-color: $form-color;
+                    background-color: darken($accord-app-5, 10%);
                     border-radius: 5px;
                     padding: 5px 7px;
                     cursor: default;
-                    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+                    box-shadow: 0 3px 10px rgba(0,0,0,0.4);
 
                     div.separator {
-                        border-top: 1px solid darken($form-color, 20%);
-                        margin: 1px 0;
+                        border-top: 1px solid lighten($accord-app-5, 20%);
+                        margin: 2px 0;
                         width: 95%;
                         height: 0;
                     }
@@ -136,10 +136,10 @@
                             cursor: pointer;
                             background-color: transparent;
                             transition: 100ms ease-in-out;
-                            color: $font-main;
+                            color: $font-main-negative;
 
                             &.invitation {
-                                color: #7940ff;
+                                color: #b494ff;
                             }
 
                             &.leave-server {

@@ -65,7 +65,6 @@ class ServerInvitation extends React.Component {
     }
 
     handleChange(option) {
-        debugger
         this.setState({ expiration: option });
     }
 
@@ -82,7 +81,7 @@ class ServerInvitation extends React.Component {
             { value: 6, label: '6 hours' },
             { value: 12, label: '12 hours' },
             { value: 24, label: '1 day' },
-            { value: 27*7, label: '7 days' },
+            { value: 24*7, label: '7 days' },
             { value: null, label: 'Never' },
         ];
 
