@@ -73,12 +73,9 @@ export const logout = () => dispatch => {
     ));
 };
 
-export const _retrieveUserLoadData = (userId, history) => dispatch => {
-    getUserServers(userId)
+export const _retrieveUserLoadData = userId => dispatch => {
+    return getUserServers(userId)
         .then(payload => {
             dispatch(receiveUserLoadData(payload));
-        })
-        .then(
-            () => history.push("/channels/@me"), () => history.push("/")
-        );
+        });
 };

@@ -18,7 +18,7 @@ class InviteExpiration extends React.Component {
 
   render() {
     return (
-      <span className="expiration-time">{ `${this.state.timeLeft}` }</span>
+      <span className={ this.state.timeLeft === "EXPIRED" ? "expired" : "expiration-time" }>{ `${this.state.timeLeft}` }</span>
     )
   }
 }

@@ -99,18 +99,18 @@
                 font-size: 16px;
                 line-height: 20px;
                 background-color: transparent;
-                color: rgb(218, 0, 0);
+                color: $danger;
                 transition: 0.1s ease-in-out;
                 &:hover {
-                  background-color: rgb(255, 34, 34);
+                  background-color: $danger;
                   color: $font-main;
                   cursor: pointer;
                 }
                 &:disabled {
                   cursor: not-allowed;
                   &:hover {
-                    color: rgb(167, 61, 61);
-                    background-color: rgba(255, 36, 36, 0.301);
+                    color: $danger;
+                    background-color: rgba($danger, 0.301);
                   }
                 }
               }

@@ -45,7 +45,9 @@ export const printTime = (createdAt, expiration) => {
     let expiryTime = (expiration * 3600 * 1000) + createdAt.getTime();
     expiryTime = new Date(expiryTime);
     let now = new Date();
-    return formatTime((expiryTime - now)/1000);
+    let timeLeft = (expiryTime - now)/1000;
+    if (timeLeft <= 0) return "EXPIRED";
+    return formatTime(timeLeft);
 };
 
 const prependZeroes = string => {
