@@ -22,22 +22,14 @@ export const removeMembership = membershipId => ({
     membershipId,
 });
 
-export const receiveNickname = payload => ({
+export const receiveNickname = membership => ({
     type: RECEIVE_NICKNAME,
-    payload,
-})
-
-export const retrieveServerMemberships = serverId => dispatch => {
-    return ServerAPIUtil.getMemberships(serverId).then(memberships => {
-        dispatch(receiveMemberships(memberships));
-    }, err => {
-        dispatch(receiveServerErrors(err.responseJSON));
-    });
-};
+    membership,
+});
 
 export const updateNickname = membership => dispatch => {
-    return MembershipAPIUtil.updateNickname(membership)
+    return MembershipAPIUtil.updateMembership(membership)
         .then(
-            payload => dispatch(receiveNickname(payload))
+            membership => dispatch(receiveMembership(membership))
         )
-}
+};

@@ -1,7 +1,7 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { closeModal } from '../../../../../actions/ui_actions';
-import { changeNickname } from '../../../../../actions/membership_actions';
+import { updateNickname } from '../../../../../actions/membership_actions';
 import ServerNickname from './server_nickname';
 import { currentUsersMembershipId } from './../../../../../utils/selectors';
 
@@ -27,7 +27,7 @@ const mSTP = (state, ownProps) => {
 const mDTP = dispatch => {
   return {
     closeModal: () => dispatch(closeModal()),
-    changeNickname: membership => dispatch(changeNickname(membership)),
+    updateNickname: membership => dispatch(updateNickname(membership)),
   };
 };
 
