@@ -107,9 +107,19 @@ class Chat extends Component {
                     <div className="message-info-wrapper">
                         <img src={ message.author.avatarUrl ? message.author.avatarUrl : window.defaultAvatarUrl} className="chat-avatar" />
                         <h6 className={ `author${message.author.membershipId ? "" : " not-a-member"}` }>
-                            { chatMembers[message.authorId] ? 
-                                (chatMembers[message.authorId].localUsername ? chatMembers[message.authorId].localUsername : chatMembers[message.authorId].username) :
-                                (message.author ? message.author.localUsername : "(Deleted User)")}
+                            { 
+                                chatMembers[message.authorId] ? 
+                                    (
+                                        chatMembers[message.authorId].localUsername ? 
+                                            chatMembers[message.authorId].localUsername :
+                                            chatMembers[message.authorId].username
+                                    ) :
+                                    (
+                                        message.author ?
+                                            message.author.localUsername :
+                                            "(Deleted User)"
+                                    )
+                            }
                         </h6>
                         <p className="date-time">{extractDateTime(message.createdAt)}</p>
                     </div>
