@@ -19,6 +19,10 @@ class ServersNavBar extends React.Component {
         }
     }
 
+    componentWillUnmount() {
+        this.props.removeServerSubs();
+    }
+
     classRemoveClick(e) {
         const servers = document.getElementsByClassName("server-item");
         for (let server of servers) { server.classList.remove("active") }

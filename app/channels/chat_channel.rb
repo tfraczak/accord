@@ -13,17 +13,20 @@ class ChatChannel < ApplicationCable::Channel
       socket[:message]["author"] = secure_user!(author)
       socket[:message]["author"]["localUsername"] = @message.local_username
       socket[:message]["author"]["membershipId"] = @message.membership.id
+      socket[:action] = "new message"
       ChatChannel.broadcast_to(@chat, socket)
     end
   end
 
   def load
+    data = {}
+    data[:action] = "load"
     messages = Message
       .where(messageable_type: @chat.class.to_s, messageable_id: @chat.id)
       .order(created_at: :desc)
-      .limit(20)
-    messages.reverse!
-    data = { messages: camelize(messages) }
+      .limit(50)
+    messages.each { |message| message[:author] = secure_user!(camelize_keys(message.author.attributes)) }
+    data[:messages] camelize(messages)
     ChatChannel.broadcast_to(@chat, data)
   end
 

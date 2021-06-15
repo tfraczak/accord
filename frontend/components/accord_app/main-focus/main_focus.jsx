@@ -13,7 +13,7 @@ export default props => {
                     <ChatPlaceholder key={`convo-${props.chatId}`}/>
                 </Route>
                 <Route exact path="/channels/:serverId/:channelId" >
-                    <ChannelChatContainer key={`chat-${props.chatId}`} />
+                    <ChannelChatContainer key={ `channel-${props.serverId}-${props.channelId}` } />
                 </Route>
                 <Route>
                     <ChatPlaceholder />

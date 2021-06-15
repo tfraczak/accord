@@ -7,6 +7,12 @@ class ChannelListItem extends Component {
         super(props);
     }
 
+    checkPath() {
+        const serverId = parseInt(this.props.serverId);
+        const channelServerId = this.props.channel.serverId;
+        return serverId === channelServerId;
+    }
+
     render() {
         const {
             channel,

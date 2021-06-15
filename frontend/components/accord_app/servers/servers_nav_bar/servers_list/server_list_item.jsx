@@ -1,7 +1,5 @@
 import React from 'react';
-import { receiveServerSub } from '../../../../../actions/socket_actions';
 import { serverInitials } from '../../../../../utils/func_utils';
-import { createServerSub } from "../../../../../utils/socket_utils";
 
 class ServerListItem extends React.Component {
     constructor(props) {
@@ -9,11 +7,12 @@ class ServerListItem extends React.Component {
         this.state = props.server;
         this.insertServerIcon = this.insertServerIcon.bind(this);
         this.classRemoveClick = this.classRemoveClick.bind(this);
+        this.checkPath = this.checkPath.bind(this);
         if (!props.serverSub) {
             this.subscription = props.createServerSub(props.server, props.currentUser, props.history);
             props.receiveServerSub({
-                server: props.server,
-                serverSub: this.subscription,
+                id: props.server.id,
+                sub: this.subscription,
             });
         } else {
             this.subscription = props.serverSub;
@@ -22,14 +21,35 @@ class ServerListItem extends React.Component {
     }
 
     classRemoveClick(e) {
-        const { id, imageUrl, name } = this.props.server;
-        const { defaultChannelId } = this.props;
-        const servers = document.getElementsByClassName("server-item");
-        for (let server of servers) { server.classList.remove("active") }
-        const profile = document.getElementById("profile");
-        profile.classList.remove("active");
-        e.currentTarget.classList.add("active");
-        this.props.history.push(`/channels/${id}/${defaultChannelId}`);
+        const { server: { id }, defaultChannelId } = this.props;
+        if (!this.checkPath()) {
+            const servers = document.getElementsByClassName("server-item");
+            for (let server of servers) { server.classList.remove("active") }
+            const profile = document.getElementById("profile");
+            profile.classList.remove("active");
+            e.currentTarget.classList.add("active");
+            this.props.history.push(`/channels/${id}/${defaultChannelId}`);
+        }
+    }
+
+    componentDidMount() {
+        const { id } = this.props.server;
+        const serverListItem = document.getElementById(`server-item-${id}`);
+        if (this.checkPath() && !serverListItem.classList.contains("active")) {
+            serverListItem.classList.add("active");            
+        };
+    }
+
+    componentWillUnmount() {
+        this.subscription.unsubscribe(this.subscription);
+    }
+
+    checkPath() {
+        const { id } = this.props.server;
+        let currentPath = this.props.location.pathname;
+        currentPath = currentPath.split("/").slice(0,3).join("/");
+        let serverPath = `/channels/${id}`;
+        return currentPath === serverPath;
     }
 
     insertServerIcon() {
@@ -54,14 +74,8 @@ class ServerListItem extends React.Component {
     }
 
     render() {
-        const {
-            imageUrl,
-            name,
-            id,
-        } = this.props.server;
-        const {
-            defaultChannelId,
-        } = this.props;
+        const { server: { id, imageUrl }, defaultChannelId } = this.props;
+
         const itemClassName = imageUrl ? "server-item image-present" : "server-item no-image";
         return (
             <li className={`server`}>

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import MessageFormContainer from "./message_form/message_form_container";
 import { extractDateTime } from "../../../utils/func_utils";
 import { nextChat } from "../../../utils/selectors";
-import { createChatSub } from '../../../utils/socket_utils';
 
 class Chat extends Component {
     constructor(props) {
@@ -10,52 +9,14 @@ class Chat extends Component {
         this.state = { messages: props.messages || [] };
         this.bottom = React.createRef();
         this.setState = this.setState.bind(this);
-
-        this.subscription = this.props.chat ? createChatSub(this) : undefined;
-
-        // this.subscription = props.chat ? 
-        // App.cable.subscriptions.create(
-        //     {
-        //         channel: `ChatChannel`,
-        //         type: `${this.props.type}`,
-        //         chatId: this.props.chat.id,
-
-        //     },
-        //     {
-        //         received: data => {
-        //             if (data.messages) {
-                        
-        //                 this.state.messages = this.state.messages.concat(data.messages);
-
-        //             } else {
-        //                 this.props.receiveMessage(data.message);
-        //                 this.setState.call(this, ({
-        //                     messages: this.state.messages.concat(data.message)
-        //                 }));
-        //             }
-                    
-        //         },
-        //         speak: data => {
-        //             return this.subscription.perform("speak", data);
-        //         },
-        //         unsubscribed: () => {
-        //             return this.subscription.perform("unsubscribed");
-        //         },
-        //         load: () => {
-        //             return this.subscription.perform("load");
-        //         }
-        //     }
-        // ) : undefined;
-        
+        this.subscription = props.chatSub ? props.chatSub : props.createChatSub(this);
     }
 
     componentDidMount() {
         if (this.bottom.current) {
             this.bottom.current.scrollIntoView();
         }
-        if (this.subscription) {
-            this.props.receiveChatSub(this.subscription);
-        }
+        
     }
 
     componentWillUnmount() {

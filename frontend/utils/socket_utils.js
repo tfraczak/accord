@@ -17,12 +17,17 @@ import {
     removeMembership,
 } from '../actions/membership_actions';
 
+import {
+    receiveMessage,
+    receiveMessages,
+} from '../actions/message_actions';
+
 
 export const createServerSub = (
     server,
-    dispatch,
     currentUser,
-    history
+    history,
+    dispatch,
 ) => (
     App.cable.subscriptions.create(
         {
@@ -75,41 +80,47 @@ export const createServerSub = (
                 // data = { channel } return new channel and last 50 messages
                 return sub.perform("update_channel", data);
             },
-            unsubscribe: () => {
-                return this.subscription.perform("unsubscribe");
+            updateNickname: (data, sub) => {
+                return sub.perform("update_nickname", data);
+            },
+            unsubscribe: (sub) => {
+                return sub.perform("unsubscribed");
             },
         }
     )
 );
 
 export const createChatSub = (
-    that
+    that,
+    type,
+    dispatch,
 ) => (
     App.cable.subscriptions.create(
         {
             channel: `ChatChannel`,
-            type: `${that.props.type}`,
+            type,
             chatId: that.props.chat.id,
-
         },
         {
             received: data => {
-                if (data.messages) {
-                    
-                    that.state.messages = that.state.messages.concat(data.messages);
-
-                } else {
-                    that.props.receiveMessage(data.message);
-                    that.setState.call(that, ({
-                        messages: that.state.messages.concat(data.message)
-                    }));
+                switch (data.action) {
+                    case "load":
+                        dispatch(receiveMessages(data.messages));
+                        break;
+                    case "new message":
+                        dispatch(receiveMessage(data.message));
+                        that.setState.call(that, ({
+                            messages: that.state.messages.concat(data.message)
+                        }));
+                        break;
+                    default:
+                        break;
                 }
-                
             },
-            speak: data => {
+            speak: (data) => {
                 return that.subscription.perform("speak", data);
             },
-            unsubscribed: () => {
+            unsubscribe: () => {
                 return that.subscription.perform("unsubscribed");
             },
             load: () => {

@@ -1,15 +1,17 @@
-import { RECEIVE_SERVER_SUB } from '../../actions/socket_actions';
+import { RECEIVE_SERVER_SUB, REMOVE_SERVER_SUBS } from '../../actions/socket_actions';
 
 export default (state = {}, action) => {
   Object.freeze(state);
   let nextState;
-  let server, serverSub;
+  let id, serverSub;
   switch (action.type) {
     case RECEIVE_SERVER_SUB:
-      server = action.payload.server;
-      serverSub = action.payload.serverSub;
-      nextState = Object.assign({}, state, { [server.id]: serverSub });
+      id = action.server.id;
+      serverSub = action.server.sub;
+      nextState = Object.assign({}, state, { [id]: serverSub });
       return nextState;
+    case REMOVE_SERVER_SUBS:
+      return {};
     default:
       return state;
   }

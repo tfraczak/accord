@@ -7,7 +7,7 @@ class ServerChannel < ApplicationCable::Channel
   
 
   def update_server(data)
-    debugger
+    
     socket = {}
     socket["action"] = "update server"
     server = Server.find_by(id: data["server"]["id"])

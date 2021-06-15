@@ -44,7 +44,9 @@ class AccordApp extends React.Component {
                                     <div className="focus-channels-dms">
                                         <Switch>
                                             <Route exact path="/channels/@me" component={ConversationMembersList} />
-                                            <Route path="/channels/:serverId/" component={ChannelsIndexContainer} />
+                                            <Route path="/channels/:serverId/" >
+                                                <ChannelsIndexContainer key={ `channels-index-s${this.props.serverId}` } />
+                                            </Route>
                                         </Switch>
                                     </div>
                                 </nav>
@@ -58,7 +60,9 @@ class AccordApp extends React.Component {
                                     <div className="focus-title">
                                         <Switch>
                                             <Route exact path="/channels/@me" component={ConversationMembersList} />
-                                            <Route exact path="/channels/:serverId/:channelId" component={ChannelChatTitleContainer} />
+                                            <Route exact path="/channels/:serverId/:channelId" >
+                                                <ChannelChatTitleContainer key={ `channel-chat-s${this.props.serverId}-c${this.props.channelId}` } />
+                                            </Route>
                                         </Switch>
                                     </div>
                                     <div className="title-toolbar"></div>
