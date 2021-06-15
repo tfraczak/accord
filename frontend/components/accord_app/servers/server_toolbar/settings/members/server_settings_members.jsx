@@ -24,6 +24,16 @@ class ServerMembersList extends Component {
         }
     }
 
+    handleKick(member) {
+        const { serverSub } = this.props;
+        
+        const memberOptions = document.getElementById(`member-options-${member.username}#${member.usernameId}`);
+        memberOptions.classList.add("hidden");
+        document.removeEventListener('mousedown', this.closeMemberOptions(memberOptions));
+        
+        serverSub.kickMember({ member }, serverSub);
+    }
+
     closeMemberOptions(memberOptions) {
         return e => {
             const clickedOutside = !memberOptions.contains(e.target);
@@ -36,20 +46,24 @@ class ServerMembersList extends Component {
 
     handleTransferOwnership(member) {
         const {
-            transferOwnership,
+            serverSub,
             closeModal,
-            server,
+            server
         } = this.props;
         
-        const formData = new FormData();
-        formData.append('server[owner_id]', member.id);
+        Object.freeze(server);
+
+        const serverCopy = Object.assign({}, server);
+
+        serverCopy['ownerId'] = member.id;
         
         const memberOptions = document.getElementById(`member-options-${member.username}#${member.usernameId}`);
         memberOptions.classList.add('hidden');
         document.removeEventListener('mousedown', this.closeMemberOptions(memberOptions));
         closeModal();
-        
-        transferOwnership(formData, server.id);
+
+        serverSub.updateServer({ server: serverCopy }, serverSub);
+        // transferOwnership(formData, server.id);
     }
 
     render() {
@@ -58,6 +72,7 @@ class ServerMembersList extends Component {
             server,
             isOwner,
             kickMember,
+            serverSub
         } = this.props;
         if (serverMembers && server) {
             return (
@@ -76,7 +91,7 @@ class ServerMembersList extends Component {
                                     member={ member }
                                     server={ server }
                                     isOwner={ isOwner }
-                                    kickMember={ () => kickMember(member.membershipId) }
+                                    kickMember={ () => serverSub.kickMember({ member }, serverSub) }
                                     transferOwnership={ () => this.handleTransferOwnership(member) }
                                 />
                             ))

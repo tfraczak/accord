@@ -10,7 +10,7 @@ class ChatChannel < ApplicationCable::Channel
     if @message.save
       socket = { message: camelize_keys(@message.attributes) }
       author = camelize_keys(@message.author.attributes)
-      socket[:message]["author"] = secure_author!(author)
+      socket[:message]["author"] = secure_user!(author)
       socket[:message]["author"]["localUsername"] = @message.local_username
       socket[:message]["author"]["membershipId"] = @message.membership.id
       ChatChannel.broadcast_to(@chat, socket)
@@ -29,24 +29,6 @@ class ChatChannel < ApplicationCable::Channel
 
   def unsubscribed
     # Any cleanup needed when channel is unsubscribed
-  end
-
-  def camelize(objects)
-    objects.map { |object| camelize_keys(object.attributes) }
-  end
-
-  def camelize_keys(hash)
-    pairs = hash.map { |key, value| [key.camelize(:lower), value] }
-    Hash[pairs]
-  end
-
-  def secure_author!(author)
-    author.delete("email")
-    author.delete("passwordDigest")
-    author.delete("sessionToken")
-    author.delete("createdAt")
-    author.delete("updatedAt")
-    author
   end
 
 end

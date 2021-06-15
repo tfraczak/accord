@@ -1,33 +1,78 @@
-import { convertToSnakeCase } from './func_utils';
+import {
+    receiveServer,
+    receiveServerErrors,
+    leftServer,
+} from '../actions/server_actions';
 
-export const createChatSocket = (type, chatId, receiveMessage, receiveMessages) => {
-    return App.cable.subscriptions.create(
+import {
+    receiveNewMember
+} from '../actions/user_actions';
+
+import {
+    receiveCreatedChannel,
+    receiveUpdatedChannel
+} from '../actions/channel_actions';
+
+import {
+    removeMembership,
+} from '../actions/membership_actions';
+
+
+export const createServerSub = (server, dispatch, currentUser, history) => (
+    App.cable.subscriptions.create(
         {
-            channel: `ChatChannel`,
-            type,
-            chatId,
+            channel: `ServerChannel`,
+            serverId: server.id,
         },
         {
             received: data => {
-                if (data.messages) {
-                    return receiveMessages(data.messages)
+                switch (data.action) {
+                    case "new member":
+                        dispatch(receiveNewMember(data.payload));
+                        break;
+                    case "kick member":
+                        if (!data.errors) {
+                            if (currentUser.id === data.payload.userId) {
+                                history.push("/channels/@me");
+                                dispatch(leftServer(data.payload));
+                            } else {
+                                dispatch(removeMembership(data.payload.membershipId));
+                            }
+                        } else {
+                            dispatch(receiveServerErrors(data.error));
+                        }
+                        break;
+                    case "update server":
+                        dispatch(receiveServer(data.server));
+                        break;
+                    case "new channel":
+                        dispatch(receiveCreatedChannel(data.channel));
+                    case "update channel":
+                        dispatch(receiveUpdatedChannel(data.payload));
+                    default:
+                        break;
                 }
-                if (data.message) {
-                    receiveMessage(data.message);
-                    this.setState({
-                        messages: this.state.messages.concat(data.message)
-                    });
-                }
             },
-            speak: data => {
-                return this.subscription.perform("speak", data);
+            updateServer: (data, sub) => {
+                return sub.perform("update_server", data);
             },
-            unsubscribed: () => {
-                return this.subscription.perform("unsubscribed");
+            newMember: (data, sub) => {
+                return sub.perform("new_member", data);
             },
-            load: () => {
-                return this.subscription.perform("load");
-            }
+            kickMember: (data, sub) => {
+                return sub.perform("kick_member", data);
+            },
+            newChannel: (data, sub) => {
+                // data = { channel } returns new { channel }
+                return sub.perform("new_channel", data);
+            },
+            updateChannel: (data, sub) => {
+                // data = { channel } return new channel and last 50 messages
+                return sub.perform("update_channel", data);
+            },
+            unsubscribe: () => {
+                return this.subscription.perform("unsubscribe");
+            },
         }
-    );
-}
+    )
+);

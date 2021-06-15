@@ -36,9 +36,20 @@ class Api::ServersController < ApplicationController
 
     def update
         @server = Server.find_by(id: params[:id])
-        @server.image.purge if @server.image.attached? && (server_params[:image_url] == "")
+        if @server.image.attached? && ((server_params[:image_url] == "") || server_params[:image])
+            @server.image.purge
+            @server.image_url = ""
+        end
         if @server && @server.update(server_params)
-            render :update
+            socket = {}
+            socket['action'] = "update server"
+            if @server.image.attached? && (@server.image_url === "")
+                @server.image_url = url_for(@server.image)
+                @server.save
+            end
+            socket['server'] = camelize_record(@server)
+            ServerChannel.broadcast_to(@server, socket)
+            # render :update
         elsif !@server
             render json: ["Server doesn't exist"], status: 404
         else

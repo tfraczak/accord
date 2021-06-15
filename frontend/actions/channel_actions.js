@@ -37,7 +37,7 @@ export const removeChannel = channel => ({
 export const recveiveChannelErrors = errors => ({
     type: RECEIVE_USER_ERRORS,
     errors,
-})
+});
 
 export const retrieveServerChannels = serverId => dispatch => (
     ServerAPIUtil.getChannels(serverId)

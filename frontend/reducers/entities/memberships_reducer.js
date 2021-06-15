@@ -1,3 +1,5 @@
+import { RECEIVE_NEW_MEMBER } from "../../actions/user_actions";
+
 import {
     RECEIVE_MEMBERSHIP,
     RECEIVE_MEMBERSHIPS,
@@ -11,6 +13,7 @@ import {
     RECEIVE_SERVER_INFO,
     LEAVE_SERVER,
     KICK_MEMBER,
+    LOAD_MEMBERS
 } from '../../actions/server_actions';
 
 import { RECEIVE_USER_LOAD_DATA } from '../../actions/session_actions';
@@ -28,6 +31,14 @@ export default (state = {}, action) => {
             return Object.assign({}, state, memberships);
         case RECEIVE_MEMBERSHIP:
             return Object.assign({}, state, { [action.membership.id]: action.membership });
+        case RECEIVE_NEW_MEMBER:
+            membership = action.payload.membership;
+            return Object.assign({}, state, { [membership.id]: membership });
+        case LOAD_MEMBERS:
+            memberships = action.payload.memberships;
+            nextState = Object.assign({}, state);
+            for (let membership of memberships) { nextState[membership.id] = membership }
+            return nextState;
         case LEAVE_SERVER:
             nextState = Object.assign({}, state);
             membershipIds = Object.values(action.payload.membershipIds);
@@ -48,6 +59,11 @@ export default (state = {}, action) => {
             nextState = Object.assign({}, state);
             membership = action.payload.membership;
             delete nextState[membership.id];
+            return nextState;
+        case REMOVE_MEMBERSHIP:
+            nextState = Object.assign({}, state);
+            membershipId = action.membershipId;
+            delete nextState[membershipId];
             return nextState;
         case RECEIVE_SERVER_INFO:
             memberships = action.payload.memberships;

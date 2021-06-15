@@ -1,5 +1,5 @@
 import React from 'react';
-import ServerListItem from './servers_list/server_list_item';
+import ServerListItemContainer from './servers_list/server_list_item_container';
 import AddServerButton from './add_server/add_server_button';
 
 class ServersNavBar extends React.Component {
@@ -39,7 +39,7 @@ class ServersNavBar extends React.Component {
                     <li className="profile-servers-separator" key="servers-list-separator-1">
                         <div></div>
                     </li>
-                    { servers.map(server => <ServerListItem key={`server-${server.id}`} server={ server } />) }
+                    { servers.map(server => <ServerListItemContainer key={`server-${server.id}`} server={ server } />) }
                     <AddServerButton id="asf-button" openModal={openModal} />
                     {/* <li className="explore-servers"></li> */}
                 </ul>

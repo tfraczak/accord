@@ -11,10 +11,12 @@ const mSTP = (state, ownProps) => {
     const server = state.entities.servers[ownProps.location.pathname.split("/")[2]];
     if (!server) return {};
     const isOwner = currentUser.id === server.ownerId;
+    const serverSub = state.subscriptions.servers[server.id];
     return {
         isOwner,
         server,
         currentUser,
+        serverSub
     };
 };
 

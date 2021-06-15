@@ -8,6 +8,7 @@ import { closeModal } from '../../../../../../actions/ui_actions';
 
 const mSTP = (state, ownProps) => {
     const server = state.entities.servers[ownProps.location.pathname.split("/")[2]];
+    const serverSub = state.subscriptions.servers[server.id];
     const currentUser = state.entities.users[state.session.id];
     return {
         serverMembers: serverMembers(
@@ -17,6 +18,7 @@ const mSTP = (state, ownProps) => {
         ).sort(membersAlphaAsc),
         server,
         isOwner: server.ownerId === currentUser.id,
+        serverSub,
     }
 };
 

@@ -14,13 +14,14 @@ export const LEAVE_SERVER = "LEAVE_SERVER";
 export const REMOVE_ERRORS = "REMOVE_ERRORS";
 export const RECEIVE_SERVER_INFO = "RECEIVE_SERVER_INFO";
 export const KICK_MEMBER = "KICK_MEMBER";
+export const LOAD_MEMBERS = "LOAD_MEMBERS";
 
 export const receiveServers = servers => ({
     type: RECEIVE_SERVERS,
     servers,
 });
 
-const receiveServer = server => ({
+export const receiveServer = server => ({
     type: RECEIVE_SERVER,
     server,
 });
@@ -63,7 +64,7 @@ const receiveServerInfo = payload => ({
     payload,
 });
 
-const leftServer = payload => ({
+export const leftServer = payload => ({
     type: LEAVE_SERVER,
     payload,
 });
@@ -71,6 +72,11 @@ const leftServer = payload => ({
 const removeKickedMember = payload => ({
     type: KICK_MEMBER,
     payload,
+});
+
+export const loadMembers = payload => ({
+    type: LOAD_MEMBERS,
+    payload
 });
 
 export const retrieveUserServers = userId => dispatch => (
@@ -115,7 +121,6 @@ export const deleteServer = (serverId) => dispatch => {
 
 export const joinServer = (membership) => dispatch => {
     membership = convertToSnakeCase(membership);
-    
     return ServerAPIUtil.joinServer(membership)
         .then(
             payload => dispatch(receiveJoinedServer(payload)),
@@ -150,7 +155,7 @@ export const getServerByJoinForm = (urlToken,currentUserId) => dispatch => {
                 };
                 return joinServer(membership)(dispatch);
             }, err => dispatch(receiveServerErrors(err.responseJSON))
-    );
+        );
 };
 
 export const getServerByUrl = urlToken => dispatch => (

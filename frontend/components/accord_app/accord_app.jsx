@@ -12,6 +12,7 @@ import CurrentUserDisplayContainer from './current_user/current_user_display_con
 import SbHeaderContainer from './sb-header/sb_header_container';
 import ChatPlaceholder from './main-focus/chat_placeholder';
 import ChannelsModal from './channels/channel_modals/channels_modal';
+import FocusRightContainer from './focus-right/focus_right_container';
 
 class AccordApp extends React.Component {
     constructor(props) {
@@ -68,10 +69,11 @@ class AccordApp extends React.Component {
                                         <ChatPlaceholder />
                                     </Switch>
                                     <div className="focus-right-wrapper">
-                                        <Switch>
+                                        {/* <Switch>
                                             <Route exact path="/channels/@me" component={ConversationMembersList} />
                                             <Route path="/channels/:serverId" component={ServerMembersListContainer}/>
-                                        </Switch>
+                                        </Switch> */}
+                                        <FocusRightContainer />
                                     </div>
                                 </div>
                             </div>

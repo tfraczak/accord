@@ -103,14 +103,19 @@ class ServerSettings extends React.Component {
         e.preventDefault();
         const {
             updateServer,
-            server
+            server,
+            serverSub
         } = this.props;
 
         Object.freeze(this.state);
         const formData = new FormData();
 
         formData.append('server[name]', this.state.name);
-        if(this.state.imageUrl !== this.props.server.imageUrl) formData.append('server[image_url]', this.state.imageUrl);
+        if (this.state.imageFile) {
+            formData.append('server[image]', this.state.imageFile);
+        } else if (!this.state.imageUrl) {
+            formData.append('server[image_url]', this.state.imageUrl);
+        }
 
         updateServer(formData, server.id)
             .then(() => {

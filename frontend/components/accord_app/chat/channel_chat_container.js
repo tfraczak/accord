@@ -1,12 +1,12 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Chat from './chat';
-import { createChatSocket } from '../../../utils/socket_utils';
 import { receiveMessage, receiveMessages } from '../../../actions/message_actions';
 import { createMessage } from '../../../utils/message_utils';
 import { chatMessages } from '../../../utils/selectors';
 import { serverMembersObj } from '../../../utils/selectors';
 import { retrieveChannel } from '../../../actions/channel_actions';
+import { receiveChatSub } from '../../../actions/socket_actions';
 
 const mSTP = (state, ownProps) => {
     const chat = state.entities.channels[ownProps.match.params.channelId];
@@ -26,10 +26,10 @@ const mSTP = (state, ownProps) => {
 const mDTP = dispatch => {
     return {
         receiveMessage: message => dispatch(receiveMessage(message)),
-        createChatSocket,
         createMessage: message => dispatch(createMessage(message)),
         receiveMessages: messages => dispatch(receiveMessages(messages)),
         retrieveChannel: channelId => dispatch(retrieveChannel(channelId)),
+        receiveChatSub: chatSub => dispatch(receiveChatSub(chatSub)),
     };
 };
 

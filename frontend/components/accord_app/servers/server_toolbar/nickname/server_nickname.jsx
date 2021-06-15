@@ -46,7 +46,6 @@ class ServerNickname extends React.Component {
         const {
             currentUser
         } = this.props;
-        debugger
         return (
             <div className="nickname-wrapper">
                 <h6 className="close" onClick={ this.clickClose }>+</h6>

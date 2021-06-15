@@ -2,13 +2,25 @@ import React, { Component } from "react";
 import MessageFormContainer from "./message_form/message_form_container";
 import { extractDateTime } from "../../../utils/func_utils";
 import { nextChat } from "../../../utils/selectors";
+import { chatSubscription } from '../../../utils/socket_utils';
 
 class Chat extends Component {
     constructor(props) {
         super(props);
         this.state = { messages: props.messages || [] };
         this.bottom = React.createRef();
-        this.subscription = this.props.chat ? App.cable.subscriptions.create(
+        this.setState = this.setState.bind(this);
+
+        // this.subscription = this.props.chat ? chatSubscription(
+        //     this.setState,
+        //     this.state,
+        //     props.type,
+        //     props.chat,
+        //     props.receiveMessage
+        // ) : undefined
+
+        this.subscription = props.chat ? 
+        App.cable.subscriptions.create(
             {
                 channel: `ChatChannel`,
                 type: `${this.props.type}`,
@@ -40,11 +52,15 @@ class Chat extends Component {
                 }
             }
         ) : undefined;
+        
     }
 
     componentDidMount() {
         if (this.bottom.current) {
             this.bottom.current.scrollIntoView();
+        }
+        if (this.subscription) {
+            this.props.receiveChatSub(this.subscription);
         }
     }
 

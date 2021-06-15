@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
     protect_from_forgery
-    include Params
+    include Params, Formatting
 
     helper_method :current_user, :logged_in?
 

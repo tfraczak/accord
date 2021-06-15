@@ -3,18 +3,15 @@ import { convertToSnakeCase } from '../../../../utils/func_utils';
 
 class MessageForm extends Component {
     constructor(props) {
-        
         super(props);
-        // message object with empty body
-        // props.message = { id, body, mid, mtype, authorid, createdat }
-        // this.state = props.message;
+
         this.state = { body: "" };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentWillUnmount() {
-        
-        this.props.subscription.unsubscribed();
+        const { sub } = this.props.subscription;
+        if (sub) sub.unsubscribed(sub);
     }
 
     update(field) {
@@ -27,13 +24,13 @@ class MessageForm extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        const sub = this.props.subscription;
         if (this.state.body) {
-            
             let message = this.props.message;
             message.body = this.state.body;
-            this.props.subscription.speak(({
+            sub.speak(({
                 message: convertToSnakeCase(message)
-            }));
+            }), sub);
             this.setState({ body: "" });
         }
     }

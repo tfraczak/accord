@@ -9,6 +9,7 @@ export const REMOVE_USER = "REMOVE_USER";
 export const RECEIVE_USER_ERRORS = "RECEIVE_USER_ERRORS";
 export const REMOVE_USER_ERRORS = "REMOVE_USER_ERRORS";
 export const REMOVE_ERRORS = "REMOVE_ERRORS";
+export const RECEIVE_NEW_MEMBER = "RECEIVE_NEW_MEMBER";
 
 
 export const receiveUsers = users => ({
@@ -31,8 +32,13 @@ const receiveUserErrors = errors => ({
     errors,
 });
 
+export const receiveNewMember = payload => ({
+    type: RECEIVE_NEW_MEMBER,
+    payload,
+});
+
 export const retrieveServerMembers = serverId => dispatch => {
-    UserAPIUtil.getServerMembers(serverId)
+    return UserAPIUtil.getServerMembers(serverId)
         .then(
             users => dispatch(receiveUsers(users)),
             err => dispatch(receiveUserErrors(err.responseJSON))

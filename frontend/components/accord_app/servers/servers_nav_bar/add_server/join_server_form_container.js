@@ -1,16 +1,19 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 import {
     getServerByJoinForm,
     removeServerErrors,
     receiveServerErrors,
 } from '../../../../../actions/server_actions';
+
 import { closeModal, openModal } from '../../../../../actions/ui_actions';
+
 import AddServerForm from './add_server_form';
 
 const mSTP = (state, ownProps) => {
-    
+    const serverSubs = state.subscriptions.servers;
     return {
         currentUser: state.entities.users[state.session.id],
         submitObj: {
@@ -34,6 +37,7 @@ const mSTP = (state, ownProps) => {
             </div>
         ),
         serverErrors: state.errors.servers,
+        serverSubs,
     }
 
 };
