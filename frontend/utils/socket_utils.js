@@ -18,7 +18,12 @@ import {
 } from '../actions/membership_actions';
 
 
-export const createServerSub = (server, dispatch, currentUser, history) => (
+export const createServerSub = (
+    server,
+    dispatch,
+    currentUser,
+    history
+) => (
     App.cable.subscriptions.create(
         {
             channel: `ServerChannel`,
@@ -73,6 +78,43 @@ export const createServerSub = (server, dispatch, currentUser, history) => (
             unsubscribe: () => {
                 return this.subscription.perform("unsubscribe");
             },
+        }
+    )
+);
+
+export const createChatSub = (
+    that
+) => (
+    App.cable.subscriptions.create(
+        {
+            channel: `ChatChannel`,
+            type: `${that.props.type}`,
+            chatId: that.props.chat.id,
+
+        },
+        {
+            received: data => {
+                if (data.messages) {
+                    
+                    that.state.messages = that.state.messages.concat(data.messages);
+
+                } else {
+                    that.props.receiveMessage(data.message);
+                    that.setState.call(that, ({
+                        messages: that.state.messages.concat(data.message)
+                    }));
+                }
+                
+            },
+            speak: data => {
+                return that.subscription.perform("speak", data);
+            },
+            unsubscribed: () => {
+                return that.subscription.perform("unsubscribed");
+            },
+            load: () => {
+                return that.subscription.perform("load");
+            }
         }
     )
 );
