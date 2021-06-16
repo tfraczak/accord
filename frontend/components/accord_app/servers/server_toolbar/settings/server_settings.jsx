@@ -53,8 +53,8 @@ class ServerSettings extends React.Component {
 
         for (let member of Object.values(members)) { serverSub.kickMember(member, serverSub) }
 
-        serverSub.deleteServer(serverSub);
-        // this.props.deleteServer(this.props.server.id);
+        // serverSub.deleteServer(serverSub);
+        this.props.deleteServer(this.props.server.id);
     }
 
     handleReset() {
