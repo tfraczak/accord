@@ -50,6 +50,16 @@ Server.create!(
     owner_id: 3,
 ).image.attach(
     io: 
+        File.open("#{Rails.root}/app/assets/images/server_image_seeds/bridge.jpg"),
+        filename: "bridge.jpg",
+        content_type: "image/jpg"
+)
+
+Server.create!(
+    name: "Pokemon Fanatics",
+    owner_id: 2,
+).image.attach(
+    io: 
         File.open("#{Rails.root}/app/assets/images/server_image_seeds/gengar.png"),
         filename: "genger.png",
         content_type: "image/png"
