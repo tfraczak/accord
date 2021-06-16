@@ -19,19 +19,23 @@ class ChatChannel < ApplicationCable::Channel
   end
 
   def load
-    data = {}
-    data[:action] = "load"
+    socket = {}
+    socket["action"] = "load"
     messages = Message
       .where(messageable_type: @chat.class.to_s, messageable_id: @chat.id)
       .order(created_at: :desc)
       .limit(50)
     messages.each { |message| message[:author] = secure_user!(camelize_keys(message.author.attributes)) }
-    data[:messages] = camelize(messages)
-    ChatChannel.broadcast_to(@chat, data)
+    socket["messages"] = camelize(messages)
+    ChatChannel.broadcast_to(@chat, socket)
   end
 
   def unsubscribed
     
+  end
+
+  def self.unsubscribe(chan)
+    stop_stream_for(chan)
   end
 
 end

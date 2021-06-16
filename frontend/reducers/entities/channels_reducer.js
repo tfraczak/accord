@@ -41,7 +41,6 @@ export default (state = {}, action) => {
             return Object.assign({}, state, { [channel.id]: channel });
         case REMOVE_CHANNEL:
             nextState = Object.assign({}, state);
-            
             delete nextState[action.channel.id];
             return nextState;
         case RECEIVE_NEW_SERVER:

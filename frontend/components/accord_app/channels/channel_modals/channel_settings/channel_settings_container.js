@@ -6,14 +6,17 @@ import ChannelSettings from './channel_settings';
 import { defaultChannelId } from '../../../../../utils/selectors';
 
 const mSTP = (state, ownProps) => {
-    const currentUser = state.entities.users[state.session.id];
     const server = state.entities.servers[ownProps.match.params.serverId];
+    if (!server) return ownProps.history.push("/channels/@me");
+    const currentUser = state.entities.users[state.session.id];
     const defChannelId = defaultChannelId(server, state.entities.channels);
+    const serverSub = state.subscriptions.servers[server.id];
     return {
         defChannelId,
         serverId: server.id,
         currentUser,
         channel: Object.assign({}, ownProps.channel),
+        serverSub,
     };
 };
 

@@ -14,12 +14,24 @@ class ChannelSettings extends React.Component {
 
     handleDelete(e) {
         e.preventDefault();
-        this.props.closeModal();
+        const {
+            closeModal,
+            channel,
+            match,
+            serverId,
+            defChannelId,
+            history,
+            serverSub,
+        } = this.props;
+
+        closeModal();
         
-        if (parseInt(this.props.match.params.channelId) === this.props.channel.id) {
-            this.props.history.push(`/channels/${this.props.serverId}/${this.props.defChannelId}`);
+        if (parseInt(match.params.channelId) === channel.id) {
+            history.push(`/channels/${serverId}/${defChannelId}`);
         }
-        this.props.deleteChannel(this.props.channel);
+
+        serverSub.deleteChannel({ channel }, serverSub);
+        // this.props.deleteChannel(this.props.channel);
     }
 
     handleReset() {
@@ -55,15 +67,25 @@ class ChannelSettings extends React.Component {
         const {
             updateChannel,
             closeModal,
+            serverSub
         } = this.props;
 
         Object.freeze(this.state);
         const channel = this.state;
-        updateChannel(channel)
-            .then(() => {
-                closeModal();
-                document.getElementById("edit-channel-btn").classList.remove("modal-open");
-            });
+
+        serverSub.updateChannel({ channel }, serverSub)
+
+        const save = document.getElementById("csf-buttons-wrapper");
+        save.classList.remove("active");
+
+        // closeModal();
+        // document.getElementById("edit-channel-btn").classList.remove("modal-open");
+
+        // updateChannel(channel)
+        //     .then(() => {
+        //         closeModal();
+        //         document.getElementById("edit-channel-btn").classList.remove("modal-open");
+        //     });
     }
 
     componentDidMount() {

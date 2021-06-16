@@ -15,7 +15,8 @@ import {
 
 import {
     receiveCreatedChannel,
-    receiveUpdatedChannel
+    receiveUpdatedChannel,
+    removeChannel,
 } from '../actions/channel_actions';
 
 import {
@@ -82,8 +83,13 @@ export const createServerSub = (
                         break;
                     case "new channel":
                         dispatch(receiveCreatedChannel(data.channel));
+                        break;
                     case "update channel":
                         dispatch(receiveUpdatedChannel(data.payload));
+                        break;
+                    case "delete channel":
+                        dispatch(removeChannel(data.channel));
+                        break;
                     default:
                         break;
                 }
@@ -91,9 +97,6 @@ export const createServerSub = (
             updateServer: (data, sub) => {
                 return sub.perform("update_server", data);
             },
-            // newMember: (data, sub) => {
-            //     return sub.perform("new_member", data);
-            // },
             kickMember: (data, sub) => {
                 return sub.perform("kick_member", data);
             },
@@ -104,12 +107,13 @@ export const createServerSub = (
                 return sub.perform("delete_server");
             },
             newChannel: (data, sub) => {
-                // data = { channel } returns new { channel }
                 return sub.perform("new_channel", data);
             },
             updateChannel: (data, sub) => {
-                // data = { channel } return new channel and last 50 messages
                 return sub.perform("update_channel", data);
+            },
+            deleteChannel: (data, sub) => {
+                return sub.perform("delete_channel", data);
             },
             updateNickname: (data, sub) => {
                 return sub.perform("update_nickname", data);

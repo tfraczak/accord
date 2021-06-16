@@ -37,18 +37,16 @@ class CreateChannel extends React.Component {
         e.preventDefault();
         const {
             closeModal,
-            processForm,
+            serverSub,
         } = this.props;
 
         Object.freeze(this.state);
         const channel = this.state;
-        processForm(channel)
-            .then(() => {
-                closeModal();
-                document.getElementById("add-channel-btn").classList.remove("modal-open");
-                document.getElementById("toggle-channels-index").classList.remove("hidden");
-                document.getElementById("channels-index").classList.remove("hidden");
-            });
+        serverSub.newChannel({ channel }, serverSub);
+        closeModal();
+        document.getElementById("add-channel-btn").classList.remove("modal-open");
+        document.getElementById("toggle-channels-index").classList.remove("hidden");
+        document.getElementById("channels-index").classList.remove("hidden");
     }
 
     clickClose() {
