@@ -11,19 +11,21 @@ import { receiveChatSub } from '../../../actions/socket_actions';
 
 const mSTP = (state, ownProps) => {
     const chat = state.entities.channels[ownProps.match.params.channelId];
-    if (!chat) return ownProps.history.push("/channels/@me");
+    debugger
+    if (!chat && !ownProps.history.location.pathname.includes("@me")) {
+        ownProps.history.push("/channels/@me");
+        return {};
+    }
     const type = "Channel";
     const messages = chatMessages(chat, type, state.entities.messages);
     const server = state.entities.servers[ownProps.match.params.serverId];
     const chatMembersObj = serverMembersObj(state.entities.users, server, state.entities.memberships);
-    const chatSub = state.subscriptions.chats[chat.id];
     return {
         chat,
         type,
         currentUserId: state.session.id,
         messages,
         chatMembers: chatMembersObj,
-        chatSub,
     }
 };
 

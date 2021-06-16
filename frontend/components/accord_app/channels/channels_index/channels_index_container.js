@@ -8,6 +8,10 @@ import { createChatSub } from '../../../../utils/socket_utils';
 
 const mSTP = (state, ownProps) => {
     const server = state.entities.servers[ownProps.match.params.serverId];
+    if (!server && !ownProps.history.location.pathname.includes("@me")) {
+        ownProps.history.push("/channels/@me");
+        return {};
+    }
     const channels = serverChannels(server, state.entities.channels);
     const currentUserId = state.session.id;
     const chatSubs = state.subscriptions.chats;

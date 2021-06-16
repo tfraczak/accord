@@ -30,13 +30,24 @@ class ServerInvitation extends React.Component {
     handleInvite(e) {
         e.preventDefault();
         e.stopPropagation();
+        const {
+            invitation,
+            server,
+            currentUser,
+            serverSub
+        } = this.props;
+
+        const {
+            expiration,
+        } = this.state;
         
-        if (!this.props.invitation && (this.state.expiration !== "")) {
-            const invitation = {};
-            invitation['serverId'] = this.props.server.id;
-            invitation['inviterId'] = this.props.currentUser.id;
-            invitation['expiration'] = this.state.expiration.value;
-            this.props.createInvite(invitation);
+        if (!invitation && (expiration !== "")) {
+            const invite = {};
+            invite['serverId'] = server.id;
+            invite['inviterId'] = currentUser.id;
+            invite['expiration'] = expiration.value;
+            serverSub.createInvite({ invite }, serverSub);
+            // this.props.createInvite(invite);
         }
     }
 

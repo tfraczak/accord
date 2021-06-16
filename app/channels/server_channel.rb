@@ -138,6 +138,17 @@ class ServerChannel < ApplicationCable::Channel
     end
   end
 
+  def create_invite(data)
+    socket = {}
+    socket["action"] = "create invite"
+    invite = Invitation.new(snakecase_keys(data["invite"]))
+    if invite.save
+      socket["invite"] = camelize_keys(invite.attributes)
+      socket["invite"]["inviter"] = secure_user!(camelize_keys(invite.inviter.attributes))
+      ServerChannel.broadcast_to(@server, socket)
+    end
+  end
+
   def unsubscribed
 
   end

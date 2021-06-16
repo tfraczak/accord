@@ -4,14 +4,20 @@ import * as InviteAPIUtil from '../utils/invitation_utils';
 export const RECEIVE_INVITATIONS = "RECEIVE_INVITATIONS";
 export const RECEIVE_INVITATION = "RECEIVE_INVITATION";
 export const REMOVE_INVITATION = "REMOVE_INVITATION";
+export const SOCKET_INVITATION = "SOCKET_INVITATION";
 
 export const receiveInvitations = invitations => ({
     type: RECEIVE_INVITATIONS,
     invitations,
 });
 
-const receiveInvitation = invitation => ({
+export const receiveInvitation = invitation => ({
     type: RECEIVE_INVITATION,
+    invitation,
+});
+
+export const socketInvitation = invitation => ({
+    type: SOCKET_INVITATION,
     invitation,
 });
 

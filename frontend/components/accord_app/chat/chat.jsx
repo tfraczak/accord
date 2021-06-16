@@ -9,10 +9,14 @@ class Chat extends Component {
         this.state = { messages: props.messages || [] };
         this.bottom = React.createRef();
         this.setState = this.setState.bind(this);
-        this.subscription = props.createChatSub(this);
+        this.subscription = props.chat ? props.createChatSub(this) : undefined;
     }
 
     componentDidMount() {
+        if (!this.props.chat) {
+            this.props.history.push("/channels/@me");
+            return;
+        }
         if (this.bottom.current) {
             this.bottom.current.scrollIntoView();
         }

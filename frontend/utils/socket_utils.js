@@ -14,6 +14,11 @@ import {
 } from '../actions/user_actions';
 
 import {
+    socketInvitation,
+    receiveInvitation,
+} from '../actions/invitation_actions';
+
+import {
     receiveCreatedChannel,
     receiveUpdatedChannel,
     removeChannel,
@@ -90,6 +95,17 @@ export const createServerSub = (
                     case "delete channel":
                         dispatch(removeChannel(data.channel));
                         break;
+                    case "delete channel":
+                        dispatch(removeChannel(data.channel));
+                        break;
+                    case "create invite":
+                        const inviterId = data.invite.inviter.id;
+                        if (currentUserId === inviterId) {
+                            dispatch(receiveInvitation(data.invite));
+                        } else {
+                            dispatch(socketInvitation(data.invite));
+                        }
+                        break;
                     default:
                         break;
                 }
@@ -117,6 +133,9 @@ export const createServerSub = (
             },
             updateNickname: (data, sub) => {
                 return sub.perform("update_nickname", data);
+            },
+            createInvite: (data, sub) => {
+                return sub.perform("create_invite", data);
             },
             unsubscribe: (sub) => {
                 return sub.perform("unsubscribed");

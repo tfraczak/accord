@@ -7,8 +7,6 @@ class Api::InvitationsController < ApplicationController
 
     def show
         invitation = Invitation.find_by(url_token: params[:url_token])
-        
-
 
         if invitation && ((invitation.expiration && !invitation.expired?) || !invitation.expiration)
             @server = Server.find_by(id: invitation.server_id)

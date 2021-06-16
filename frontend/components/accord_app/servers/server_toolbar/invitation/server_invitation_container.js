@@ -8,11 +8,13 @@ const mSTP = (state, ownProps) => {
   const server = state.entities.servers[ownProps.location.pathname.split("/")[2]];
   const invitation = state.session.invitation;
   const currentUser = state.entities.users[state.session.id];
+  const serverSub = state.subscriptions.servers[server.id];
 
   return {
     currentUser,
     server,
-    invitation
+    invitation,
+    serverSub,
   };
 };
 

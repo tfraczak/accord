@@ -2,6 +2,7 @@ import {
     RECEIVE_INVITATION,
     RECEIVE_INVITATIONS,
     REMOVE_INVITATION,
+    SOCKET_INVITATION,
 } from "../../actions/invitation_actions";
 import {
     RECEIVE_SERVER_INFO,
@@ -19,6 +20,8 @@ export default (state = {}, action) => {
     let invitation, invitations, invitationId, invitationIds;
     switch (action.type) {
         case RECEIVE_INVITATION:
+            return Object.assign({}, state, { [action.invitation.id]: action.invitation });
+        case SOCKET_INVITATION:
             return Object.assign({}, state, { [action.invitation.id]: action.invitation });
         case RECEIVE_INVITATIONS:
             return Object.assign({}, state, action.invitations);
