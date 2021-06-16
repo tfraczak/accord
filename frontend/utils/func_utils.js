@@ -85,12 +85,12 @@ export const extractDateTime = dateTime => {
 
     // today?
     if ((now.getDate() === dateObj.getDate()) && (now.getMonth() === dateObj.getMonth()) && (now.getYear() === dateObj.getYear())) {
-        return `today at ${time}`;
+        return `Today at ${time}`;
     }
 
     // yesterday?
     if ((now.getDate() - dateObj.getDate() === 1) || (now.getMonth() - dateObj.getMonth() === 1) || (now.getYear() - dateObj.getYear() === 1)) {
-        return `yesterday at ${time}`;
+        return `Yesterday at ${time}`;
     }
 
     // more than a day ago
