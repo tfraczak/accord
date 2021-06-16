@@ -35,6 +35,7 @@ class ServerNickname extends React.Component {
         const membership = this.state;
 
         serverSub.updateNickname({ membership }, serverSub);
+        closeModal();
 
         // changeNickname(membership)
         //     .then(
