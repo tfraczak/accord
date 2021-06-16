@@ -58,7 +58,7 @@ class InviteListItem extends React.Component {
                             { invite.isExpired ?
                                 ( <span className="expired">EXPIRED</span> ) :
                                 invite.expiration ?
-                                    ( <InviteExpiration invite={ invite } /> ) :
+                                    ( <InviteExpiration key={ `invite-exp-${invite.id}` } invite={ invite } /> ) :
                                     ( <span className="no-expiration">∞</span> )
                             }
                     </div>

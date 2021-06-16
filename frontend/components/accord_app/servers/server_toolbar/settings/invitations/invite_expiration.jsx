@@ -7,8 +7,12 @@ class InviteExpiration extends React.Component {
     this.setTime = this.setTime.bind(this);
     if (!props.invite.isExpired && props.invite.expiration) {
       this.state = { timeLeft: printTime(props.invite.createdAt, props.invite.expiration) }
-      setInterval(this.setTime, 1000);
+      this.interval = setInterval(this.setTime, 1000);
     }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   setTime() {

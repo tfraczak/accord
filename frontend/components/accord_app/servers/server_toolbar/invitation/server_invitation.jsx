@@ -1,12 +1,15 @@
 import React from 'react';
 import Select from 'react-select';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 class ServerInvitation extends React.Component {
     constructor(props) {
         super(props);
-
+        const urlToken = props.invitation ? props.invitation.urlToken : "";
         this.state = {
-            expiration: ""
+            expiration: "",
+            urlToken,
+            copied: false,
         };
 
         this.handleInvite = this.handleInvite.bind(this);
@@ -68,6 +71,14 @@ class ServerInvitation extends React.Component {
         }
     }
 
+    copied() {
+        const copyBtn = document.getElementById("copy-url-token");
+        const urlToken = document.getElementById("url-token");
+        urlToken.classList.add("copied");
+        copyBtn.classList.add("copied");
+        copyBtn.textContent = "Copied!";
+    }
+
     check() {
         return (
             !!this.props.invitation ||
@@ -111,7 +122,10 @@ class ServerInvitation extends React.Component {
                             ( <h6 id="url-token" className="url-token example">dX0cmrzF0w</h6> )
                             }
                         </div>
-                        <button onClick={ this.copyClick } disabled={ !this.canCopy() }>Copy</button>
+                        <CopyToClipboard text={ invitation ? invitation.urlToken : "" } onCopy={ this.copied }>
+                            {/* <button onClick={ this.copyClick } disabled={ !this.canCopy() }>Copy</button> */}
+                            <button id="copy-url-token" disabled={ !this.canCopy() }>Copy</button>
+                        </CopyToClipboard>
                     </div>
                     <div className="expiration-options-wrapper">
                         <h6 className="select-label">EXPIRE AFTER</h6>
