@@ -1,5 +1,7 @@
 import * as ServerAPIUtil from "../utils/server_utils";
+import { createServerSub } from "../utils/socket_utils";
 import { convertToSnakeCase } from "../utils/func_utils";
+import { receiveServerSub } from "../actions/socket_actions";
 
 export const RECEIVE_SERVERS = "RECEIVE_SERVERS";
 export const RECEIVE_SERVER = "RECEIVE_SERVER";
@@ -33,7 +35,7 @@ export const receiveServerErrors = errors => {
     };
 };
 
-const removeServer = payload => ({
+export const removeServer = payload => ({
     type: REMOVE_SERVER,
     payload,
 });
@@ -98,7 +100,15 @@ export const createServer = server => dispatch => {
     // server = convertToSnakeCase(server);
     return ServerAPIUtil.createServer(server)
         .then(
-            payload => dispatch(receiveNewServer(payload)),
+            payload => {
+                const serverSub = createServerSub(
+                    payload.server,
+                    payload.membership.userId,
+                    dispatch
+                );
+                dispatch(receiveServerSub({ id: payload.server.id, sub: serverSub }));
+                dispatch(receiveNewServer(payload));
+            },
             err => dispatch(receiveServerErrors(err.responseJSON))
         );
 };
@@ -119,11 +129,13 @@ export const deleteServer = (serverId) => dispatch => {
         )
 };
 
-export const joinServer = (membership) => dispatch => {
-    membership = convertToSnakeCase(membership);
-    return ServerAPIUtil.joinServer(membership)
+export const joinServer = (membership, currentUserId) => dispatch => {
+    const snakedMembership = convertToSnakeCase(membership);
+    return ServerAPIUtil.joinServer(snakedMembership)
         .then(
-            payload => dispatch(receiveJoinedServer(payload)),
+            payload => {
+                return dispatch(receiveJoinedServer(payload));
+            },
             err => err
         );
 };
@@ -144,7 +156,7 @@ export const kickMember = (membershipId) => dispatch => {
         );
 };
 
-export const getServerByJoinForm = (urlToken,currentUserId) => dispatch => {
+export const getServerByJoinForm = (urlToken, currentUserId, history, location) => dispatch => {
     return ServerAPIUtil.getServerByInvite(urlToken)
         .then(
             server => {
@@ -153,7 +165,7 @@ export const getServerByJoinForm = (urlToken,currentUserId) => dispatch => {
                     joinableId: server.id,
                     joinableType: "Server",
                 };
-                return joinServer(membership)(dispatch);
+                return joinServer(membership, currentUserId, history, location)(dispatch);
             }, err => dispatch(receiveServerErrors(err.responseJSON))
         );
 };

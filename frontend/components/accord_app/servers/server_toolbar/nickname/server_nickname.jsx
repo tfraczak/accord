@@ -28,14 +28,18 @@ class ServerNickname extends React.Component {
         const {
             closeModal,
             changeNickname,
+            serverSub,
         } = this.props;
 
         Object.freeze(this.state);
         const membership = this.state;
-        changeNickname(membership)
-            .then(
-                () => closeModal()
-            );
+
+        serverSub.updateNickname({ membership }, serverSub);
+
+        // changeNickname(membership)
+        //     .then(
+        //         () => closeModal()
+        //     );
     }
 
     clickClose() {
@@ -64,6 +68,7 @@ class ServerNickname extends React.Component {
                         <button
                             type="button"
                             onClick={ this.resetNickname }
+                            className="nickname-reset"
                         >
                             Reset Nickname
                         </button>

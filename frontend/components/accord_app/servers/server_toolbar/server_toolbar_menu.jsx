@@ -11,9 +11,22 @@ class ServerToolbarMenu extends Component {
   }
 
   handleLeave() {
+    const {
+      membershipId,
+      currentUserId,
+      serverSub,
+    } = this.props;
+
+    const cableData = {
+      membershipId,
+      currentUserId
+    };
+
     this.props.closeToolbar();
     this.props.history.push("/channels/@me");
-    this.props.leaveServer();
+
+    serverSub.leaveServer(cableData, serverSub);
+    // this.props.leaveServer();
     
   }
 

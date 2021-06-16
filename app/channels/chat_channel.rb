@@ -26,12 +26,12 @@ class ChatChannel < ApplicationCable::Channel
       .order(created_at: :desc)
       .limit(50)
     messages.each { |message| message[:author] = secure_user!(camelize_keys(message.author.attributes)) }
-    data[:messages] camelize(messages)
+    data[:messages] = camelize(messages)
     ChatChannel.broadcast_to(@chat, data)
   end
 
   def unsubscribed
-    # Any cleanup needed when channel is unsubscribed
+    
   end
 
 end

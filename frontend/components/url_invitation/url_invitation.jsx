@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 class UrlInvitation extends React.Component {
     constructor(props) {
@@ -70,8 +69,14 @@ class UrlInvitation extends React.Component {
     handleYes(e) {
         e.preventDefault();
         const redirectTime = 3000;
-        const serverIds = this.props.serverIds;
-        const invitedServer = this.props.invitedServer;
+
+        const {
+            serverIds,
+            invitedServer,
+            currentUserId,
+            history,
+        } = this.props;
+
         if (serverIds.includes(invitedServer.id.toString())) {
             this.setState({
                 join: () => (
@@ -83,7 +88,7 @@ class UrlInvitation extends React.Component {
                 question: () => <div className="separator"></div>,
             });
             setTimeout(() => {
-                this.props.history.push("./app");
+                history.push("./app");
             },redirectTime);
             return;
         } else if (this.props.errors[0] === "Invite code is expired.") {
@@ -106,14 +111,14 @@ class UrlInvitation extends React.Component {
                 question: () => <div className="separator"></div>,
             });
             let membership = {
-                userId: this.props.currentUserId,
+                userId: currentUserId,
                 joinableId: invitedServer.id,
                 joinableType: "Server",
             }
-            this.props.joinServer(membership)
+            this.props.joinServer(membership, currentUserId)
                 .then(
                     res => {
-                        setTimeout(() => this.props.history.push("/app"), redirectTime);
+                        setTimeout(() => history.push("/app"), redirectTime);
                         this.setState({
                             join: () => (
                                 <div className="join-wrapper">
@@ -135,7 +140,7 @@ class UrlInvitation extends React.Component {
                                 question: () => <div className="separator"></div>,
                             });
                             setTimeout(() => {
-                                this.props.history.push("./app");
+                                history.push("./app");
                             },redirectTime);
                         } else {
                             this.setState({
@@ -148,7 +153,7 @@ class UrlInvitation extends React.Component {
                                 question: () => <div className="separator"></div>,
                             });
                             setTimeout(() => {
-                                this.props.history.push("./app");
+                                history.push("./app");
                             },redirectTime);
                         }
                     }

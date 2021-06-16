@@ -20,7 +20,10 @@ class ServersNavBar extends React.Component {
     }
 
     componentWillUnmount() {
-        this.props.removeServerSubs();
+        const path = this.props.history.location.pathname;
+        if (!path.includes("/channels")) {
+            this.props.removeServerSubs();
+        }
     }
 
     classRemoveClick(e) {

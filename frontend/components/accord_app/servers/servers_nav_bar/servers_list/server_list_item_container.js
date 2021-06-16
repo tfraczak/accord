@@ -19,7 +19,7 @@ const mSTP = (state, ownProps) => {
 const mDTP = dispatch => ({
   receiveServerSub: serverSub => dispatch(receiveServerSub(serverSub)),
   receiveServer: server => dispatch(receiveServer(server)),
-  createServerSub: (server, currentUser, history) => createServerSub(server, currentUser, history, dispatch),
+  createServerSub: (server, currentUser) => createServerSub(server, currentUser, dispatch),
 });
 
 export default withRouter(connect(mSTP, mDTP)(ServerListItem));

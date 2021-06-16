@@ -1,7 +1,12 @@
 import {
+    removeServerSub,
+} from '../actions/socket_actions';
+
+import {
     receiveServer,
     receiveServerErrors,
     leftServer,
+    removeServer,
 } from '../actions/server_actions';
 
 import {
@@ -15,6 +20,7 @@ import {
 
 import {
     removeMembership,
+    receiveMembership,
 } from '../actions/membership_actions';
 
 import {
@@ -25,8 +31,7 @@ import {
 
 export const createServerSub = (
     server,
-    currentUser,
-    history,
+    currentUserId,
     dispatch,
 ) => (
     App.cable.subscriptions.create(
@@ -41,19 +46,39 @@ export const createServerSub = (
                         dispatch(receiveNewMember(data.payload));
                         break;
                     case "kick member":
-                        if (!data.errors) {
-                            if (currentUser.id === data.payload.userId) {
-                                history.push("/channels/@me");
+                        if (!data.error) {
+                            if (currentUserId === data.payload.userId) {
                                 dispatch(leftServer(data.payload));
                             } else {
                                 dispatch(removeMembership(data.payload.membershipId));
                             }
                         } else {
-                            dispatch(receiveServerErrors(data.error));
+                            if (data.payload.currentUserId === currentUserId) {
+                                dispatch(receiveServerErrors(data.error));
+                            }
                         }
+                        break;
+                    case "leave server":
+                        if (!data.error) {
+                            if (currentUserId === data.payload.userId) {
+                                dispatch(leftServer(data.payload));
+                            } else {
+                                dispatch(removeMembership(data.payload.membershipId));
+                            }
+                        } else {
+                            if (data.payload.userId === currentUserId) {
+                                dispatch(receiveServerErrors(data.error));
+                            }
+                        }
+                        break;
+                    case "delete server":
+                        dispatch(removeServer(data.payload));
                         break;
                     case "update server":
                         dispatch(receiveServer(data.server));
+                        break;
+                    case "update nickname":
+                        dispatch(receiveMembership(data.membership));
                         break;
                     case "new channel":
                         dispatch(receiveCreatedChannel(data.channel));
@@ -66,11 +91,17 @@ export const createServerSub = (
             updateServer: (data, sub) => {
                 return sub.perform("update_server", data);
             },
-            newMember: (data, sub) => {
-                return sub.perform("new_member", data);
-            },
+            // newMember: (data, sub) => {
+            //     return sub.perform("new_member", data);
+            // },
             kickMember: (data, sub) => {
                 return sub.perform("kick_member", data);
+            },
+            leaveServer: (data, sub) => {
+                return sub.perform("leave_server", data);
+            },
+            deleteServer: (sub) => {
+                return sub.perform("delete_server");
             },
             newChannel: (data, sub) => {
                 // data = { channel } returns new { channel }

@@ -11,6 +11,7 @@ import { receiveChatSub } from '../../../actions/socket_actions';
 
 const mSTP = (state, ownProps) => {
     const chat = state.entities.channels[ownProps.match.params.channelId];
+    if (!chat) return ownProps.history.push("/channels/@me");
     const type = "Channel";
     const messages = chatMessages(chat, type, state.entities.messages);
     const server = state.entities.servers[ownProps.match.params.serverId];

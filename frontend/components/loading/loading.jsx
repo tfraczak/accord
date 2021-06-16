@@ -1,10 +1,13 @@
 import React from 'react';
 
 export default props => {
-
     props.retrieveUserLoadData(props.currentUserId)
         .then(
-            () => props.history.push("/channels/@me"),
+            () => {
+                if (props.history.location.pathname !== "/channels/@me") {
+                    props.history.push("/channels/@me");
+                }
+            },
             () => props.history.push("/")
         );
     

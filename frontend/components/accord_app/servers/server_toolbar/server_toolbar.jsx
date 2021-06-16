@@ -67,9 +67,9 @@ class ServerToolbar extends Component {
             removeInvitation,
             openModal,
             openFullModal,
+            serverSub,
         } = this.props;
 
-        const params = this.props.match.params;
         if(server) {
             
             return (
@@ -105,7 +105,8 @@ class ServerToolbar extends Component {
                                 deleteServer={ () => deleteServer(server.id) }
                                 leaveServer={ () => leaveServer(membershipId) }
                                 createInvite={ () => createInvite(server.id) }
-                                history={ this.props.history }
+                                history={ history }
+                                serverSub={ serverSub }
                             />
                         </section> 
                 </section>
@@ -120,17 +121,11 @@ class ServerToolbar extends Component {
         const {
             history,
             server,
-            currentUserId,
-            membershipId,
-            deleteServer,
-            updateServer,
-            leaveServer,
-            createInvite,
         } = this.props;
         
         return (
             <>
-                { server ? this.renderServer() : history.push('/app') }
+                { server ? this.renderServer() : history.push("/channels/@me") }
             </>
         )
     }

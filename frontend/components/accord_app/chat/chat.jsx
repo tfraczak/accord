@@ -9,7 +9,7 @@ class Chat extends Component {
         this.state = { messages: props.messages || [] };
         this.bottom = React.createRef();
         this.setState = this.setState.bind(this);
-        this.subscription = props.chatSub ? props.chatSub : props.createChatSub(this);
+        this.subscription = props.createChatSub(this);
     }
 
     componentDidMount() {
@@ -21,6 +21,7 @@ class Chat extends Component {
 
     componentWillUnmount() {
         // this.props.history.location.pathname is the next url path
+        this.subscription.unsubscribe();
         const nextPath = this.props.history.location.pathname;
         const next = nextChat(nextPath);
         const type = next[0];
@@ -61,7 +62,7 @@ class Chat extends Component {
                 <div key={`message-${message.id}`} className="message-wrapper">
                     <div className="message-info-wrapper">
                         <img src={ message.author.avatarUrl ? message.author.avatarUrl : window.defaultAvatarUrl} className="chat-avatar" />
-                        <h6 className={ `author${message.author.membershipId ? "" : " not-a-member"}` }>
+                        <h6 className={ `author${chatMembers[message.authorId] ? "" : " not-a-member"}` }>
                             { 
                                 chatMembers[message.authorId] ? 
                                     (

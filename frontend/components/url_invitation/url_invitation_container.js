@@ -16,7 +16,7 @@ const mSTP = (state, ownProps) => {
 const mDTP = dispatch => {
     return {
         getServerByUrl: urlToken => dispatch(getServerByUrl(urlToken)),
-        joinServer: membership => dispatch(joinServer(membership)),
+        joinServer: (membership, currentUserId, history, location) => dispatch(joinServer(membership, currentUserId, history, location)),
         retrieveUserServers: userId => dispatch(retrieveUserServers(userId)),
         validUrlToken: validUrlToken,
         serverInitials: serverInitials,

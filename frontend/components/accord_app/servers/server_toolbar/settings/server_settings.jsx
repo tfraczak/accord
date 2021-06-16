@@ -37,11 +37,24 @@ class ServerSettings extends React.Component {
 
     handleDelete(e) {
         e.preventDefault();
-        this.props.closeModal();
-        if (parseInt(this.props.location.pathname.split("/")[2]) === this.props.server.id) {
-            this.props.history.push(`/channels/@me`);
+        const {
+            closeModal,
+            location,
+            server,
+            history,
+            serverSub,
+            members,
+        } = this.props;
+
+        closeModal();
+        if (parseInt(location.pathname.split("/")[2]) === server.id) {
+            history.push(`/channels/@me`);
         }
-        this.props.deleteServer(this.props.server.id);
+
+        for (let member of Object.values(members)) { serverSub.kickMember(member, serverSub) }
+
+        serverSub.deleteServer(serverSub);
+        // this.props.deleteServer(this.props.server.id);
     }
 
     handleReset() {

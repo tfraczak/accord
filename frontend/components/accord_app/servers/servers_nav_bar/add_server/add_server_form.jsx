@@ -76,10 +76,6 @@ class AddServerForm extends React.Component {
                 if (urlToken) {
                     processForm(urlToken, currentUser.id)
                         .then(data => {
-                            const server = data.payload.server;
-                            const serverSub = this.props.serverSubs[server.id];
-                            const cableData = { member: currentUser };
-                            serverSub.newMember(cableData, serverSub);
                             closeModal();
                             document.getElementById("asf-button").classList.remove("active");
                         }, err => {

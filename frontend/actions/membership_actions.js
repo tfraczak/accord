@@ -31,5 +31,5 @@ export const updateNickname = membership => dispatch => {
     return MembershipAPIUtil.updateMembership(membership)
         .then(
             membership => dispatch(receiveMembership(membership))
-        )
+        );
 };

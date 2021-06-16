@@ -19,8 +19,11 @@ const mSTP = (state, ownProps) => {
       membershipsState
     )
   ];
+  const serverSub = state.subscriptions.servers[server.id];
+
   return {
     currentUser: currentUserCopy,
+    serverSub,
   };
 };
 
@@ -28,6 +31,7 @@ const mDTP = dispatch => {
   return {
     closeModal: () => dispatch(closeModal()),
     updateNickname: membership => dispatch(updateNickname(membership)),
+
   };
 };
 

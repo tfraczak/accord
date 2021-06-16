@@ -19,6 +19,7 @@ const mSTP = (state, ownProps) => {
         server,
         isOwner: server.ownerId === currentUser.id,
         serverSub,
+        currentUserId: currentUser.id,
     }
 };
 

@@ -1,5 +1,6 @@
 import Loading from "./loading";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import { _retrieveUserLoadData } from '../../actions/session_actions';
 
 const mSTP = (state, ownProps) => {
@@ -28,4 +29,4 @@ const mDTP = (dispatch) => ({
     retrieveUserLoadData: userId => dispatch(_retrieveUserLoadData(userId)),
 });
 
-export default connect(mSTP, mDTP)(Loading);
+export default withRouter(connect(mSTP, mDTP)(Loading));

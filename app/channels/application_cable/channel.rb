@@ -26,5 +26,25 @@ module ApplicationCable
       user.delete("updatedAt")
       user
     end
+
+    def server_socket(action, membership=nil, user=nil, current_user_id=nil)
+      socket = {}
+      socket["action"] = action
+      socket["payload"] = {
+        channel_ids: @server.channels.pluck(:id),
+        invitation_ids: @server.invitations.pluck(:id),
+        membership_ids: @server.memberships.pluck(:id),
+        message_ids: @server.messages.pluck(:id),
+        server_id: @server.id,
+      }
+
+      socket["payload"]["membership_id"] = membership.id if membership
+      socket["payload"]["user_id"] = user.id if user
+      socket["payload"]["current_user_id"] = current_user_id if current_user_id
+
+      socket["payload"] = camelize_keys(socket["payload"].as_json)
+      socket
+    end
+
   end
 end

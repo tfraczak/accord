@@ -7,6 +7,7 @@ class ServerMembersList extends Component {
         super(props);
         this.closeMemberOptions = this.closeMemberOptions.bind(this);
         this.handleContext = this.handleContext.bind(this);
+        this.handleKick = this.handleKick.bind(this);
         this.handleTransferOwnership = this.handleTransferOwnership.bind(this);
     }
 
@@ -25,13 +26,18 @@ class ServerMembersList extends Component {
     }
 
     handleKick(member) {
-        const { serverSub } = this.props;
+        const { serverSub, currentUserId } = this.props;
         
         const memberOptions = document.getElementById(`member-options-${member.username}#${member.usernameId}`);
         memberOptions.classList.add("hidden");
         document.removeEventListener('mousedown', this.closeMemberOptions(memberOptions));
         
-        serverSub.kickMember({ member }, serverSub);
+        const cableData = {
+            member,
+            currentUserId
+        };
+
+        serverSub.kickMember(cableData, serverSub);
     }
 
     closeMemberOptions(memberOptions) {
@@ -91,7 +97,7 @@ class ServerMembersList extends Component {
                                     member={ member }
                                     server={ server }
                                     isOwner={ isOwner }
-                                    kickMember={ () => serverSub.kickMember({ member }, serverSub) }
+                                    kickMember={ () => this.handleKick(member) }
                                     transferOwnership={ () => this.handleTransferOwnership(member) }
                                 />
                             ))

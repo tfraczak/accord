@@ -1,18 +1,20 @@
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
+import ServerToolbar from "./server_toolbar";
 import * as InviteActions from '../../../../actions/invitation_actions';
 import * as ServerActions from '../../../../actions/server_actions';
-import ServerToolbar from "./server_toolbar";
-import { currentUsersMembershipId } from '../../../../utils/selectors';
 import { openModal, openFullModal } from '../../../../actions/ui_actions';
+import { currentUsersMembershipId } from '../../../../utils/selectors';
 
 const mSTP = (state, ownProps) => {
 
     const server = state.entities.servers[ownProps.match.params.serverId];
+    if (!server) return ownProps.history.push("/channels/@me");
     const currentUserId = state.session.id;
     const memberships = state.entities.memberships;
     const users = state.entities.users;
     const invitation = state.session.invitation;
+    const serverSub = state.subscriptions.servers[server.id];
 
     const membershipId = currentUsersMembershipId(
         currentUserId,
@@ -26,6 +28,7 @@ const mSTP = (state, ownProps) => {
         currentUserId,
         membershipId,
         invitation,
+        serverSub
     };
 };
 

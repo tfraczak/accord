@@ -9,7 +9,10 @@ class ServerListItem extends React.Component {
         this.classRemoveClick = this.classRemoveClick.bind(this);
         this.checkPath = this.checkPath.bind(this);
         if (!props.serverSub) {
-            this.subscription = props.createServerSub(props.server, props.currentUser, props.history);
+            this.subscription = props.createServerSub(
+                props.server,
+                props.currentUser.id
+            );
             props.receiveServerSub({
                 id: props.server.id,
                 sub: this.subscription,
@@ -41,7 +44,10 @@ class ServerListItem extends React.Component {
     }
 
     componentWillUnmount() {
-        this.subscription.unsubscribe(this.subscription);
+        const path = this.props.history.location.pathname;
+        if (!path.includes("/channels")) {
+            this.subscription.unsubscribe(this.subscription);
+        }
     }
 
     checkPath() {

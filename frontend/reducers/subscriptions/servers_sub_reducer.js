@@ -1,4 +1,9 @@
-import { RECEIVE_SERVER_SUB, REMOVE_SERVER_SUBS } from '../../actions/socket_actions';
+import {
+  RECEIVE_SERVER_SUB,
+  REMOVE_SERVER_SUBS,
+} from '../../actions/socket_actions';
+
+import { REMOVE_SERVER } from '../../actions/server_actions';
 
 export default (state = {}, action) => {
   Object.freeze(state);
@@ -12,6 +17,10 @@ export default (state = {}, action) => {
       return nextState;
     case REMOVE_SERVER_SUBS:
       return {};
+    case REMOVE_SERVER:
+      nextState = Object.assign({}, state);
+      delete nextState[action.serverId];
+      return nextState;
     default:
       return state;
   }

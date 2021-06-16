@@ -12,7 +12,21 @@ class Api::MembershipsController < ApplicationController
             @membership = Membership.new(membership_params)
             if @membership.save
                 @server = Server.find_by(id: @membership.joinable_id)
+                
                 render :create
+
+                if (membership_params[:user_id] != current_user.id) && (membership_params[:user_id] != @server.owner_id)
+                    user = User.find_by(id: membership_params[:user_id])
+                    member = secure_user!(camelize_record(user))
+                    membership = camelize_record(@membership)
+                    membership.delete("createdAt")
+                    membership.delete("updatedAt")
+                    socket = {}
+                    socket["action"] = "new member"
+                    socket["payload"] = { member: member, membership: membership }.as_json
+                    ServerChannel.broadcast_to(@server, socket)
+                end
+
             else
                 case @membership.errors.full_messages
                 when ["User has already been taken"]
@@ -23,20 +37,6 @@ class Api::MembershipsController < ApplicationController
             end
         end
     end
-
-    # def update # used only for updating local_username
-    #     @membership = Membership.find_by(id: params[:id])
-    #     @server = Server.find_by(id: @membership.joinable_id) if @membership.joinable_type == "Server"
-    #     if local_username_valid? && @membership.update(local_username: local_username_param)
-    #         render :update
-    #     elsif @membership && local_username_empty?
-    #         render json: ["Local username cannot be empty."], status: 422
-    #     elsif illegal_update?
-    #         render json: ["Cannot update other membership parameters."], status: 403
-    #     else
-    #         render json: ["Invalid entry for membership paramters."], status: 422
-    #     end
-    # end
 
     def update
         @membership = Membership.find_by(id: params[:id])
