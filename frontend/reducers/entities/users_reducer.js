@@ -1,5 +1,15 @@
-import { RECEIVE_CURRENT_USER, RECEIVE_USER_LOAD_DATA } from "../../actions/session_actions";
-import { RECEIVE_USERS, RECEIVE_USER, RECEIVE_NEW_MEMBER } from "../../actions/user_actions";
+import {
+    RECEIVE_CURRENT_USER,
+    RECEIVE_USER_LOAD_DATA,
+    RECEIVE_PRIVATE_USER_LOAD_DATA,
+} from "../../actions/session_actions";
+
+import {
+    RECEIVE_USERS,
+    RECEIVE_USER,
+    RECEIVE_NEW_MEMBER
+} from "../../actions/user_actions";
+
 import {
     RECEIVE_JOINED_SERVER,
     RECEIVE_SERVER_INFO,
@@ -39,6 +49,8 @@ export default (state = {}, action) => {
             nextState = Object.assign({}, state);
             delete nextState[action.payload.member.id];
             return nextState;
+        case RECEIVE_PRIVATE_USER_LOAD_DATA:
+            return Object.assign({}, state, action.payload.users);
         default:
             return state;
     }

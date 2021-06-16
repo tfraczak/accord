@@ -37,7 +37,8 @@ class ChannelsModal extends Component {
 		if(modal.type) {
 			switch(modal.type) {
 				case "channel settings":
-					component = <ChannelSettingsContainer channel={modal.channel} />;
+					const channel = modal.channel
+					component = <ChannelSettingsContainer key={ `channel-settings-modal-${channel.serverId}-${channel.id}-${channel.name}` } channel={ channel } />;
 					bgClassName = "csf-modal-background";
 					childClassName = "csf-modal-child";
 					break;

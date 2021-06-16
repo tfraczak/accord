@@ -4,6 +4,7 @@ export const REMOVE_CHAT_SUBS = "REMOVE_CHAT_SUBS";
 export const RECEIVE_SERVER_SUB = "RECEIVE_SERVER_SUB";
 export const REMOVE_SERVER_SUBS = "REMOVE_SERVER_SUBS";
 export const REMOVE_SERVER_SUB = "REMOVE_SERVER_SUB";
+export const RECEIVE_SESSION_SUB = "RECEIVE_SESSION_SUB";
 
 export const receiveChatSub = chat => { // chat should look like { id: chat.id, sub: chatSub }
   return {
@@ -42,5 +43,12 @@ export const removeServerSub = serverId => {
   return {
     type: REMOVE_SERVER_SUBS,
     serverId
+  };
+};
+
+export const receiveSessionSub = sessionSub => {
+  return {
+    type: RECEIVE_SESSION_SUB,
+    sessionSub,
   };
 };

@@ -6,6 +6,7 @@ import { receiveUsers } from './user_actions';
 import { receiveMemberships } from './membership_actions';
 import { receiveInvitations } from './invitation_actions';
 import { receiveChannels } from './channel_actions';
+import { getUserConversations } from "../utils/conversation_utils";
 
 
 export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER"; 
@@ -14,6 +15,7 @@ export const RECEIVE_SESSION_ERRORS = "RECEIVE_SESSION_ERRORS";
 export const REMOVE_SESSION_ERRORS = "REMOVE_SESSION_ERRORS";
 export const REMOVE_ERRORS = "REMOVE_ERRORS";
 export const RECEIVE_USER_LOAD_DATA = "RECEIVE_USER_LOAD_DATA";
+export const RECEIVE_PRIVATE_USER_LOAD_DATA = "RECEIVE_PRIVATE_USER_LOAD_DATA";
 
 
 const receiveCurrentUser = currentUser => {
@@ -39,6 +41,13 @@ const receiveUserLoadData = payload => {
         payload,
     }
     
+};
+
+const receivePrivateUserLoadData = payload => {
+    return {
+        type: RECEIVE_PRIVATE_USER_LOAD_DATA,
+        payload,
+    }
 };
 
 export const removeErrors = () => ({
@@ -74,6 +83,10 @@ export const logout = () => dispatch => {
 };
 
 export const _retrieveUserLoadData = userId => dispatch => {
+    getUserConversations(userId)
+        .then(payload => {
+            dispatch(receivePrivateUserLoadData(payload));
+        });
     return getUserServers(userId)
         .then(payload => {
             dispatch(receiveUserLoadData(payload));

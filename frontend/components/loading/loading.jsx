@@ -1,6 +1,10 @@
 import React from 'react';
 
 export default props => {
+    if (!Object.keys(props.sessionSub).length) {
+        const sub = props.createSessionSub(props.currentUserId)
+        props.receiveSessionSub(sub);
+    }
     props.retrieveUserLoadData(props.currentUserId)
         .then(
             () => {

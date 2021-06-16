@@ -44,17 +44,25 @@ class Api::MembershipsController < ApplicationController
                 @convo = Conversation.find_by(id: @membership.joinable_id)
                 
                 render :create
-
+                
                 if (membership_params[:user_id] != current_user.id) && (membership_params[:user_id] != @server.owner_id)
                     user = User.find_by(id: membership_params[:user_id])
                     member = secure_user!(camelize_record(user))
                     membership = camelize_record(@membership)
                     membership.delete("createdAt")
                     membership.delete("updatedAt")
+                    messages = Message
+                        .where(messageable_type: :Conversation, messageable_id: @convo.id)
+                        .order(created_at: :desc)
+                        .limit(50)
+                    messages = camelize(messages)
                     socket = {}
                     socket["action"] = "new member"
-                    socket["payload"] = { member: member, membership: membership }.as_json
-                    ServerChannel.broadcast_to(@convo, socket)
+                    socket["payload"] = {
+                        member: member,
+                        membership: membership,
+                    }.as_json
+                    SessionChannel.broadcast_to(@convo, socket)
                 end
 
             else

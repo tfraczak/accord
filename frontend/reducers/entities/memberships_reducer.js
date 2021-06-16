@@ -16,7 +16,10 @@ import {
     LOAD_MEMBERS
 } from '../../actions/server_actions';
 
-import { RECEIVE_USER_LOAD_DATA } from '../../actions/session_actions';
+import {
+    RECEIVE_USER_LOAD_DATA,
+    RECEIVE_PRIVATE_USER_LOAD_DATA,
+} from '../../actions/session_actions';
 
 
 export default (state = {}, action) => {
@@ -68,6 +71,8 @@ export default (state = {}, action) => {
         case RECEIVE_SERVER_INFO:
             memberships = action.payload.memberships;
             return Object.assign({}, state, memberships);
+        case RECEIVE_PRIVATE_USER_LOAD_DATA:
+            return Object.assign({}, state, action.payload.memberships);
         default:
             return state;
     }

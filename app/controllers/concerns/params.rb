@@ -14,9 +14,9 @@ module Params
     params.require(:channel).permit(:name, :media_type, :server_id, :default)
   end
 
-  # def conversation_params
-  #   params.require(:conversation).permit(:initiator_id)
-  # end
+  def conversation_params
+    params.require(:conversation).permit(:name, :initiator_id, :image, :user_ids)
+  end
 
   def membership_params
     params.require(:membership).permit(:user_id, :joinable_id, :joinable_type, :local_username)

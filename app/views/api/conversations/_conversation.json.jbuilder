@@ -1,0 +1,1 @@
+json.extract! convo, :id, :initiator_id, :name

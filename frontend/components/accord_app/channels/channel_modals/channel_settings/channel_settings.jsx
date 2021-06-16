@@ -78,6 +78,11 @@ class ChannelSettings extends React.Component {
         const save = document.getElementById("csf-buttons-wrapper");
         save.classList.remove("active");
 
+        const name = this.state.name;
+        if (name[name.length-1] === "-") {
+            this.setState({ name: name.slice(0,name.length-1) });
+        }
+
         // closeModal();
         // document.getElementById("edit-channel-btn").classList.remove("modal-open");
 

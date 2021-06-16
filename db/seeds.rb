@@ -144,4 +144,8 @@ Channel.create!(
     name: "this-is-so-awesome",
     media_type: "Text"
 )
-
+Channel.create!(
+    server_id: 3,
+    name: "this-is-so-awesome",
+    media_type: "Text"
+)

@@ -183,3 +183,35 @@ export const createChatSub = (
         }
     )
 );
+
+export const createSessionSub = (
+    currentUserId,
+    dispatch,
+) => (
+    App.cable.subscriptions.create(
+        {
+            channel: `SessionChannel`,
+            currentUserId,
+        },
+        {
+            received: data => {
+                switch (data.action) {
+                    case "new conversation": // convo, memberships
+                        dispatch(receiveNewConversation(data.payload));
+                        break;
+                    case "new conversation member":
+                        dispatch(receiveNewMember(data.payload));
+                        break;
+                    default:
+                        break;
+                }
+            },
+            newConvo: (data, sub) => { // need userId of other person
+                return sub.perform("new_convo", data);
+            },
+            unsubscribe: () => {
+                return that.subscription.perform("unsubscribed");
+            },
+        }
+    )
+)

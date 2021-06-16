@@ -18,7 +18,10 @@ import {
 
 import { chatMessages } from "../../utils/selectors";
 
-import { RECEIVE_USER_LOAD_DATA } from '../../actions/session_actions';
+import {
+    RECEIVE_USER_LOAD_DATA,
+    RECEIVE_PRIVATE_USER_LOAD_DATA,
+} from '../../actions/session_actions';
 
 
 export default (state = {}, action) => {
@@ -67,6 +70,8 @@ export default (state = {}, action) => {
             messageIds = Object.values(action.payload.messageIds);
             for(let id of messageIds) { delete nextState[id] }
             return nextState;
+        case RECEIVE_PRIVATE_USER_LOAD_DATA:
+            return Object.assign({}, state, action.payload.messages);
         default:
             return state;
     }
