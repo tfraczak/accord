@@ -5,7 +5,6 @@ import CreateChannelButton from '../channel_modals/create_channel_form/create_ch
 class ChannelsIndex extends Component {
     constructor(props) {
         super(props);
-        props.removeChatSubs();
     }
 
     showTextChannels(e) {
@@ -24,8 +23,6 @@ class ChannelsIndex extends Component {
             openFullModal,
             createChatSub,
             receiveChatSub,
-            chatSubs,
-            removeChatSubs,
         } = this.props;
         if (server) {
             return (
@@ -50,8 +47,6 @@ class ChannelsIndex extends Component {
                                 currentUserId={ currentUserId }
                                 createChatSub={ createChatSub }
                                 receiveChatSub={ receiveChatSub }
-                                chatSub={ chatSubs[channel.id] }
-                                removeChatSubs={ removeChatSubs }
                             />
                         ))}
                     </ul>

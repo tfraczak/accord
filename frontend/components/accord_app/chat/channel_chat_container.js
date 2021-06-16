@@ -11,7 +11,6 @@ import { receiveChatSub } from '../../../actions/socket_actions';
 
 const mSTP = (state, ownProps) => {
     const chat = state.entities.channels[ownProps.match.params.channelId];
-    debugger
     if (!chat && !ownProps.history.location.pathname.includes("@me")) {
         ownProps.history.push("/channels/@me");
         return {};
