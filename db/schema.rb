@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_12_030817) do
+ActiveRecord::Schema.define(version: 2021_06_16_131424) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,14 @@ ActiveRecord::Schema.define(version: 2021_06_12_030817) do
     t.boolean "default"
     t.index ["server_id", "default"], name: "unique_default_channel", unique: true
     t.index ["server_id"], name: "index_channels_on_server_id"
+  end
+
+  create_table "conversations", force: :cascade do |t|
+    t.bigint "initiator_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.index ["initiator_id"], name: "index_conversations_on_initiator_id"
   end
 
   create_table "invitations", force: :cascade do |t|
@@ -108,6 +116,7 @@ ActiveRecord::Schema.define(version: 2021_06_12_030817) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "channels", "servers"
+  add_foreign_key "conversations", "users", column: "initiator_id"
   add_foreign_key "invitations", "servers"
   add_foreign_key "memberships", "users"
   add_foreign_key "messages", "users", column: "author_id"

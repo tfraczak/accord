@@ -35,6 +35,15 @@ class User < ApplicationRecord
 
     has_one_attached :avatar
 
+    has_many :conversations,
+        through: :memberships,
+        source: :joinable,
+        source_type: :Conversation
+
+    has_many :initiated_conversations,
+        foreign_key: :initiator_id,
+        class_name: :Conversation
+
     def self.find_by_credentials(email, pw)
         user = User.find_by(email: email)
         return user if user && user.is_password?(pw)
