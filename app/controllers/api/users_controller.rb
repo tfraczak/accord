@@ -6,6 +6,11 @@ class Api::UsersController < ApplicationController
             @server_id = params[:server_id]
             @type = :Server
             @users = server.members
+        elsif params[:conversation_id]
+            conversation = Conversation.find_by(id: params[:conversation_id])
+            @conversation_id = params[:conversation_id]
+            @type = :Conversation
+            @users = conversation.members
         end
         render :index
     end

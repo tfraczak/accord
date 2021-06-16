@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     resources :channels, only: [:create, :update, :destroy, :show] do
       resources :messages, only: :index
     end
-    resources :conversations, only: [:create, :update, :destroy] do
+    resources :conversations, only: [:create, :update] do
       resources :users, only: :index
       resources :messages, only: :index
       resources :memberships, only: [:index, :create]

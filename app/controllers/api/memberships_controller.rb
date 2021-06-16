@@ -3,6 +3,8 @@ class Api::MembershipsController < ApplicationController
     def index
         if params[:server_id]
             @memberships = Membership.where(joinable_id: params[:server_id], joinable_type: :Server)
+        else
+            @memberships = Membership.where(joinable_id: params[:conversation_id], joinable_type: :Conversation)
         end
         render :index
     end
@@ -25,6 +27,34 @@ class Api::MembershipsController < ApplicationController
                     socket["action"] = "new member"
                     socket["payload"] = { member: member, membership: membership }.as_json
                     ServerChannel.broadcast_to(@server, socket)
+                end
+
+            else
+                case @membership.errors.full_messages
+                when ["User has already been taken"]
+                    render json: ["You're already a member!"], status: 409
+                else
+                    render json: @membership.errors.full_messages, status: 422
+                end
+            end
+        end
+        if params[:conversation_id]
+            @membership = Membership.new(membership_params)
+            if @membership.save
+                @convo = Conversation.find_by(id: @membership.joinable_id)
+                
+                render :create
+
+                if (membership_params[:user_id] != current_user.id) && (membership_params[:user_id] != @server.owner_id)
+                    user = User.find_by(id: membership_params[:user_id])
+                    member = secure_user!(camelize_record(user))
+                    membership = camelize_record(@membership)
+                    membership.delete("createdAt")
+                    membership.delete("updatedAt")
+                    socket = {}
+                    socket["action"] = "new member"
+                    socket["payload"] = { member: member, membership: membership }.as_json
+                    ServerChannel.broadcast_to(@convo, socket)
                 end
 
             else
