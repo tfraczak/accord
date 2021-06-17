@@ -55,7 +55,7 @@ class User < ApplicationRecord
     end
 
     def self.generate_username_id(username)
-        users = self.where(username: username)
+        users = User.where(username: username)
         if users.length == 0
             rand_user_id = (10000*rand()).floor.to_s
             return rand_user_id if rand_user_id.length == 4

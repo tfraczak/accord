@@ -1,0 +1,189 @@
+.user-show-modal-background {
+  position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	background: $modal-bg-color;
+	z-index: 10;
+
+  .user-show-modal-child {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    // background-color: $form-color;
+    width: 550px;
+    height: 500px;
+    font-family: $roboto;
+    border-radius: 7px;
+
+    .user-show-wrapper {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      box-sizing: border-box;
+      height: 100%;
+      width: 100%;
+      
+      .top-wrapper {
+        position: relative;
+        width: 100%;
+        height: 150px;
+        background-color: $form-color;
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
+
+
+        .user-wrapper {
+          position: absolute;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          left: 20px;
+          top: 45%;
+          z-index: 1;
+          
+          img {
+            width: 125px;
+            height: 125px;
+            border-radius: 150px;
+            object-fit: cover;
+            border: 8px solid darken($accord-app-5, 10%);
+            margin-bottom: 10px;
+          }
+
+          .username-wrapper {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            font-size: 20px;
+            font-weight: 500;
+            .username {
+              color: $font-main-negative
+            }
+            .username-id {
+              color: $font-sub-negative;
+            }
+          }
+
+        }
+
+      }
+
+      .bottom-wrapper {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-start;
+        width: 100%;
+        background-color: darken($accord-app-5, 10%);
+        height: 100%;
+        width: 100%;
+        border-bottom-left-radius: 7px;
+				border-bottom-right-radius: 7px;
+        .send-message-btn {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          cursor: pointer;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 3px;
+          font-size: 14px;
+          font-weight: 700;
+          background-color: $link-color;
+          color: $font-main;
+          height: 32px;
+          padding: 10px 15px;
+          transition: 100ms ease-in-out;
+          &:hover {
+            background-color: $form-button;
+          }
+        }
+
+        .common-stuff {
+          display: flex;
+          align-items: flex-end;
+          color: $font-main-negative;
+          font-size: 14px;
+          font-weight: 500;
+          margin: 0 20px;
+          
+          .common {
+            position: relative;
+            cursor: pointer;
+            padding: 25px 0;
+            margin-right: 40px;
+
+            &:hover, &.active {
+              top: 2px;
+              border-bottom: 2px solid $font-main-negative;
+            }
+            
+          }
+
+        }
+
+        .commons {
+          margin-top: 2px;
+          width: 100%;
+          height: 200px;
+          border-top: 1px solid $font-sub;
+
+          .common-servers {
+            margin-top: 10px;
+            display: flex;
+            flex-direction: column;
+            .common-server-item {
+              display: flex;
+              justify-content: flex-start;
+              height: 48px;
+              width: 100%;
+              margin: 10px 20px;
+              img {
+                width: 48px;
+                height: 48px;
+                object-fit: cover;
+                border-radius: 100px;
+              }
+              .server-info-wrapper {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: center;
+                height: 100%;
+                margin-left: 8px;
+                h1 {
+                  font-size: 16px;
+                  font-weight: 400;
+                  margin-bottom: 5px;
+                  color: $font-main-negative;
+                }
+                h3 {
+                  font-size: 12px;
+                  font-weight: 400;
+                  color: $font-sub-negative;
+                }
+              }
+            }
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+}

@@ -111,7 +111,7 @@
         visibility: visible;
         opacity: 1;
         font-family: $roboto;
-        transition: visibility 0s opacity 0.1s;
+        transition: visibility 0s opacity 0.1s ease-in-out;
 
         &.hidden {
           visibility: hidden;

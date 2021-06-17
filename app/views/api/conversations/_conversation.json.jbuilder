@@ -1,1 +1,1 @@
-json.extract! convo, :id, :initiator_id, :name
+json.extract! convo, :id, :initiator_id, :name, :receiver_id

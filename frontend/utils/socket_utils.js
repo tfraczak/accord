@@ -196,7 +196,7 @@ export const createSessionSub = (
         {
             received: data => {
                 switch (data.action) {
-                    case "new conversation": // convo, memberships
+                    case "initiate conversation": // convo, memberships
                         dispatch(receiveNewConversation(data.payload));
                         break;
                     case "new conversation member":
@@ -214,4 +214,4 @@ export const createSessionSub = (
             },
         }
     )
-)
+);

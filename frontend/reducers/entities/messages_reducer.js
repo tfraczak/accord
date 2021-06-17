@@ -23,6 +23,10 @@ import {
     RECEIVE_PRIVATE_USER_LOAD_DATA,
 } from '../../actions/session_actions';
 
+import {
+    RECEIVE_CONVERSATION,
+} from '../../actions/conversation_actions';
+
 
 export default (state = {}, action) => {
     Object.freeze(state);
@@ -71,6 +75,8 @@ export default (state = {}, action) => {
             for(let id of messageIds) { delete nextState[id] }
             return nextState;
         case RECEIVE_PRIVATE_USER_LOAD_DATA:
+            return Object.assign({}, state, action.payload.messages);
+        case RECEIVE_CONVERSATION:
             return Object.assign({}, state, action.payload.messages);
         default:
             return state;

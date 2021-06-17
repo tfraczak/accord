@@ -1,14 +1,10 @@
 if @found
-  json.partial! "api/conversations/conversation", conversation: @convo
+  json.partial! "api/conversations/conversation", convo: @convo
 else
   json.set! :conversation do
-    json.partial! "api/conversations/conversation", conversation: @convo
+    json.partial! "api/conversations/conversation", convo: @convo
   end
-  json.set! :memberships do
-    @memberships.each do |membership|
-      json.set! membership.id do
-        json.partial! "api/memberships/conversation", membership: membership
-      end
-    end
+  json.set! :membership do
+    json.partial! "api/memberships/membership", membership: @convo.memberships.first
   end
 end

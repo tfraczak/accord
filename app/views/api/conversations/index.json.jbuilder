@@ -6,7 +6,7 @@ json.set! :conversations do
   end
 end
 
-json.set! :users do
+json.set! :members do
   @conversations.each do |convo|
       convo.members.each do |member|
           json.set! member.id do
@@ -28,9 +28,14 @@ end
 
 messages = []
 @conversations.each do |convo|
+  membership = Membership.find_by(
+    joinable_id: convo.id,
+    joinable_type: :Conversation,
+    user_id: current_user.id,
+  )
   messages = messages.concat(
-    Message
-      .where(messageable_type: :Conversation, messageable_id: convo.id)
+    convo.messages
+      .where("messages.created_at > ?", membership.created_at)
       .order(created_at: :desc)
       .limit(50)
   )

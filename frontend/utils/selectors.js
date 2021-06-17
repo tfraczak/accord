@@ -89,4 +89,36 @@ export const nextChat = path => {
         default:
             return ["Channel", chatId];
     }
-}
+};
+
+export const commonServers = (user1, user2, membershipsState, serversState) => {
+    const mems = Object.values(membershipsState);
+    const user1ServerMems = mems.filter(mem => (mem.userId === user1.id) && (mem.joinableType === "Server"));
+    const user1Servers = user1ServerMems.map(mem => serversState[mem.joinableId]);
+    const user1ServersObj = {};
+    for(let server of user1Servers) { user1ServersObj[server.id] = server }
+
+    const user2ServerMems = mems.filter(mem => (mem.userId === user2.id) && (mem.joinableType === "Server"));
+    const user2Servers = user2ServerMems.map(mem => serversState[mem.joinableId]);
+
+    return user2Servers.filter(server => user1ServersObj[server.id]);
+};
+
+export const commonServerLocalUsernames = (user1, user2, membershipsState, serversState) => {
+    const mutualServers = commonServers(user1, user2, membershipsState, serversState);
+    const mutualServerIds = mutualServers.map(server => server.id);
+    const mems = Object.values(membershipsState);
+    const user2ServerMems = mems.filter(mem => (mem.userId === user2.id) && (mem.joinableType === "Server"));
+    // return mutualServerIds.map(id => {
+    //     for (let mem of user2ServerMems) {
+    //         if (mem.joinableId === id) {
+    //             if (!mem.localUsername) {
+                    
+    //                 return user2.username;
+    //             } else {
+
+    //             }
+    //         }
+    //     }
+    // });
+};

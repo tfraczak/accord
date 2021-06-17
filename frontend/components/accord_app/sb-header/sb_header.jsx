@@ -8,7 +8,10 @@ export default props => {
     return (
         <header className="sb-header server-toolbar">
             <Switch>
-                <Route exact path="/channels/@me" >
+                <Route exact path="/channels/@me/" >
+                    <ConversationMembersList />
+                </Route>
+                <Route exact path="/channels/@me/:conversationId" >
                     <ConversationMembersList />
                 </Route>
                 <Route path="/channels/:serverId" >

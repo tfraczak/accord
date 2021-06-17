@@ -15,7 +15,7 @@ module Params
   end
 
   def conversation_params
-    params.require(:conversation).permit(:name, :initiator_id, :image, :user_ids)
+    params.require(:conversation).permit(:name, :receiver_id, :initiator_id, :image, :user_ids)
   end
 
   def membership_params

@@ -21,6 +21,11 @@ import {
     RECEIVE_PRIVATE_USER_LOAD_DATA,
 } from '../../actions/session_actions';
 
+import {
+    RECEIVE_NEW_CONVERSATION,
+    RECEIVE_CONVERSATION
+} from '../../actions/conversation_actions';
+
 
 export default (state = {}, action) => {
     Object.freeze(state);
@@ -73,6 +78,11 @@ export default (state = {}, action) => {
             return Object.assign({}, state, memberships);
         case RECEIVE_PRIVATE_USER_LOAD_DATA:
             return Object.assign({}, state, action.payload.memberships);
+        case RECEIVE_CONVERSATION:
+            return Object.assign({}, state, action.payload.memberships);
+        case RECEIVE_NEW_CONVERSATION:
+            membership = action.payload.membership;
+            return Object.assign({}, state, { [membership.id]: membership });
         default:
             return state;
     }

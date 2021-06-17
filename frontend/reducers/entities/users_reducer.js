@@ -17,6 +17,8 @@ import {
     LOAD_MEMBERS
 } from "../../actions/server_actions";
 
+import { RECEIVE_CONVERSATION } from "../../actions/conversation_actions";
+
 
 export default (state = {}, action) => {
     Object.freeze(state);
@@ -50,7 +52,9 @@ export default (state = {}, action) => {
             delete nextState[action.payload.member.id];
             return nextState;
         case RECEIVE_PRIVATE_USER_LOAD_DATA:
-            return Object.assign({}, state, action.payload.users);
+            return Object.assign({}, state, action.payload.members);
+        case RECEIVE_CONVERSATION:
+            return Object.assign({}, state, action.payload.members);
         default:
             return state;
     }

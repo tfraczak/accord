@@ -13,6 +13,7 @@ import SbHeaderContainer from './sb-header/sb_header_container';
 import ChatPlaceholder from './main-focus/chat_placeholder';
 import ChannelsModal from './channels/channel_modals/channels_modal';
 import FocusRightContainer from './focus-right/focus_right_container';
+import UserModal from './user/user_modal/user_modal';
 
 class AccordApp extends React.Component {
     constructor(props) {
@@ -31,6 +32,7 @@ class AccordApp extends React.Component {
             <>
                 <Route path="/channels/:serverId" component={ ServersModal } />
                 <Route exact path="/channels/:serverId/:channelId" component={ ChannelsModal }/>
+                <Route path="/channels" component={ UserModal } />
                 <div className="webapp-wrapper">
                     <ServersNavBarContainer />
                     <div className="base wrapper">
@@ -39,7 +41,12 @@ class AccordApp extends React.Component {
                             <div className="sidebar-wrapper">
                                 <nav className="sidebar-nav">
                                     <div className="sb-header wrapper">
-                                        <Route path="/channels/:serverId/" component={SbHeaderContainer}/>
+                                        <Switch>
+                                            <Route exact path="/channels/@me/:conversationId">
+                                                <div></div>
+                                            </Route>
+                                            <Route path="/channels/:serverId/" component={SbHeaderContainer}/>
+                                        </Switch>
                                     </div>
                                     <div className="focus-channels-dms">
                                         <Switch>

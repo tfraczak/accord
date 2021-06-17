@@ -1,3 +1,5 @@
+import { convertToSnakeCase } from "./func_utils";
+
 export const getUserConversations = userId => (
     $.ajax({
         method: "GET",
@@ -5,12 +7,13 @@ export const getUserConversations = userId => (
     })
 );
 
-export const createConversation = conversation => {
+export const createConversation = convo => {
+    const conversation = convertToSnakeCase(convo);
     return $.ajax({
         method: "POST",
-        url: "/api/conversations",
+        url: `/api/users/${convo.receiverId}/conversations`,
         data: { conversation },
-    })
+    });
 };
 
 export const updateConversation = conversation => {

@@ -9,6 +9,11 @@ import {
 } from '../../actions/invitation_actions';
 
 import { RECEIVE_INVITED_SERVER } from "../../actions/server_actions";
+import {
+    RECEIVE_CONVERSATION,
+    RECEIVE_NEW_CONVERSATION,
+    REMOVE_CREATED_CONVO
+} from "../../actions/conversation_actions";
 
 
 const _nullSession = Object.freeze({
@@ -23,11 +28,17 @@ export default (state = _nullSession, action) => {
         case LOGOUT_CURRENT_USER:
             return _nullSession;
         case RECEIVE_INVITED_SERVER:
-            return Object.assign({}, state, { invitedServer: action.server })
+            return Object.assign({}, state, { invitedServer: action.server });
         case RECEIVE_INVITATION:
-            return Object.assign({}, state, { invitation: action.invitation })
+            return Object.assign({}, state, { invitation: action.invitation });
         case REMOVE_INVITATION:
             return Object.assign({}, state, { invitation: "" });
+        case RECEIVE_NEW_CONVERSATION:
+            return Object.assign({}, state, { conversation: action.payload.conversation });
+        case REMOVE_CREATED_CONVO:
+            return Object.assign({}, state, { conversation: "" });
+        case RECEIVE_CONVERSATION:
+            return Object.assign({}, state, { conversation: action.payload.conversation });
         default:
             return state;
     }

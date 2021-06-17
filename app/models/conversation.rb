@@ -1,6 +1,6 @@
 class Conversation < ApplicationRecord
 
-  validates :initiator_id, presence: true
+  validates :initiator_id, :receiver_id, presence: true
 
   belongs_to :initiator,
     foreign_key: :initiator_id,
@@ -17,6 +17,7 @@ class Conversation < ApplicationRecord
     source: :user
 
   before_validation :assign_name
+  after_create :create_initial_membership
 
   has_one_attached :image
 
@@ -31,6 +32,22 @@ class Conversation < ApplicationRecord
     conversations_hash = Hash[memberships.map { |mem| [mem.joinable, mem.joinable.members.pluck(:id).sort!] }]
     conversations_hash.each { |convo, member_ids| return convo if member_ids == user_ids }
     nil
+  end
+
+  def self.find_by_initiation_ids(i, r)
+    conversations = Conversation.where(initiator_id: i, receiver_id: r)
+    return nil if conversations.length == 0
+    conversations.each { |conversation| return conversation if conversation.members.length == 1 }
+    nil
+  end
+
+  def create_initial_membership
+    Membership.new(
+      user_id: self.initiator_id,
+      local_username: "",
+      joinable_type: :Conversation,
+      joinable_id: self.id
+    ).save
   end
 
   def create_memberships(user_ids)
