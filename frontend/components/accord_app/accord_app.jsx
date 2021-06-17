@@ -41,12 +41,7 @@ class AccordApp extends React.Component {
                             <div className="sidebar-wrapper">
                                 <nav className="sidebar-nav">
                                     <div className="sb-header wrapper">
-                                        <Switch>
-                                            <Route exact path="/channels/@me/:conversationId">
-                                                <div></div>
-                                            </Route>
-                                            <Route path="/channels/:serverId/" component={SbHeaderContainer}/>
-                                        </Switch>
+                                        <Route path="/channels" component={SbHeaderContainer}/>
                                     </div>
                                     <div className="focus-channels-dms">
                                         <Switch>
@@ -67,6 +62,10 @@ class AccordApp extends React.Component {
                                     <div className="focus-title">
                                         <Switch>
                                             <Route exact path="/channels/@me" component={ConversationMembersList} />
+                                            <Route exact path="/channels/@me/:conversationId" >
+                                                <ConversationMembersList key={ Math.random()*1000000 } />
+                                                {/* <div></div> */}
+                                            </Route>
                                             <Route exact path="/channels/:serverId/:channelId" >
                                                 <ChannelChatTitleContainer key={ `channel-chat-s${this.props.serverId}-c${this.props.channelId}` } />
                                             </Route>
