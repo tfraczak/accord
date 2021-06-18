@@ -62,6 +62,10 @@
             &:focus {
                 outline: none;
             }
+
+            &::placeholder {
+                user-select: none;
+            }
         }
     }
 

@@ -8,6 +8,27 @@ class ServerToolbarMenu extends Component {
   constructor(props) {
     super(props);
     this.handleLeave = this.handleLeave.bind(this);
+    // this.setWrapperRef = this.setWrapperRef.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
+  }
+
+  componentDidMount() {
+      document.addEventListener('mousedown', this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+      document.removeEventListener('mousedown', this.handleClickOutside);
+  }
+
+  handleClickOutside(e) {
+    if (this.props.wrapperRef && (!this.props.wrapperRef.contains(e.target) || e.target === this.props.dropdownBtnRef)) {
+      if (this.props.dropdownBtnRef.classList.contains("open")){
+        this.props.dropdownBtnRef.classList.remove("open");
+        this.props.closeToolbar(); 
+      } else if(e.target === this.props.dropdownBtnRef){
+        this.props.dropdownBtnRef.classList.add("open");
+      }
+    }
   }
 
   handleLeave() {
@@ -40,7 +61,8 @@ class ServerToolbarMenu extends Component {
     return (
       <ul
         id="server-tools"
-        className="st-closed">
+        className="st-closed"
+      >
 
         <ServerInvitationButton 
           key={`invitation-${server.id}`}

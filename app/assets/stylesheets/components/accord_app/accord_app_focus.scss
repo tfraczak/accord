@@ -11,6 +11,7 @@
         padding: 0 12px;
         box-sizing: border-box;
         cursor: default;
+        user-select: none;
 
         position: relative;
         border-bottom: 1px solid $accord-app-3;

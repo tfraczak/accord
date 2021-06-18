@@ -11,46 +11,77 @@ class ServerToolbar extends Component {
         this.stWrapperRef = React.createRef();
         this.toggleToolbar = this.toggleToolbar.bind(this);
         this.closeToolbar = this.closeToolbar.bind(this);
-        this.handleClickOutside = this.handleClickOutside.bind(this);
-
+        this.setToolbarRef = this.setToolbarRef.bind(this);
+        this.setWrapperRef = this.setWrapperRef.bind(this);
+        this.setDropdownBtnRef = this.setDropdownBtnRef.bind(this);
+        this.setChevronRef = this.setChevronRef.bind(this);
+        this.setXRef = this.setXRef.bind(this);
     }
 
-    // componentDidMount() {
-    //     document.addEventListener('mousedown', this.handleClickOutside);
-    // }
+    setWrapperRef(node) {
+        this.wrapperRef = node;
+    }
 
-    // componentWillUnmount() {
-    //     document.removeEventListener('mousedown', this.handleClickOutside);
-    // }
+    setToolbarRef(node) {
+        this.toolbarRef = node;
+    }
 
-    handleClickOutside(e) {
-        if (this.stWrapperRef && !this.stWrapperRef.current.contains(e.target)) {
-            this.closeToolbar();
-        }
+    setChevronRef(node) {
+        this.chevronRef = node;
+    }
+
+    setXRef(node) {
+        this.xRef = node;
+    }
+
+    setDropdownBtnRef(node) {
+        this.dropdownBtnRef = node;
     }
 
     closeToolbar() {
+        const {
+            chevronRef,
+            xRef,
+            wrapperRef,
+            dropdownBtnRef
+        } = this;
+
         const fadeIn = document.getElementsByClassName("fade-in");
         if (fadeIn) {
-            document.getElementById("st-dropdown-button").classList.remove("dropped");
-            document.getElementById("st-chevron").classList.remove("fade-in");
-            document.getElementById("st-x").classList.remove("fade-in");
-            document.getElementById("server-tools-wrapper").classList.remove("fade-in");
-            document.getElementById("server-tools-wrapper").classList.add("fade-out");
+            dropdownBtnRef.classList.remove("dropped");
+            dropdownBtnRef.classList.remove("open");
+            chevronRef.classList.remove("fade-in");
+            xRef.classList.remove("fade-in");
+            wrapperRef.classList.remove("fade-in");
+            wrapperRef.classList.add("fade-out");
         }
     }
 
     toggleToolbar(e) {
         e.preventDefault();
+
+        const {
+            chevronRef,
+            xRef,
+            wrapperRef,
+        } = this;
+
         e.currentTarget.classList.toggle("dropped");
-        document.getElementById("st-chevron").classList.toggle("fade-in");
-        document.getElementById("st-x").classList.toggle("fade-in");
+        chevronRef.classList.toggle("fade-in");
+        xRef.classList.toggle("fade-in");
         const fadeIn = document.getElementsByClassName("fade-in");
-        if (fadeIn) {
-            document.getElementById("server-tools-wrapper").classList.toggle("fade-out")
+        if (e.currentTarget.classList.contains("dropped")) {
+            wrapperRef.classList.add("fade-in");
+            wrapperRef.classList.remove("fade-out");
         } else {
-            document.getElementById("server-tools-wrapper").classList.toggle("fade-in")
+            wrapperRef.classList.add("fade-out");
+            wrapperRef.classList.remove("fade-in");
         }
+        // if (fadeIn.length) {
+        //     wrapperRef.classList.toggle("fade-out")
+        // } else {
+        //     wrapperRef.classList.toggle("fade-in")
+        // }
     }
 
     renderServer() {
@@ -76,27 +107,31 @@ class ServerToolbar extends Component {
                 <section
                     className="st-wrapper">
                     <button
+                        ref={ this.setDropdownBtnRef }
                         id="st-dropdown-button"
                         className={`st-dropdown-btn`}
                         type="button"
                         onMouseDown={ this.toggleToolbar }>
                             { server.name }
                         <i 
+                            ref={this.setChevronRef}
                             id="st-chevron"
                             className={`fas fa-chevron-down`}></i>
-                        <h6 id="st-x">+</h6>
+                        <h6 ref={this.setXRef} id="st-x">+</h6>
                     </button>
                         <section
+                            ref={ this.setWrapperRef }
                             id="server-tools-wrapper"
                             className="server-tools-wrapper fade-out"
-                            // onBlur={this.closeToolbar}
-                            ref={this.stWrapperRef}>
+                        >
                             <ServerToolbarMenu
                                 isOwner={ server.ownerId === currentUserId ? true : false }
                                 server={ server }
                                 openModal={ openModal }
                                 openFullModal={ openFullModal }
                                 closeToolbar={ this.closeToolbar }
+                                wrapperRef={ this.wrapperRef }
+                                dropdownBtnRef={ this.dropdownBtnRef }
                                 invitation={ invitation }
                                 removeInvitation={ removeInvitation }
                                 currentUserId={ currentUserId }

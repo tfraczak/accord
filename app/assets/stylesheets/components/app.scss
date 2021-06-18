@@ -22,5 +22,9 @@ html {
         z-index: -1;
     }
     overflow-x: hidden;
+
+    img {
+        user-select: none;
+    }
     
 }

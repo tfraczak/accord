@@ -2,6 +2,7 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
+    user-select: none;
 
     position: relative;
     display: flex;
@@ -15,7 +16,6 @@
         height: 48px;
         box-sizing: border-box;
         border-bottom: 1px solid $accord-app-4;
-        cursor: pointer;
     }
 
     .focus-channels-dms {
@@ -50,4 +50,5 @@
     box-sizing: border-box;
     font-family: $roboto;
     padding: 0 8px;
+    user-select: none;
 }
