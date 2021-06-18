@@ -79,10 +79,7 @@ class AccordApp extends React.Component {
                                     <div className="title-toolbar"></div>
                                 </div>
                                 <div className="focus-content">
-                                    <Switch>
-                                        <Route path="/channels/:serverId/:channelId" component={MainFocusContainer} />
-                                        <ChatPlaceholder />
-                                    </Switch>
+                                    <Route path="/channels/" component={MainFocusContainer} />
                                     <div className="focus-right-wrapper">
                                         {/* <Switch>
                                             <Route exact path="/channels/@me" component={ConversationMembersList} />

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import MessageFormContainer from "./message_form/message_form_container";
+import MessageListItem from "./message_form/message_list_item";
 import { extractDateTime } from "../../../utils/func_utils";
 import { nextChat } from "../../../utils/selectors";
 
@@ -15,7 +16,6 @@ class Chat extends Component {
     componentDidMount() {
         if (!this.props.chat) {
             this.props.history.push("/channels/@me");
-            return;
         }
         if (this.bottom.current) {
             this.bottom.current.scrollIntoView();
@@ -32,7 +32,9 @@ class Chat extends Component {
         const id = next[1];
         if (type === "Channel") {
             this.props.retrieveChannel(id);
-        } // else retrieveConversation(id)
+        } else if (type === "Conversation") {
+            this.props.retrieveConversation(id);
+        }
     }
 
     componentDidUpdate() {
@@ -44,12 +46,16 @@ class Chat extends Component {
     
 
     render() {
-        if (!this.props.chat) return null;
+        if (!this.props.chat) {
+            this.props.history.push("/channels/@me");
+            return null;
+        }
         const {
             currentUserId,
             chat,
             type,
             chatMembers,
+            placeholder
         } = this.props;
         
 
@@ -63,28 +69,12 @@ class Chat extends Component {
         
         const messageList = this.state.messages.map(message => {
             return (
-                <div key={`message-${message.id}`} className="message-wrapper">
-                    <div className="message-info-wrapper">
-                        <img src={ message.author.avatarUrl ? message.author.avatarUrl : window.defaultAvatarUrl} className="chat-avatar" />
-                        <h6 className={ `author${chatMembers[message.authorId] ? "" : " not-a-member"}` }>
-                            { 
-                                chatMembers[message.authorId] ? 
-                                    (
-                                        chatMembers[message.authorId].localUsername ? 
-                                            chatMembers[message.authorId].localUsername :
-                                            chatMembers[message.authorId].username
-                                    ) :
-                                    (
-                                        message.author ?
-                                            message.author.localUsername :
-                                            "(Deleted User)"
-                                    )
-                            }
-                        </h6>
-                        <p className="date-time">{extractDateTime(message.createdAt)}</p>
-                    </div>
-                    <p className="message" >{ message.body }</p>
-                </div>
+                <MessageListItem 
+                    key={`message-${message.id}`} 
+                    chatMembers={ chatMembers } 
+                    message={ message } 
+                    type={ type }
+                />
             );
         });
 
@@ -98,7 +88,11 @@ class Chat extends Component {
                 <MessageFormContainer
                     subscription={ this.subscription }
                     message={ newMessage }
-                    key={`mform-${chat.id}`}/>
+                    key={ `mform-${chat.id}-${type}` }
+                    type={ type }
+                    chat={ chat }
+                    placeholder={ placeholder }
+                />
             </>
         )
     }

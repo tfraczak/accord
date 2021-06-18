@@ -15,8 +15,8 @@ export default props => {
     return (
         <div className="main-focus placeholder">
             <div className="messages-wrapper placeholder">
-                <img className="construction-img" src={ window.construction } alt="under construction" />
-                <h1 className="construction-msg">{ msg }</h1>
+                {/* <img className="construction-img" src={ window.construction } alt="under construction" />
+                <h1 className="construction-msg">{ msg }</h1> */}
             </div>
         </div>
         

@@ -7,7 +7,7 @@ import { createChatSub } from '../../../utils/socket_utils';
 import { chatMessages } from '../../../utils/selectors';
 import { serverMembersObj } from '../../../utils/selectors';
 import { retrieveChannel } from '../../../actions/channel_actions';
-import { receiveChatSub } from '../../../actions/socket_actions';
+import { retrieveConversation } from '../../../actions/conversation_actions';
 
 const mSTP = (state, ownProps) => {
     const chat = state.entities.channels[ownProps.match.params.channelId];
@@ -19,12 +19,14 @@ const mSTP = (state, ownProps) => {
     const messages = chatMessages(chat, type, state.entities.messages);
     const server = state.entities.servers[ownProps.match.params.serverId];
     const chatMembersObj = serverMembersObj(state.entities.users, server, state.entities.memberships);
+    let placeholder = `Message # ${chat.name}`;
     return {
         chat,
         type,
         currentUserId: state.session.id,
         messages,
         chatMembers: chatMembersObj,
+        placeholder,
     }
 };
 
@@ -34,7 +36,7 @@ const mDTP = dispatch => {
         createMessage: message => dispatch(createMessage(message)),
         receiveMessages: messages => dispatch(receiveMessages(messages)),
         retrieveChannel: channelId => dispatch(retrieveChannel(channelId)),
-        receiveChatSub: chatSub => dispatch(receiveChatSub(chatSub)),
+        retrieveConversation: convoId => dispatch(retrieveConversation(convoId)),
         createChatSub: chatComponent => createChatSub(chatComponent, "Channel", dispatch),
     };
 };

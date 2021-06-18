@@ -6,6 +6,10 @@ class Conversation < ApplicationRecord
     foreign_key: :initiator_id,
     class_name: :User
 
+  belongs_to :receiver,
+    foreign_key: :receiver_id,
+    class_name: :User
+
   has_many :messages, 
     as: :messageable,
     dependent: :destroy
@@ -28,8 +32,14 @@ class Conversation < ApplicationRecord
     self.name ||= ""
   end
 
+  def member?(user)
+    [*self.members].any? { |member| member == user }
+  end
+
   def self.find_by_user_ids(i,r,user_ids)
-    conversations = [*Conversation.where(initiator_id: i, receiver_id: r)]
+    conversations1 = [*Conversation.where(initiator_id: i, receiver_id: r)]
+    conversations2 = [*Conversation.where(initiator_id: r, receiver_id: i)]
+    conversations = conversations1.concat(conversations2)
     memberships = [*Membership.where(user_id: i, joinable_type: :Conversation)]
     return nil if memberships.empty?
     mems_hash = Hash[memberships.map { |mem| [mem.joinable, mem.joinable.members.pluck(:id)] }]
@@ -62,8 +72,7 @@ class Conversation < ApplicationRecord
     ).save
   end
 
-  def create_memberships(user_ids)
-    user_ids.map do |id|
+  def create_membership(id)
       mem = Membership.new(
         user_id: id,
         local_username: "",
@@ -71,7 +80,6 @@ class Conversation < ApplicationRecord
         joinable_id: self.id
       )
       mem if mem.save
-    end
   end
       
 end

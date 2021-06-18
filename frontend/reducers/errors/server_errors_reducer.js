@@ -8,6 +8,8 @@ import {
 
 import { REMOVE_ERRORS } from './errors_reducer';
 
+import { LOGOUT_CURRENT_USER } from '../../actions/session_actions';
+
 export default (state = [], action) => {
     Object.freeze(state)
     switch (action.type) {
@@ -23,6 +25,8 @@ export default (state = [], action) => {
         case REMOVE_SERVER_ERRORS:
             return [];
         case REMOVE_ERRORS:
+            return [];
+        case LOGOUT_CURRENT_USER:
             return [];
         default:
             return state;

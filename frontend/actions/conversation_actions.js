@@ -44,4 +44,13 @@ export const createConversation = conversation => dispatch => {
         }
       }
     );
-}
+};
+
+export const retrieveConversation = convoId => dispatch => {
+  return ConvoAPIUtil.getConversation(convoId)
+    .then(
+      payload => {
+        return dispatch(receiveConversation(payload));
+      }
+    );
+};

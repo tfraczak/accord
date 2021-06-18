@@ -7,11 +7,15 @@ class MessageForm extends Component {
 
         this.state = { body: "" };
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.setFocusRef = this.setFocusRef.bind(this);
     }
 
-    componentWillUnmount() {
-        const { sub } = this.props.subscription;
-        if (sub) sub.unsubscribed(sub);
+    componentDidMount() {
+        this.focusRef.focus();
+    }
+
+    setFocusRef(node) {
+        this.focusRef = node;
     }
 
     update(field) {
@@ -41,13 +45,14 @@ class MessageForm extends Component {
             <>
                 <form 
                     className="message-form"
-                    onSubmit={this.handleSubmit}>
-                        <input 
+                    onSubmit={ this.handleSubmit }>
+                        <input
+                            ref={ this.setFocusRef }
                             type="text"
                             className="message-input"
-                            placeholder={`Message # ${this.props.channel.name}`}
-                            value={this.state.body}
-                            onChange={this.update("body")}/>
+                            placeholder={this.props.placeholder}
+                            value={ this.state.body}
+                            onChange={ this.update("body") }/>
                 </form>
             </>
         )

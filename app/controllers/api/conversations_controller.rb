@@ -8,15 +8,36 @@ class Api::ConversationsController < ApplicationController
     end
   end
 
+  def show
+    @convo = Conversation.find_by(id: params[:id])
+    if @convo.member?(current_user)
+      render :show
+    else
+      render json: ["You do not belong here..."], status: 403
+    end
+  end
+
   def create
     @found = false
 
     i = current_user.id
     r = params[:user_id].to_i
-    user_ids = [i,r]
+    user_ids = params[:user_ids] || [i,r]
 
     @convo = Conversation.find_by_user_ids(i,r,user_ids)
-    @convo = Conversation.initiated?(i, r) unless @convo
+    unless @convo
+      @convo = Conversation.initiated?(i, r)
+      if @convo
+        membership = Membership.find_by(user_id: current_user.id, joinable_id: @convo.id, joinable_type: :Conversation)
+        if !membership
+          Membership.create(
+            user_id: current_user.id,
+            joinable_id: @convo.id,
+            joinable_type: :Conversation
+          )
+        end
+      end
+    end
 
     if !@convo
 

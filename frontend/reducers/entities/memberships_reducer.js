@@ -19,6 +19,7 @@ import {
 import {
     RECEIVE_USER_LOAD_DATA,
     RECEIVE_PRIVATE_USER_LOAD_DATA,
+    LOGOUT_CURRENT_USER
 } from '../../actions/session_actions';
 
 import {
@@ -83,6 +84,8 @@ export default (state = {}, action) => {
         case RECEIVE_NEW_CONVERSATION:
             membership = action.payload.membership;
             return Object.assign({}, state, { [membership.id]: membership });
+        case LOGOUT_CURRENT_USER:
+            return {};
         default:
             return state;
     }

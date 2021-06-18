@@ -1,3 +1,4 @@
+import { LOGOUT_CURRENT_USER } from "../../actions/session_actions";
 import { RECEIVE_SESSION_SUB } from "../../actions/socket_actions";
 
 export default (state = {}, action) => {
@@ -9,6 +10,8 @@ export default (state = {}, action) => {
       sessionSub = action.sessionSub;
       nextState = Object.assign({}, state, sessionSub);
       return nextState;
+    case LOGOUT_CURRENT_USER:
+      return {};
     default:
       return state;
   }

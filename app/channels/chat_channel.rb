@@ -11,10 +11,27 @@ class ChatChannel < ApplicationCable::Channel
       socket = { message: camelize_keys(@message.attributes) }
       author = camelize_keys(@message.author.attributes)
       socket[:message]["author"] = secure_user!(author)
-      socket[:message]["author"]["localUsername"] = @message.local_username
+      socket[:message]["author"]["localUsername"] = @message.local_username if @chat.class.to_s == "Channel"
       socket[:message]["author"]["membershipId"] = @message.membership.id
       socket[:action] = "new message"
+      if @chat.class.to_s == "Conversation"
+        receiver = @chat.receiver
+        initiator = @chat.initiator
+        ids = @chat.members.pluck(:id)
+        unless ids.include?(receiver.id)
+          membership = @chat.create_membership(@chat.receiver_id)
+          memberships = [*@chat.memberships]
+          memberships << membership
+          convo_socket = build_convo_socket("initiate conversation")
+          SessionChannel.broadcast_to(receiver, convo_socket)
+          convo_socket["payload"]["messages"] = {}
+          SessionChannel.broadcast_to(initiator, convo_socket)
+        end
+
+      end
+
       ChatChannel.broadcast_to(@chat, socket)
+      
     end
   end
 
@@ -36,6 +53,27 @@ class ChatChannel < ApplicationCable::Channel
 
   def self.unsubscribe(chan)
     stop_stream_for(chan)
+  end
+
+  def build_convo_socket(action)
+    convo_socket = {}
+    convo_socket["payload"] = {}
+    convo_socket["action"] = action
+    convo_socket["payload"]["conversation"] = camelize_keys(@chat.attributes)
+    convo_socket["payload"]["memberships"] = format_records(@chat.memberships)
+    convo_socket["payload"]["messages"] = formatted_messages
+    convo_socket
+  end
+
+  def formatted_messages
+    messages = @chat.messages.order(created_at: :desc).limit(50)
+    msgs = messages.map do |message|
+      formatted_message = camelize_keys(message.attributes)
+      author = message.author
+      formatted_message["author"] = secure_user!(camelize_keys(author.attributes))
+      [message.id, formatted_message]
+    end
+    Hash[msgs]
   end
 
 end

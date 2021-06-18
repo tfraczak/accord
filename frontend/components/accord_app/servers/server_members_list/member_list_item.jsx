@@ -17,6 +17,8 @@ export default (props) => {
         removeCreatedConvo,
     } = props;
 
+    const isCurrentUser = currentUserId === member.id;
+
     let username;
     if (member.localUsername) {
         username = member.localUsername;
@@ -81,11 +83,16 @@ export default (props) => {
                         
                         <UserShowButton openModal={ handleModal } user={ member } />
 
-                        <li className="message-btn">
-                            <button type="button" onClick={ handleMessage }>
-                                Message
-                            </button>
-                        </li>
+                        {
+                            isCurrentUser ? null : 
+                            (
+                                <li className="message-btn">
+                                    <button type="button" onClick={ handleMessage }>
+                                        Message
+                                    </button>
+                                </li>
+                            )
+                        }
                         
                         { isOwner && member.id !== server.ownerId ?
                             (

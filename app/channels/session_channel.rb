@@ -31,4 +31,8 @@ class SessionChannel < ApplicationCable::Channel
     end
   end
 
+  def unsubscribed
+    
+  end
+
 end

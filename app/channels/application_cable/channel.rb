@@ -4,6 +4,10 @@ module ApplicationCable
       objects.map { |object| camelize_keys(object.attributes) }
     end
 
+    def format_records(objects)
+      Hash[camelize(objects).map { |object| [object["id"], object] }]
+    end
+
     def camelize_users(users)
       users.map { |user| secure_user!(camelize_keys(user.attributes)) }
     end

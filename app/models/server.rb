@@ -41,6 +41,10 @@ class Server < ApplicationRecord
         end
     end
 
+    def member?(user)
+        [*self.members].any? { |member| member == user }
+    end
+
     def assign_owner_as_member
         Membership.new(
             user_id: self.owner_id,

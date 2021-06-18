@@ -21,6 +21,7 @@ import { chatMessages } from "../../utils/selectors";
 import {
     RECEIVE_USER_LOAD_DATA,
     RECEIVE_PRIVATE_USER_LOAD_DATA,
+    LOGOUT_CURRENT_USER
 } from '../../actions/session_actions';
 
 import {
@@ -78,6 +79,8 @@ export default (state = {}, action) => {
             return Object.assign({}, state, action.payload.messages);
         case RECEIVE_CONVERSATION:
             return Object.assign({}, state, action.payload.messages);
+        case LOGOUT_CURRENT_USER:
+            return {};
         default:
             return state;
     }

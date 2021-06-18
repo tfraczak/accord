@@ -11,7 +11,10 @@ import {
     RECEIVE_JOINED_SERVER,
 } from "../../actions/server_actions";
 
-import { RECEIVE_USER_LOAD_DATA } from '../../actions/session_actions';
+import {
+    RECEIVE_USER_LOAD_DATA,
+    LOGOUT_CURRENT_USER
+} from '../../actions/session_actions';
 
 
 export default (state = {}, action) => {
@@ -48,6 +51,8 @@ export default (state = {}, action) => {
             invitationIds = Object.values(action.payload.invitationIds);
             for(let id of invitationIds) { delete nextState[id] }
             return nextState;
+        case LOGOUT_CURRENT_USER:
+            return {};
         default:
             return state;
     }

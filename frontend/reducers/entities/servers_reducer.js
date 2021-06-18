@@ -8,7 +8,10 @@ import {
     RECEIVE_SERVER_INFO,
 } from "../../actions/server_actions";
 
-import { RECEIVE_USER_LOAD_DATA } from '../../actions/session_actions';
+import {
+    RECEIVE_USER_LOAD_DATA,
+    LOGOUT_CURRENT_USER
+} from '../../actions/session_actions';
 
 
 export default (state = {}, action) => {
@@ -38,6 +41,8 @@ export default (state = {}, action) => {
         case RECEIVE_NEW_SERVER:
             server = action.payload.server;
             return Object.assign({}, state, { [server.id]: server });
+        case LOGOUT_CURRENT_USER:
+            return {};
         default:
             return state;
     }

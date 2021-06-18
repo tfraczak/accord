@@ -14,6 +14,10 @@ import {
 } from '../actions/user_actions';
 
 import {
+    receiveConversation
+} from '../actions/conversation_actions';
+
+import {
     socketInvitation,
     receiveInvitation,
 } from '../actions/invitation_actions';
@@ -197,7 +201,7 @@ export const createSessionSub = (
             received: data => {
                 switch (data.action) {
                     case "initiate conversation": // convo, memberships
-                        dispatch(receiveNewConversation(data.payload));
+                        dispatch(receiveConversation(data.payload));
                         break;
                     case "new conversation member":
                         dispatch(receiveNewMember(data.payload));
@@ -209,8 +213,8 @@ export const createSessionSub = (
             newConvo: (data, sub) => { // need userId of other person
                 return sub.perform("new_convo", data);
             },
-            unsubscribe: () => {
-                return that.subscription.perform("unsubscribed");
+            unsubscribe: (sub) => {
+                return sub.perform("unsubscribed");
             },
         }
     )

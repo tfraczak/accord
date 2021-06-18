@@ -60,7 +60,7 @@ class UserShow extends React.Component {
     const {
       mutualServers,
       user,
-      localUsernameObj
+      localUsernameObj,
     } = this.props;
     return (
       <ul className="common-servers">
@@ -106,9 +106,14 @@ class UserShow extends React.Component {
             </div>
 
             <div className="bottom-wrapper">
-              <button onClick={ this.handleSendMessage } className="send-message-btn">
-                Send Message
-              </button>
+              {
+                isCurrentUser ? null : 
+                (
+                  <button onClick={ this.handleSendMessage } className="send-message-btn">
+                    Send Message
+                  </button>
+                )
+              }
               <ul className="common-stuff">
                 { isCurrentUser ? null :
                   (

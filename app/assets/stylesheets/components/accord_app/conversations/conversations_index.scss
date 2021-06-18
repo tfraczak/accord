@@ -4,6 +4,11 @@
   flex-direction: column;
   font-family: $roboto;
   
+  overflow: hidden scroll;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  
 
   .conversations-title-wrapper {
 
@@ -28,11 +33,6 @@
     flex-direction: column;
     width: 100%;
 
-    overflow: hidden scroll;
-    &::-webkit-scrollbar {
-      display: none;
-    }
-
     li {
       position: relative;
       display: flex;
@@ -52,6 +52,7 @@
         padding: 0 8px;
         border-radius: 3px;
         text-decoration: none;
+        transition: 100ms ease-in-out;
 
         &:hover {
           color: $font-main;

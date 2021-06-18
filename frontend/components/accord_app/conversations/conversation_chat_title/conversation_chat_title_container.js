@@ -6,7 +6,7 @@ import { openModal } from '../../../../actions/ui_actions';
 
 const mSTP = (state, ownProps) => {
     const conversation = state.entities.conversations[ownProps.match.params.conversationId];
-    const currentUserId = state.entities.users[state.session.id];
+    const currentUserId = state.session.id;
     const users = state.entities.users;
     const convoMembers = conversationMembers(
         users,

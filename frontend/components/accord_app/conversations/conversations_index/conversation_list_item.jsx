@@ -19,7 +19,7 @@ class ConversationListItem extends Component {
 
         const convoMemberNames = otherMembers.map(member => member.username);
 
-        const user = users[conversation.receiverId];
+        let user = conversation.receiverId === currentUserId ? users[conversation.initiatorId] : users[conversation.receiverId];
 
         return (
             <li>

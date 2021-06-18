@@ -18,13 +18,12 @@ json.set! :memberships do
   end
 end
 
-membership = Membership.find_by(
-  joinable_id: @convo.id,
-  joinable_type: :Conversation,
-  user_id: current_user.id,
-)
+# membership = Membership.find_by(
+#   joinable_id: @convo.id,
+#   joinable_type: :Conversation,
+#   user_id: current_user.id,
+# )
 messages = @convo.messages
-  .where("messages.created_at > ?", membership.created_at)
   .order(created_at: :desc)
   .limit(50)
 

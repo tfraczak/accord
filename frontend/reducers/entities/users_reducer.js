@@ -2,6 +2,7 @@ import {
     RECEIVE_CURRENT_USER,
     RECEIVE_USER_LOAD_DATA,
     RECEIVE_PRIVATE_USER_LOAD_DATA,
+    LOGOUT_CURRENT_USER
 } from "../../actions/session_actions";
 
 import {
@@ -55,6 +56,8 @@ export default (state = {}, action) => {
             return Object.assign({}, state, action.payload.members);
         case RECEIVE_CONVERSATION:
             return Object.assign({}, state, action.payload.members);
+        case LOGOUT_CURRENT_USER:
+            return {};
         default:
             return state;
     }

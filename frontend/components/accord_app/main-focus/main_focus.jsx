@@ -8,8 +8,8 @@ export default props => {
     return (
         <div className="main-focus">
             <Switch>
-                <Route path="/channels/@me">
-                    <ChatPlaceholder />
+                <Route exact path="/channels/@me/:conversationId">
+                    <ConversationChatContainer key={ `convo-chat-${props.chatId}${props.convoMembers ? props.convoMembers.length : ""}` } />
                 </Route>
                 <Route exact path="/channels/:serverId/:channelId" >
                     <ChannelChatContainer key={ `channel-chat-${props.chatId}` } />

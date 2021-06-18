@@ -3,7 +3,10 @@ import {
   RECEIVE_CONVERSATION
 } from "../../actions/conversation_actions";
 
-import { RECEIVE_PRIVATE_USER_LOAD_DATA } from "../../actions/session_actions";
+import {
+  RECEIVE_PRIVATE_USER_LOAD_DATA,
+  LOGOUT_CURRENT_USER
+} from "../../actions/session_actions";
 
 export default (state = {}, action) => {
   Object.freeze(state);
@@ -23,6 +26,8 @@ export default (state = {}, action) => {
     case RECEIVE_PRIVATE_USER_LOAD_DATA:
       nextState = Object.assign({}, state, action.payload.conversations);
       return nextState;
+    case LOGOUT_CURRENT_USER:
+      return {};
     default:
       return state;
   }

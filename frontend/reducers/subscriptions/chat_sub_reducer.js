@@ -4,6 +4,10 @@ import {
   REMOVE_CHAT_SUBS,
 } from '../../actions/socket_actions';
 
+import {
+  LOGOUT_CURRENT_USER
+} from '../../actions/session_actions';
+
 export default (state = {}, action) => {
   Object.freeze(state);
   let nextState;
@@ -22,6 +26,12 @@ export default (state = {}, action) => {
       for (let chat of chats) { nextState[chat.id] = chat.sub }
       return nextState
     case REMOVE_CHAT_SUBS:
+      return {};
+    case LOGOUT_CURRENT_USER:
+      chatSubs = Object.values(state);
+      if (chatSubs.length) {
+        for (let sub of chatSubs) { sub.unsubscribe(sub) }
+      }
       return {};
     default:
       return state;

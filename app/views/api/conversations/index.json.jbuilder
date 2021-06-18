@@ -35,7 +35,7 @@ messages = []
   )
   messages = messages.concat(
     convo.messages
-      .where("messages.created_at > ?", membership.created_at)
+      .where("messages.created_at >= ?", membership.created_at-1)
       .order(created_at: :desc)
       .limit(50)
   )

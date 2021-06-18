@@ -11,6 +11,15 @@ export const serverMembers = (usersState, server, membershipsState) => {
     }
 };
 
+export const serverMembersObj = (usersState, server, membershipsState) => {
+    if (server) {
+        const membersArr = serverMembers(usersState, server, membershipsState)
+        let members = {};
+        for(let member of membersArr) { members[member.id] = member }
+        return members;
+    }
+};
+
 export const conversationMembers = (usersState, conversation, membershipsState) => {
     if (conversation) {
         const users = Object.values(usersState);
@@ -24,14 +33,16 @@ export const conversationMembers = (usersState, conversation, membershipsState) 
     }
 };
 
-export const serverMembersObj = (usersState, server, membershipsState) => {
-    if (server) {
-        const membersArr = serverMembers(usersState, server, membershipsState)
+export const convoMembersObj = (usersState, conversation, membershipsState) => {
+    if (conversation) {
+        const membersArr = conversationMembers(usersState, conversation, membershipsState)
         let members = {};
         for(let member of membersArr) { members[member.id] = member }
         return members;
     }
-}
+};
+
+
 
 const attachLocalUsername = (usersArr, membershipsArr) => {
 

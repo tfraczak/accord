@@ -14,7 +14,10 @@ import {
     REMOVE_SERVER,
 } from "../../actions/server_actions";
 
-import { RECEIVE_USER_LOAD_DATA } from '../../actions/session_actions';
+import {
+    RECEIVE_USER_LOAD_DATA,
+    LOGOUT_CURRENT_USER
+} from '../../actions/session_actions';
 
 
 
@@ -62,6 +65,8 @@ export default (state = {}, action) => {
             channelIds = Object.values(action.payload.channelIds);
             for(let id of channelIds) { delete nextState[id] }
             return nextState;
+        case LOGOUT_CURRENT_USER:
+            return {};
         default:
             return state;
     }

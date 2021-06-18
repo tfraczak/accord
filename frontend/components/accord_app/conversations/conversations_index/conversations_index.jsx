@@ -6,6 +6,12 @@ class ConversationsIndex extends Component {
         super(props);
     }
 
+    componentDidMount() {
+        if (!Object.values(this.props.conversations).length) {
+            
+        }
+    }
+
     render() {
         const {
             conversations,

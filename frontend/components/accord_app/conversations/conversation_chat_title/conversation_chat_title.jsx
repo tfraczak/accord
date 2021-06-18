@@ -10,8 +10,14 @@ export default props => {
         currentUserId,
         openModal,
     } = props;
+
+    const {
+        initiatorId,
+        receiverId,
+        name
+    } = conversation;
     
-    const user = users[conversation.receiverId];
+    const user = receiverId === currentUserId ? users[initiatorId] : users[receiverId];
     
     const modal = {
         type: "user show",
@@ -20,12 +26,12 @@ export default props => {
 
     const otherMembers = convoMembers.filter(member => member.id !== currentUserId);
 
-    const convoTitle = conversation.name ? conversation.name : limitChars(otherMembers.join(", "), 42);
+    const convoTitle = name ? name : limitChars(otherMembers.join(", "), 42);
 
     return (
         <div className="conversation-chat-title-wrapper">
             {
-                convoMembers.length < 2 ? (
+                convoMembers.length < 3 ? (
                     <>
                         <span className="title-icon"><i className="fas fa-at"></i></span>
                         <h1 onClick={ () => openModal(modal) } className="username">{ user.username }</h1>
