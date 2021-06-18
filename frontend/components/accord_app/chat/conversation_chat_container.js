@@ -12,12 +12,18 @@ import { limitChars } from '../../../utils/func_utils';
 
 const mSTP = (state, ownProps) => {
     const chat = state.entities.conversations[ownProps.match.params.conversationId];
+    if (!chat) {
+        ownProps.history.push("/channels/@me");
+        return {};
+    }
     const type = "Conversation";
     const messages = chatMessages(chat, type, state.entities.messages);
     const users = state.entities.users;
     const chatMembersObj = convoMembersObj(state.entities.users, chat, state.entities.memberships);
     const currentUserId = state.session.id;
     let otherUser, placeholder;
+    let channels = state.entities.channels;
+    let conversations = state.entities.conversations;
     if (Object.values(chatMembersObj).length < 3) {
         otherUser = currentUserId === chat.receiverId ?
             users[chat.initiatorId] :
@@ -37,7 +43,9 @@ const mSTP = (state, ownProps) => {
         currentUserId: state.session.id,
         messages,
         chatMembers: chatMembersObj,
-        placeholder
+        placeholder,
+        channels,
+        conversations,
     }
 };
 

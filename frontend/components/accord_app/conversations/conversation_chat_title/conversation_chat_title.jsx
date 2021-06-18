@@ -11,6 +11,8 @@ export default props => {
         openModal,
     } = props;
 
+    if (!conversation) return null;
+    
     const {
         initiatorId,
         receiverId,

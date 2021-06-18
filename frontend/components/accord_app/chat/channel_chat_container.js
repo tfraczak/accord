@@ -11,7 +11,7 @@ import { retrieveConversation } from '../../../actions/conversation_actions';
 
 const mSTP = (state, ownProps) => {
     const chat = state.entities.channels[ownProps.match.params.channelId];
-    if (!chat && !ownProps.history.location.pathname.includes("@me")) {
+    if (!chat) {
         ownProps.history.push("/channels/@me");
         return {};
     }
@@ -20,6 +20,8 @@ const mSTP = (state, ownProps) => {
     const server = state.entities.servers[ownProps.match.params.serverId];
     const chatMembersObj = serverMembersObj(state.entities.users, server, state.entities.memberships);
     let placeholder = `Message # ${chat.name}`;
+    let channels = state.entities.channels;
+    let conversations = state.entities.conversations;
     return {
         chat,
         type,
@@ -27,6 +29,8 @@ const mSTP = (state, ownProps) => {
         messages,
         chatMembers: chatMembersObj,
         placeholder,
+        channels,
+        conversations,
     }
 };
 

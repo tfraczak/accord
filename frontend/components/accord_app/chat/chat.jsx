@@ -25,16 +25,29 @@ class Chat extends Component {
 
     componentWillUnmount() {
         // this.props.history.location.pathname is the next url path
-        this.subscription.unsubscribe();
-        const nextPath = this.props.history.location.pathname;
-        const next = nextChat(nextPath);
-        const type = next[0];
-        const id = next[1];
-        if (type === "Channel") {
-            this.props.retrieveChannel(id);
-        } else if (type === "Conversation") {
-            this.props.retrieveConversation(id);
+        const {
+            history,
+            retrieveChannel,
+            retrieveConversation,
+            channels,
+            conversations,
+            chat
+        } = this.props;
+        if (chat) {
+            this.subscription.unsubscribe();
+            const nextPath = history.location.pathname;
+            const next = nextChat(nextPath);
+            const type = next[0];
+            const id = next[1];
+            if (type === "Channel" && channels[id]) {
+                retrieveChannel(id);
+            } else if (type === "Conversation" && conversations[id]) {
+                retrieveConversation(id);
+            } else {
+                history.push("/channels/@me");
+            }
         }
+        
     }
 
     componentDidUpdate() {
