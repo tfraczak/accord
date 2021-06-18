@@ -4,6 +4,7 @@ import MemberListItem from './member_list_item';
 class ServerMembersList extends Component {
     constructor(props) {
         super(props);
+        this.state = { member: null };
         this.closeMemberMenu = this.closeMemberMenu.bind(this);
         this.handleContext = this.handleContext.bind(this);
         this.handleKick = this.handleKick.bind(this);
@@ -13,8 +14,8 @@ class ServerMembersList extends Component {
         return e => {
             e.preventDefault();
             const mem = document.getElementById(`ml-item-${member.id}`);
-            mem.classList.add("active");
             const memberMenu = document.getElementById(`member-menu-${member.username}#${member.usernameId}`);
+            mem.classList.add("active");
             const rect = e.currentTarget.getBoundingClientRect();
             const x = e.clientX - rect.left - memberMenu.offsetWidth;
             const y = e.clientY - rect.top;
@@ -22,6 +23,7 @@ class ServerMembersList extends Component {
             memberMenu.style.left = `${x}px`;
             memberMenu.classList.remove('hidden');
             document.addEventListener('mousedown', this.closeMemberMenu(memberMenu, mem));
+            this.setState({ member });
         };
     }
 
@@ -31,7 +33,8 @@ class ServerMembersList extends Component {
             if (clickedOutside) {
                 mem.classList.remove("active");
                 memberMenu.classList.add("hidden");
-                document.removeEventListener('mousedown', this.closeMemberMenu(memberMenu));
+                document.removeEventListener('mousedown', this.closeMemberMenu(memberMenu, mem));
+                this.setState({ member: null });
             }
         };
     }
@@ -62,13 +65,15 @@ class ServerMembersList extends Component {
             openModal,
             createConversation,
             createdConvo,
-            removeCreatedConvo
+            removeCreatedConvo,
+            history
         } = this.props;
 
         const isOwner = server.ownerId === currentUserId;
 
         if (serverMembers) {
-            return ( 
+            return (
+
                 <div className="members-list-wrapper">
                     <h3 className="ml-title">MEMBERS - {serverMembers.length}</h3>
                     <ul className="ml-ul">
@@ -81,12 +86,14 @@ class ServerMembersList extends Component {
                                     menuId={ `member-menu-${member.username}#${member.usernameId}` }
                                     kickMember={ () => this.handleKick(member) }
                                     handleContext={ this.handleContext(member) }
+                                    closeMemberMenu={ (memberMenu, mem) => this.closeMemberMenu(memberMenu, mem) }
                                     isOwner={ isOwner }
                                     openModal={ openModal }
                                     createConversation={ createConversation }
                                     removeCreatedConvo={ removeCreatedConvo }
                                     currentUserId={ currentUserId }
                                     createdConvo={ createdConvo }
+                                    history={ history }
                                 />
                             )
                         ) }

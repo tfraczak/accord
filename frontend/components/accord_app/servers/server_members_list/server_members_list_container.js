@@ -4,8 +4,7 @@ import ServerMembersList from './server_members_list';
 import { serverMembers } from '../../../../utils/selectors';
 import { membersAlphaAsc } from '../../../../utils/func_utils';
 import { openModal } from '../../../../actions/ui_actions';
-import { createConversation } from '../../../../utils/conversation_utils';
-import { removeCreatedConvo } from '../../../../actions/conversation_actions';
+import { createConversation, removeCreatedConvo } from '../../../../actions/conversation_actions';
 
 const mSTP = (state, ownProps) => {
     const users = state.entities.users;

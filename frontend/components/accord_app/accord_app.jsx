@@ -6,7 +6,9 @@ import ConversationMembersList from './conversations/conversation_members_list/c
 import ServerToolbarContainer from './servers/server_toolbar/server_toolbar_container';
 import ServersModal from './servers/server_modals/servers_modal';
 import ChannelsIndexContainer from './channels/channels_index/channels_index_container';
+import ConversationsIndexContainer from './conversations/conversations_index/conversations_index_container';
 import ChannelChatTitleContainer from './channels/channel_chat_title/channel_chat_title_container';
+import ConversationChatTitleContainer from './conversations/conversation_chat_title/conversation_chat_title_container';
 import MainFocusContainer from './main-focus/main_focus_container';
 import CurrentUserDisplayContainer from './current_user/current_user_display_container';
 import SbHeaderContainer from './sb-header/sb_header_container';
@@ -45,7 +47,9 @@ class AccordApp extends React.Component {
                                     </div>
                                     <div className="focus-channels-dms">
                                         <Switch>
-                                            <Route exact path="/channels/@me" component={ConversationMembersList} />
+                                            <Route path="/channels/@me" >
+                                                <ConversationsIndexContainer />
+                                            </Route>
                                             <Route path="/channels/:serverId/" >
                                                 <ChannelsIndexContainer key={ `channels-index-s${this.props.serverId}` } />
                                             </Route>
@@ -61,10 +65,11 @@ class AccordApp extends React.Component {
                                 <div className="focus-title-bar">
                                     <div className="focus-title">
                                         <Switch>
-                                            <Route exact path="/channels/@me" component={ConversationMembersList} />
+                                            {/* <Route exact path="/channels/@me" >
+                                                <div></div>
+                                            </Route> */}
                                             <Route exact path="/channels/@me/:conversationId" >
-                                                <ConversationMembersList key={ Math.random()*1000000 } />
-                                                {/* <div></div> */}
+                                                <ConversationChatTitleContainer key={ `convo-${this.props.convoId}` }/>
                                             </Route>
                                             <Route exact path="/channels/:serverId/:channelId" >
                                                 <ChannelChatTitleContainer key={ `channel-chat-s${this.props.serverId}-c${this.props.channelId}` } />

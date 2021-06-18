@@ -2,7 +2,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { closeModal } from '../../../../actions/ui_actions';
 import { createConversation, removeCreatedConvo } from '../../../../actions/conversation_actions';
-import { commonServers } from '../../../../utils/selectors';
+import { commonServers, commonLocalUsernameObj } from '../../../../utils/selectors';
 
 import UserShow from './user_show';
 
@@ -15,12 +15,18 @@ const mSTP = (state, ownProps) => {
     state.entities.memberships,
     state.entities.servers
   );
+  const localUsernameObj = commonLocalUsernameObj(
+    ownProps.user,
+    mutualServers,
+    state.entities.memberships
+  );
   const createdConvo = state.session.conversation;
   return {
       currentUser,
       sessionSub,
       mutualServers,
       createdConvo,
+      localUsernameObj,
   };
 };
 

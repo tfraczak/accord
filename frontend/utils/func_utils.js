@@ -115,3 +115,8 @@ export const membersAlphaAsc = (m1, m2) => {
         if (m2.username <= m1.username) return 1;
     }
 };
+
+export const limitChars = (string, limit) => {
+    if (string.length < limit) return string;
+    return string.slice(0,limit) + "...";
+};

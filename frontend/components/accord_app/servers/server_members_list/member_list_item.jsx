@@ -10,10 +10,10 @@ export default (props) => {
         isOwner,
         kickMember,
         handleContext,
+        closeMemberMenu,
         openModal,
         history,
         createConversation,
-        createdConvo,
         removeCreatedConvo,
     } = props;
 
@@ -46,11 +46,14 @@ export default (props) => {
         };
         createConversation(conversation)
             .then(
-                () => {
-                    if (createdConvo) {
-                        history.push(`/channels/@me/${createdConvo.id}`);
-                        removeCreatedConvo();
-                    }
+                res => {
+                    const mem = document.getElementById(`ml-item-${member.id}`);
+                    const memberMenu = document.getElementById(`member-menu-${member.username}#${member.usernameId}`);
+                    mem.classList.remove("active");
+                    memberMenu.classList.add("hidden");
+                    document.removeEventListener('mousedown', closeMemberMenu(memberMenu, mem));
+                    history.push(`/channels/@me/${res.payload.conversation.id}`);
+                    removeCreatedConvo();
                 }
             );
     };

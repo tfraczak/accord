@@ -43,7 +43,9 @@ class Conversation < ApplicationRecord
   end
 
   def self.initiated?(i, r)
-    conversations = [*Conversation.where(initiator_id: i, receiver_id: r)]
+    conversations1 = [*Conversation.where(initiator_id: i, receiver_id: r)]
+    conversations2 = [*Conversation.where(initiator_id: r, receiver_id: i)]
+    conversations = conversations1.concat(conversations2)
     return nil if conversations.length == 0
     conversations.each do |conversation|
       return conversation if conversation.members.length == 1

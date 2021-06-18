@@ -11,6 +11,19 @@ export const serverMembers = (usersState, server, membershipsState) => {
     }
 };
 
+export const conversationMembers = (usersState, conversation, membershipsState) => {
+    if (conversation) {
+        const users = Object.values(usersState);
+        const memberships = Object.values(membershipsState)
+        const convoMemberships = memberships.filter(membership => {
+            return (membership.joinableType === "Conversation") && (membership.joinableId === conversation.id);
+        });
+        const convoMemberIds = convoMemberships.map(membership => membership.userId);
+        const members = users.filter(user => convoMemberIds.includes(user.id));
+        return members;
+    }
+};
+
 export const serverMembersObj = (usersState, server, membershipsState) => {
     if (server) {
         const membersArr = serverMembers(usersState, server, membershipsState)
@@ -91,34 +104,29 @@ export const nextChat = path => {
     }
 };
 
-export const commonServers = (user1, user2, membershipsState, serversState) => {
+export const commonServers = (currUser, user, membershipsState, serversState) => {
     const mems = Object.values(membershipsState);
-    const user1ServerMems = mems.filter(mem => (mem.userId === user1.id) && (mem.joinableType === "Server"));
-    const user1Servers = user1ServerMems.map(mem => serversState[mem.joinableId]);
-    const user1ServersObj = {};
-    for(let server of user1Servers) { user1ServersObj[server.id] = server }
+    const currUserServerMems = mems.filter(mem => (mem.userId === currUser.id) && (mem.joinableType === "Server"));
+    const currUserServers = currUserServerMems.map(mem => serversState[mem.joinableId]);
+    const currUserServersObj = {};
+    for(let server of currUserServers) { currUserServersObj[server.id] = server }
 
-    const user2ServerMems = mems.filter(mem => (mem.userId === user2.id) && (mem.joinableType === "Server"));
-    const user2Servers = user2ServerMems.map(mem => serversState[mem.joinableId]);
+    const userServerMems = mems.filter(mem => (mem.userId === user.id) && (mem.joinableType === "Server"));
+    const userServers = userServerMems.map(mem => serversState[mem.joinableId]);
 
-    return user2Servers.filter(server => user1ServersObj[server.id]);
+    return userServers.filter(server => currUserServersObj[server.id]);
 };
 
-export const commonServerLocalUsernames = (user1, user2, membershipsState, serversState) => {
-    const mutualServers = commonServers(user1, user2, membershipsState, serversState);
-    const mutualServerIds = mutualServers.map(server => server.id);
+export const commonLocalUsernameObj = (user, servers, membershipsState) => {
     const mems = Object.values(membershipsState);
-    const user2ServerMems = mems.filter(mem => (mem.userId === user2.id) && (mem.joinableType === "Server"));
-    // return mutualServerIds.map(id => {
-    //     for (let mem of user2ServerMems) {
-    //         if (mem.joinableId === id) {
-    //             if (!mem.localUsername) {
-                    
-    //                 return user2.username;
-    //             } else {
-
-    //             }
-    //         }
-    //     }
-    // });
+    const obj = {};
+    for (let server of servers) { 
+        const mem = mems.find(mem => (
+            (mem.userId === user.id) &&
+            (mem.joinableId === server.id) &&
+            (mem.joinableType === "Server")
+        ));
+        obj[server.id] = mem.localUsername;
+    }
+    return obj;
 };

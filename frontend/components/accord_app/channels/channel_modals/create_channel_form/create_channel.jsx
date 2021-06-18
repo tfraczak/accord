@@ -7,16 +7,30 @@ class CreateChannel extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.clickClose = this.clickClose.bind(this);
+        this.setWrapperRef = this.setWrapperRef.bind(this);
+        this.handleClickOutside = this.handleClickOutside.bind(this);
+    }
+
+    setWrapperRef(node) {
+        this.wrapperRef = node;
+    }
+
+    handleClickOutside(e) {
+        if (this.wrapperRef && !this.wrapperRef.contains(e.target)) {
+            this.clickClose();
+        }
     }
 
     componentDidMount() {
         const input = document.getElementById("create-channel-input");
         input.addEventListener("paste", e => e.preventDefault());
+        document.addEventListener("mousedown", this.handleClickOutside);
     }
 
     componentWillUnmount() {
         const input = document.getElementById("create-channel-input");
         input.removeEventListener("paste", e => e.preventDefault());
+        document.removeEventListener("mousedown", this.handleClickOutside);
     }
 
     handleChange(e) {
@@ -62,7 +76,7 @@ class CreateChannel extends React.Component {
         } = this.props;
 
         return (
-            <div className="create-channel-wrapper">
+            <div ref={ this.setWrapperRef } className="create-channel-wrapper">
                 {/* <i className="fas fa-times" onClick={this.clickClose}></i> */}
                 <h6 className="close" onClick={this.clickClose}>+</h6>
                 <h1 className="create-channel-title">{formTitle}</h1>

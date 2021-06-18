@@ -5,26 +5,18 @@ class UserShow extends React.Component {
   constructor(props) {
       super(props);
       this.handleSendMessage = this.handleSendMessage.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
+      this.handleClickOutside = this.handleClickOutside.bind(this);
       this.clickClose = this.clickClose.bind(this);
+      this.setWrapperRef = this.setWrapperRef.bind(this);
+      // this.wrapperRef = React.createRef();
   }
 
   componentDidMount() {
-    const {
-      createdConvo,
-      closeModal,
-      history,
-      removeCreatedConvo,
-    } = this.props;
-
-    if (createdConvo) {
-      closeModal();
-      history.push(`/channels/@me/${createdConvo.id}`);
-      removeCreatedConvo();
-    }
+    document.addEventListener('mousedown', this.handleClickOutside);
   }
 
   componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside);
     this.props.removeCreatedConvo();
   }
 
@@ -32,7 +24,9 @@ class UserShow extends React.Component {
     const {
       createConversation,
       user,
-      currentUser
+      currentUser,
+      history,
+      closeModal
     } = this.props
 
     const convo = {
@@ -41,16 +35,33 @@ class UserShow extends React.Component {
       name: "",
     };
 
-    createConversation(convo);
+    createConversation(convo)
+      .then(
+        res => {
+          closeModal();
+          history.push(`/channels/@me/${res.payload.conversation.id}`);
+          removeCreatedConvo();
+        }
+      );
 
   }
 
-  handleSubmit(e) {
+  setWrapperRef(node) {
+    this.wrapperRef = node;
+  }
 
+  handleClickOutside(e) {
+    if (this.wrapperRef && !this.wrapperRef.contains(e.target)) {
+      this.props.closeModal();
+    }
   }
 
   insertMutualServers() {
-    const { mutualServers, user } = this.props;
+    const {
+      mutualServers,
+      user,
+      localUsernameObj
+    } = this.props;
     return (
       <ul className="common-servers">
         { mutualServers.map(server => (
@@ -58,7 +69,7 @@ class UserShow extends React.Component {
             <img className="server-image" src={ server.imageUrl ? server.imageUrl : serverInitials(server.name) } />
             <div className="server-info-wrapper">
               <h1 className="server-name" >{ server.name }</h1>
-              <h3 className="local-username" >{ `#${user.username}` }</h3>
+              <h3 className="local-username" >{ `#${localUsernameObj[server.id] ? localUsernameObj[server.id] : user.username}` }</h3>
             </div>
           </li>
         ))
@@ -82,7 +93,7 @@ class UserShow extends React.Component {
       const isCurrentUser = user.id === currentUser.id;
 
       return (
-          <div className="user-show-wrapper">
+          <div ref={this.setWrapperRef} className="user-show-wrapper">
             
             <div className="top-wrapper">
               <div className="user-wrapper">

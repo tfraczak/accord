@@ -8,10 +8,24 @@ import ServerSettingsContainer from '../server_toolbar/settings/server_settings_
 import ServerNicknameContainer from '../server_toolbar/nickname/server_nickname_container';
 
 class ServerModal extends React.Component {
-    constructor(props) {
-      super(props);
-	  this.escModal = this.escModal.bind(this);
+	constructor(props) {
+		super(props);
+		this.escModal = this.escModal.bind(this);
+		this.setWrapperRef = this.setWrapperRef.bind(this);
+		this.handleClickOutside = this.handleClickOutside.bind(this);
+	}
+
+	setWrapperRef(node) {
+		this.wrapperRef = node;
+	}
+
+	handleClickOutside(e) {
+		if (this.wrapperRef && !this.wrapperRef.contains(e.target)) {
+			document.getElementById("asf-button").classList.remove("active");
+			document.getElementById("asf-button").blur(); 
+      this.props.closeModal();
     }
+	}
 
 	escModal(e) {
 		if (e.keyCode === 27) {
@@ -23,10 +37,12 @@ class ServerModal extends React.Component {
 
 	componentDidMount() {
 		document.addEventListener("keydown", this.escModal, false);
+		document.addEventListener("mousedown", this.handleClickOutside);
 	}
 
 	componentWillUnmount() {
 		document.removeEventListener("keydown", this.escModal);
+		document.removeEventListener("mousedown", this.handleClickOutside);
 	}
 
   render() {
@@ -71,7 +87,9 @@ class ServerModal extends React.Component {
 			<div className={ className }>
 				<div 
 				className={ childClassName }
-				onClick={e => e.stopPropagation()}>
+				onClick={e => e.stopPropagation()}
+				ref={ this.setWrapperRef }
+				>
 
 				{ component }
 				

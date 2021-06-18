@@ -11,9 +11,11 @@ const mSTP = (state, ownProps) => {
         server = state.entities.servers[ownProps.location.pathname.split("/")[2]];
         members = serverMembers(usersState, server, memsState);
     }
+    let createdConvo = state.session.conversation;
     return {
         server,
-        members
+        members,
+        createdConvo
     };
 };
 

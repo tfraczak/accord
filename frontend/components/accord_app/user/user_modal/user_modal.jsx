@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import UserShowContainer from '../user_show/user_show_container';
+import { closeModal } from '../../../../actions/ui_actions';
 
 class UserModal extends React.Component {
   constructor(props) {
@@ -11,8 +12,6 @@ class UserModal extends React.Component {
 
   escModal(e) {
     if (e.keyCode === 27) {
-      // document.getElementById("user-settings-button").classList.remove("active");
-      // document.getElementById("user-settings-button").blur(); 
       this.props.closeModal();
     }
   }

@@ -12,7 +12,8 @@ export default props => {
                     <ConversationMembersList key={`convo-${props.chatId}`}/>
                 </Route>
                 <Route exact path="/channels/:serverId/:channelId" >
-                    <ServerMembersListContainer key={`chat-${props.server.id}-${props.members.length}`} />
+                    <ServerMembersListContainer key={`chat-${props.server.id}-${props.members.length}${props.createdConvo ? `-${props.createdConvo.id}` : ""}`} />
+                    {/* <ServerMembersListContainer key={Math.floor(Math.random()*10000000)} /> */}
                 </Route>
             </Switch>
         </div>

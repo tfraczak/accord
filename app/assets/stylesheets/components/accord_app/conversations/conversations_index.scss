@@ -1,0 +1,86 @@
+.conversations-index-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  font-family: $roboto;
+  
+
+  .conversations-title-wrapper {
+
+    .title {
+      position: relative;
+      left: 3px;
+      padding: 18px 8px 4px 18px;
+      height: 40px;
+      font-weight: 500;
+      font-size: 14px;
+      transform: scale(1.03, 0.95);
+      color: $font-sub;
+      cursor: default;
+      &:hover {
+        color: $font-main;
+      }
+    }
+  }
+  #conversations-index {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    overflow: hidden scroll;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    li {
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 42px;
+      margin-left: 8px;
+      padding-top: 2px;
+      a {
+        position: relative;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        color: $font-sub;
+        width: 100%;
+        height: 100%;
+        padding: 0 8px;
+        border-radius: 3px;
+        text-decoration: none;
+
+        &:hover {
+          color: $font-main;
+          background-color: darken($accord-app-3, 5%);
+        }
+        &.active {
+          color: $font-main;
+          background-color: darken($accord-app-3, 10%);
+        }
+        img {
+          width: 32px;
+          height: 32px;
+          border-radius: 50px;
+          margin-right: 12px;
+        }
+        .user {
+          font-weight: 500;
+          font-size: 16px;
+        }
+        .group-chat-wrapper {
+
+          .convo-member-names {
+  
+          }
+          .num-members {
+            
+          }
+        }
+      }
+    }
+  }
+}

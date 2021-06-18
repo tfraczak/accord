@@ -1,0 +1,25 @@
+.conversation-chat-title-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-family: $roboto;
+  color: $font-main;
+
+  .title-icon{
+    color: lighten($font-main, 20%);
+    font-size: 20px;
+    margin: 0 8px;
+  }
+  .username {
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  //////////////////////////
+  .convo-name {
+
+  }
+}
