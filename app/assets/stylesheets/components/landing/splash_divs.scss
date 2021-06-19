@@ -1,9 +1,9 @@
 .splash-box {
-    position: absolute;
+    position: relative;
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    top: 150px;;
+    top: 150px;
     left: 0;
     width: 100%;
     height: 100%;
@@ -17,193 +17,218 @@
     flex-direction: column;
     justify-content: space-between;
     width: 100%;
-    height: 3000px;
-    
-    > div {
-        display: flex;
-        justify-content: center;
-        justify-content: space-between;
+    height: auto;
+
+    .info-wrapper:not(.one) {
+        padding: 100px 0;
+    }
+
+    .info-wrapper {
         width: 100%;
-        margin: 0 auto;
+        &.one {
+            margin-bottom: 500px;
+        }
 
-        h1 {
-            font-size: 54px;
+        &.three, &.five {
+            background-color: $bg-color;
+        }
+
+        p > a, h1 > a {
+            text-decoration: none;
+            color: $link-color;
+            font-weight: 500;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        h1 > a {
             font-weight: 700;
-            margin-bottom: 40px;
         }
 
-        .title-desc {
-            width: 400px;
-        }
+        > div {
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            justify-content: space-between;
+            width: 100%;
+            margin: 0 auto;
+            // padding: 500px 0;
 
-    }
-
-    .div-1, .div-5 {
-        flex-direction: column;
-        align-items: center;
-        
-        p {
-            text-align: center;
-        }
-
-        img {
-            height: 300px;
-            width: 300px;
-        }
-    }
-
-    .div-2, .div-3, .div-4 {
-        width: 60%;
-        display: grid;
-        grid-template-columns: repeat(12,1fr);
-        grid-gap: 5%;
-        color: $font-main;
-        align-items: center;
-        padding: 50px 40px;
-        height: 600px;
-
-        img {
-            height: 350px;
-        }
-
-        .title {
-            font-size: 42px;
-            font-weight: 700;
-            line-height: 55px;
-        }
-        .desc {
-            margin-top: -20px;
-            font-size: 20px;
-            line-height: 34px;
-            font-weight: 300;
-        }
-    }
-
-    .div-2, .div-4 {
-
-        img {
-            grid-column-start: 1;
-            grid-column-end: 6;
-        }
-
-        .title-desc {
-            grid-column-end: 13;
-        }
-
-    }
-
-    .div-3 {
-
-        img {
-            grid-column-end: 12;
-        }
-
-        .title-desc {
-            grid-column-start: 2;
-            grid-column-end: 7;
-        }
-    }
-
-    .login-link, .register-link, .open-accord {
-        text-decoration: none;
-        margin-left: 70px;
-        position: relative;
-        padding: 18px 30px;
-        background-color: white;
-        color: $font-main;
-        font-weight: 500;
-        font-size: 18px;
-        border-radius: 50px;
-        font-family: $roboto;
-        display: flex;
-        align-items: center;
-        white-space: nowrap;
-
-        transition: 0.2s ease-in-out;
-
-        &:hover {
-            cursor: pointer;
-            color: $link-hover-color;
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
-        }
-
-    }
+            
     
-    .register-link, .open-accord.bottom {
-        background-color: $link-button-color;
-        color: $font-main;
+            h1 {
+                font-size: 54px;
+                font-weight: 700;
+                margin-bottom: 40px;
+            }
+    
+            .title-desc {
+                width: 400px;
+            }
+    
+        }
+    
+        .div-1, .div-5 {
+            flex-direction: column;
+            align-items: center;
+            
+            p {
+                text-align: center;
+            }
+    
+            img {
+                height: 300px;
+                width: 300px;
+            }
+        }
+    
+        .div-2, .div-3, .div-4 {
+            width: 70%;
+            display: flex;
+            justify-content: space-around;
+            color: $font-main;
+            align-items: center;
+            padding: 50px 40px;
+            height: 600px;
+
+            .title-desc {
+                margin: 0 30px;
+            }
+    
         
-        &:hover {
-            cursor: pointer;
-            background-color: $link-button-color-hover;
-            box-shadow: 0 0 30px rgba(255, 196, 0, 0.2);
+            .title {
+                font-size: 42px;
+                font-weight: 700;
+                line-height: 55px;
+            }
+    
+            .desc {
+                margin-top: -20px;
+                font-size: 20px;
+                line-height: 34px;
+                font-weight: 300;
+            }
+        }
+    
+        .div-2 {
+            img {
+                height: 350px;
+            }
+        }
+    
+        .div-3, .div-4 {
+            img {
+                height: 450px;
+            }
+        }
+    
+        .login-link, .register-link, .open-accord {
+            text-decoration: none;
+            margin-left: 70px;
+            position: relative;
+            padding: 18px 30px;
+            background-color: white;
+            color: $font-main;
+            font-weight: 500;
+            font-size: 18px;
+            border-radius: 50px;
+            font-family: $roboto;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+    
+            transition: 0.2s ease-in-out;
+    
+            &:hover {
+                cursor: pointer;
+                color: $link-hover-color;
+                box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+            }
+    
+        }
+        
+        .register-link, .open-accord.bottom {
+            background-color: $link-button-color;
+            color: $font-main;
+            
+            &:hover {
+                cursor: pointer;
+                background-color: $link-button-color-hover;
+                box-shadow: 0 0 30px rgba(255, 196, 0, 0.2);
+            }
+        }
+    
+        .div-1 {
+            color: white;
+            width: 40%;
+    
+            h1 {
+                font-size: 54px;
+                font-weight: 700;
+                margin-bottom: 40px;
+            }
+    
+            p {
+                font-size: 20px;
+                line-height: 36px;
+                // text-shadow:
+                //     -1px -1px 0 #000,  
+                //     1px -1px 0 #000,
+                //     -1px 1px 0 #000,
+                //     1px 1px 0 #000;
+                margin-bottom: 30px;
+            }
+    
+            i {
+                padding-right: 10px;
+            }
+    
+        }
+    
+        .div-5 {
+            margin-top: 200px;
+            .desc {
+                margin-top: -20px;
+                font-size: 20px;
+                line-height: 34px;
+                font-weight: 300;
+                width: 60%;
+            }
+            img {
+                width: 800px;
+                height: 400px;
+                margin-bottom: 30px;
+            }
+    
+            h2 {
+                margin-bottom: 30px;
+                font-size: 36px;
+                font-weight: 700;
+    
+            }
+
+            p {
+                margin-bottom: 20px;
+            }
+    
+            a {
+                margin-left: 0;
+            }
+    
+        }
+    
+        .session-links {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    
+        .open-accord {
+            margin: 0;
         }
     }
 
-    .div-1 {
-        color: white;
-        width: 40%;
-        margin-bottom: 500px;
-
-        h1 {
-            font-size: 54px;
-            font-weight: 700;
-            margin-bottom: 40px;
-        }
-
-        p {
-            font-size: 20px;
-            line-height: 36px;
-            // text-shadow:
-            //     -1px -1px 0 #000,  
-            //     1px -1px 0 #000,
-            //     -1px 1px 0 #000,
-            //     1px 1px 0 #000;
-            margin-bottom: 30px;
-        }
-
-        i {
-            padding-right: 10px;
-        }
-
-    }
-
-    .div-5 {
-        margin-top: 200px;
-        .desc {
-            margin-top: -20px;
-            font-size: 20px;
-            line-height: 34px;
-            font-weight: 300;
-            width: 60%;
-        }
-        img {
-            width: 800px;
-            height: 400px;
-            margin-bottom: 30px;
-        }
-
-        h2 {
-            margin-bottom: 30px;
-            font-size: 36px;
-            font-weight: 700;
-
-        }
-
-        a {
-            margin-left: 0;
-        }
-
-    }
-
-    .session-links {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .open-accord {
-        margin: 0;
-    }
 
 }

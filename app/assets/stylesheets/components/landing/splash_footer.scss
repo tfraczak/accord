@@ -1,16 +1,16 @@
 .splash-footer-wrapper {
     box-sizing: border-box;
-    position: absolute;
-    top: 3900px;
+    position: relative;
+    // top: 4500px;
     display: flex;
-    bottom: 0px;
+    // bottom: 0px;
     align-items: flex-start;
     justify-content: center;
     height: 30rem;
     width: 100vw;
     background-color: $font-main;
     font-family: $roboto;
-    margin-top: 200px;
+    margin-top: 150px;
     padding: 50px 0;
     
     .footer-grid {

@@ -29,8 +29,8 @@ export default props => {
                 <div className="div-2">
                     <img src={window.splash2} alt="ph-img" />
                     <div className="title-desc">
-                        <h1 className="title">An invite-only place with plenty of room to talk</h1>
-                        <p className="desc">Accord servers are organized into topic-based channels where you can collaborate, share, and just talk about your day without clogging up a group chat.</p>
+                        <h1 className="title">A clone of <a href="https://discord.com" target="_blank">Discord</a>, a popular social communication app</h1>
+                        <p className="desc">Just like Discord, Accord servers are organized by topic-based channels, where you can chat, share, or whatever you'd like to talk about wihout being bombarded by a group chat.</p>
                     </div>
                 </div>
             )
@@ -38,8 +38,8 @@ export default props => {
             return (
                 <div className="div-3">
                     <div className="title-desc">
-                        <h1 className="title">Where hanging out is easy</h1>
-                        <p className="desc">Grab a seat in a voice channel when you’re free. Friends in your server can see you’re around and instantly pop in to talk without having to call.</p>
+                        <h1 className="title">The tech involved with Accord</h1>
+                        <p className="desc">Grab a seat, and check out a sampling of all the tech used to build Accord. Please enjoy a real code snippet from the app as well!</p>
                     </div>
                     <img src={window.splash3} alt="ph-img" />
                 </div>
@@ -49,18 +49,18 @@ export default props => {
                 <div className="div-4">
                     <img src={window.splash4} alt="ph-img" />
                     <div className="title-desc">
-                        <h1 className="title">From a few to a fandom</h1>
-                        <p className="desc">Get a community of any size running with moderation tools and custom member access. Give members special powers, set up private channels, and more.</p>
+                        <h1 className="title">A little bit about myself</h1>
+                        <p className="desc">There are a few things I learned along the way, and here are some of them. I'm also the owner of <a href="https://pepplish.com" target="_blank">Pepplish Provisions</a>, a hot sauce company based in NYC.</p>
                     </div>
                 </div>
             )
         case 5:
             return (
                 <div className="div-5">
-                    <h1 className="title">Reliable tech for staying close</h1>
-                    <p className="desc">Low-latency voice and video feels like you’re in the same room. Wave hello over video, watch friends stream their games, or gather up and have a drawing session with screen share.</p>
+                    <h1 className="title">Take a brief look at my projects</h1>
+                    <p className="desc">Like what you see? You can shoot me an email at <a href="mailto: tfraczak@gmail.com" target="_blank">tfraczak@gmail.com</a> or call me at <a href="tel:3477702444">347-770-2444</a>. <br /> Be on the lookout, there are surely more projects on the way!</p>
                     <img src={window.splash5} alt="ph-img" />
-                    <h2 className="journey-question">Ready to start your journey?</h2>
+                    <h2 className="journey-question">Wanna give it a try?</h2>
                     { props.loggedIn ? (
                                 <Link className="open-accord bottom" to="/app">Open Accord</Link>
                         ) : (

@@ -44,11 +44,11 @@ export default (props) => {
             </header>
             <div className="splash-box">
                 <div className="splash-info-wrapper">
-                    <SplashInfoDiv divNum={1} loggedIn={props.loggedIn} />
-                    <SplashInfoDiv divNum={2} loggedIn={props.loggedIn} />
-                    <SplashInfoDiv divNum={3} loggedIn={props.loggedIn} />
-                    <SplashInfoDiv divNum={4} loggedIn={props.loggedIn} />
-                    <SplashInfoDiv divNum={5} loggedIn={props.loggedIn} />
+                    <section className="info-wrapper one"><SplashInfoDiv divNum={1} loggedIn={props.loggedIn} /></section>
+                    <section className="info-wrapper two"><SplashInfoDiv divNum={2} loggedIn={props.loggedIn} /></section>
+                    <section className="info-wrapper three"><SplashInfoDiv divNum={3} loggedIn={props.loggedIn} /></section>
+                    <section className="info-wrapper four"><SplashInfoDiv divNum={4} loggedIn={props.loggedIn} /></section>
+                    <section className="info-wrapper five"><SplashInfoDiv divNum={5} loggedIn={props.loggedIn} /></section>
                 </div>
             </div>
             <div className="splash-footer-wrapper">

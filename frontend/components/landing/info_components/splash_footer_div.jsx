@@ -94,7 +94,7 @@ export default props => {
                     <h1 className="contact-title">Contact</h1>
                     <ul className="contact-list">
                         <li>Timothy Fraczak</li>
-                        <li>347 770 4444</li>
+                        <li><a href="tel:3477702444">347-770-2444</a></li>
                         <li><a href="mailto:tfraczak@gmail.com?subject=Hey! I saw your Accord app on Heroku.">tfraczak@gmail.com</a></li>
                     </ul>
                 </div>
