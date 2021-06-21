@@ -8,6 +8,7 @@ import Error404 from './error_404/error_404';
 import UrlInvitationContainer from "./url_invitation/url_invitation_container";
 import { Route, Switch } from "react-router-dom";
 import { AuthRoute, ProtectedRoute } from '../utils/route_utils';
+import CanvasBackground from "./canvas_background/canvas_background";
 
 const App = () => (
     <div className="app-wrapper">

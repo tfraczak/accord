@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import CanvasBackground from '../canvas_background/canvas_background';
 
 export default props => {
     const errMsgs = [
@@ -13,11 +14,18 @@ export default props => {
         const i = Math.floor(Math.random() * errMsgs.length);
         return errMsgs[i];
     };
-    const inlineBgImg = {backgroundImage: `url(${window.brokenBg})`};
+    // const inlineBgImg = {backgroundImage: `url(${window.brokenBg})`};
 
     return (
         <>
-            <div className="bg-container" style={inlineBgImg}></div>
+            <div className="bg-container">
+                <CanvasBackground
+                    numStars={ 50 }
+                    numBackFlakes={ 600 }
+                    numFrontFlakes={ 400 }
+                    bgUrl={ window.error404Img }
+                />
+            </div>
             <div className="error-404-wrapper">
                 <h1>404</h1>
                 <p>{errMsg()}</p>

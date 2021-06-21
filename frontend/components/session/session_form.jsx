@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import CanvasBackground from '../canvas_background/canvas_background';
 
 class SessionForm extends React.Component {
     constructor(props) {
@@ -209,7 +210,14 @@ class SessionForm extends React.Component {
 
         return (
             <>
-                <div className="bg-container" style={inlineBgImg}></div>
+                <div className="bg-container">
+                    <CanvasBackground key="canvas-background"
+                        numStars={ 400 }
+                        numBackFlakes={ 200 }
+                        numFrontFlakes={ 100 }
+                        bgUrl={ window.backgroundImg }
+                    />
+                </div>
                 <header className="session-header-wrapper">
                     <Link className="session-to-home" to="/">
                         <img id="splash-logo" className="horizontal-logo" src={window.logoUrl} />

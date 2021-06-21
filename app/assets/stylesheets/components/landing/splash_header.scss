@@ -58,6 +58,7 @@
             display: flex;
             align-items: center;
             grid-column-end: 13;
+            transition: 100ms ease-in-out;
     
             &:hover {
                 cursor: pointer;

@@ -46,6 +46,7 @@
         align-items: center;
         white-space: nowrap;
         margin-top: 50px;
+        transition: 100ms ease-in-out;
 
         &:hover {
             cursor: pointer;

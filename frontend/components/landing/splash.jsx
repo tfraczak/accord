@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import SplashInfoDiv from "./info_components/splash_info_div";
 import SplashFooterDiv from "./info_components/splash_footer_div";
+import CanvasBackground from '../canvas_background/canvas_background';
 
 
 // class Splash extends React.Component {
@@ -28,8 +29,16 @@ export default (props) => {
 
     return (
         <div className="splash-wrapper">
-            <a name="#top"></a>
-            <div className="bg-container" style={inlineBgImg}></div>
+            
+            <a name="top"></a>
+            <div className="bg-container">
+                <CanvasBackground key="canvas-background"
+                    numStars={ 400 }
+                    numBackFlakes={ 200 }
+                    numFrontFlakes={ 100 }
+                    bgUrl={ window.backgroundImg }
+                />
+            </div>
             <header className="header-wrapper">
                 <div className="header-elements">
                     <img id="splash-logo" className="horizontal-logo" src={window.logoUrl} />

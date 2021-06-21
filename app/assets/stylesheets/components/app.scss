@@ -9,7 +9,7 @@
 @import "./url_invite_page/url_invite_page.scss";
 
 html {
-    background-color: #fdf9f6;
+    background-color: #fffdf8;
     .bg-container {
         position: absolute;
         top: 0;
@@ -19,12 +19,38 @@ html {
         display: flex;
         justify-content: center;
         align-items: center;
-        z-index: -1;
+        z-index: -10;
+        #bg {
+            position: absolute;
+            top: 0;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 3;
+            background-color: transparent;
+        }
     }
     overflow-x: hidden;
 
     img {
         user-select: none;
     }
+
+    &::-webkit-scrollbar {
+        display: block;
+        width: 5px;
+        background-color: #fffdf8;
+      }
+    
+      &::-webkit-scrollbar-thumb {
+        display: block;
+        background-color: $font-main;
+        border-radius: 20px;
+      }
+      &::-webkit-scrollbar-track {
+        display: block;
+        background-color: transparent;
+      }
     
 }
