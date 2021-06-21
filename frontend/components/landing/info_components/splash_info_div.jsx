@@ -59,9 +59,9 @@ export default props => {
                 <div className="div-5">
                     <h1 className="title">Take a brief look at my projects</h1>
                     <p className="desc">
-                        Like what you see? You can shoot me an email at 
-                        <a href="mailto: tfraczak@gmail.com" target="_blank">tfraczak@gmail.com</a> 
-                        or call me at <a href="tel:3477702444">347-770-2444</a>.
+                        Like what you see? You can shoot me an email at&nbsp;
+                        <a href="mailto: tfraczak@gmail.com" target="_blank">tfraczak@gmail.com</a>&nbsp;
+                        or call me at <a href="tel:3477702444">347-770-2444</a>.&nbsp;
                         <br />Be on the lookout, there are surely more projects on the way!
                         <br /> <Link to="/">Accord</Link> | <a href="https://postcard-triplog.herokuapp.com/#/" target="_blank">Postcard</a> | <a href="https://tfraczak.github.io/dungeon_crawler/" target="_blank">Dungeon Crawler</a>
                     </p>
