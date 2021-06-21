@@ -1,7 +1,7 @@
 class Star {
   constructor(canvas) {
     this.randStar(canvas);
-    this.dr = 0.015;
+    this.dr = 0.02;
     this.color = this.randColor();
   }
 
@@ -9,7 +9,7 @@ class Star {
     ctx.beginPath();
     ctx.arc(this.x,this.y, this.r, 2*Math.PI, false);
     ctx.shadowBlur = 0;
-    ctx.shadowColor = "#ffbb00";
+    ctx.shadowColor = this.color;
     ctx.fillStyle = this.color;
     ctx.fill();
   }
@@ -21,7 +21,7 @@ class Star {
 
   randColor() {
     const red = 255;
-    const blue = Math.floor(Math.random()*136);
+    const blue = Math.floor(Math.random()*230);
     const green = Math.round(203 + (blue * 0.2666667));
     return `rgb(${red}, ${green}, ${blue})`;
   }
