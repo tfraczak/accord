@@ -146,6 +146,6 @@ Channel.create!(
 )
 Channel.create!(
     server_id: 3,
-    name: "this-is-so-awesome",
+    name: "memes",
     media_type: "Text"
 )
