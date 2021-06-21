@@ -19,7 +19,7 @@ class Snowflake {
 
   moveFlake(dx) {
     this.angle += Math.random() * 0.03;
-    const maxY = (Math.random() * 100) + 800;
+    const maxY = (Math.random() * 167) + 800;
     this.y += Math.pow(this.speed, 2) + 1;
     this.x += dx + Math.sin(this.angle) * this.offset;
     if (this.y > maxY) {
