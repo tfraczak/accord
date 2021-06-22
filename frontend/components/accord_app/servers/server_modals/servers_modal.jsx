@@ -7,7 +7,7 @@ import ServerInvitationContainer from '../server_toolbar/invitation/server_invit
 import ServerSettingsContainer from '../server_toolbar/settings/server_settings_container';
 import ServerNicknameContainer from '../server_toolbar/nickname/server_nickname_container';
 
-class ServerModal extends React.Component {
+class ServersModal extends React.Component {
 	constructor(props) {
 		super(props);
 		this.escModal = this.escModal.bind(this);
@@ -41,6 +41,7 @@ class ServerModal extends React.Component {
 	}
 
 	componentWillUnmount() {
+		this.props.closeModal();
 		document.removeEventListener("keydown", this.escModal);
 		document.removeEventListener("mousedown", this.handleClickOutside);
 	}
@@ -111,4 +112,4 @@ const mDTP = dispatch => {
   };
 };
 
-export default connect(mSTP, mDTP)(ServerModal);
+export default connect(mSTP, mDTP)(ServersModal);

@@ -23,6 +23,7 @@ class ChannelsModal extends Component {
 	}
 
 	componentWillUnmount() {
+		this.props.closeModal();
 		document.removeEventListener("keydown", this.escModal);
 	}
 

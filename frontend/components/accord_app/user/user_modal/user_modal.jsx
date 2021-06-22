@@ -21,6 +21,7 @@ class UserModal extends React.Component {
   }
 
   componentWillUnmount() {
+    this.props.closeModal();
     document.removeEventListener("keydown", this.escModal);
   }
 
