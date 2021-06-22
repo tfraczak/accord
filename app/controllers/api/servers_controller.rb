@@ -64,12 +64,38 @@ class Api::ServersController < ApplicationController
             @invitation_ids = @server.invitations.pluck(:id)
             @membership_ids = @server.memberships.pluck(:id)
             @message_ids = @server.messages.pluck(:id)
+            user_ids = @server.members.pluck(:id)
             @server_id = @server.id
+
+            
+
             @server.destroy
+
+            user_ids = user_ids.select { |id| id != current_user.id }
+            users = user_ids.map { |id| User.find_by(id: id) }
+            
+            socket = build_delete_socket!
+
+            users.each { |user| SessionChannel.broadcast_to(user, socket) }
+
             render :destroy
         else
             render json: ["Server doesn't exist."], status: 404
         end
+    end
+
+    private
+
+    def build_delete_socket!
+        socket = {}
+        socket["action"] = "remove_server"
+        socket["payload"] = {}
+        socket["payload"]["channelIds"] = @channel_ids
+        socket["payload"]["invitationIds"] = @invitation_ids
+        socket["payload"]["membershipIds"] = @membership_ids
+        socket["payload"]["messageIds"] = @message_ids
+        socket["payload"]["serverId"] = @server_id
+        socket
     end
 
 end

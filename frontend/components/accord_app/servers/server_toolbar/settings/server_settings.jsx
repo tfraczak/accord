@@ -51,14 +51,14 @@ class ServerSettings extends React.Component {
         if (parseInt(location.pathname.split("/")[2]) === server.id) {
             history.push(`/channels/@me`);
         }
-        
 
-        for (let member of Object.values(members)) {
-            if (currentUser.id !== member.id) serverSub.kickMember(member, serverSub);
-        }
+
+        // for (let member of Object.values(members)) {
+        //     if (currentUser.id !== member.id) serverSub.kickMember(member, serverSub);
+        // }
 
         // serverSub.deleteServer(serverSub);
-        this.props.deleteServer(this.props.server.id);
+        this.props.deleteServer(this.props.server.id); // the delete api handle removing the server for all other users using Session socket
     }
 
     handleReset() {

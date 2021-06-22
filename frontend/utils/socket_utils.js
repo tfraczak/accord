@@ -206,6 +206,9 @@ export const createSessionSub = (
                     case "new conversation member":
                         dispatch(receiveNewMember(data.payload));
                         break;
+                    case "remove_server":
+                        dispatch(removeServer(data.payload));
+                        break;
                     default:
                         break;
                 }
@@ -213,6 +216,7 @@ export const createSessionSub = (
             newConvo: (data, sub) => { // need userId of other person
                 return sub.perform("new_convo", data);
             },
+
             unsubscribe: (sub) => {
                 return sub.perform("unsubscribed");
             },
