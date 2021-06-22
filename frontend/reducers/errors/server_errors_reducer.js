@@ -16,8 +16,8 @@ export default (state = [], action) => {
         case RECEIVE_SERVER_ERRORS:
             if (action.errors) return action.errors;
             return state;
-        case RECEIVE_SERVERS:
-            return [];
+        // case RECEIVE_SERVERS:
+        //     return [];
         case RECEIVE_SERVER:
             return [];
         case REMOVE_SERVER:

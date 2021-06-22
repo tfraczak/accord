@@ -35,6 +35,24 @@ class ServersNavBar extends React.Component {
 
     render() {
         const { servers, openModal } = this.props;
+        if (!servers || !servers.length) {
+            return (
+                <nav className="servers-profile-nav">
+                    <ul className="nav-list">
+                        <li className="profile">
+                            <a id="profile" onClick={this.classRemoveClick} className="profile-link" to="/channels/@me">
+                                <img src={window.defaultAvatarUrl} alt="profile-img" className="profile-link" />
+                            </a>
+                        </li>
+                        <li className="profile-servers-separator" key="servers-list-separator-1">
+                            <div></div>
+                        </li>
+                        <AddServerButton id="asf-button" openModal={openModal} />
+                    </ul>
+                </nav>
+            );
+        }
+        
         return (
             <nav className="servers-profile-nav">
                 <ul className="nav-list">

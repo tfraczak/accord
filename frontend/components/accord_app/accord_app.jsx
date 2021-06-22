@@ -24,9 +24,7 @@ class AccordApp extends React.Component {
     }
 
     componentDidMount() {
-        // if (!this.props.servers.length) {
-        //     this.props.history.push("/app");
-        // }
+        
     }
 
     render() {

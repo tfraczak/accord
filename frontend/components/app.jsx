@@ -8,21 +8,23 @@ import Error404 from './error_404/error_404';
 import UrlInvitationContainer from "./url_invitation/url_invitation_container";
 import { Route, Switch } from "react-router-dom";
 import { AuthRoute, ProtectedRoute } from '../utils/route_utils';
-import CanvasBackground from "./canvas_background/canvas_background";
 
-const App = () => (
-    <div className="app-wrapper">
-        <Switch>
-            <ProtectedRoute path="/channels" component={AccordAppContainer} />
-            <ProtectedRoute exact path="/app" component={LoadingContainer} />
-            <AuthRoute exact path="/login" component={LoginFormContainer} />
-            <AuthRoute exact path="/register" component={RegisterFormContainer} />
-            <Route exact path="/" component={SplashContainer}/>
-            <Route exact path="/404" component={Error404} />
-            <ProtectedRoute path="/" component={UrlInvitationContainer} />
-            <Route component={Error404} />
-        </Switch>
-    </div>
-);
+const App = () => {
+    return (
+        <div className="app-wrapper">
+            <Switch>
+                <ProtectedRoute exact path="/app" component={LoadingContainer} />
+                <AuthRoute exact path="/login" component={LoginFormContainer} />
+                <AuthRoute exact path="/register" component={RegisterFormContainer} />
+                <Route exact path="/404" component={Error404} />
+                <ProtectedRoute path="/channels" component={AccordAppContainer} />
+                <ProtectedRoute exact path="/:urlToken" component={UrlInvitationContainer} />
+                <Route exact path="/" component={SplashContainer}/>
+                <Route component={Error404} />
+            </Switch>
+        </div>
+    );
+    
+};
 
 export default App;

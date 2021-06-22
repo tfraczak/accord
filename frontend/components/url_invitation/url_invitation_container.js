@@ -4,11 +4,14 @@ import { getServerByUrl, joinServer, retrieveUserServers } from '../../actions/s
 import { validUrlToken, serverInitials } from "../../utils/func_utils";
 
 const mSTP = (state, ownProps) => {
+    const urlToken = ownProps.match.params.urlToken;
+    Object.freeze(state.entities.servers);
+    
     return {
         currentUserId: state.session.id,
         invitedServer: state.session.invitedServer,
-        urlToken: ownProps.location.pathname.slice(-10),
-        serverIds: Object.keys(state.entities.servers),
+        urlToken,
+        serverIds: Object.keys(Object.assign({}, state.entities.servers)),
         errors: state.errors.servers,
     }
 };

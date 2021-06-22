@@ -7,6 +7,7 @@ import { removeServerSubs } from "../../../../actions/socket_actions";
 
 
 const mSTP = (state, ownProps) => {
+    
     return {
         servers: Object.values(state.entities.servers),
         currentUserId: state.session.id,

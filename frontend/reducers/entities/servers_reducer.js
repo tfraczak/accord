@@ -1,5 +1,4 @@
 import {
-    RECEIVE_SERVERS,
     RECEIVE_SERVER,
     REMOVE_SERVER,
     LEAVE_SERVER,
@@ -18,9 +17,10 @@ export default (state = {}, action) => {
     Object.freeze(state);
     let nextState;
     let server, servers, serverId, serverIds;
+    
     switch(action.type) {
-        case RECEIVE_SERVERS:
-            return Object.assign({}, action.servers);
+        // case RECEIVE_SERVERS:
+        //     return Object.assign({}, action.servers);
         case RECEIVE_USER_LOAD_DATA:
             return Object.assign({}, action.payload.servers);
         case RECEIVE_SERVER:

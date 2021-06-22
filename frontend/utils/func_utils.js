@@ -1,5 +1,5 @@
 export const validUrlToken = path => {
-    const pattern = /^((https?:\/\/)?(accord\.com\/))?[\w]{10}$/;
+    const pattern = /^((https?:\/\/)?(accord\.com\/))?[\w\-]{10}$/;
     const isValid = path.match(pattern);
     if (isValid) return isValid[0].slice(-10);
     return null;
@@ -15,19 +15,24 @@ const splitName = (name, char) => {
 }
 
 export const serverInitials = name => {
-    let newName;
-    if (name.includes(" ")) {
-        newName = name.split(" ").map(word => word[0]).join("");
-    } else if (name.includes("-")) {
-        newName = splitName(name, "-");
-    } else if (name.includes("/")) {
-        newName = splitName(name, "/");
-    } else if (name.includes("_")) {
-        newName = splitName(name, "_");
-    } else {
-        newName = name[0];
+    if (name) {
+        let newName;
+        if (name.includes(" ")) {
+            newName = name.split(" ").map(word => word[0]).join("");
+        } else if (name.includes("-")) {
+            newName = splitName(name, "-");
+        } else if (name.includes("/")) {
+            newName = splitName(name, "/");
+        } else if (name.includes("_")) {
+            newName = splitName(name, "_");
+        } else {
+            newName = name[0];
+        }
+        return newName;
     }
-    return newName;
+
+    return "";
+    
 };
 
 export const convertToSnakeCase = obj => {

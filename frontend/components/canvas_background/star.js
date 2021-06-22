@@ -1,7 +1,7 @@
 class Star {
   constructor(canvas) {
     this.randStar(canvas);
-    this.dr = 0.02;
+    this.dr = (Math.random()*0.015) + 0.03;
     this.color = this.randColor();
   }
 

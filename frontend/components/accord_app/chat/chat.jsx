@@ -40,13 +40,13 @@ class Chat extends Component {
                 const next = nextChat(nextPath);
                 const type = next[0];
                 const id = next[1];
-                if (type === "Channel" && channels[id]) {
+                if (type === "Channel" && id && channels[id]) {
                     retrieveChannel(id);
-                } else if (type === "Conversation" && conversations[id]) {
+                } else if (type === "Conversation" && id && conversations[id]) {
                     retrieveConversation(id);
-                } else {
+                } else if (id) {
                     history.push("/channels/@me");
-            }
+                }
             }
             
         }

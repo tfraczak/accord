@@ -29,7 +29,7 @@ export default props => {
             <div className="error-404-wrapper">
                 <h1>404</h1>
                 <p>{errMsg()}</p>
-                <Link to="/" >Let's get you back home...</Link>
+                <Link to="/app" >Let's get you back home...</Link>
             </div>
         </>
     )

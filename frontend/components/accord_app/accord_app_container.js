@@ -1,10 +1,6 @@
 import { connect } from "react-redux";
 import { withRouter } from 'react-router-dom';
 import AccordApp from "./accord_app";
-import * as ServerActions from '../../actions/server_actions';
-import * as UserActions from '../../actions/user_actions';
-import { _retrieveUserLoadData } from '../../actions/session_actions';
-import { openModal, closeModal } from "../../actions/ui_actions";
 
 const mSTP = (state, ownProps) => {
     let serverId = parseInt(ownProps.location.pathname.split("/")[2]);
@@ -24,16 +20,7 @@ const mSTP = (state, ownProps) => {
 
 };
 
-const mDTP = (dispatch) => ({
-    retrieveUserServers: currentUserId => dispatch(ServerActions.retrieveUserServers(currentUserId)),
-    createServer: server => dispatch(ServerActions.createServer(server)),
-    updateServer: server => dispatch(ServerActions.updateServer(server)),
-    deleteServer: serverId => dispatch(ServerActions.deleteServer(serverId)),
-    joinServer: membership => dispatch(ServerActions.joinServer(membership)),
-    leaveServer: (membershipId) => dispatch(ServerActions.leaveServer(membershipId)),
-    retrieveServerMembers: serverId => dispatch(UserActions.retrieveServerMembers(serverId)),
-    openModal: modal => dispatch(openModal(modal)),
-    closeModal: () => dispatch(closeModal()),
+const mDTP = dispatch => ({
 });
 
 export default withRouter(connect(mSTP, mDTP)(AccordApp));
