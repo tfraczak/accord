@@ -69,7 +69,7 @@ class ServerToolbar extends Component {
         e.currentTarget.classList.toggle("dropped");
         chevronRef.classList.toggle("fade-in");
         xRef.classList.toggle("fade-in");
-        const fadeIn = document.getElementsByClassName("fade-in");
+        // const fadeIn = document.getElementsByClassName("fade-in");
         if (e.currentTarget.classList.contains("dropped")) {
             wrapperRef.classList.add("fade-in");
             wrapperRef.classList.remove("fade-out");

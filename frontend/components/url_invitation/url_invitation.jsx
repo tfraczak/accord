@@ -1,4 +1,5 @@
 import React from 'react';
+import CanvasBackground from "../canvas_background/canvas_background";
 
 class UrlInvitation extends React.Component {
     constructor(props) {
@@ -192,10 +193,17 @@ class UrlInvitation extends React.Component {
     }
 
     render() {
-        const inlineBgImg = {backgroundImage: `url(${window.backgroundImg})`};
+        // const inlineBgImg = {backgroundImage: `url(${window.backgroundImg})`};
         return (
             <>
-                <div className="bg-container" style={inlineBgImg}></div>
+                <div className="bg-container">
+                    <CanvasBackground 
+                        numStars={ 200 }
+                        numFrontFlakes={ 25 }
+                        numBackFlakes={ 50 }
+                        bgUrl={ window.backgroundImg }
+                    />
+                </div>
                 <div className="url-invite-wrapper">
                     <div className="url-invite-content-box">
                         { this.state.join() }

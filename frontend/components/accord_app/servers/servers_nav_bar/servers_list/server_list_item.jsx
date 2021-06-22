@@ -80,6 +80,7 @@ class ServerListItem extends React.Component {
     }
 
     render() {
+        if(!this.props.server) return null;
         const { server: { id, imageUrl }, defaultChannelId } = this.props;
 
         const itemClassName = imageUrl ? "server-item image-present" : "server-item no-image";
