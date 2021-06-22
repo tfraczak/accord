@@ -4,6 +4,7 @@ import {
     REMOVE_MESSAGE,
 } from "../../actions/message_actions";
 import {
+    RECEIVE_SERVERS,
     RECEIVE_SERVER_INFO,
     LEAVE_SERVER,
     REMOVE_SERVER,
@@ -36,6 +37,8 @@ export default (state = {}, action) => {
     switch (action.type) {
         case RECEIVE_MESSAGES:
             return Object.assign({}, state, action.messages);
+        case RECEIVE_SERVERS:
+            return Object.assign({}, state, action.payload.messages);
         case RECEIVE_USER_LOAD_DATA:
             messages = action.payload.messages;
             return Object.assign({}, state, messages);

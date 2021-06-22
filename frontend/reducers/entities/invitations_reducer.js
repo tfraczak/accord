@@ -5,6 +5,7 @@ import {
     SOCKET_INVITATION,
 } from "../../actions/invitation_actions";
 import {
+    RECEIVE_SERVERS,
     RECEIVE_SERVER_INFO,
     LEAVE_SERVER,
     REMOVE_SERVER,
@@ -28,6 +29,8 @@ export default (state = {}, action) => {
             return Object.assign({}, state, { [action.invitation.id]: action.invitation });
         case RECEIVE_INVITATIONS:
             return Object.assign({}, state, action.invitations);
+        case RECEIVE_SERVERS:
+            return Object.assign({}, state, action.payload.invitations);
         case RECEIVE_USER_LOAD_DATA:
             invitations = action.payload.invitations;
             return Object.assign({}, state, invitations);

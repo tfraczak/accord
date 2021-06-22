@@ -7,6 +7,7 @@ import {
 } from "../../actions/channel_actions";
 
 import {
+    RECEIVE_SERVERS,
     RECEIVE_NEW_SERVER,
     RECEIVE_JOINED_SERVER,
     RECEIVE_SERVER_INFO,
@@ -26,6 +27,8 @@ export default (state = {}, action) => {
     let nextState;
     let channel, channels, channelId, channelIds;
     switch (action.type) {
+        case RECEIVE_SERVERS:
+            return Object.assign({}, state, action.payload.channels );
         case RECEIVE_CHANNELS:
             return Object.assign({}, state, action.channels );
         case RECEIVE_USER_LOAD_DATA:

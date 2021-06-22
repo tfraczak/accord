@@ -12,6 +12,7 @@ import {
 } from "../../actions/user_actions";
 
 import {
+    RECEIVE_SERVERS,
     RECEIVE_JOINED_SERVER,
     RECEIVE_SERVER_INFO,
     KICK_MEMBER,
@@ -30,6 +31,8 @@ export default (state = {}, action) => {
             return Object.assign({}, state, { [action.currentUser.id]: action.currentUser });
         case RECEIVE_USERS:
             return Object.assign({}, state, action.users);
+        case RECEIVE_SERVERS:
+            return Object.assign({}, state, action.payload.users);
         case LOAD_MEMBERS:
             users = action.payload.users;
             nextState = Object.assign({}, state);

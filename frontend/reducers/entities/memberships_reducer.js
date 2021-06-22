@@ -7,6 +7,7 @@ import {
 } from "../../actions/membership_actions";
 
 import {
+    RECEIVE_SERVERS,
     REMOVE_SERVER,
     RECEIVE_JOINED_SERVER,
     RECEIVE_NEW_SERVER,
@@ -35,6 +36,8 @@ export default (state = {}, action) => {
     switch (action.type) {
         case RECEIVE_MEMBERSHIPS:
             return Object.assign({}, state, action.memberships);
+        case RECEIVE_SERVERS:
+            return Object.assign({}, state, action.payload.memberships);
         case RECEIVE_USER_LOAD_DATA:
             memberships = action.payload.memberships;
             return Object.assign({}, state, memberships);

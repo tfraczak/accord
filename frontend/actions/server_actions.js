@@ -3,7 +3,7 @@ import { createServerSub } from "../utils/socket_utils";
 import { convertToSnakeCase } from "../utils/func_utils";
 import { receiveServerSub } from "../actions/socket_actions";
 
-// export const RECEIVE_SERVERS = "RECEIVE_SERVERS";
+export const RECEIVE_SERVERS = "RECEIVE_SERVERS";
 export const RECEIVE_SERVER = "RECEIVE_SERVER";
 export const RECEIVE_SERVER_ERRORS = "RECEIVE_SERVER_ERRORS";
 export const REMOVE_SERVER_ERRORS = "REMOVE_SERVER_ERRORS";
@@ -18,10 +18,10 @@ export const RECEIVE_SERVER_INFO = "RECEIVE_SERVER_INFO";
 export const KICK_MEMBER = "KICK_MEMBER";
 export const LOAD_MEMBERS = "LOAD_MEMBERS";
 
-// export const receiveServers = servers => ({
-//     type: RECEIVE_SERVERS,
-//     servers,
-// });
+export const receiveServers = payload => ({
+    type: RECEIVE_SERVERS,
+    payload,
+});
 
 export const receiveServer = server => ({
     type: RECEIVE_SERVER,
