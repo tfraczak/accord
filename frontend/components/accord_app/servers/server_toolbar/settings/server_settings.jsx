@@ -51,6 +51,7 @@ class ServerSettings extends React.Component {
         if (parseInt(location.pathname.split("/")[2]) === server.id) {
             history.push(`/channels/@me`);
         }
+        
 
         for (let member of Object.values(members)) {
             if (currentUser.id !== member.id) serverSub.kickMember(member, serverSub);
