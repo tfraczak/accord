@@ -39,7 +39,7 @@ class ServerListItem extends React.Component {
         const { id } = this.props.server;
         const serverListItem = document.getElementById(`server-item-${id}`);
         if (this.checkPath() && !serverListItem.classList.contains("active")) {
-            serverListItem.classList.add("active");            
+            serverListItem.classList.add("active");
         };
     }
 
@@ -52,7 +52,8 @@ class ServerListItem extends React.Component {
 
     checkPath() {
         const { id } = this.props.server;
-        let currentPath = this.props.location.pathname;
+        let currentPath = this.props.history.location.pathname;
+        debugger
         currentPath = currentPath.split("/").slice(0,3).join("/");
         let serverPath = `/channels/${id}`;
         return currentPath === serverPath;
