@@ -53,7 +53,6 @@ class ServerListItem extends React.Component {
     checkPath() {
         const { id } = this.props.server;
         let currentPath = this.props.history.location.pathname;
-        debugger
         currentPath = currentPath.split("/").slice(0,3).join("/");
         let serverPath = `/channels/${id}`;
         return currentPath === serverPath;
