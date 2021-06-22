@@ -44,6 +44,7 @@ class ServerSettings extends React.Component {
             history,
             serverSub,
             members,
+            currentUser,
         } = this.props;
 
         closeModal();
@@ -51,7 +52,9 @@ class ServerSettings extends React.Component {
             history.push(`/channels/@me`);
         }
 
-        for (let member of Object.values(members)) { serverSub.kickMember(member, serverSub) }
+        for (let member of Object.values(members)) {
+            if (currentUser.id !== member.id) serverSub.kickMember(member, serverSub);
+        }
 
         // serverSub.deleteServer(serverSub);
         this.props.deleteServer(this.props.server.id);
