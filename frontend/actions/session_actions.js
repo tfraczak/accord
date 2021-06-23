@@ -78,12 +78,15 @@ export const logout = () => dispatch => {
 };
 
 export const _retrieveUserLoadData = userId => dispatch => {
-    getUserConversations(userId)
+    return getUserConversations(userId)
         .then(payload => {
             dispatch(receivePrivateUserLoadData(payload));
-        });
-    return getUserServers(userId)
-        .then(payload => {
-            dispatch(receiveUserLoadData(payload));
-        });
+        }).then(
+            () => {
+                getUserServers(userId)
+                    .then(
+                        payload => dispatch(receiveUserLoadData(payload))
+                    )
+            }
+        );
 };
