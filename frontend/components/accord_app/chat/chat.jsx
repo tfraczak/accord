@@ -40,7 +40,6 @@ class Chat extends Component {
                 const next = nextChat(nextPath);
                 const type = next[0];
                 const id = next[1];
-                debugger
                 if (type === "Channel" && id && channels[id]) {
                     retrieveChannel(id);
                 } else if (type === "Conversation" && id && conversations[id]) {
