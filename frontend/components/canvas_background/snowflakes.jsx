@@ -56,8 +56,12 @@ class Snowflakes extends React.Component {
       styleBG.height = `${this.height}px`;
       
 
-      for (let i = 0; i < this.props.numBackFlakes; i++) { this.backSnowflakes.push(new Snowflake(this.backCanvas, "back")); }
-      for (let i = 0; i < this.props.numFrontFlakes; i++) { this.frontSnowflakes.push(new Snowflake(this.frontCanvas, "front")); }
+      for (let i = 0; i < this.props.numBackFlakes; i++) {
+        this.backSnowflakes.push(new Snowflake(this.backCanvas, "back"));
+      }
+      for (let i = 0; i < this.props.numFrontFlakes; i++) {
+        this.frontSnowflakes.push(new Snowflake(this.frontCanvas, "front"));
+      }
       this.then = Date.now();
       this.startTime = this.then;
       this.animate();
@@ -87,7 +91,6 @@ class Snowflakes extends React.Component {
       frontCTX,
       backSnowflakes,
       frontSnowflakes,
-      startTime,
     } = this;
 
     let step = () => {

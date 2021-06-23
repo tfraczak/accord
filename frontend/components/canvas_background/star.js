@@ -29,7 +29,6 @@ class Star {
   randStar(canvas) {
     this.x = Math.floor((Math.random() * (canvas.width - 2)) + 1);
     this.y = Math.floor((Math.random() * (canvas.height - 2)) + 1);
-    this.pos = [this.x,this.y];
     this.r = Math.random() * 1.7 + 0.5;
   }
 

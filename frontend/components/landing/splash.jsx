@@ -23,10 +23,6 @@ export default (props) => {
         }
     }
 
-    const inlineBgImg = {backgroundImage: `url(${window.backgroundImg})`};
-    
-    // <img className="bg-image" src={window.backgroundImg} alt="bg-img" />
-
     return (
         <div className="splash-wrapper">
             

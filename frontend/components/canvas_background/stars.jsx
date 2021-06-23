@@ -28,7 +28,9 @@ class Stars extends React.Component {
       style.left = 0;
       style.backgroundColor = "#2f3234";
       style.zIndex = 1;
+
       for (let i = 0; i < this.props.numStars; i++) { this.stars.push(new Star(this.canvas)); }
+      
       this.then = Date.now();
       this.startTime = this.then;
       this.animate(ctx);
