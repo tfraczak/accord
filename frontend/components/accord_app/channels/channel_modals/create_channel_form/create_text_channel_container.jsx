@@ -9,7 +9,7 @@ import CreateChannel from './create_channel';
 
 const mSTP = (state, ownProps) => {
     const server = state.entities.servers[ownProps.match.params.serverId];
-    if (!server) return ownProps.history.push("/channels/@me");
+    // if (!server) return ownProps.history.push("/channels/@me");
     const serverSub = state.subscriptions.servers[server.id];
     return {
         currentUser: state.entities.users[state.session.id],

@@ -11,10 +11,10 @@ import { retrieveConversation } from '../../../actions/conversation_actions';
 
 const mSTP = (state, ownProps) => {
     const chat = state.entities.channels[ownProps.match.params.channelId];
-    if (!chat) {
-        ownProps.history.push("/channels/@me");
-        return {};
-    }
+    // if (!chat) {
+    //     ownProps.history.push("/channels/@me");
+    //     return {};
+    // }
     const type = "Channel";
     const messages = chatMessages(chat, type, state.entities.messages);
     const server = state.entities.servers[ownProps.match.params.serverId];

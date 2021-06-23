@@ -12,10 +12,10 @@ import { limitChars } from '../../../utils/func_utils';
 
 const mSTP = (state, ownProps) => {
     const chat = state.entities.conversations[ownProps.match.params.conversationId];
-    if (!chat) {
-        ownProps.history.push("/channels/@me");
-        return {};
-    }
+    // if (!chat) {
+    //     ownProps.history.push("/channels/@me");
+    //     return {};
+    // }
     const type = "Conversation";
     const messages = chatMessages(chat, type, state.entities.messages);
     const users = state.entities.users;

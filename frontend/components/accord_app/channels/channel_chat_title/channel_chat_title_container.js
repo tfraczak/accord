@@ -4,10 +4,10 @@ import ChannelChatTitle from './channel_chat_title';
 
 const mSTP = (state, ownProps) => {
     const channel = state.entities.channels[ownProps.match.params.channelId];
-    if (!channel && !ownProps.history.location.pathname.includes("@me")) {
-        ownProps.history.push("/channels/@me");
-        return {};
-    }
+    // if (!channel && !ownProps.history.location.pathname.includes("@me")) {
+    //     ownProps.history.push("/channels/@me");
+    //     return {};
+    // }
     
     return {
         channel,

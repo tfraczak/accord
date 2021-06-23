@@ -9,10 +9,10 @@ import { currentUsersMembershipId } from '../../../../utils/selectors';
 const mSTP = (state, ownProps) => {
 
     const server = state.entities.servers[ownProps.match.params.serverId];
-    if (!server && !ownProps.history.location.pathname.includes("@me")) {
-        ownProps.history.push("/channels/@me");
-        return {};
-    }
+    // if (!server && !ownProps.history.location.pathname.includes("@me")) {
+    //     ownProps.history.push("/channels/@me");
+    //     return {};
+    // }
     const currentUserId = state.session.id;
     const memberships = state.entities.memberships;
     const users = state.entities.users;
