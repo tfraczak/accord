@@ -19,11 +19,62 @@
         width: 100%;
         padding: 5px 75px 7px 75px;
         margin-top: 15px;
-        
-
 
         &:hover {
             background-color: $chat-hover;
+        }
+
+        .message-toolbar {
+            position: absolute;
+            right: 15px;
+            top: -12px;
+            display: flex;
+            align-items: center;
+            height: 28px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(black, 0.2);
+
+            &.hidden {
+                display: none;
+            }
+
+            li {
+                box-sizing: border-box;
+                display: flex;
+                align-items: center;
+                height: 100%;
+                
+                button {
+                    box-sizing: border-box;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: $accord-app-3;
+                    color: $font-main;
+                    height: 100%;
+                    width: 28px;
+                    border-radius: 2px;
+                    padding: 5px;
+                    cursor: pointer;
+                    &:hover {
+                        background-color: lighten($accord-app-3, 5%);
+                    }
+                }
+                &:first-child {
+                    border-radius: 5px 0 0 5px;
+                    // background-color: aqua;
+                    button {
+                        border-radius: 5px 0 0 5px;
+                    }
+                }
+                &:last-child {
+                    // background-color: chartreuse;
+                    border-radius: 0 5px 5px 0;
+                    button {
+                        border-radius: 0 5px 5px 0;
+                    }
+                }
+            }
         }
 
         .chat-avatar {
@@ -58,7 +109,7 @@
                 &:hover {
                     text-decoration: underline;
                     color: black;
-                    cursor: pointer;
+                    cursor: default;
                 }
 
                 &.not-a-member {

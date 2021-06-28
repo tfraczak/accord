@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import MessageFormContainer from "./message_form/message_form_container";
+import MessageForm from "./message_form/message_form";
 import MessageListItem from "./message_form/message_list_item";
 import { extractDateTime } from "../../../utils/func_utils";
 import { nextChat } from "../../../utils/selectors";
@@ -88,22 +88,13 @@ class Chat extends Component {
         
         const messageList = this.state.messages.map(message => {
             return (
-                this.state.updateMsgId === message.id ? (
-                    <UpdateMessageForm 
-                        key={ `update-message-${message.id}` }
-                        chatMembers={ chatMembers }
-                        message={ message }
-                        type={ type }
-                    />
-                ) : (
-                    <MessageListItem 
-                        key={`message-${message.id}`} 
-                        chatMembers={ chatMembers } 
-                        message={ message } 
-                        type={ type }
-                    />
-                )
-                
+                <MessageListItem 
+                    key={`message-${message.id}`} 
+                    chatMembers={ chatMembers } 
+                    message={ message } 
+                    type={ type }
+                    subscription={ this.subscription }
+                />
             );
         });
 
@@ -114,12 +105,11 @@ class Chat extends Component {
                     <div ref={this.bottom} key={"bottom"} className="message-wrapper bottom"></div>
                 </div>
                 <div className="msg-form-separator" />
-                <MessageFormContainer
+                <MessageForm
+                    key={ `mform-${chat.id}-${type}` }
+                    action={ "create" }
                     subscription={ this.subscription }
                     message={ newMessage }
-                    key={ `mform-${chat.id}-${type}` }
-                    type={ type }
-                    chat={ chat }
                     placeholder={ placeholder }
                 />
             </>
