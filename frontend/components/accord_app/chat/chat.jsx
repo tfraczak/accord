@@ -7,7 +7,10 @@ import { nextChat } from "../../../utils/selectors";
 class Chat extends Component {
     constructor(props) {
         super(props);
-        this.state = { messages: props.messages || [] };
+        this.state = { 
+            messages: props.messages || [],
+            updateMsgId: null,
+        };
         this.bottom = React.createRef();
         this.setState = this.setState.bind(this);
         this.subscription = props.chat ? props.createChatSub(this) : undefined;
@@ -85,12 +88,22 @@ class Chat extends Component {
         
         const messageList = this.state.messages.map(message => {
             return (
-                <MessageListItem 
-                    key={`message-${message.id}`} 
-                    chatMembers={ chatMembers } 
-                    message={ message } 
-                    type={ type }
-                />
+                this.state.updateMsgId === message.id ? (
+                    <UpdateMessageForm 
+                        key={ `update-message-${message.id}` }
+                        chatMembers={ chatMembers }
+                        message={ message }
+                        type={ type }
+                    />
+                ) : (
+                    <MessageListItem 
+                        key={`message-${message.id}`} 
+                        chatMembers={ chatMembers } 
+                        message={ message } 
+                        type={ type }
+                    />
+                )
+                
             );
         });
 
