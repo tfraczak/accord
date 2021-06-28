@@ -167,9 +167,12 @@ export const createChatSub = (
                         break;
                     case "new message":
                         dispatch(receiveMessage(data.message));
-                        that.setState.call(that, ({
+                        that.setState({
                             messages: that.state.messages.concat(data.message)
-                        }));
+                        });
+                        break;
+                    case "update message":
+                        dispatch(receiveMessage(data.message));
                         break;
                     default:
                         break;
@@ -177,6 +180,9 @@ export const createChatSub = (
             },
             speak: (data) => {
                 return that.subscription.perform("speak", data);
+            },
+            update: (data) => {
+                return that.subscription.perform("update", data);
             },
             unsubscribe: () => {
                 return that.subscription.perform("unsubscribed");

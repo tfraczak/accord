@@ -11,7 +11,7 @@ class UserModal extends React.Component {
   }
 
   escModal(e) {
-    if (e.keyCode === 27) {
+    if (e.key === "Escape" && this.props.modal) {
       this.props.closeModal();
     }
   }

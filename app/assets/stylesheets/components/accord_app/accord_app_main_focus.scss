@@ -34,6 +34,11 @@
         width: 100%;
     }
 
+    > .message-form {
+        min-height: 65px;
+        max-height: 65px;
+    }
+    
     .message-form {
         position: relative;
         display: flex;
@@ -43,8 +48,6 @@
         box-sizing: border-box;
         padding: 0 20px;
         width: 100%;
-        min-height: 65px;
-        max-height: 65px;
 
         .message-input {
             position: relative;

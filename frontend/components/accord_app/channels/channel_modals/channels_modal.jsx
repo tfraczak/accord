@@ -11,7 +11,7 @@ class ChannelsModal extends Component {
     }
 
 	escModal(e) {
-		if (e.keyCode === 27) {
+		if (e.key === "Escape" && this.props.modal) {
 			document.getElementById("add-channel-btn").classList.remove("open-modal");
 			document.getElementById("add-channel-btn").blur(); 
 			this.props.closeModal();

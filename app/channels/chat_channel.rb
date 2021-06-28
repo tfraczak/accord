@@ -8,12 +8,7 @@ class ChatChannel < ApplicationCable::Channel
   def speak(data) # create action equivalent?
     @message = Message.new(data['message'])
     if @message.save
-      socket = { message: camelize_keys(@message.attributes) }
-      author = camelize_keys(@message.author.attributes)
-      socket[:message]["author"] = secure_user!(author)
-      socket[:message]["author"]["localUsername"] = @message.local_username if @chat.class.to_s == "Channel"
-      socket[:message]["author"]["membershipId"] = @message.membership.id
-      socket[:action] = "new message"
+      socket = build_message_socket("new message")
       if @chat.class.to_s == "Conversation"
         receiver = @chat.receiver
         initiator = @chat.initiator
@@ -29,6 +24,16 @@ class ChatChannel < ApplicationCable::Channel
         end
 
       end
+
+      ChatChannel.broadcast_to(@chat, socket)
+      
+    end
+  end
+
+  def update(data)
+    @message = Message.find_by(id: data['message']['id'])
+    if @message.update(body: data['message']['body'])
+      socket = build_message_socket("update message")
 
       ChatChannel.broadcast_to(@chat, socket)
       
@@ -55,6 +60,8 @@ class ChatChannel < ApplicationCable::Channel
     stop_stream_for(chan)
   end
 
+  private
+
   def build_convo_socket(action)
     convo_socket = {}
     convo_socket["payload"] = {}
@@ -74,6 +81,16 @@ class ChatChannel < ApplicationCable::Channel
       [message.id, formatted_message]
     end
     Hash[msgs]
+  end
+
+  def build_message_socket(action)
+    socket = { message: camelize_keys(@message.attributes) }
+    author = camelize_keys(@message.author.attributes)
+    socket[:message]["author"] = secure_user!(author)
+    socket[:message]["author"]["localUsername"] = @message.local_username if @chat.class.to_s == "Channel"
+    socket[:message]["author"]["membershipId"] = @message.membership.id
+    socket[:action] = action
+    socket
   end
 
 end

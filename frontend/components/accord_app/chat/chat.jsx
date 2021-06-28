@@ -13,7 +13,17 @@ class Chat extends Component {
         };
         this.bottom = React.createRef();
         this.setState = this.setState.bind(this);
+        this.handleEdit = this.handleEdit.bind(this);
+        this.handleToolbarClose = this.handleToolbarClose.bind(this);
         this.subscription = props.chat ? props.createChatSub(this) : undefined;
+    }
+
+    handleEdit(message) {
+        return () => {
+            this.setState({
+                updateMsgId: message.id,
+            });
+        };
     }
 
     componentDidMount() {
@@ -23,11 +33,20 @@ class Chat extends Component {
         if (this.bottom.current) {
             this.bottom.current.scrollIntoView();
         }
-        
+        document.addEventListener("keydown", this.handleToolbarClose);
+    }
+
+    handleToolbarClose(e) {
+        if (e.key === "Escape" && this.state.updateMsgId) {
+            this.setState({
+                updateMsgId: null,
+            });
+        }
     }
 
     componentWillUnmount() {
         // this.props.history.location.pathname is the next url path
+        document.removeEventListener("keydown", this.handleToolbarClose);
         const {
             history,
             retrieveChannel,
@@ -94,6 +113,9 @@ class Chat extends Component {
                     message={ message } 
                     type={ type }
                     subscription={ this.subscription }
+                    handleEdit={ this.handleEdit(message) }
+                    setState={ this.setState }
+                    updateMsgId={ this.state.updateMsgId }
                 />
             );
         });

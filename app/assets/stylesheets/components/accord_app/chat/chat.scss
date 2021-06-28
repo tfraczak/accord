@@ -129,12 +129,51 @@
 
             
         }
-        
-        .message {
-            min-height: 22px;
-            font-weight: 300;
-            font-size: 16px;
+
+        .message-body-wrapper {
+            display: flex;
+            align-items: center;
+            .message {
+                display: flex;
+                align-items: center;
+                min-height: 22px;
+                font-weight: 300;
+                font-size: 16px;
+            }
+            .edited {
+                font-weight: 400;
+                font-size: 10px;
+                margin-left: 5px;
+                color: $font-sub;
+            }
         }
+        
+
+        .um-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            .message-form {
+                display: flex;
+                flex-direction: column;
+                padding: 0;
+                .um-options {
+                    bottom: 0;
+                    font-size: 12px;
+                    .um-btn {
+                        width: auto;
+                        background-color: transparent;
+                        color: darken($link-color, 15%);
+                        cursor: pointer;
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+    
+        }
+
 
     }
 

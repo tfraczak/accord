@@ -46,6 +46,7 @@ export default (state = {}, action) => {
             messages = action.payload.messages;
             return Object.assign({}, state, messages);
         case RECEIVE_MESSAGE:
+            debugger
             return Object.assign({}, state, { [action.message.id]: action.message });
         case REMOVE_MESSAGE:
             nextState = Object.assign({}, state);
