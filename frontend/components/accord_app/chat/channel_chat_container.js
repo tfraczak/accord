@@ -1,7 +1,7 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Chat from './chat';
-import { receiveMessage, receiveMessages, removeUpdatedMessage } from '../../../actions/message_actions';
+import { receiveMessage, receiveMessages } from '../../../actions/message_actions';
 import { createMessage } from '../../../utils/message_utils';
 import { createChatSub } from '../../../utils/socket_utils';
 import { chatMessages } from '../../../utils/selectors';
@@ -39,7 +39,6 @@ const mDTP = dispatch => {
         receiveMessage: message => dispatch(receiveMessage(message)),
         createMessage: message => dispatch(createMessage(message)),
         receiveMessages: messages => dispatch(receiveMessages(messages)),
-        removeUpdatedMessage: () => dispatch(removeUpdatedMessage()),
         retrieveChannel: channelId => dispatch(retrieveChannel(channelId)),
         retrieveConversation: convoId => dispatch(retrieveConversation(convoId)),
         createChatSub: chatComponent => createChatSub(chatComponent, "Channel", dispatch),
