@@ -15,14 +15,14 @@ class Stars extends React.Component {
     if (this.canvas) {
       const style = this.canvas.style;
 
-      this.width = window.innerWidth;
-      this.height = window.innerHeight;
+      this.width = 1920;
+      this.height = 967;
       this.canvas.width = this.width;
       this.canvas.height = this.height;
 
       const ctx = this.canvas.getContext('2d');
-      style.width = `${window.innerWidth}px`;
-      style.height = `${window.innerHeight}px`;
+      style.width = `100vw`;
+      style.height = `100vh`;
       style.position = "absolute";
       style.top = 0;
       style.left = 0;

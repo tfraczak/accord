@@ -27,8 +27,8 @@ class Snowflakes extends React.Component {
       const styleFront = this.frontCanvas.style;
       const styleBG = this.bgRef.style;
 
-      this.width = window.innerWidth;
-      this.height = window.innerHeight;
+      this.width = 1920;
+      this.height = 967;
 
       this.backCanvas.width = this.width;
       this.frontCanvas.width = this.width;
@@ -38,22 +38,22 @@ class Snowflakes extends React.Component {
       this.backCTX = this.backCanvas.getContext('2d');
       this.frontCTX = this.frontCanvas.getContext('2d');
 
-      styleBack.width = this.width;
-      styleBack.height = this.height;
+      styleBack.width = "100vw";
+      styleBack.height = "100vh";
       styleBack.position = "absolute";
       styleBack.top = 0;
       styleBack.left = 0;
       styleBack.backgroundColor = "transparent";
       styleBack.zIndex = 2;
-      styleFront.width = this.width;
-      styleFront.height = this.height;
+      styleFront.width = "100vw";
+      styleFront.height = "100vh";
       styleFront.position = "absolute";
       styleFront.top = 0;
       styleFront.left = 0;
       styleFront.backgroundColor = "transparent";
       styleFront.zIndex = 4;
-      styleBG.width = `${this.width}px`;
-      styleBG.height = `${this.height}px`;
+      styleBG.width = "100vw";
+      styleBG.height = "100vh";
       
 
       for (let i = 0; i < this.props.numBackFlakes; i++) {
