@@ -94,7 +94,17 @@ export const extractDateTime = dateTime => {
     }
 
     // yesterday?
-    if ((now.getDate() - dateObj.getDate() === 1) || (now.getMonth() - dateObj.getMonth() === 1) || (now.getYear() - dateObj.getYear() === 1)) {
+
+    now.setMilliseconds(0);
+    now.setSeconds(0);
+    now.setMinutes(0);
+    now.setHours(0);
+    dateObj.setMilliseconds(0);
+    dateObj.setSeconds(0);
+    dateObj.setMinutes(0);
+    dateObj.setHours(0);
+
+    if (now.getTime() - dateObj.getTime() === 1000*60*60*24) {
         return `Yesterday at ${time}`;
     }
 
