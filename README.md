@@ -125,40 +125,42 @@ export const convertToSnakeCase = (obj) => {
   return newObj;
 };
 
-export const extractDateTime = (dateTime) => {
-  let dateObject = new Date(dateTime);
+export const extractDateTime = dateTime => {
+    let dateObject = new Date(dateTime);
+    
+    // find the local time
+    const timeOptions = { hour: 'numeric', minute: 'numeric' };
+    let time = dateObject.toLocaleTimeString('en-US', timeOptions);
+    
+    // find the local date
+    const dateOptions = { month: 'numeric', day: 'numeric', year: 'numeric' };
+    let date = dateObject.toLocaleDateString('en-US', dateOptions);
+    
+    const now = new Date();
+    const dateObj = new Date(date);
 
-  // find the local time
-  const timeOptions = { hour: "numeric", minute: "numeric" };
-  let time = dateObject.toLocaleTimeString("en-US", timeOptions);
+    // today?
+    if ((now.getDate() === dateObj.getDate()) && (now.getMonth() === dateObj.getMonth()) && (now.getYear() === dateObj.getYear())) {
+        return `Today at ${time}`;
+    }
 
-  // find the local date
-  const dateOptions = { month: "numeric", day: "numeric", year: "numeric" };
-  let date = dateObject.toLocaleDateString("en-US", dateOptions);
+    // yesterday?
 
-  const now = new Date();
-  const dateObj = new Date(date);
+    now.setMilliseconds(0);
+    now.setSeconds(0);
+    now.setMinutes(0);
+    now.setHours(0);
+    dateObj.setMilliseconds(0);
+    dateObj.setSeconds(0);
+    dateObj.setMinutes(0);
+    dateObj.setHours(0);
 
-  // today?
-  if (
-    now.getDate() === dateObj.getDate() &&
-    now.getMonth() === dateObj.getMonth() &&
-    now.getYear() === dateObj.getYear()
-  ) {
-    return `today at ${time}`;
-  }
+    if (now.getTime() - dateObj.getTime() === 1000*60*60*24) {
+        return `Yesterday at ${time}`;
+    }
 
-  // yesterday?
-  if (
-    now.getDate() - dateObj.getDate() === 1 ||
-    now.getMonth() - dateObj.getMonth() === 1 ||
-    now.getYear() - dateObj.getYear() === 1
-  ) {
-    return `yesterday at ${time}`;
-  }
-
-  // more than a day ago
-  return date;
+    // more than a day ago
+    return date;
 };
 
 // and there are many others that have since been added!
