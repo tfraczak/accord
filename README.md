@@ -40,16 +40,16 @@ Within the `Servers` feature, I was able to employ a "join server via invitation
 
 ```js
 <div className="app-wrapper">
-  <Switch>
-    <ProtectedRoute path="/channels" component={AccordAppContainer} />
-    <ProtectedRoute exact path="/app" component={LoadingContainer} />
-    <AuthRoute exact path="/login" component={LoginFormContainer} />
-    <AuthRoute exact path="/register" component={RegisterFormContainer} />
-    <Route exact path="/" component={SplashContainer} />
-    <Route exact path="/404" component={Error404} />
-    <ProtectedRoute path="/" component={UrlInvitationContainer} />
-    <Route component={Error404} />
-  </Switch>
+    <Switch>
+        <ProtectedRoute exact path="/app" component={LoadingContainer} />
+        <AuthRoute exact path="/login" component={LoginFormContainer} />
+        <AuthRoute exact path="/register" component={RegisterFormContainer} />
+        <Route exact path="/404" component={Error404} />
+        <ProtectedRoute path="/channels" component={AccordAppContainer} />
+        <ProtectedRoute exact path="/:urlToken" component={UrlInvitationContainer} />
+        <Route exact path="/" component={SplashContainer}/>
+        <Route component={Error404} />
+    </Switch>
 </div>
 ```
 
