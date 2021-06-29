@@ -40,6 +40,19 @@ class ChatChannel < ApplicationCable::Channel
     end
   end
 
+  def destroy(data)
+    message = Message.find_by(id: data['message']['id'])
+    if message
+      message_id = message.id
+      socket = { 
+        "action" => "delete message",
+        "messageId" => message_id
+      }
+      message.destroy
+      ChatChannel.broadcast_to(@chat, socket)
+    end
+  end
+
   def load
     socket = {}
     socket["action"] = "load"

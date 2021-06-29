@@ -84,11 +84,11 @@ class MessageListItem extends React.Component {
     }
 
     onMouseEnter() {
-        this.toolbarRef.classList.remove("hidden");
+        this.toolbarRef?.classList.remove("hidden");
     }
 
     onMouseLeave() {
-        this.toolbarRef.classList.add("hidden");
+        this.toolbarRef?.classList.add("hidden");
     }
 
     render() {
@@ -96,7 +96,9 @@ class MessageListItem extends React.Component {
             message,
             type,
             handleEdit,
-            updateMsgId
+            handleDelete,
+            updateMsgId,
+            isAuthor
         } = this.props;
         return (
             <div onMouseEnter={ this.onMouseEnter } onMouseLeave={ this.onMouseLeave } key={`message-${message.id}`} className="message-wrapper">
@@ -106,14 +108,17 @@ class MessageListItem extends React.Component {
                     <p className="date-time">{extractDateTime(message.createdAt)}</p>
                 </div>
                 { updateMsgId === message.id ? this.insertUpdateForm() : this.insertMessageBody() }
-                <ul ref={ this.setToolbarRef } className="message-toolbar hidden">
-                    <li>
-                        <button onClick={ handleEdit } type="button" className="fas fa-pencil-alt"></button>
-                    </li>
-                    <li>
-                        <button type="button" className="fas fa-trash-alt"></button>
-                    </li>
-                </ul>
+                { isAuthor ? (
+                    <ul ref={ this.setToolbarRef } className="message-toolbar hidden">
+                        <li>
+                            <button onClick={ handleEdit } type="button" className="fas fa-pencil-alt"></button>
+                        </li>
+                        <li>
+                            <button onClick={ handleDelete } type="button" className="fas fa-trash-alt"></button>
+                        </li>
+                    </ul>
+                ) : null }
+                
             </div>
         );
     }

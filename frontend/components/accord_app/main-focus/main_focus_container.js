@@ -24,7 +24,7 @@ const mSTP = (state, ownProps) => {
     return {
         chatId: next[1],
         type: next[0],
-        convoMembers
+        convoMembers,
     }
 };
 

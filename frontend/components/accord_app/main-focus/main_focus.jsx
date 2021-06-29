@@ -5,14 +5,18 @@ import ConversationChatContainer from '../chat/conversation_chat_container';
 import ChatPlaceholder from './chat_placeholder';
 
 export default props => {
+    const {
+        chatId,
+        convoMembers,
+    } = props;
     return (
         <div className="main-focus">
             <Switch>
                 <Route exact path="/channels/@me/:conversationId">
-                    <ConversationChatContainer key={ `convo-chat-${props.chatId}${props.convoMembers ? props.convoMembers.length : ""}` } />
+                    <ConversationChatContainer key={ `convo-chat-${chatId}${convoMembers ? convoMembers.length : ""}` } />
                 </Route>
                 <Route exact path="/channels/:serverId/:channelId" >
-                    <ChannelChatContainer key={ `channel-chat-${props.chatId}` } />
+                    <ChannelChatContainer key={ `channel-chat-${chatId}` } />
                 </Route>
                 <Route>
                     <ChatPlaceholder />

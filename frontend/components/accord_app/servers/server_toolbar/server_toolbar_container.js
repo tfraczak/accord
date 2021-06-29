@@ -17,7 +17,7 @@ const mSTP = (state, ownProps) => {
     const memberships = state.entities.memberships;
     const users = state.entities.users;
     const invitation = state.session.invitation;
-    const serverSub = state.subscriptions.servers[server.id];
+    const serverSub = state.subscriptions.servers[ownProps.match.params.serverId];
 
     const membershipId = currentUsersMembershipId(
         currentUserId,

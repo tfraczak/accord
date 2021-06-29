@@ -14,6 +14,7 @@ class Chat extends Component {
         this.bottom = React.createRef();
         this.setState = this.setState.bind(this);
         this.handleEdit = this.handleEdit.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
         this.handleToolbarClose = this.handleToolbarClose.bind(this);
         this.subscription = props.chat ? props.createChatSub(this) : undefined;
     }
@@ -23,6 +24,13 @@ class Chat extends Component {
             this.setState({
                 updateMsgId: message.id,
             });
+        };
+    }
+
+    handleDelete(message) {
+        return () => {
+            const sub = this.subscription;
+            sub.delete({ message });
         };
     }
 
@@ -108,7 +116,7 @@ class Chat extends Component {
         const messageList = this.state.messages.map(message => {
             return (
                 <MessageListItem 
-                    key={`message-${message.id}`} 
+                    key={`message-${message.id}${message.updatedAt}`} 
                     chatMembers={ chatMembers } 
                     message={ message } 
                     type={ type }
@@ -116,6 +124,8 @@ class Chat extends Component {
                     handleEdit={ this.handleEdit(message) }
                     setState={ this.setState }
                     updateMsgId={ this.state.updateMsgId }
+                    isAuthor={ currentUserId === message.authorId }
+                    handleDelete={ this.handleDelete(message) }
                 />
             );
         });

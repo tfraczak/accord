@@ -32,7 +32,7 @@ class MessageForm extends Component {
         const { action, setState } = this.props;
         const sub = this.props.subscription;
         if (this.state.body) {
-            let message = this.props.message;
+            let message = Object.assign({}, this.props.message);
             message.body = this.state.body;
             switch(action) {
                 case "create":

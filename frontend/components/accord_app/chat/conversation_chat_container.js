@@ -1,7 +1,7 @@
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Chat from './chat';
-import { receiveMessage, receiveMessages } from '../../../actions/message_actions';
+import { receiveMessage, receiveMessages, removeUpdatedMessage } from '../../../actions/message_actions';
 import { retrieveConversation } from '../../../actions/conversation_actions';
 import { retrieveChannel } from '../../../actions/channel_actions';
 import { createMessage } from '../../../utils/message_utils';

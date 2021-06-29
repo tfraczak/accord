@@ -36,6 +36,7 @@ import {
 import {
     receiveMessage,
     receiveMessages,
+    removeMessage,
 } from '../actions/message_actions';
 
 
@@ -161,6 +162,7 @@ export const createChatSub = (
         },
         {
             received: data => {
+                let messages;
                 switch (data.action) {
                     case "load":
                         dispatch(receiveMessages(data.messages));
@@ -173,6 +175,21 @@ export const createChatSub = (
                         break;
                     case "update message":
                         dispatch(receiveMessage(data.message));
+                        messages = {};
+                        that.state.messages.forEach(message => messages[message.id] = message);
+                        messages[data.message.id] = data.message;
+                        that.setState({
+                            messages: Object.values(messages),
+                        });
+                        break;
+                    case "delete message":
+                        dispatch(removeMessage(data.messageId));
+                        messages = {};
+                        that.state.messages.forEach(message => messages[message.id] = message);
+                        delete messages[data.messageId];
+                        that.setState({
+                            messages: Object.values(messages),
+                        });
                         break;
                     default:
                         break;
@@ -183,6 +200,9 @@ export const createChatSub = (
             },
             update: (data) => {
                 return that.subscription.perform("update", data);
+            },
+            delete: (data) => {
+                return that.subscription.perform("destroy", data);
             },
             unsubscribe: () => {
                 return that.subscription.perform("unsubscribed");
