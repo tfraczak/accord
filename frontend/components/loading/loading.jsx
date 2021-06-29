@@ -15,7 +15,7 @@ class Loading extends React.Component {
             .then(
                 () => {
                     if (this.props.history.location.pathname !== "/channels/@me") {
-                        setTimeout(() => this.props.history.push("/channels/@me"),2000);
+                        setTimeout(() => this.props.history.push("/channels/@me"),1000);
                     }
                 },
                 () => this.props.history.push("/")
