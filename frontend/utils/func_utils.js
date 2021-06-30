@@ -75,35 +75,34 @@ const formatTime = diffTime => {
 
 
 export const extractDateTime = dateTime => {
-    let dateObject = new Date(dateTime);
+    let dateTimeObj = new Date(dateTime);
     
     // find the local time
     const timeOptions = { hour: 'numeric', minute: 'numeric' };
-    let time = dateObject.toLocaleTimeString('en-US', timeOptions);
+    let time = dateTimeObj.toLocaleTimeString('en-US', timeOptions);
     
     // find the local date
     const dateOptions = { month: 'numeric', day: 'numeric', year: 'numeric' };
-    let date = dateObject.toLocaleDateString('en-US', dateOptions);
+    let date = dateTimeObj.toLocaleDateString('en-US', dateOptions);
     
     const now = new Date();
     const dateObj = new Date(date);
-
-    // today?
-    if ((now.getDate() === dateObj.getDate()) && (now.getMonth() === dateObj.getMonth()) && (now.getYear() === dateObj.getYear())) {
-        return `Today at ${time}`;
-    }
-
-    // yesterday?
 
     now.setMilliseconds(0);
     now.setSeconds(0);
     now.setMinutes(0);
     now.setHours(0);
-    dateObj.setMilliseconds(0);
-    dateObj.setSeconds(0);
-    dateObj.setMinutes(0);
-    dateObj.setHours(0);
+    // dateObj.setMilliseconds(0);
+    // dateObj.setSeconds(0);
+    // dateObj.setMinutes(0);
+    // dateObj.setHours(0);
 
+    // today?
+    if (now.getTime() - dateObj.getTime() === 0) {
+        return `Today at ${time}`;
+    }
+
+    // yesterday?
     if (now.getTime() - dateObj.getTime() === 1000*60*60*24) {
         return `Yesterday at ${time}`;
     }
