@@ -28,7 +28,9 @@ class User < ApplicationRecord
         source: :joinable,
         source_type: :Server
 
-    has_many :messages
+    has_many :messages,
+        foreign_key: :author_id,
+        class_name: :Message
 
     has_many :invitations,
         foreign_key: :inviter_id

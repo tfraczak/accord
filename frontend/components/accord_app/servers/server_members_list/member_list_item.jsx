@@ -73,13 +73,8 @@ export default (props) => {
             </div>
             
             <div id={ menuId } className="member-menu hidden">
-                    {/* <i className="fas fa-ellipsis-v"></i> */}
+
                     <ul>
-                        {/* <li className="profile-btn">
-                            <button type="button" onClick={ () => openModal(modal) }>
-                                Profile
-                            </button>
-                        </li> */}
                         
                         <UserShowButton openModal={ handleModal } user={ member } />
 
