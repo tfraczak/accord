@@ -1,10 +1,10 @@
 > # README
 
-# **<a href="https://accord-app.herokuapp.com/#/" target="_blank">Accord</a>**
+# **Accord**
 
 _Accord is a clone of Discord, a social communication app which allows users to connect with each other via live text, voice, or video._
 
-[<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/landing_canvas.gif?raw=true" style="height: 300px;" />](https://accord-app.herokuapp.com/#/)
+<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/landing_canvas.gif?raw=true" style="height: 300px;" />
 
 ## **Technologies Employed**
 
@@ -14,19 +14,19 @@ _Accord is a clone of Discord, a social communication app which allows users to 
 
 `Ruby on Rails` is primarily used as a data API back-end for this app. It handles all of the data fetching and storage in the `PostgresQL` database. `Rails` is a _very_ powerful app building tool which simplifies a lot of the complicated code for accessing, retrieving, mutating, analyzing, and/or displaying the appropriate data.
 
-🔌 **Websockets via ActionCable in Rails**  
+🔌 **Websockets via ActionCable in Rails**
 
-<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/direct_messaging.gif?raw=true" style="height: 300px;">  
+<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/direct_messaging.gif?raw=true" style="height: 300px;">
 
 `ActionCable` (`ApplicationCable`) allows the use of websockets to connect to the backend API to execute basic HTML actions (such as create, update, destroy) in real-time so that a user does not have to refresh a webpage to receive new messages. `Websockets` are an API that allows real-time HTML requests for data, which is perfect for a live messaging app. Otherwise, it would just be a forum post website without them where the user would have to manually refresh the page to view new messages.
 
-⚛️🏦 **React/Redux**  
+⚛️🏦 **React/Redux**
   - React v17.0.2
   - Redux v4.1.0
 
-These two are grouped together because they go hand-in-hand with creating a web app like <a href="https://accord-app.herokuapp.com/#/" target="_blank">Accord</a>. `Redux` allows the front-end to maintain a pseudo-database of data and access it in a much faster time compared to exchanging information with the data API back-end in rails for every request. And, it goes without saying, `React` is almost a must for any modern front-end view as it allows for a very dynamic UI/UX using JavaScript. Each also comes with a whole host of npm packages that help them interact with each other, and enhance them by themselves.
+These two are grouped together because they go hand-in-hand with creating a web app like **Accord**. `Redux` allows the front-end to maintain a pseudo-database of data and access it in a much faster time compared to exchanging information with the data API back-end in rails for every request. And, it goes without saying, `React` is almost a must for any modern front-end view as it allows for a very dynamic UI/UX using JavaScript. Each also comes with a whole host of npm packages that help them interact with each other, and enhance them by themselves.
 
-🎁 **Webpack**  
+🎁 **Webpack**
 
 `Webpack` allows all the front-end code to be bundled into one JavaScript file for the app to run, instead of calling each code file in the `head` section of the root HTML document.
 
@@ -127,15 +127,15 @@ export const convertToSnakeCase = (obj) => {
 
 export const extractDateTime = dateTime => {
     let dateTimeObj = new Date(dateTime);
-    
+
     // find the local time
     const timeOptions = { hour: 'numeric', minute: 'numeric' };
     let time = dateTimeObj.toLocaleTimeString('en-US', timeOptions);
-    
+
     // find the local date
     const dateOptions = { month: 'numeric', day: 'numeric', year: 'numeric' };
     let date = dateTimeObj.toLocaleDateString('en-US', dateOptions);
-    
+
     const now = new Date();
     const dateObj = new Date(date);
 
@@ -169,46 +169,44 @@ For `extractDateTime`, I was having a lot of trouble figuring out what the heck 
 
 ---
 
-## [Accord](https://accord-app.herokuapp.com/#/) in action!
-
-_**Any double browsers here are in incognito/private browsing mode in Chrome and Firefox to ensure two separate clients are connected to the server.**_  
+_**Any double browsers here are in incognito/private browsing mode in Chrome and Firefox to ensure two separate clients are connected to the server.**_
 
 Landing Canvas effects:<br />
-<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/landing_canvas.gif?raw=true" style="height: 300px;"/>  
+<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/landing_canvas.gif?raw=true" style="height: 300px;"/>
 
 Session errors:<br />
-<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/login_errors.gif?raw=true" style="height: 300px;"/>  
-<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/register_errors.gif?raw=true" style="height: 300px;"/>  
+<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/login_errors.gif?raw=true" style="height: 300px;"/>
+<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/register_errors.gif?raw=true" style="height: 300px;"/>
 
 Logging in as demo user:<br />
-<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/login_demo.gif?raw=true" style="height: 300px;"/>  
+<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/login_demo.gif?raw=true" style="height: 300px;"/>
 <br />
 
-### **Now for the good stuff, WebSocketed CRUD!**  
+### **Now for the good stuff, WebSocketed CRUD!**
 <br />
 
 Channel messaging:<br />
-<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/channel_messaging.gif?raw=true" style="height: 300px;"/>  
+<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/channel_messaging.gif?raw=true" style="height: 300px;"/>
 
 <br />
 **Server CRUD**
 <br />
 
 Creating and joining a server via URL token:<br />
-<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/server_create_join.gif?raw=true" style="height: 300px;"/>   
-<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/url_join.gif?raw=true" style="height: 300px;"/>   
+<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/server_create_join.gif?raw=true" style="height: 300px;"/>
+<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/url_join.gif?raw=true" style="height: 300px;"/>
 Updating a server:<br />
-<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/server_update.gif?raw=true" style="height: 300px;"/>  
+<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/server_update.gif?raw=true" style="height: 300px;"/>
 Leaving and deleting a server:<br />
-<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/leave_delete_server.gif?raw=true" style="height: 300px;"/>  
+<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/leave_delete_server.gif?raw=true" style="height: 300px;"/>
 Changing local nickname:<br />
-<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/change_nickname.gif?raw=true" style="height: 300px;"/>  
+<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/change_nickname.gif?raw=true" style="height: 300px;"/>
 Channel CRUD:<br />
-<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/channel_crud.gif?raw=true" style="height: 300px;"/>  
+<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/channel_crud.gif?raw=true" style="height: 300px;"/>
 Error404 page when trying an invalid token or just a random URL that's not important to the app:<br />
-<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/error_404.gif?raw=true" style="height: 300px;" />  
+<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/error_404.gif?raw=true" style="height: 300px;" />
 Expired token handling:<br />
-<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/expired_token.gif?raw=true" style="height: 300px;"/>  
+<img src="https://github.com/tfraczak/accord/blob/main/app/assets/images/design_docs/expired_token.gif?raw=true" style="height: 300px;"/>
 
 <br />
 <br />
