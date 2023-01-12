@@ -1,6 +1,13 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
-    "sourceMap": true
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "module": "ES2020",
+    "allowJs": true,
+    "checkJs": true,
+    "target": "es6",
+    "jsx": "react",
+    "outDir": "./app/assets/builds",
+    "paths": {}
   }
 }

@@ -3,11 +3,9 @@
 //
 //= require action_cable
 //= require_self
-//= require_tree ./channels
 
 (function() {
   this.App || (this.App = {});
-
+  // @ts-ignore
   App.cable = ActionCable.createConsumer();
-
 }).call(this);
