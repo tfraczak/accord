@@ -1,1 +1,4 @@
 export const REMOVE_ERRORS: 'REMOVE_ERRORS' = 'REMOVE_ERRORS';
+export type MISC_ACTION_TYPES = (
+  typeof REMOVE_ERRORS
+);

@@ -8,6 +8,10 @@
     "target": "es6",
     "jsx": "react",
     "outDir": "./app/assets/builds",
-    "paths": {}
+    "paths": {
+      "@axios": ["./app/client/helpers/axios"],
+      "@constants": ["./app/client/constants"],
+      "@helpers": ["./app/client/helpers"]
+    }
   }
 }

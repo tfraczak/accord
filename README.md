@@ -9,8 +9,8 @@ _Accord is a clone of Discord, a social communication app which allows users to 
 ## **Technologies Employed**
 
 🚂 **Ruby on Rails using PostgresQL**
-  - Ruby v2.5.1p57
-  - Rails v5.2.3
+  - Ruby ~~v2.5.1p57~~ v3.0.3p157 (as of 1/12/23)
+  - Rails ~~v5.2.3~~ v7.0.4 (as of 1/12/23)
 
 `Ruby on Rails` is primarily used as a data API back-end for this app. It handles all of the data fetching and storage in the `PostgresQL` database. `Rails` is a _very_ powerful app building tool which simplifies a lot of the complicated code for accessing, retrieving, mutating, analyzing, and/or displaying the appropriate data.
 
@@ -21,14 +21,14 @@ _Accord is a clone of Discord, a social communication app which allows users to 
 `ActionCable` (`ApplicationCable`) allows the use of websockets to connect to the backend API to execute basic HTML actions (such as create, update, destroy) in real-time so that a user does not have to refresh a webpage to receive new messages. `Websockets` are an API that allows real-time HTML requests for data, which is perfect for a live messaging app. Otherwise, it would just be a forum post website without them where the user would have to manually refresh the page to view new messages.
 
 ⚛️🏦 **React/Redux**
-  - React v17.0.2
-  - Redux v4.1.0
+  - React ~~v17.0.2~~ v18.2.0 (as of 1/12/23)
+  - Redux ~~v4.1.0~~ v4.2.0 (as of 1/12/23)
 
 These two are grouped together because they go hand-in-hand with creating a web app like **Accord**. `Redux` allows the front-end to maintain a pseudo-database of data and access it in a much faster time compared to exchanging information with the data API back-end in rails for every request. And, it goes without saying, `React` is almost a must for any modern front-end view as it allows for a very dynamic UI/UX using JavaScript. Each also comes with a whole host of npm packages that help them interact with each other, and enhance them by themselves.
 
-🎁 **Webpack**
+🎁 ~~**Webpack**~~ **ESBuild** (as of 1/12/23)
 
-`Webpack` allows all the front-end code to be bundled into one JavaScript file for the app to run, instead of calling each code file in the `head` section of the root HTML document.
+~~`Webpack`~~ `ESBuild` allows all the front-end code to be bundled into one JavaScript file for the app to run, instead of calling each code file in the `head` section of the root HTML document.
 
 ---
 
@@ -166,6 +166,11 @@ Two of the functions I'm excited about are `convertToSnakeCase` and `extractDate
 
 For `extractDateTime`, I was having a lot of trouble figuring out what the heck kind of format my back-end `DateTime` object was being converted into. I learned it's an <a href="https://en.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601</a> date format in UTC. Before that, I was trying to manually write code to extract the date and time; convert it myself to GMT-4 (New York); and calculate whether the `dateTime` passed an argument is today, yesterday, or more than a day ago. After some extensive reading of <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">`Date`</a> objects in `JavaScript` on MDN, I figured out a simple, and sort of elegant, way of returning a formatted date/time string to be displayed next to my message when it's displayed in the chat.
 
+
+### _Update 1/12/23_
+
+- I began to implement Typescript in the project to ensure type safety across frontend files to reduce errors which would otherwise be easily made in vanilla JavaScript, and might be difficult to find while debugging.
+- I also updated Rails to v7, removed Webpack in favor of ESBuild (ESBuild is a lightweight JS bundler that is rails-friendly)
 
 ---
 

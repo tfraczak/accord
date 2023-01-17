@@ -1,10 +1,6 @@
 import axios from 'axios';
-import { toSnakeCase } from '../helpers';
-
-type Params = {
-  url: string,
-  data?: { [key:string]: any },
-};
+import { toSnakeCase } from './formatting';
+import { Params } from '../types';
 
 export const get = async ({ url, data = {} }: Params): Promise<any> => axios.get(url, toSnakeCase(data));
 export const post = async ({ url, data = {} }: Params): Promise<any> => axios.post(url, toSnakeCase(data));

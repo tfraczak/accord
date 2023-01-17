@@ -1,5 +1,7 @@
-import { toSnakeCase } from './utils_helpers';
+import _ from 'lodash';
+import _inflection from 'lodash-inflection';
 import { User } from '../types';
+_.mixin(_inflection);
 
 export const validUrlToken = (path: string): null | string => {
   const pattern = /^((https?:\/\/)?(accord\.com\/))?[\w\-]{10}$/;
@@ -27,6 +29,23 @@ export const serverInitials = (name: string): string => {
   }
   return '';
 };
+
+export const buildUrl = (itemType, itemId = null) => {
+  const itemText = itemType.match(/^session$/i) ? 'session' : _.pluralize(itemType);
+  return itemId ? `/api/${itemText}/${itemId}` :  `/api/${itemText}`;
+};
+
+const convertToCase = (caseType: string, obj: object): object => {
+  const converter = _[caseType.concat('Case')];
+  if (!converter) return obj;
+
+  return _.transform(obj, (acc: object, value: any, key: string, target: any) => {
+    const convertedKey = _.isArray(target) || key[0] === '&' ? key : converter(key);
+    acc[convertedKey] = _.isObject(value) ? convertToCase(caseType, value) : value;
+  });
+};
+
+export const toSnakeCase = (obj: object): object => convertToCase('snake', obj);
 
 export const convertToSnakeCase = (obj: object): object => toSnakeCase(obj);
 
@@ -56,8 +75,6 @@ const formatTime = (diffTime: number): string => {
 
   return `${dString}:${hString}:${mString}:${sString}`;
 };
-
-
 
 export const extractDateTime = (dateTime: string): string => {
   let dateTimeObj = new Date(dateTime);
