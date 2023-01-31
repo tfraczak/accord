@@ -3,7 +3,7 @@ import {
   RECEIVE_USERS,
   RECEIVE_USER_ERRORS,
   LOGOUT_CURRENT_USER,
-} from '../../constants';
+} from '@constants';
 
 export default (state = [], action) => {
   Object.freeze(state);

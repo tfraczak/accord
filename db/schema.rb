@@ -2,16 +2,15 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_17_013024) do
-
+ActiveRecord::Schema[7.0].define(version: 2023_01_18_021102) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,7 +19,7 @@ ActiveRecord::Schema.define(version: 2021_06_17_013024) do
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -32,7 +31,7 @@ ActiveRecord::Schema.define(version: 2021_06_17_013024) do
     t.text "metadata"
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
@@ -40,8 +39,8 @@ ActiveRecord::Schema.define(version: 2021_06_17_013024) do
     t.string "name", null: false
     t.string "media_type", null: false
     t.bigint "server_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "default"
     t.index ["server_id", "default"], name: "unique_default_channel", unique: true
     t.index ["server_id"], name: "index_channels_on_server_id"
@@ -49,8 +48,8 @@ ActiveRecord::Schema.define(version: 2021_06_17_013024) do
 
   create_table "conversations", force: :cascade do |t|
     t.bigint "initiator_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "name"
     t.bigint "receiver_id", null: false
     t.index ["initiator_id"], name: "index_conversations_on_initiator_id"
@@ -60,8 +59,8 @@ ActiveRecord::Schema.define(version: 2021_06_17_013024) do
     t.string "url_token"
     t.bigint "server_id", null: false
     t.float "expiration"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.bigint "inviter_id", null: false
     t.index ["inviter_id"], name: "index_invitations_on_inviter_id"
     t.index ["server_id"], name: "index_invitations_on_server_id"
@@ -73,8 +72,8 @@ ActiveRecord::Schema.define(version: 2021_06_17_013024) do
     t.string "local_username"
     t.string "joinable_type", null: false
     t.bigint "joinable_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["joinable_type", "joinable_id"], name: "index_memberships_on_joinable_type_and_joinable_id"
     t.index ["user_id", "joinable_id", "joinable_type"], name: "unique_membership_index", unique: true
     t.index ["user_id"], name: "index_memberships_on_user_id"
@@ -85,8 +84,8 @@ ActiveRecord::Schema.define(version: 2021_06_17_013024) do
     t.bigint "author_id", null: false
     t.string "messageable_type", null: false
     t.bigint "messageable_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["author_id"], name: "index_messages_on_author_id"
     t.index ["messageable_id", "messageable_type"], name: "index_messages_on_messageable_id_and_messageable_type"
     t.index ["messageable_type", "messageable_id"], name: "index_messages_on_messageable_type_and_messageable_id"
@@ -95,8 +94,8 @@ ActiveRecord::Schema.define(version: 2021_06_17_013024) do
   create_table "servers", force: :cascade do |t|
     t.string "name", null: false
     t.string "image_url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.bigint "owner_id"
     t.index ["owner_id"], name: "index_servers_on_owner_id"
   end
@@ -106,10 +105,9 @@ ActiveRecord::Schema.define(version: 2021_06_17_013024) do
     t.string "username", null: false
     t.string "username_id", null: false
     t.string "avatar_url"
-    t.string "password_digest", null: false
     t.string "session_token", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["session_token"], name: "index_users_on_session_token", unique: true
     t.index ["username", "username_id"], name: "unique_username_by_uid", unique: true

@@ -1,5 +1,4 @@
-import { LOGOUT_CURRENT_USER } from '../../constants';
-import { RECEIVE_SESSION_SUB } from '../../actions/socket_actions';
+import { LOGOUT_CURRENT_USER, RECEIVE_SESSION_SUB } from '@constants';
 
 export default (state = {}, action) => {
   Object.freeze(state);

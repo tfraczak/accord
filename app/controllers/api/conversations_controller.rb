@@ -1,9 +1,9 @@
 class Api::ConversationsController < ApplicationController
-  
+
   def index
-    user = User.find_by(id: params[:user_id])
-    if user
-      @conversations = user.conversations
+    @user = User.find_by(id: params[:user_id])
+    if @user
+      @conversations = @user.conversations
       render :index
     end
   end
@@ -53,8 +53,8 @@ class Api::ConversationsController < ApplicationController
 
       else
 
-        render json: @convo.errors.full_messages, status: 409  
-        
+        render json: @convo.errors.full_messages, status: 409
+
       end
 
     else

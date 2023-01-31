@@ -7,20 +7,30 @@ gem 'rails', '~> 7.0.4'
 gem 'pg'
 gem 'puma'
 gem 'rake'
-gem 'jbuilder'
 gem 'redis'
-gem 'bcrypt'
-gem 'sprockets-rails'
+gem 'jbuilder'
 gem 'aws-sdk-s3'
+
+gem 'sprockets-rails'
 gem 'turbo-rails'
 gem 'stimulus-rails'
 gem 'jsbundling-rails'
 gem 'cssbundling-rails'
-gem 'rack-cors'
+
 gem 'rubocop'
 gem 'rubocop-rails'
+
 gem 'bootsnap', require: false
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+
+gem 'bcrypt'
+gem 'rack-cors'
+gem 'devise'
+gem 'devise-encryptable'
+gem 'jwt'
+gem 'devise-jwt'
+
+gem 'react_on_rails'
 
 group :development, :test do
   gem 'rspec-rails'
@@ -36,6 +46,7 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'pry-rails'
+  gem 'break'
 end
 
 group :test do

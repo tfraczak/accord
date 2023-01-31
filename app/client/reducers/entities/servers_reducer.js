@@ -6,12 +6,9 @@ import {
   RECEIVE_JOINED_SERVER,
   RECEIVE_NEW_SERVER,
   RECEIVE_SERVER_INFO,
-} from '../../actions/server_actions';
-
-import {
   RECEIVE_USER_LOAD_DATA,
   LOGOUT_CURRENT_USER,
-} from '../../constants';
+} from '@constants';
 
 
 export default (state = {}, action) => {

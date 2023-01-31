@@ -22,24 +22,32 @@ export const removeErrors = () => ({ type: REMOVE_ERRORS });
 export const register = (user) => (dispatch) => (
   axios.post({ url: usersUrl(), data: { user } })
     .then(
-      (currentUser) => dispatch(receiveCurrentUser(currentUser)),
-      (err) => dispatch(receiveSessionErrors(err.responseJSON)),
+      (currentUser) => {
+        dispatch(receiveCurrentUser(currentUser))
+      },
+      (err) => {
+        dispatch(receiveSessionErrors(err.response.data))
+      },
     )
 );
 
-export const login = (user) => (dispatch) => (
-  axios.post({ url: sessionUrl(), data: { user } })
+export const login = (user) => (dispatch) => {
+  return axios.post({ url: sessionUrl(), data: { user } })
     .then(
       (currentUser) => dispatch(receiveCurrentUser(currentUser)),
-      (err) => dispatch(receiveSessionErrors(err.responseJSON)),
-    )
-);
+      (err) => dispatch(receiveSessionErrors(err.response.data)),
+    );
+};
 
 export const logout = () => (dispatch) => (
   axios.destroy({ url: sessionUrl() })
     .then(
-      () => dispatch(logoutCurrentUser()),
-      (err) => dispatch(receiveSessionErrors(err.responseJSON)),
+      () => {
+        dispatch(logoutCurrentUser())
+      },
+      (err) => {
+        dispatch(receiveSessionErrors(err.response.data))
+      },
     )
 );
 

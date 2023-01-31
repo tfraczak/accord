@@ -1,4 +1,4 @@
-import { OPEN_MODAL, CLOSE_MODAL, OPEN_FULL_MODAL } from '../../actions/ui_actions';
+import { OPEN_MODAL, CLOSE_MODAL, OPEN_FULL_MODAL } from '@constants';
 
 export default (state = null, action) => {
   Object.freeze(state);

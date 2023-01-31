@@ -2,9 +2,8 @@ import {
   RECEIVE_CHAT_SUB,
   RECEIVE_CHAT_SUBS,
   REMOVE_CHAT_SUBS,
-} from '../../actions/socket_actions';
-
-import { LOGOUT_CURRENT_USER } from '../../constants';
+  LOGOUT_CURRENT_USER,
+} from '@constants';
 
 export default (state = {}, action) => {
   Object.freeze(state);

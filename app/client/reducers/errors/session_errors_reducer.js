@@ -1,10 +1,9 @@
 import {
   RECEIVE_CURRENT_USER,
   RECEIVE_SESSION_ERRORS,
-  REMOVE_SESSION_ERRORS,
   LOGOUT_CURRENT_USER,
   REMOVE_ERRORS,
-} from '../../constants';
+} from '@constants';
 
 export default (state = [], action) => {
   Object.freeze(state);

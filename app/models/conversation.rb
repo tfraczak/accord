@@ -10,10 +10,10 @@ class Conversation < ApplicationRecord
     foreign_key: :receiver_id,
     class_name: :User
 
-  has_many :messages, 
+  has_many :messages,
     as: :messageable,
     dependent: :destroy
-  
+
   has_many :memberships,
     as: :joinable,
     inverse_of: :joinable,
@@ -56,11 +56,11 @@ class Conversation < ApplicationRecord
     conversations1 = [*Conversation.where(initiator_id: i, receiver_id: r)]
     conversations2 = [*Conversation.where(initiator_id: r, receiver_id: i)]
     conversations = conversations1.concat(conversations2)
-    return nil if conversations.length == 0
+    return false if conversations.length == 0
     conversations.each do |conversation|
       return conversation if conversation.members.length == 1
     end
-    nil
+    false
   end
 
   def create_initial_membership
@@ -81,5 +81,5 @@ class Conversation < ApplicationRecord
       )
       mem if mem.save
   end
-      
+
 end

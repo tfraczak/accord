@@ -7,16 +7,12 @@ import {
   RECEIVE_USERS,
   RECEIVE_USER,
   RECEIVE_NEW_MEMBER,
-} from '../../constants';
-
-import {
   RECEIVE_SERVERS,
   RECEIVE_JOINED_SERVER,
   RECEIVE_SERVER_INFO,
   KICK_MEMBER,
   LOAD_MEMBERS,
-} from '../../actions/server_actions';
-
+} from '@constants';
 
 export default (state = {}, action) => {
   Object.freeze(state);

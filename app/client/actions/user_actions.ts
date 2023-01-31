@@ -4,7 +4,7 @@ import {
   RECEIVE_USER_ERRORS,
   RECEIVE_USERS,
   REMOVE_USER,
-} from '../constants';
+} from '@constants';
 
 export const receiveUsers = (users) => ({ type: RECEIVE_USERS, users });
 export const removeUser = (userId) => ({ type: REMOVE_USER, userId });

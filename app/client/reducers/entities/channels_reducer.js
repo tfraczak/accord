@@ -6,16 +6,13 @@ import {
   RECEIVE_UPDATED_CHANNEL,
   RECEIVE_USER_LOAD_DATA,
   LOGOUT_CURRENT_USER,
-} from '../../constants';
-
-import {
   RECEIVE_SERVERS,
   RECEIVE_NEW_SERVER,
   RECEIVE_JOINED_SERVER,
   RECEIVE_SERVER_INFO,
   LEAVE_SERVER,
   REMOVE_SERVER,
-} from '../../actions/server_actions';
+} from '@constants';
 
 export default (state = {}, action) => {
   Object.freeze(state);

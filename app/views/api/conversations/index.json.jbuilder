@@ -28,10 +28,11 @@ end
 
 messages = []
 @conversations.each do |convo|
+  binding.pry
   membership = Membership.find_by(
     joinable_id: convo.id,
     joinable_type: :Conversation,
-    user_id: current_user.id,
+    user_id: current_user&.id || @user&.id,
   )
   messages = messages.concat(
     convo.messages

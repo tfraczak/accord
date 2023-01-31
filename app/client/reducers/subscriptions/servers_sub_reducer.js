@@ -1,9 +1,9 @@
 import {
   RECEIVE_SERVER_SUB,
   REMOVE_SERVER_SUBS,
-} from '../../actions/socket_actions';
-import { REMOVE_SERVER } from '../../actions/server_actions';
-import { LOGOUT_CURRENT_USER } from '../../constants';
+  LOGOUT_CURRENT_USER,
+  REMOVE_SERVER,
+} from '@constants';
 
 export default (state = {}, action) => {
   Object.freeze(state);

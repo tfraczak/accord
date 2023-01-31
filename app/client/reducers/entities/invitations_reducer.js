@@ -3,19 +3,14 @@ import {
   RECEIVE_INVITATIONS,
   REMOVE_INVITATION,
   SOCKET_INVITATION,
-} from '../../actions/invitation_actions';
-import {
   RECEIVE_SERVERS,
   RECEIVE_SERVER_INFO,
   LEAVE_SERVER,
   REMOVE_SERVER,
   RECEIVE_JOINED_SERVER,
-} from '../../actions/server_actions';
-
-import {
   RECEIVE_USER_LOAD_DATA,
   LOGOUT_CURRENT_USER,
-} from '../../constants';
+} from '@constants';
 
 
 export default (state = {}, action) => {

@@ -2,15 +2,11 @@ import {
   RECEIVE_MESSAGE,
   RECEIVE_MESSAGES,
   REMOVE_MESSAGE,
-} from '../../actions/message_actions';
-import {
   RECEIVE_SERVERS,
   RECEIVE_SERVER_INFO,
   LEAVE_SERVER,
   REMOVE_SERVER,
   RECEIVE_JOINED_SERVER,
-} from '../../actions/server_actions';
-import {
   RECEIVE_CHANNEL,
   REMOVE_CHANNEL,
   RECEIVE_CHANNELS,
@@ -19,7 +15,7 @@ import {
   RECEIVE_PRIVATE_USER_LOAD_DATA,
   LOGOUT_CURRENT_USER,
   RECEIVE_CONVERSATION,
-} from '../../constants';
+} from '@constants';
 
 import { chatMessages } from '../../utils/selectors';
 

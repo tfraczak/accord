@@ -3,7 +3,7 @@ import {
   RECEIVE_CONVERSATION,
   RECEIVE_PRIVATE_USER_LOAD_DATA,
   LOGOUT_CURRENT_USER,
-} from '../../constants';
+} from '@constants';
 
 export default (state = {}, action) => {
   let conversation, conversations, conversationId, conversationIds;

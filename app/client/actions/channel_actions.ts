@@ -1,19 +1,19 @@
 import {
-  buildUrl,
   get,
   post,
   patch,
   destroy,
-} from '../helpers';
-import { receiveServerErrors } from './server_actions';
-import { RECEIVE_USER_ERRORS } from '../constants';
+} from '@axios';
 import {
   RECEIVE_CHANNEL,
   RECEIVE_CHANNELS,
   REMOVE_CHANNEL,
   RECEIVE_CREATED_CHANNEL,
   RECEIVE_UPDATED_CHANNEL,
-} from '../constants';
+  RECEIVE_USER_ERRORS,
+} from '@constants';
+import { buildUrl } from '@helpers';
+import { receiveServerErrors } from './server_actions';
 
 const url = (id: number | null = null): string => buildUrl('channel', id);
 
@@ -42,21 +42,15 @@ export const retrieveChannel = (channelId) => (dispatch) => (
 
 export const createChannel = (channel) => (dispatch) => {
   return post({ url: url(), data: { channel } })
-    .then(
-      (channel) => dispatch(receiveCreatedChannel(channel)),
-    );
+    .then((channel) => dispatch(receiveCreatedChannel(channel)));
 };
 
 export const updateChannel = (channel) => (dispatch) => (
   patch({ url: url(channel.id), data: { channel } })
-    .then(
-      (payload) => dispatch(receiveUpdatedChannel(payload)),
-    )
+    .then((payload) => dispatch(receiveUpdatedChannel(payload)))
 );
 
 export const deleteChannel = (channel) => (dispatch) => (
   destroy({ url: url(channel.id) })
-    .then(
-      () => dispatch(removeChannel(channel)),
-    )
+    .then(() => dispatch(removeChannel(channel)))
 );

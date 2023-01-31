@@ -1,5 +1,7 @@
-import { RECEIVE_MEMBERSHIP, RECEIVE_MEMBERSHIPS, REMOVE_MEMBERSHIP } from '../../actions/membership_actions';
 import {
+  RECEIVE_MEMBERSHIP,
+  RECEIVE_MEMBERSHIPS,
+  REMOVE_MEMBERSHIP,
   RECEIVE_SERVERS,
   REMOVE_SERVER,
   RECEIVE_JOINED_SERVER,
@@ -8,15 +10,13 @@ import {
   LEAVE_SERVER,
   KICK_MEMBER,
   LOAD_MEMBERS,
-} from '../../actions/server_actions';
-import {
   RECEIVE_USER_LOAD_DATA,
   RECEIVE_PRIVATE_USER_LOAD_DATA,
   LOGOUT_CURRENT_USER,
   RECEIVE_NEW_CONVERSATION,
   RECEIVE_CONVERSATION,
   RECEIVE_NEW_MEMBER,
-} from '../../constants';
+} from '@constants';
 
 
 export default (state = {}, action) => {

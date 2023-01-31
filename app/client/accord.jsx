@@ -5,8 +5,12 @@ import throttle from 'lodash.throttle';
 import configureStore from './store/store';
 import Root from './components/root';
 import { saveState } from './utils/state_utils';
+import ActionCable from 'actioncable';
 
 document.addEventListener('DOMContentLoaded', () => {
+  window.App = {};
+  // @ts-ignore
+  window.App.cable = ActionCable.createConsumer();
   const root = document.getElementById('root');
   let store;
   if (window.currentUser) {
@@ -15,10 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
       entities: { users: { [window.currentUser.id]: window.currentUser } },
       session: { id: window.currentUser.id },
     };
-
-    delete window.currentUser;
-
     store = configureStore(preloadedState);
+    delete window.currentUser;
   } else {
     store = configureStore();
   }

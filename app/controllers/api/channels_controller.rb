@@ -16,7 +16,7 @@ class Api::ChannelsController < ApplicationController
     if channel.save
       render json: render_channel_json, status: :ok
     else
-      render json: channel.errors.full_messages, status: 422
+      render json: channel.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -25,7 +25,7 @@ class Api::ChannelsController < ApplicationController
     if channel.update(channel_params)
       render json: render_channel_json, status: :ok
     else
-      render json: channel.errors.full_messages, status: 422
+      render json: channel.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -34,7 +34,7 @@ class Api::ChannelsController < ApplicationController
     if channel && channel.destroy
       render json: render_channel_json, status: :ok
     else
-      render json: ["This channel does not exist"], status: 404
+      render json: ["This channel does not exist"], status: :not_found
     end
   end
 

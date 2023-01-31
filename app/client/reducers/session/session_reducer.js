@@ -1,12 +1,14 @@
-import { RECEIVE_INVITATION, REMOVE_INVITATION } from '../../actions/invitation_actions';
-import { RECEIVE_INVITED_SERVER } from '../../actions/server_actions';
 import {
+  REMOVE_INVITATION,
+  RECEIVE_INVITATION,
+  RECEIVE_INVITED_SERVER,
   LOGOUT_CURRENT_USER,
   RECEIVE_CONVERSATION,
   RECEIVE_CURRENT_USER,
   RECEIVE_NEW_CONVERSATION,
   REMOVE_CREATED_CONVO,
-} from '../../constants';
+  RECEIVE_SESSION_ERRORS,
+} from '@constants';
 
 const _nullSession = Object.freeze({ id: null });
 

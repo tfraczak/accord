@@ -4,9 +4,9 @@ import {
   REMOVE_SERVER,
   RECEIVE_SERVER_ERRORS,
   REMOVE_SERVER_ERRORS,
-} from '../../actions/server_actions';
-import { REMOVE_ERRORS } from './errors_reducer';
-import { LOGOUT_CURRENT_USER } from '../../constants';
+  REMOVE_ERRORS,
+  LOGOUT_CURRENT_USER,
+} from '@constants';
 
 export default (state = [], action) => {
   Object.freeze(state);
