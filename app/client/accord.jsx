@@ -2,26 +2,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import throttle from 'lodash.throttle';
-import configureStore from './store/store';
+import createStore from './store/store';
 import Root from './components/root';
 import { saveState } from './utils/state_utils';
 import ActionCable from 'actioncable';
 
 document.addEventListener('DOMContentLoaded', () => {
-  window.App = {};
   globalThis.App.cable = ActionCable.createConsumer();
   const root = document.getElementById('root');
   let store;
-  if (window.currentUser) {
-    const currentUser = window.currentUser;
+  const { currentUser } = globalThis;
+  if (currentUser) {
     const preloadedState = {
-      entities: { users: { [window.currentUser.id]: window.currentUser } },
-      session: { id: window.currentUser.id },
+      entities: { users: { [currentUser.id]: currentUser } },
+      session: { id: currentUser.id },
     };
-    store = configureStore(preloadedState);
-    delete window.currentUser;
+    store = createStore(preloadedState);
+    delete globalThis.currentUser;
   } else {
-    store = configureStore();
+    store = createStore();
   }
 
   store.subscribe(throttle(() => {
@@ -29,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
       entities: store.getState().entities,
       session: store.getState().session,
     });
-  }, 1000));
+  }, 10000));
 
   ReactDOM.render(<Root store={store} />, root);
 });
