@@ -1,45 +1,35 @@
-import React from "react";
+import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect, Route, withRouter } from 'react-router-dom';
+import {
+  Navigate,
+  Route,
+  useLocation,
+  useNavigate,
+  useParams,
+} from 'react-router-dom';
 
-const Auth = ({component: Component, path, loggedIn, exact}) => (
-    <Route path={path} exact={exact} render={props => (
-        !loggedIn ? (
-            <Component {...props} />
-        ) : (
-            <Redirect to="/app" />
-        )
-    )} />
+const withRouter = (Component) => {
+  return (props) => {
+    const location = useLocation();
+    const navigate = useNavigate();
+    const params = useParams();
+    return (
+      <Component
+        {...props}
+        router={{ location, navigate, params }}
+      />
+    );
+  };
+};
+
+const Auth = ({ component: Component, path, loggedIn }) => (
+  <Route path={path} element={!loggedIn ? <Component /> : <Navigate to="/app" />}/>
 );
 
-const Protected = ({component: Component, path, loggedIn, exact}) => (
-    <Route path={path} exact={exact} render={props => (
-        loggedIn ? (
-            <Component {...props} />
-        ) : (
-            <Redirect to="/login" />
-        )
-    )}/>
+const Protected = ({ component: Component, path, loggedIn }) => (
+  <Route path={path} element={loggedIn ? <Component /> : <Navigate to="/login" />}/>
 );
 
-// const Invite = ({component: Component, error: Error404 , path, loggedIn, exact}) => (
-//     <Route path={path} exact={exact} render={props => (
-//         loggedIn ? (
-//             <Component {...props} />
-//         ) : (
-//             <Error404 />
-//         )
-//     )}/>
-// );
-
-const mSTP = state => ({
-    loggedIn: Boolean(state.session.id)
-});
-
-export const AuthRoute = withRouter(
-    connect(mSTP,null)(Auth)
-);
-
-export const ProtectedRoute = withRouter(
-    connect(mSTP,null)(Protected)
-);
+const mSTP = (state) => ({ loggedIn: Boolean(state.session.id) });
+export const AuthRoute = withRouter(connect(mSTP, null)(Auth));
+export const ProtectedRoute = withRouter(connect(mSTP, null)(Protected));

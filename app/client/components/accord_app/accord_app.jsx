@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, Route, Switch } from 'react-router-dom';
+import { NavLink, Route, Routes } from 'react-router-dom';
 import ServersNavBarContainer from './servers/servers_nav_bar/servers_nav_bar_container';
 import ServerMembersListContainer from './servers/server_members_list/server_members_list_container';
 import ConversationMembersList from './conversations/conversation_members_list/conversation_members_list_container';
@@ -17,85 +17,66 @@ import ChannelsModal from './channels/channel_modals/channels_modal';
 import FocusRightContainer from './focus-right/focus_right_container';
 import UserModal from './user/user_modal/user_modal';
 
-class AccordApp extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
+const AccordApp = (props) => {
+  const { channelId, serverId, convoId } = props;
+  return (
+    <>
+      <Route path="/channels/:serverId" element={<ServersModal />} />
+      <Route path="/channels/:serverId/:channelId" element={<ChannelsModal />}/>
+      <Route path="/channels" element={<UserModal />} />
+      <div className="webapp-wrapper">
+        <ServersNavBarContainer />
+        <div className="base wrapper">
+          <div className="content wrapper">
 
-    componentDidMount() {
-        
-    }
-
-    render() {
-        return (
-            <>
-                <Route path="/channels/:serverId" component={ ServersModal } />
-                <Route exact path="/channels/:serverId/:channelId" component={ ChannelsModal }/>
-                <Route path="/channels" component={ UserModal } />
-                <div className="webapp-wrapper">
-                    <ServersNavBarContainer />
-                    <div className="base wrapper">
-                        <div className="content wrapper">
-
-                            <div className="sidebar-wrapper">
-                                <nav className="sidebar-nav">
-                                    <div className="sb-header wrapper">
-                                        <Route path="/channels" component={SbHeaderContainer}/>
-                                    </div>
-                                    <div className="focus-channels-dms">
-                                        <Switch>
-                                            <Route path="/channels/@me" >
-                                                <ConversationsIndexContainer />
-                                            </Route>
-                                            <Route path="/channels/:serverId/" >
-                                                <ChannelsIndexContainer key={ `channels-index-s${this.props.serverId}` } />
-                                            </Route>
-                                        </Switch>
-                                    </div>
-                                </nav>
-                                <div className="sidebar-current-user">
-                                    <CurrentUserDisplayContainer />
-                                </div>
-                            </div>
-
-                            <div className="focus">
-                                <div className="focus-title-bar">
-                                    <div className="focus-title">
-                                        <Switch>
-                                            {/* <Route exact path="/channels/@me" >
-                                                <div></div>
-                                            </Route> */}
-                                            <Route exact path="/channels/@me/:conversationId" >
-                                                <ConversationChatTitleContainer key={ `convo-${this.props.convoId}` }/>
-                                            </Route>
-                                            <Route exact path="/channels/:serverId/:channelId" >
-                                                <ChannelChatTitleContainer key={ `channel-chat-s${this.props.serverId}-c${this.props.channelId}` } />
-                                            </Route>
-                                        </Switch>
-                                    </div>
-                                    <div className="title-toolbar"></div>
-                                </div>
-                                <div className="focus-content">
-                                    <Route path="/channels/" component={MainFocusContainer} />
-                                    <div className="focus-right-wrapper">
-                                        {/* <Switch>
-                                            <Route exact path="/channels/@me" component={ConversationMembersList} />
-                                            <Route path="/channels/:serverId" component={ServerMembersListContainer}/>
-                                        </Switch> */}
-                                        <FocusRightContainer />
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
+            <div className="sidebar-wrapper">
+              <nav className="sidebar-nav">
+                <div className="sb-header wrapper">
+                  <Route path="/channels" element={<SbHeaderContainer />}/>
                 </div>
-            </>
-        )
-    }
+                <div className="focus-channels-dms">
+                  <Routes>
+                    <Route path="/channels/@me" >
+                      <ConversationsIndexContainer />
+                    </Route>
+                    <Route path="/channels/:serverId/" >
+                      <ChannelsIndexContainer key={ `channels-index-s${serverId}` } />
+                    </Route>
+                  </Routes>
+                </div>
+              </nav>
+              <div className="sidebar-current-user">
+                <CurrentUserDisplayContainer />
+              </div>
+            </div>
 
-}
+            <div className="focus">
+              <div className="focus-title-bar">
+                <div className="focus-title">
+                  <Routes>
+                    <Route  path="/channels/@me/:conversationId" >
+                      <ConversationChatTitleContainer key={ `convo-${convoId}` }/>
+                    </Route>
+                    <Route  path="/channels/:serverId/:channelId" >
+                      <ChannelChatTitleContainer key={ `channel-chat-s${serverId}-c${channelId}` } />
+                    </Route>
+                  </Routes>
+                </div>
+                <div className="title-toolbar"></div>
+              </div>
+              <div className="focus-content">
+                <Route path="/channels/" element={<MainFocusContainer />} />
+                <div className="focus-right-wrapper">
+                  <FocusRightContainer />
+                </div>
+              </div>
+            </div>
 
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
 
 export default AccordApp;
