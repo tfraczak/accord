@@ -9,8 +9,7 @@ import ActionCable from 'actioncable';
 
 document.addEventListener('DOMContentLoaded', () => {
   window.App = {};
-  // @ts-ignore
-  window.App.cable = ActionCable.createConsumer();
+  globalThis.App.cable = ActionCable.createConsumer();
   const root = document.getElementById('root');
   let store;
   if (window.currentUser) {
