@@ -1,22 +1,27 @@
-import { createStore, applyMiddleware } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
-import rootReducer from '../reducers/root_reducer';
+import reducer from '../reducers/root_reducer';
 import { loadState } from '../utils/state_utils';
+import { DEFAULT_STATE } from '@constants';
 
-let middleware = [];
-
-if (process.env.NODE_ENV === 'development') {
-  middleware = [...middleware, thunk, logger];
-} else {
-  middleware = [...middleware, thunk];
-}
-
-const configureStore = (preloadedState = {}) => {
-  // @ts-ignore
-  const persistedState = window.currentUser ? loadState() : {};
-  const newState = Object.assign({}, preloadedState, persistedState);
-  return createStore(rootReducer, newState, applyMiddleware(...middleware));
+const middleware = (getDefaultMiddleware) => {
+  const middlewareToApply = [thunk];
+  if (process.env.NODE_ENV === 'development') middlewareToApply.push(logger);
+  return getDefaultMiddleware().concat(middlewareToApply);
 };
 
-export default configureStore;
+const createStore = (state = DEFAULT_STATE) => {
+  // @ts-ignore
+  const persistedState = window.currentUser ? loadState() : {};
+  const preloadedState = Object.assign({}, state, persistedState);
+  const storeConfig = {
+    reducer,
+    devTools: process.env.NODE_ENV !== 'production',
+    middleware,
+    preloadedState,
+  };
+  return configureStore(storeConfig);
+};
+
+export default createStore;
