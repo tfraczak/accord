@@ -7,7 +7,7 @@ class Star {
 
   render(ctx) {
     ctx.beginPath();
-    ctx.arc(this.x,this.y, this.r, 2*Math.PI, false);
+    ctx.arc(this.x, this.y, this.r, 2*Math.PI, false);
     ctx.shadowBlur = 0;
     ctx.shadowColor = this.color;
     ctx.fillStyle = this.color;
@@ -31,7 +31,6 @@ class Star {
     this.y = Math.floor((Math.random() * (canvas.height - 2)) + 1);
     this.r = Math.random() * 1.7 + 0.5;
   }
-
 }
 
 export default Star;

@@ -10,7 +10,7 @@ class Snowflake {
 
   render(ctx) {
     ctx.beginPath();
-    ctx.arc(this.x,this.y, this.r, 2*Math.PI, false);
+    ctx.arc(this.x, this.y, this.r, 2*Math.PI, false);
     ctx.shadowBlur = 0;
     ctx.shadowColor = this.color;
     ctx.fillStyle = this.color;
@@ -34,11 +34,11 @@ class Snowflake {
     let n, back;
     n = Math.floor((Math.random() * num) + (256 - num));
     switch(this.order) {
-      case "back":
-        back = (Math.random() * 0.8) + 0.2;
-        return `rgba(${n},${n},${n},${back})`;
-      case "front":
-        return `rgba(${n},${n},${n},1)`;
+    case 'back':
+      back = (Math.random() * 0.8) + 0.2;
+      return `rgba(${n},${n},${n},${back})`;
+    case 'front':
+      return `rgba(${n},${n},${n},1)`;
     }
   }
 
@@ -48,7 +48,6 @@ class Snowflake {
     this.r = (Math.random() * 1.7) + 0.5;
     this.speed = Math.random() + 1;
   }
-
 }
 
 export default Snowflake;
