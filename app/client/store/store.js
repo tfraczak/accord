@@ -12,8 +12,7 @@ const middleware = (getDefaultMiddleware) => {
 };
 
 const createStore = (state = DEFAULT_STATE) => {
-  // @ts-ignore
-  const persistedState = window.currentUser ? loadState() : {};
+  const persistedState = globalThis.currentUser ? loadState() : {};
   const preloadedState = Object.assign({}, state, persistedState);
   const storeConfig = {
     reducer,

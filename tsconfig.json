@@ -11,7 +11,10 @@
     "paths": {
       "@axios": ["./app/client/helpers/axios"],
       "@constants": ["./app/client/constants"],
-      "@helpers": ["./app/client/helpers"]
-    }
+      "@helpers": ["./app/client/helpers"],
+      "@types": ["./app/client/types"],
+    },
+    "types": ["node"],
+    "typeRoots": ["app/client/types/global.d.ts"]
   }
 }
