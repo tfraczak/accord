@@ -13,7 +13,7 @@ const middleware = (getDefaultMiddleware) => {
 
 const createStore = (state = DEFAULT_STATE) => {
   const persistedState = globalThis.currentUser ? loadState() : {};
-  const preloadedState = Object.assign({}, state, persistedState);
+  const preloadedState = { ...state, ...persistedState };
   const storeConfig = {
     reducer,
     devTools: process.env.NODE_ENV !== 'production',

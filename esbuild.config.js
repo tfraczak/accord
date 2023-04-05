@@ -2,7 +2,7 @@ const path = require('path');
 const rails = require('esbuild-rails');
 
 require('esbuild').build({
-  entryPoints: ['accord.jsx'],
+  entryPoints: ['accord.tsx'],
   bundle: true,
   sourcemap: true,
   outdir: path.join(process.cwd(), 'app/assets/builds'),
