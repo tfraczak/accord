@@ -1,4 +1,4 @@
-import * as axios from '@axios';
+import { get, post } from '@axios';
 import { buildUrl } from '../helpers';
 import {
   RECEIVE_NEW_CONVERSATION,
@@ -15,13 +15,17 @@ export const receiveConversation = (payload) => ({ type: RECEIVE_CONVERSATION, p
 export const removeCreatedConvo = () => ({ type: REMOVE_CREATED_CONVO });
 
 export const createConversation = (conversation) => (dispatch) => {
-  return axios.post({ url: url(), data: { conversation } })
+  return post({ url: url(), data: { conversation } })
     .then(
-      (payload) => payload.messages ? dispatch(receiveConversation(payload)) : dispatch(receiveNewConversation(payload)),
+      (payload) => payload.messages ? (
+        dispatch(receiveConversation(payload))
+      ) : (
+        dispatch(receiveNewConversation(payload))
+      ),
     );
 };
 
 export const retrieveConversation = (convoId) => (dispatch) => {
-  return axios.get({ url: url(convoId) })
+  return get({ url: url(convoId) })
     .then((payload) => dispatch(receiveConversation(payload)));
 };

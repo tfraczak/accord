@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter } from '@utils';
 import ConversationListItem from './conversation_list_item';
-import { conversationMembers } from '../../../../utils/selectors';
+import { conversationMembers } from '@selectors';
 
 const mSTP = (state, ownProps) => {
   const convoMembers = conversationMembers(
     state.entities.users,
     ownProps.conversation,
-    state.entities.memberships
+    state.entities.memberships,
   );
   return {
     convoMembers,
@@ -15,8 +15,6 @@ const mSTP = (state, ownProps) => {
   };
 };
 
-const mDTP = dispatch => ({
-    
-});
+const mDTP = (dispatch) => ({});
 
 export default withRouter(connect(mSTP, mDTP)(ConversationListItem));

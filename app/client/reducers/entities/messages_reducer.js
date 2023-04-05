@@ -17,7 +17,7 @@ import {
   RECEIVE_CONVERSATION,
 } from '@constants';
 
-import { chatMessages } from '../../utils/selectors';
+import { chatMessages } from '@selectors';
 
 export default (state = {}, action) => {
   Object.freeze(state);

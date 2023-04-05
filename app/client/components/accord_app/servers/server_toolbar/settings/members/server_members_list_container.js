@@ -1,9 +1,8 @@
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { serverMembers } from '../../../../../../utils/selectors';
-import { membersAlphaAsc } from '../../../../../../utils/func_utils';
+import { withRouter } from '@utils';
+import { serverMembers } from '@selectors';
+import { membersAlphaAsc } from '@helpers';
 import ServerSettingsMembers from './server_settings_members';
-import { kickMember, updateServer } from '../../../../../../actions/server_actions';
 import { closeModal } from '../../../../../../actions/ui_actions';
 
 const mSTP = (state, ownProps) => {
@@ -23,10 +22,6 @@ const mSTP = (state, ownProps) => {
   };
 };
 
-const mDTP = (dispatch) => ({
-  kickMember: (membershipId) => dispatch(kickMember(membershipId)),
-  transferOwnership: (formData, serverId) => dispatch(updateServer(formData, serverId)),
-  closeModal: () => dispatch(closeModal()),
-});
+const mDTP = (dispatch) => ({ closeModal: () => dispatch(closeModal()) });
 
 export default withRouter(connect(mSTP, mDTP)(ServerSettingsMembers));

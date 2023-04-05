@@ -8,7 +8,7 @@ import {
   useParams,
 } from 'react-router-dom';
 
-const withRouter = (Component) => {
+export const withRouter = (Component) => {
   return (props) => {
     const location = useLocation();
     const navigate = useNavigate();

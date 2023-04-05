@@ -13,6 +13,8 @@
       "@constants": ["./app/client/constants"],
       "@helpers": ["./app/client/helpers"],
       "@types": ["./app/client/types"],
+      "@utils": ["./app/client/utils"],
+      "@selectors": ["./app/client/selectors"]
     },
     "types": ["node"],
     "typeRoots": ["app/client/types/global.d.ts"]

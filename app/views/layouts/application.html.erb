@@ -20,10 +20,9 @@
       <%= current_user_assignment %>
     <% end %>
     <script>
-      window.defaultServerImg = "<%= image_url('server_img_upload.png') %>";
       window.brokenBg = "<%= image_url('error_404.png') %>";
       window.logoUrl = "<%= image_url('splash_logo_white.png') %>";
-      window.defaultAvatarUrl = "<%= image_url('default_avatar.png') %>";
+      globalThis.defaultAvatarUrl = "<%= image_url('default_avatar.png') %>";
       window.backgroundImg = "<%= image_url('vg_background.png') %>";
       window.placeholderImg = "<%= image_url('placeholder.png') %>";
       window.loginIcon = "<%= image_url('enter.svg') %>";

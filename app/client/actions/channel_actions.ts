@@ -28,7 +28,7 @@ export const retrieveServerChannels = (serverId) => (dispatch) => (
   get({ url: `${buildUrl('server', serverId)}/channels` })
     .then(
       (payload) => dispatch(receiveChannels(payload)),
-      (err) => dispatch(receiveServerErrors(err.responseJSON)),
+      (err) => dispatch(receiveServerErrors(err.data)),
     )
 );
 
@@ -36,14 +36,17 @@ export const retrieveChannel = (channelId) => (dispatch) => (
   get({ url: url(channelId) })
     .then(
       (payload) => dispatch(receiveChannel(payload)),
-      (err) => dispatch(receiveChannelErrors(err.responseJSON)),
+      (err) => dispatch(receiveChannelErrors(err.data)),
     )
 );
 
-export const createChannel = (channel) => (dispatch) => {
-  return post({ url: url(), data: { channel } })
-    .then((channel) => dispatch(receiveCreatedChannel(channel)));
-};
+export const createChannel = (channel) => (dispatch) => (
+  post({ url: url(), data: { channel } })
+    .then(
+      (channel) => dispatch(receiveCreatedChannel(channel)),
+      (err) => receiveChannelErrors(err.data),
+    )
+);
 
 export const updateChannel = (channel) => (dispatch) => (
   patch({ url: url(channel.id), data: { channel } })

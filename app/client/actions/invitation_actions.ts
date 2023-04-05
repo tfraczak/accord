@@ -1,5 +1,5 @@
 import { receiveServerErrors } from './server_actions';
-import * as axios from '@axios';
+import { destroy, get, post } from '@axios';
 import {
   RECEIVE_INVITATIONS,
   RECEIVE_INVITATION,
@@ -16,7 +16,7 @@ export const socketInvitation = (invitation) => ({ type: SOCKET_INVITATION, invi
 export const removeInvitation = (inviteId) => ({ type: REMOVE_INVITATION, inviteId });
 
 export const createInvite = (invitation) => (dispatch) => (
-  axios.post({ url: url(), data: { invitation } })
+  post({ url: url(), data: { invitation } })
     .then(
       (invitation) => dispatch(receiveInvitation(invitation)),
       (err) => dispatch(receiveServerErrors(err.responseJSON)),
@@ -24,7 +24,7 @@ export const createInvite = (invitation) => (dispatch) => (
 );
 
 export const deleteInvite = (invite) => (dispatch) => (
-  axios.destroy({ url: url(invite.id) })
+  destroy({ url: url(invite.id) })
     .then(
       () => dispatch(removeInvitation(invite.id)),
       (err) => dispatch(receiveServerErrors(err.responseJSON)),
@@ -32,7 +32,7 @@ export const deleteInvite = (invite) => (dispatch) => (
 );
 
 export const retrieveServerInvites = (serverId) => (dispatch) => (
-  axios.get({ url: `${buildUrl('server', serverId)}/invitations` })
+  get({ url: `${buildUrl('server', serverId)}/invitations` })
     .then(
       (invitations) => dispatch(receiveInvitation(invitations)),
       (err) => dispatch(receiveServerErrors(err.responseJSON)),

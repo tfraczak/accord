@@ -1,4 +1,4 @@
-import * as axios from '@axios';
+import { patch } from '@axios';
 import {
   RECEIVE_MEMBERSHIPS,
   RECEIVE_MEMBERSHIP,
@@ -15,6 +15,6 @@ export const removeMembership = (membershipId) => ({ type: REMOVE_MEMBERSHIP, me
 export const receiveNickname = (membership) => ({ type: RECEIVE_NICKNAME, membership });
 
 export const updateNickname = (membership) => (dispatch) => (
-  axios.patch({ url: url(membership.id), data: { membership } })
+  patch({ url: url(membership.id), data: { membership } })
     .then((membership) => dispatch(receiveMembership(membership)))
 );

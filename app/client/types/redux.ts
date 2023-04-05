@@ -31,7 +31,10 @@ export type EntitiesState = {
 };
 export type ErrorsState = { server: string[], session: string[], users: string[] };
 export type SessionState = null | { id: number };
-export type SubscriptionsState = { server: Subscriptions, session: Subscriptions };
+export type SubscriptionsState = {
+  server: { [key: number]: Subscriptions },
+  session: { [key: number]: Subscriptions },
+};
 export type UIState = { modal: null | string };
 
 export type ReduxState = {

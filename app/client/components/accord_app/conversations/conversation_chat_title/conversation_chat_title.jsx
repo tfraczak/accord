@@ -1,50 +1,49 @@
 import React from 'react';
-import { limitChars } from '../../../../utils/func_utils';
+import { limitChars } from '@helpers';
 
-export default props => {
+export default (props) => {
+  const {
+    conversation,
+    users,
+    convoMembers,
+    currentUserId,
+    openModal,
+  } = props;
 
-    const {
-        conversation,
-        users,
-        convoMembers,
-        currentUserId,
-        openModal,
-    } = props;
+  if (!conversation) return null;
 
-    if (!conversation) return null;
-    
-    const {
-        initiatorId,
-        receiverId,
-        name
-    } = conversation;
-    
-    const user = receiverId === currentUserId ? users[initiatorId] : users[receiverId];
-    
-    const modal = {
-        type: "user show",
-        user,
-    };
+  const {
+    initiatorId,
+    receiverId,
+    name,
+  } = conversation;
 
-    const otherMembers = convoMembers.filter(member => member.id !== currentUserId);
+  const user = receiverId === currentUserId ? users[initiatorId] : users[receiverId];
 
-    const convoTitle = name ? name : limitChars(otherMembers.join(", "), 42);
+  const modal = {
+    type: 'user show',
+    user,
+  };
 
-    return (
-        <div className="conversation-chat-title-wrapper">
-            {
-                convoMembers.length < 3 ? (
-                    <>
-                        <span className="title-icon"><i className="fas fa-at"></i></span>
-                        <h1 onClick={ () => openModal(modal) } className="username">{ user.username }</h1>
-                    </>
-                ) : (
-                    <>
-                        <span className="title-icon"><i className="fas fa-users"></i></span>
-                        <h1 className="convo-name">{ convoTitle }</h1>
-                    </>
-                )
-            }
-        </div>
-    );
-}
+  const otherMembers = convoMembers.filter((member) => member.id !== currentUserId);
+
+  const convoTitle = name ? name : limitChars(otherMembers.join(', '), 42);
+
+  return (
+    <div className="conversation-chat-title-wrapper">
+      {
+        convoMembers.length < 3 ? (
+          <>
+            <span className="title-icon"><i className="fas fa-at"></i></span>
+            <h1 onClick={ () => openModal(modal) } className="username">{ user.username }</h1>
+          </>
+        ) : (
+          <>
+            <span className="title-icon"><i className="fas fa-users"></i></span>
+            <h1 className="convo-name">{ convoTitle }</h1>
+          </>
+        )
+      }
+    </div>
+  );
+};
